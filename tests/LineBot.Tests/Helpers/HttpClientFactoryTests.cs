@@ -14,7 +14,7 @@ namespace Line.Tests
     public class HttpClientFactoryTests
     {
         [TestMethod]
-        public void Create_ConfigurationIsNull_ThrowsArgumentNullException()
+        public void Create_ConfigurationIsNull_ThrowsException()
         {
             ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
             {
