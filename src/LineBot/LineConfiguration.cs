@@ -6,7 +6,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the configuration of the line bot.
+    /// Encapsulates the configuration of the <see cref="ILineBot"/>.
     /// </summary>
     public sealed class LineConfiguration : ILineConfiguration
     {

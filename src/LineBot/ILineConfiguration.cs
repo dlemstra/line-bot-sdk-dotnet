@@ -6,7 +6,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for the configuration of the line bot.
+    /// Encapsulates the interface for the configuration of the <see cref="ILineBot"/>.
     /// </summary>
     public interface ILineConfiguration
     {
