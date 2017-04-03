@@ -17,6 +17,28 @@ namespace Line.Tests.Profile
 
         [TestMethod]
         [DeploymentItem(UserProfileJson)]
+        public async Task GetProfile_UserIdIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("userId", async () =>
+            {
+                IUserProfile profile = await bot.GetProfile(null);
+            });
+        }
+
+        [TestMethod]
+        [DeploymentItem(UserProfileJson)]
+        public async Task GetProfile_UserIdIsEmpty_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("userId", async () =>
+            {
+                IUserProfile profile = await bot.GetProfile(string.Empty);
+            });
+        }
+
+        [TestMethod]
+        [DeploymentItem(UserProfileJson)]
         public async Task GetProfile_CorrectResponse_ReturnsUserProfile()
         {
             TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
