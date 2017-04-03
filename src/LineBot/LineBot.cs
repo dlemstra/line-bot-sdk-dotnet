@@ -42,10 +42,9 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
             HttpResponseMessage response = await _client.GetAsync($"profile/{userId}");
-            response.CheckResult();
+            await response.CheckResult();
 
-            string body = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<UserProfile>(body);
+            return await response.Content.DeserializeObject<UserProfile>();
         }
     }
 }

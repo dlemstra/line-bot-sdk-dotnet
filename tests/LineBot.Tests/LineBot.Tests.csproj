@@ -34,8 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Extensions\LineError.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="UserProfile\UserProfile.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

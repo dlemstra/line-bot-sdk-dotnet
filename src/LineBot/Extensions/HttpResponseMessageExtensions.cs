@@ -4,14 +4,26 @@
 // </copyright>
 
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Line
 {
     internal static class HttpResponseMessageExtensions
     {
-        public static void CheckResult(this HttpResponseMessage self)
+        public static async Task CheckResult(this HttpResponseMessage self)
         {
-            self.EnsureSuccessStatusCode();
+            if (self.IsSuccessStatusCode)
+                return;
+
+            if (self.Content == null)
+                throw new LineBotException(self.StatusCode);
+
+            LineError error = await self.Content.DeserializeObject<LineError>();
+
+            if (error == null || string.IsNullOrWhiteSpace(error.Message))
+                throw new LineBotException(self.StatusCode);
+
+            throw new LineBotException(self.StatusCode, error);
         }
     }
 }
