@@ -1,4 +1,4 @@
-﻿// <copyright file="LineClient.cs" company="Dirk Lemstra">
+﻿// <copyright file="LineBot.cs" company="Dirk Lemstra">
 // Copyright 2017 Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 // </copyright>
@@ -18,7 +18,7 @@ namespace Line
         private readonly ILineConfiguration _configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LineClient"/> class.
+        /// Initializes a new instance of the <see cref="LineBot"/> class.
         /// </summary>
         /// <param name="configuration">The configuration for the client.</param>
         public LineBot(ILineConfiguration configuration)
