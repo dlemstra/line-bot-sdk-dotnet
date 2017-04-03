@@ -2,4 +2,4 @@
 
 dotnet restore
 
-dotnet build --configuration=Release
+dotnet build  LineBot.sln -c release /p:codecov=true

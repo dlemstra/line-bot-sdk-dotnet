@@ -1,4 +1,9 @@
+*.user
+
 .vs
 bin
 obj
-*.user
+
+LineBot.Coverage.xml
+
+build/*
