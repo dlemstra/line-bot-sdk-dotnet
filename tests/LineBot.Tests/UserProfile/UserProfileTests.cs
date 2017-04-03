@@ -16,7 +16,6 @@ namespace Line.Tests.Profile
         private const string UserProfileJson = "UserProfile\\UserProfile.json";
 
         [TestMethod]
-        [DeploymentItem(UserProfileJson)]
         public async Task GetProfile_UserIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
@@ -27,7 +26,6 @@ namespace Line.Tests.Profile
         }
 
         [TestMethod]
-        [DeploymentItem(UserProfileJson)]
         public async Task GetProfile_UserIdIsEmpty_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
