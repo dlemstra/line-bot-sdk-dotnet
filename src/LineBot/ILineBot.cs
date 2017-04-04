@@ -24,8 +24,15 @@ namespace Line
         /// <summary>
         /// Returns the profile for the specified user.
         /// </summary>
-        /// <param name="userId">The id of the user</param>
+        /// <param name="userId">The id of the user.</param>
         /// <returns>The profile for the specified user.</returns>
         Task<IUserProfile> GetProfile(string userId);
+
+        /// <summary>
+        /// Leaves the specified group.
+        /// </summary>
+        /// <param name="groupId">The id of the group.</param>
+        /// <returns>.</returns>
+        Task LeaveGroup(string groupId);
     }
 }

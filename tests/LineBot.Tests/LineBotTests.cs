@@ -12,7 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -27,6 +28,51 @@ namespace Line.Tests
             {
                 new LineBot(null);
             });
+        }
+
+        [TestMethod]
+        public async Task LeaveGroup_GroupIdIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("groupId", async () =>
+            {
+                await bot.LeaveGroup(null);
+            });
+        }
+
+        [TestMethod]
+        public async Task LeaveGroup_GroupIsEmpty_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("groupId", async () =>
+            {
+                await bot.LeaveGroup(string.Empty);
+            });
+        }
+
+        [TestMethod]
+        public async Task LeaveGroup_ErrorResponse_ThrowsException()
+        {
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+
+            await ExceptionAssert.ThrowsUnknownError(async () =>
+            {
+                await bot.LeaveGroup("test");
+            });
+        }
+
+        [TestMethod]
+        public async Task LeaveGroup_CorrectResponse_ThrowsNoException()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.LeaveGroup("test");
+
+            Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
+            Assert.AreEqual("group/test/leave", httpClient.RequestPath);
         }
     }
 }

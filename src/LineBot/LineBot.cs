@@ -14,7 +14,6 @@
 
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Line
 {
@@ -54,6 +53,19 @@ namespace Line
             await response.CheckResult();
 
             return await response.Content.DeserializeObject<UserProfile>();
+        }
+
+        /// <summary>
+        /// Leaves the specified group.
+        /// </summary>
+        /// <param name="groupId">The id of the group.</param>
+        /// <returns>.</returns>
+        public async Task LeaveGroup(string groupId)
+        {
+            Guard.NotNullOrEmpty(nameof(groupId), groupId);
+
+            HttpResponseMessage response = await _client.PostAsync($"group/{groupId}/leave", null);
+            await response.CheckResult();
         }
     }
 }

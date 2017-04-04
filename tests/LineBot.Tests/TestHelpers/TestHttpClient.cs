@@ -48,6 +48,11 @@ namespace Line.Tests
             }
         }
 
+        public static TestHttpClient Create()
+        {
+            return new TestHttpClient(new TestHttpMessageHandler(HttpStatusCode.OK));
+        }
+
         public static TestHttpClient Create(string responseFile)
         {
             return new TestHttpClient(new TestHttpMessageHandler(responseFile));
