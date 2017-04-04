@@ -45,6 +45,19 @@ namespace Line.Tests.Profile
         }
 
         [TestMethod]
+        public async Task GetProfile_ErrorResponse_ThrowsException()
+        {
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+
+            await ExceptionAssert.ThrowsUnknownError(async () =>
+            {
+                await bot.GetProfile("test");
+            });
+        }
+
+        [TestMethod]
         [DeploymentItem(UserProfileJson)]
         public async Task GetProfile_CorrectResponse_ReturnsUserProfile()
         {
@@ -61,20 +74,6 @@ namespace Line.Tests.Profile
             Assert.AreEqual(new Uri("http://obs.line-apps.com/..."), profile.PictureUrl);
             Assert.AreEqual("Hello, LINE!", profile.StatusMessage);
             Assert.AreEqual("Uxxxxxxxxxxxxxx...", profile.UserId);
-        }
-
-        [TestMethod]
-        [DeploymentItem(UserProfileJson)]
-        public async Task GetProfile_ErrorResponse_ThrowsException()
-        {
-            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
-
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
-
-            await ExceptionAssert.ThrowsUnknownError(async () =>
-            {
-                await bot.GetProfile("test");
-            });
         }
     }
 }
