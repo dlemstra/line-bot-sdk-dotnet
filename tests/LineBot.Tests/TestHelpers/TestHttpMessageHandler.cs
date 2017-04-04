@@ -29,13 +29,20 @@ namespace Line.Tests
         {
         }
 
-        public TestHttpMessageHandler(HttpStatusCode statusCode, string responseFile)
+        public TestHttpMessageHandler(HttpStatusCode statusCode)
+            : this(statusCode, null)
+        {
+        }
+
+        private TestHttpMessageHandler(HttpStatusCode statusCode, string responseFile)
         {
             _response = new HttpResponseMessage()
             {
                 StatusCode = statusCode,
-                Content = new StringContent(File.ReadAllText(responseFile))
             };
+
+            if (!string.IsNullOrEmpty(responseFile))
+                _response.Content = new StringContent(File.ReadAllText(responseFile));
         }
 
         public HttpRequestMessage Request { get; set; }

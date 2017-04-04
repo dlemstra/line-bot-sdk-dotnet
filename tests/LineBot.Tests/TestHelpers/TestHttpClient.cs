@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Net;
 using System.Net.Http;
 
 namespace Line.Tests
@@ -50,6 +51,11 @@ namespace Line.Tests
         public static TestHttpClient Create(string responseFile)
         {
             return new TestHttpClient(new TestHttpMessageHandler(responseFile));
+        }
+
+        public static TestHttpClient ThatReturnsAnError()
+        {
+            return new TestHttpClient(new TestHttpMessageHandler(HttpStatusCode.InternalServerError));
         }
     }
 }

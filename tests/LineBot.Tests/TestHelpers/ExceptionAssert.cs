@@ -61,6 +61,11 @@ namespace Line.Tests
             Assert.AreEqual(paramName, exception.ParamName);
         }
 
+        public static async Task<LineBotException> ThrowsUnknownError(Func<Task> action)
+        {
+            return await ThrowsAsync<LineBotException>("Unknown error", action);
+        }
+
         private static async Task<TException> ThrowsAsync<TException>(Func<Task> action)
             where TException : Exception
         {

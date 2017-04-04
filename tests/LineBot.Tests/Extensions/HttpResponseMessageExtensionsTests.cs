@@ -46,7 +46,7 @@ namespace Line.Tests
                 StatusCode = HttpStatusCode.InternalServerError,
             };
 
-            LineBotException exception = await ExceptionAssert.ThrowsAsync<LineBotException>("Unknown error", async () =>
+            LineBotException exception = await ExceptionAssert.ThrowsUnknownError(async () =>
             {
                 await responseMessage.CheckResult();
             });
@@ -65,7 +65,7 @@ namespace Line.Tests
                 Content = new StringContent(string.Empty)
             };
 
-            LineBotException exception = await ExceptionAssert.ThrowsAsync<LineBotException>("Unknown error", async () =>
+            LineBotException exception = await ExceptionAssert.ThrowsUnknownError(async () =>
             {
                 await responseMessage.CheckResult();
             });
@@ -80,7 +80,7 @@ namespace Line.Tests
                 Content = new StringContent("{}")
             };
 
-            LineBotException exception = await ExceptionAssert.ThrowsAsync<LineBotException>("Unknown error", async () =>
+            LineBotException exception = await ExceptionAssert.ThrowsUnknownError(async () =>
             {
                 await responseMessage.CheckResult();
             });
