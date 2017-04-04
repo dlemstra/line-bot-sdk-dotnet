@@ -34,5 +34,12 @@ namespace Line
         /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
         Task LeaveGroup(string groupId);
+
+        /// <summary>
+        /// Leaves the specified room.
+        /// </summary>
+        /// <param name="roomId">The id of the room.</param>
+        /// <returns>.</returns>
+        Task LeaveRoom(string roomId);
     }
 }

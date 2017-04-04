@@ -67,5 +67,18 @@ namespace Line
             HttpResponseMessage response = await _client.PostAsync($"group/{groupId}/leave", null);
             await response.CheckResult();
         }
+
+        /// <summary>
+        /// Leaves the specified room.
+        /// </summary>
+        /// <param name="roomId">The id of the room.</param>
+        /// <returns>.</returns>
+        public async Task LeaveRoom(string roomId)
+        {
+            Guard.NotNullOrEmpty(nameof(roomId), roomId);
+
+            HttpResponseMessage response = await _client.PostAsync($"room/{roomId}/leave", null);
+            await response.CheckResult();
+        }
     }
 }
