@@ -31,6 +31,70 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task GetContent_MessageIdIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messageId", async () =>
+            {
+                await bot.GetContent(null);
+            });
+        }
+
+        [TestMethod]
+        public async Task GetContent_MessageIsEmpty_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messageId", async () =>
+            {
+                await bot.GetContent(string.Empty);
+            });
+        }
+
+        [TestMethod]
+        public async Task GetContent_ErrorResponse_ThrowsException()
+        {
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+
+            await ExceptionAssert.ThrowsUnknownError(async () =>
+            {
+                await bot.GetContent("test");
+            });
+        }
+
+        [TestMethod]
+        public async Task GetContent_EmptyResponse_ReturnsNull()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            byte[] data = await bot.GetContent("test");
+
+            Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
+            Assert.AreEqual("message/test/content", httpClient.RequestPath);
+
+            Assert.IsNull(data);
+        }
+
+        [TestMethod]
+        public async Task GetContent_CorrectResponse_ReturnsData()
+        {
+            byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
+
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            byte[] data = await bot.GetContent("test");
+
+            Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
+            Assert.AreEqual("message/test/content", httpClient.RequestPath);
+
+            Assert.IsNotNull(data);
+            CollectionAssert.AreEqual(data, input);
+        }
+
+        [TestMethod]
         public async Task LeaveGroup_GroupIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);

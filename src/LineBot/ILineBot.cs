@@ -22,10 +22,17 @@ namespace Line
     public interface ILineBot
     {
         /// <summary>
-        /// Returns the profile for the specified user.
+        /// Returns the content of the specified message.
+        /// </summary>
+        /// <param name="messageId">The id of the message</param>
+        /// <returns>The content of the specified message.</returns>
+        Task<byte[]> GetContent(string messageId);
+
+        /// <summary>
+        /// Returns the profile of the specified user.
         /// </summary>
         /// <param name="userId">The id of the user.</param>
-        /// <returns>The profile for the specified user.</returns>
+        /// <returns>The profile of the specified user.</returns>
         Task<IUserProfile> GetProfile(string userId);
 
         /// <summary>

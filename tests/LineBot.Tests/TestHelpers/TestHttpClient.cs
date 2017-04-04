@@ -62,5 +62,10 @@ namespace Line.Tests
         {
             return new TestHttpClient(new TestHttpMessageHandler(HttpStatusCode.InternalServerError));
         }
+
+        public static TestHttpClient ThatReturnsData(byte[] data)
+        {
+            return new TestHttpClient(new TestHttpMessageHandler(data));
+        }
     }
 }

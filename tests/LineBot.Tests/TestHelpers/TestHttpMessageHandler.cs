@@ -24,25 +24,24 @@ namespace Line.Tests
     {
         private readonly HttpResponseMessage _response;
 
-        public TestHttpMessageHandler(string responseFile)
-            : this(HttpStatusCode.OK, responseFile)
+        public TestHttpMessageHandler(byte[] data)
+            : this(HttpStatusCode.OK)
         {
+            _response.Content = new ByteArrayContent(data);
+        }
+
+        public TestHttpMessageHandler(string responseFile)
+            : this(HttpStatusCode.OK)
+        {
+            _response.Content = new StringContent(File.ReadAllText(responseFile));
         }
 
         public TestHttpMessageHandler(HttpStatusCode statusCode)
-            : this(statusCode, null)
-        {
-        }
-
-        private TestHttpMessageHandler(HttpStatusCode statusCode, string responseFile)
         {
             _response = new HttpResponseMessage()
             {
                 StatusCode = statusCode,
             };
-
-            if (!string.IsNullOrEmpty(responseFile))
-                _response.Content = new StringContent(File.ReadAllText(responseFile));
         }
 
         public HttpRequestMessage Request { get; set; }

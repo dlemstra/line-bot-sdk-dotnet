@@ -41,10 +41,28 @@ namespace Line
         }
 
         /// <summary>
-        /// Returns the profile for the specified user.
+        /// Returns the content of the specified message.
+        /// </summary>
+        /// <param name="messageId">The id of the message</param>
+        /// <returns>The content of the specified message.</returns>
+        public async Task<byte[]> GetContent(string messageId)
+        {
+            Guard.NotNullOrEmpty(nameof(messageId), messageId);
+
+            HttpResponseMessage response = await _client.GetAsync($"message/{messageId}/content");
+            await response.CheckResult();
+
+            if (response.Content == null)
+                return null;
+
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+        /// <summary>
+        /// Returns the profile of the specified user.
         /// </summary>
         /// <param name="userId">The id of the user</param>
-        /// <returns>The profile for the specified user.</returns>
+        /// <returns>The profile of the specified user.</returns>
         public async Task<IUserProfile> GetProfile(string userId)
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
