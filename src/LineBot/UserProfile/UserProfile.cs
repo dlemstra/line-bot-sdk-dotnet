@@ -17,9 +17,6 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    /// <summary>
-    /// Encapsulates the profile of a user.
-    /// </summary>
     internal sealed class UserProfile : IUserProfile
     {
         [JsonProperty("displayName")]
