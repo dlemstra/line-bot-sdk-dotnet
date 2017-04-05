@@ -45,13 +45,13 @@ namespace Line.Tests
 
         public static void ThrowsArgumentNullException(string paramName, Action action)
         {
-            ArgumentException exception = Throws<ArgumentNullException>("Value cannot be null.", action);
+            ArgumentException exception = Throws<ArgumentNullException>(action);
             Assert.AreEqual(paramName, exception.ParamName);
         }
 
         public static async Task ThrowsArgumentNullExceptionAsync(string paramName, Func<Task> action)
         {
-            ArgumentException exception = await ThrowsAsync<ArgumentNullException>("Value cannot be null.", action);
+            ArgumentException exception = await ThrowsAsync<ArgumentNullException>(action);
             Assert.AreEqual(paramName, exception.ParamName);
         }
 
