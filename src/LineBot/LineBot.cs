@@ -122,5 +122,17 @@ namespace Line
             HttpResponseMessage response = await _client.PostAsync($"room/{roomId}/leave", null);
             await response.CheckResult();
         }
+
+        /// <summary>
+        /// Leaves the specified room.
+        /// </summary>
+        /// <param name="room">The room.</param>
+        /// <returns>.</returns>
+        public async Task LeaveRoom(IRoom room)
+        {
+            Guard.NotNull(nameof(room), room);
+
+            await LeaveRoom(room.Id);
+        }
     }
 }

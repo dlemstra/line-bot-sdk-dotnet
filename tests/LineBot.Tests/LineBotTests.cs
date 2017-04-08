@@ -26,6 +26,11 @@ namespace Line.Tests
             public string Id => "testGroup";
         }
 
+        private class TestRoom : IRoom
+        {
+            public string Id => "testRoom";
+        }
+
         [TestMethod]
         public void Create_ConfigurationIsNull_ThrowsArgumentNullException()
         {
@@ -166,12 +171,22 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task LeaveRoom_RoomsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("room", async () =>
+            {
+                await bot.LeaveRoom((IRoom)null);
+            });
+        }
+
+        [TestMethod]
         public async Task LeaveRoom_RoomIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("roomId", async () =>
             {
-                await bot.LeaveRoom(null);
+                await bot.LeaveRoom((string)null);
             });
         }
 
@@ -199,7 +214,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveRoom_CorrectResponse_ThrowsNoException()
+        public async Task LeaveRoom_CorrectRoomId_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -208,6 +223,17 @@ namespace Line.Tests
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
             Assert.AreEqual("room/test/leave", httpClient.RequestPath);
+        }
+
+        [TestMethod]
+        public async Task LeaveRoom_CorrectRoom_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.LeaveRoom(new TestRoom());
+
+            Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
         }
     }
 }

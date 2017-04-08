@@ -57,10 +57,17 @@ namespace Line
         Task LeaveGroup(IGroup group);
 
         /// <summary>
-        /// Leaves the specified room.
+        /// Leave the specified room.
         /// </summary>
         /// <param name="roomId">The id of the room.</param>
         /// <returns>.</returns>
         Task LeaveRoom(string roomId);
+
+        /// <summary>
+        /// Leave the specified room.
+        /// </summary>
+        /// <param name="roomId">The room.</param>
+        /// <returns>.</returns>
+        Task LeaveRoom(IRoom room);
     }
 }
