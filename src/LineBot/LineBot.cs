@@ -81,11 +81,12 @@ namespace Line
         public async Task<IUserProfile> GetProfile(IUser user)
         {
             Guard.NotNull(nameof(user), user);
+
             return await GetProfile(user.Id);
         }
 
         /// <summary>
-        /// Leaves the specified group.
+        /// Leave the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
@@ -95,6 +96,18 @@ namespace Line
 
             HttpResponseMessage response = await _client.PostAsync($"group/{groupId}/leave", null);
             await response.CheckResult();
+        }
+
+        /// <summary>
+        /// Leave the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <returns>.</returns>
+        public async Task LeaveGroup(IGroup group)
+        {
+            Guard.NotNull(nameof(group), group);
+
+            await LeaveGroup(group.Id);
         }
 
         /// <summary>

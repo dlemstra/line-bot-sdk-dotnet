@@ -21,6 +21,11 @@ namespace Line.Tests
     [TestClass]
     public class LineBotTests
     {
+        private class TestGroup : IGroup
+        {
+            public string Id => "testGroup";
+        }
+
         [TestMethod]
         public void Create_ConfigurationIsNull_ThrowsArgumentNullException()
         {
@@ -95,12 +100,22 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task LeaveGroup_GroupIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("group", async () =>
+            {
+                await bot.LeaveGroup((IGroup)null);
+            });
+        }
+
+        [TestMethod]
         public async Task LeaveGroup_GroupIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("groupId", async () =>
             {
-                await bot.LeaveGroup(null);
+                await bot.LeaveGroup((string)null);
             });
         }
 
@@ -128,7 +143,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveGroup_CorrectResponse_ThrowsNoException()
+        public async Task LeaveGroup_CorrectGroupId_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -137,6 +152,17 @@ namespace Line.Tests
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
             Assert.AreEqual("group/test/leave", httpClient.RequestPath);
+        }
+
+        [TestMethod]
+        public async Task LeaveGroup_CorrectGroup_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.LeaveGroup(new TestGroup());
+
+            Assert.AreEqual("group/testGroup/leave", httpClient.RequestPath);
         }
 
         [TestMethod]

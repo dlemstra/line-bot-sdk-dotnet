@@ -43,11 +43,18 @@ namespace Line
         Task<IUserProfile> GetProfile(IUser user);
 
         /// <summary>
-        /// Leaves the specified group.
+        /// Leave the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
         Task LeaveGroup(string groupId);
+
+        /// <summary>
+        /// Leave the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <returns>.</returns>
+        Task LeaveGroup(IGroup group);
 
         /// <summary>
         /// Leaves the specified room.
