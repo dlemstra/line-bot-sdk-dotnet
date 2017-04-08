@@ -66,7 +66,7 @@ namespace Line.Tests
             return await ThrowsAsync<LineBotException>("Unknown error", action);
         }
 
-        private static async Task<TException> ThrowsAsync<TException>(Func<Task> action)
+        public static async Task<TException> ThrowsAsync<TException>(Func<Task> action)
             where TException : Exception
         {
             try
@@ -84,7 +84,7 @@ namespace Line.Tests
             }
         }
 
-        private static TException Throws<TException>(Action action)
+        public static TException Throws<TException>(Action action)
             where TException : Exception
         {
             try
