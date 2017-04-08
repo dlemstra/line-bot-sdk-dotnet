@@ -74,6 +74,17 @@ namespace Line
         }
 
         /// <summary>
+        /// Returns the profile of the specified user.
+        /// </summary>
+        /// <param name="user">The user</param>
+        /// <returns>The profile of the specified user.</returns>
+        public async Task<IUserProfile> GetProfile(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+            return await GetProfile(user.Id);
+        }
+
+        /// <summary>
         /// Leaves the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>

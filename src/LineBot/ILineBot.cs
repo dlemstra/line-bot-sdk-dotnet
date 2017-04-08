@@ -36,6 +36,13 @@ namespace Line
         Task<IUserProfile> GetProfile(string userId);
 
         /// <summary>
+        /// Returns the profile of the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>The profile of the specified user.</returns>
+        Task<IUserProfile> GetProfile(IUser user);
+
+        /// <summary>
         /// Leaves the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>

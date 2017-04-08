@@ -24,13 +24,28 @@ namespace Line.Tests.Profile
     {
         private const string UserProfileJson = "UserProfile\\UserProfile.json";
 
+        private class TestUser : IUser
+        {
+            public string Id => "testUser";
+        }
+
+        [TestMethod]
+        public async Task GetProfile_UserIsNulll_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("user", async () =>
+            {
+                IUserProfile profile = await bot.GetProfile((IUser)null);
+            });
+        }
+
         [TestMethod]
         public async Task GetProfile_UserIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("userId", async () =>
             {
-                IUserProfile profile = await bot.GetProfile(null);
+                IUserProfile profile = await bot.GetProfile((string)null);
             });
         }
 
@@ -74,6 +89,19 @@ namespace Line.Tests.Profile
             Assert.AreEqual(new Uri("http://obs.line-apps.com/..."), profile.PictureUrl);
             Assert.AreEqual("Hello, LINE!", profile.StatusMessage);
             Assert.AreEqual("Uxxxxxxxxxxxxxx...", profile.UserId);
+        }
+
+        [TestMethod]
+        [DeploymentItem(UserProfileJson)]
+        public async Task GetProfile_WithUser_ReturnsUserProfile()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            IUserProfile profile = await bot.GetProfile(new TestUser());
+
+            Assert.AreEqual("profile/testUser", httpClient.RequestPath);
+            Assert.IsNotNull(profile);
         }
     }
 }
