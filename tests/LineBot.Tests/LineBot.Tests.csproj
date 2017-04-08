@@ -15,7 +15,7 @@
     <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\LineBot.snk</AssemblyOriginatorKeyFile>
-    <RootNamespace>LineBot</RootNamespace>
+    <RootNamespace>Line.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
