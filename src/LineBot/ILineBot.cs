@@ -66,7 +66,7 @@ namespace Line
         /// <summary>
         /// Leave the specified room.
         /// </summary>
-        /// <param name="roomId">The room.</param>
+        /// <param name="room">The room.</param>
         /// <returns>.</returns>
         Task LeaveRoom(IRoom room);
     }
