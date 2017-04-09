@@ -31,5 +31,13 @@ namespace Line
             if (value.Length == 0)
                 throw new ArgumentException("Value cannot be empty.", paramName);
         }
+
+        public static void NotNullOrEmpty(string paramName, byte[] value)
+        {
+            NotNull(paramName, value);
+
+            if (value.Length == 0)
+                throw new ArgumentException("Value cannot be empty.", paramName);
+        }
     }
 }

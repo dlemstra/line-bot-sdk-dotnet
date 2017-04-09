@@ -23,6 +23,13 @@ namespace Line
     /// </summary>
     public sealed class LineBotException : Exception
     {
+        internal LineBotException(string message)
+            : base(message)
+        {
+            StatusCode = HttpStatusCode.OK;
+            Details = new List<ILineErrorDetails>();
+        }
+
         internal LineBotException(HttpStatusCode statusCode)
             : base("Unknown error")
         {

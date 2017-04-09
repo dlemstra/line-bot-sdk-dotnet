@@ -18,7 +18,8 @@ namespace Line.Tests
     {
         public static ILineConfiguration ForTest => new LineConfiguration
         {
-            ChannelAccessToken = "Test"
+            ChannelAccessToken = "ChannelAccessToken",
+            ChannelSecret = "ChannelSecret"
         };
     }
 }

@@ -55,6 +55,12 @@ namespace Line.Tests
             Assert.AreEqual(paramName, exception.ParamName);
         }
 
+        public static void ThrowsArgumentEmptyException(string paramName, Action action)
+        {
+            ArgumentException exception = Throws<ArgumentException>("Value cannot be empty.", action);
+            Assert.AreEqual(paramName, exception.ParamName);
+        }
+
         public static async Task ThrowsArgumentEmptyExceptionAsync(string paramName, Func<Task> action)
         {
             ArgumentException exception = await ThrowsAsync<ArgumentException>("Value cannot be empty.", action);

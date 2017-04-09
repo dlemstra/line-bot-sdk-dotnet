@@ -23,5 +23,10 @@ namespace Line
         /// Gets the channel access token.
         /// </summary>
         string ChannelAccessToken { get; }
+
+        /// <summary>
+        /// Gets the channel secret.
+        /// </summary>
+        string ChannelSecret { get; }
     }
 }
