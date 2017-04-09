@@ -37,19 +37,15 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(GroupJson)]
-        public void GetGroup_EventSourceTypeIsNotGroup_ThrowsException()
+        public void Group_EventSourceTypeIsNotGroup_ReturnsNull()
         {
             IEventSource source = CreateUser();
-
-            ExceptionAssert.Throws<InvalidOperationException>("SourceType should be Group.", () =>
-            {
-                IGroup group = source.Group;
-            });
+            Assert.IsNull(source.Group);
         }
 
         [TestMethod]
         [DeploymentItem(GroupJson)]
-        public void GetGroup_EventSourceTypeIsGroup_ReturnsGroup()
+        public void Group_EventSourceTypeIsGroup_ReturnsGroup()
         {
             IEventSource source = CreateGroup();
             Assert.AreEqual(EventSourceType.Group, source.SourceType);
@@ -59,19 +55,15 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(UserJson)]
-        public void GetRoom_EventSourceTypeIsNotRoom_ThrowsException()
+        public void Room_EventSourceTypeIsNotRoom_ReturnsNull()
         {
             IEventSource source = CreateUser();
-
-            ExceptionAssert.Throws<InvalidOperationException>("SourceType should be Room.", () =>
-            {
-                IRoom room = source.Room;
-            });
+            Assert.IsNull(source.Room);
         }
 
         [TestMethod]
         [DeploymentItem(RoomJson)]
-        public void GetRoom_EventSourceTypeIsRoom_ReturnsRoom()
+        public void Room_EventSourceTypeIsRoom_ReturnsRoom()
         {
             IEventSource source = CreateRoom();
             Assert.AreEqual(EventSourceType.Room, source.SourceType);
@@ -81,19 +73,15 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(GroupJson)]
-        public void GetUser_EventSourceTypeIsNotUser_ThrowsException()
+        public void User_EventSourceTypeIsNotUser_ReturnsNull()
         {
             IEventSource source = CreateRoom();
-
-            ExceptionAssert.Throws<InvalidOperationException>("SourceType should be User.", () =>
-            {
-                IUser user = source.User;
-            });
+            Assert.IsNull(source.User);
         }
 
         [TestMethod]
         [DeploymentItem(UserJson)]
-        public void GetUser_EventSourceTypeIsUser_ReturnsUser()
+        public void User_EventSourceTypeIsUser_ReturnsUser()
         {
             IEventSource source = CreateUser();
             Assert.AreEqual(EventSourceType.User, source.SourceType);

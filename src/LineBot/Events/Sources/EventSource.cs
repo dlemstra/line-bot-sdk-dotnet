@@ -39,7 +39,7 @@ namespace Line
             get
             {
                 if (SourceType != EventSourceType.Group)
-                    throw new InvalidOperationException($"{nameof(SourceType)} should be {nameof(EventSourceType.Group)}.");
+                    return null;
 
                 return this;
             }
@@ -52,7 +52,7 @@ namespace Line
             get
             {
                 if (SourceType != EventSourceType.Room)
-                    throw new InvalidOperationException($"{nameof(SourceType)} should be {nameof(EventSourceType.Room)}.");
+                    return null;
 
                 return this;
             }
@@ -65,7 +65,7 @@ namespace Line
             get
             {
                 if (SourceType != EventSourceType.User)
-                    throw new InvalidOperationException($"{nameof(SourceType)} should be {nameof(EventSourceType.User)}.");
+                    return null;
 
                 return this;
             }
