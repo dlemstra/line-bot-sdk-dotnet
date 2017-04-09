@@ -21,16 +21,6 @@ namespace Line.Tests
     [TestClass]
     public class LineBotTests
     {
-        private class TestGroup : IGroup
-        {
-            public string Id => "testGroup";
-        }
-
-        private class TestRoom : IRoom
-        {
-            public string Id => "testRoom";
-        }
-
         [TestMethod]
         public void Create_ConfigurationIsNull_ThrowsArgumentNullException()
         {
@@ -234,6 +224,16 @@ namespace Line.Tests
             await bot.LeaveRoom(new TestRoom());
 
             Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
+        }
+
+        private class TestGroup : IGroup
+        {
+            public string Id => "testGroup";
+        }
+
+        private class TestRoom : IRoom
+        {
+            public string Id => "testRoom";
         }
     }
 }

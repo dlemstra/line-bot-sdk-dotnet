@@ -24,11 +24,6 @@ namespace Line.Tests.Profile
     {
         private const string UserProfileJson = "UserProfile\\UserProfile.json";
 
-        private class TestUser : IUser
-        {
-            public string Id => "testUser";
-        }
-
         [TestMethod]
         public async Task GetProfile_UserIsNulll_ThrowsException()
         {
@@ -102,6 +97,11 @@ namespace Line.Tests.Profile
 
             Assert.AreEqual("profile/testUser", httpClient.RequestPath);
             Assert.IsNotNull(profile);
+        }
+
+        private class TestUser : IUser
+        {
+            public string Id => "testUser";
         }
     }
 }
