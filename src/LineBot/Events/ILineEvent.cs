@@ -19,7 +19,7 @@ namespace Line
     /// <summary>
     /// Encapsulates the interface for a LINE event.
     /// </summary>
-    public interface ILineEvent
+    public interface ILineEvent : IReplyToken
     {
         /// <summary>
         /// Gets the type of the event.
@@ -27,17 +27,7 @@ namespace Line
         LineEventType EventType { get; }
 
         /// <summary>
-        /// Gets the follow event information.
-        /// </summary>
-        IFollowEvent FollowEvent { get; }
-
-        /// <summary>
-        /// Gets the join event information.
-        /// </summary>
-        IJoinEvent JoinEvent { get; }
-
-        /// <summary>
-        /// Gets the postback event information.
+        /// Gets the postback information.
         /// </summary>
         IPostback Postback { get; }
 

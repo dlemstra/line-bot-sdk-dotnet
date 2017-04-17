@@ -20,10 +20,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class FollowEventTests
+    public class FollowTests
     {
         private const string FollowEventJson = "Events\\Follow\\FollowEvent.json";
-        private const string InvalidJson = "Events\\Invalid.json";
 
         [TestMethod]
         [DeploymentItem(FollowEventJson)]
@@ -45,24 +44,7 @@ namespace Line.Tests
             Assert.AreEqual(EventSourceType.User, source.SourceType);
             Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
 
-            IFollowEvent followEvent = lineEvent.FollowEvent;
-            Assert.IsNotNull(followEvent);
-            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", followEvent.ReplyToken);
-        }
-
-        [TestMethod]
-        [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_FollowEventReturnsNull()
-        {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.FollowEvent);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
         }
     }
 }

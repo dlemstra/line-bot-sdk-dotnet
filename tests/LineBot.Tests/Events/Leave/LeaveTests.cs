@@ -20,17 +20,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class JoinEventTests
+    public class LeaveTests
     {
-        private const string JoinEventJson = "Events\\Join\\JoinEvent.json";
-        private const string InvalidJson = "Events\\Invalid.json";
+        private const string LeaveEventJson = "Events\\Leave\\LeaveEvent.json";
 
         [TestMethod]
-        [DeploymentItem(JoinEventJson)]
-        public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
+        [DeploymentItem(LeaveEventJson)]
+        public async Task GetEvents_ValidRequest_IsLeaveEvent()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(JoinEventJson);
+            TestHttpRequest request = new TestHttpRequest(LeaveEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -38,31 +37,12 @@ namespace Line.Tests
 
             ILineEvent lineEvent = events.First();
 
-            Assert.AreEqual(LineEventType.Join, lineEvent.EventType);
+            Assert.AreEqual(LineEventType.Leave, lineEvent.EventType);
 
             IEventSource source = lineEvent.Source;
             Assert.IsNotNull(source);
             Assert.AreEqual(EventSourceType.Group, source.SourceType);
             Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
-
-            IJoinEvent joinEvent = lineEvent.JoinEvent;
-            Assert.IsNotNull(joinEvent);
-            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", joinEvent.ReplyToken);
-        }
-
-        [TestMethod]
-        [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_FollowEventReturnsNull()
-        {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.JoinEvent);
         }
     }
 }

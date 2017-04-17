@@ -20,10 +20,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class PostbackEventTests
+    public class PostbackTests
     {
         private const string PostbackEventJson = "Events\\Postback\\PostbackEvent.json";
-        private const string InvalidJson = "Events\\Invalid.json";
 
         [TestMethod]
         [DeploymentItem(PostbackEventJson)]
@@ -48,21 +47,7 @@ namespace Line.Tests
             IPostback postback = lineEvent.Postback;
             Assert.IsNotNull(postback);
             Assert.AreEqual("action=buyItem&itemId=123123&color=red", postback.Data);
-        }
-
-        [TestMethod]
-        [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_FollowEventReturnsNull()
-        {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.Postback);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", postback.ReplyToken);
         }
     }
 }

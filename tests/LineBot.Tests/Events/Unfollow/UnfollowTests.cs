@@ -20,16 +20,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class LeaveEventTests
+    public class UnfollowTests
     {
-        private const string LeaveEventJson = "Events\\Leave\\LeaveEvent.json";
+        private const string UnfollowEventJson = "Events\\Unfollow\\UnfollowEvent.json";
 
         [TestMethod]
-        [DeploymentItem(LeaveEventJson)]
-        public async Task GetEvents_ValidRequest_IsLeaveEvent()
+        [DeploymentItem(UnfollowEventJson)]
+        public async Task GetEvents_ValidRequest_IsUnfollowEvent()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(LeaveEventJson);
+            TestHttpRequest request = new TestHttpRequest(UnfollowEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -37,12 +37,12 @@ namespace Line.Tests
 
             ILineEvent lineEvent = events.First();
 
-            Assert.AreEqual(LineEventType.Leave, lineEvent.EventType);
+            Assert.AreEqual(LineEventType.Unfollow, lineEvent.EventType);
 
             IEventSource source = lineEvent.Source;
             Assert.IsNotNull(source);
-            Assert.AreEqual(EventSourceType.Group, source.SourceType);
-            Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
+            Assert.AreEqual(EventSourceType.User, source.SourceType);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
         }
     }
 }

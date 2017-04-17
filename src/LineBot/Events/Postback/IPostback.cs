@@ -15,7 +15,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for a postback event.
+    /// Encapsulates the interface for a postback.
     /// </summary>
     public interface IPostback : IReplyToken
     {

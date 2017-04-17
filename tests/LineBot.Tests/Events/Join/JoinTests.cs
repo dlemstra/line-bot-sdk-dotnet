@@ -20,16 +20,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class UnfollowEventTests
+    public class JoinTests
     {
-        private const string UnfollowEventJson = "Events\\Unfollow\\UnfollowEvent.json";
+        private const string JoinEventJson = "Events\\Join\\JoinEvent.json";
 
         [TestMethod]
-        [DeploymentItem(UnfollowEventJson)]
-        public async Task GetEvents_ValidRequest_IsUnfollowEvent()
+        [DeploymentItem(JoinEventJson)]
+        public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(UnfollowEventJson);
+            TestHttpRequest request = new TestHttpRequest(JoinEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -37,12 +37,14 @@ namespace Line.Tests
 
             ILineEvent lineEvent = events.First();
 
-            Assert.AreEqual(LineEventType.Unfollow, lineEvent.EventType);
+            Assert.AreEqual(LineEventType.Join, lineEvent.EventType);
 
             IEventSource source = lineEvent.Source;
             Assert.IsNotNull(source);
-            Assert.AreEqual(EventSourceType.User, source.SourceType);
-            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+            Assert.AreEqual(EventSourceType.Group, source.SourceType);
+            Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
+
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
         }
     }
 }
