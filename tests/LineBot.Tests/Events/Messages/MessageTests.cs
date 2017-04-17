@@ -27,6 +27,7 @@ namespace Line.Tests
         private const string InvalidMesssageJson = "Events\\Messages\\InvalidMessage.json";
         private const string MessageEventWithoutMessageJson = "Events\\Messages\\MessageEventWithoutMessage.json";
         private const string TextJson = "Events\\Messages\\Text.json";
+        private const string VideoJson = "Events\\Messages\\Video.json";
 
         [TestMethod]
         [DeploymentItem(MessageEventWithoutMessageJson)]
@@ -77,6 +78,32 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        [DeploymentItem(ImageJson)]
+        public async Task Group_MessageTypeIsImage_ReturnsMessage()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(ImageJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            IEventSource source = lineEvent.Source;
+            Assert.IsNotNull(source);
+            Assert.AreEqual(EventSourceType.User, source.SourceType);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
+
+            Assert.IsNotNull(lineEvent.Message);
+            Assert.AreEqual(MessageType.Image, lineEvent.Message.MessageType);
+            Assert.AreEqual("325708", lineEvent.Message.Id);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
+            Assert.IsNull(lineEvent.Message.Text);
+        }
+
+        [TestMethod]
         [DeploymentItem(TextJson)]
         public async Task Group_MessageTypeIsText_ReturnsMessage()
         {
@@ -103,11 +130,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(ImageJson)]
-        public async Task Group_MessageTypeIsImage_ReturnsMessage()
+        [DeploymentItem(VideoJson)]
+        public async Task Group_MessageTypeIsVideo_ReturnsMessage()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(ImageJson);
+            TestHttpRequest request = new TestHttpRequest(VideoJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -122,7 +149,7 @@ namespace Line.Tests
             Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
 
             Assert.IsNotNull(lineEvent.Message);
-            Assert.AreEqual(MessageType.Image, lineEvent.Message.MessageType);
+            Assert.AreEqual(MessageType.Video, lineEvent.Message.MessageType);
             Assert.AreEqual("325708", lineEvent.Message.Id);
             Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
             Assert.IsNull(lineEvent.Message.Text);

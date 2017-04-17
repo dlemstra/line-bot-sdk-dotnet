@@ -20,18 +20,23 @@ namespace Line
     public enum MessageType
     {
         /// <summary>
-        /// Unknown
+        /// Unknown.
         /// </summary>
         Unknown,
 
         /// <summary>
-        /// Image message
+        /// Image message.
         /// </summary>
         Image,
 
         /// <summary>
-        /// Text message
+        /// Text message.
         /// </summary>
         Text,
+
+        /// <summary>
+        /// Video message.
+        /// </summary>
+        Video
     }
 }
