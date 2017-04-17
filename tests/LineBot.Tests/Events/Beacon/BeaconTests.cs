@@ -24,6 +24,7 @@ namespace Line.Tests
     {
         private const string BeaconEventJson = "Events\\Beacon\\BeaconEvent.json";
         private const string BeaconEventWithoutBeaconJson = "Events\\Beacon\\BeaconEventWithoutBeacon.json";
+        private const string InvalidBeaconJson = "Events\\Beacon\\InvalidBeacon.json";
         private const string InvalidJson = "Events\\Invalid.json";
 
         [TestMethod]
@@ -70,6 +71,22 @@ namespace Line.Tests
 
             Assert.AreEqual(LineEventType.Beacon, lineEvent.EventType);
             Assert.IsNull(lineEvent.Beacon);
+        }
+
+        [TestMethod]
+        [DeploymentItem(InvalidBeaconJson)]
+        public async Task GetEvents_InvalidBeaconType_BeaconTypeIsUnknown()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(InvalidBeaconJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            Assert.IsNotNull(lineEvent.Beacon);
+            Assert.AreEqual(BeaconType.Unknown, lineEvent.Beacon.BeaconType);
         }
 
         [TestMethod]

@@ -20,6 +20,11 @@ namespace Line
     public enum BeaconType
     {
         /// <summary>
+        /// Unknown.
+        /// </summary>
+        Unknown,
+
+        /// <summary>
         /// Tapped beacon banner.
         /// </summary>
         Banner,

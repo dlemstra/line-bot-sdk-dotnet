@@ -20,7 +20,7 @@ namespace Line
     public interface IBeacon : IReplyToken
     {
         /// <summary>
-        /// Gets the type of the beacon event.
+        /// Gets the type of the beacon.
         /// </summary>
         BeaconType BeaconType { get; }
 
