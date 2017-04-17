@@ -22,6 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class PostbackTests
     {
+        private const string InvalidJson = "Events\\Invalid.json";
         private const string PostbackEventJson = "Events\\Postback\\PostbackEvent.json";
         private const string PostbackEventWithoutPostbackJson = "Events\\Postback\\PostbackEventWithoutPostback.json";
 
@@ -67,6 +68,21 @@ namespace Line.Tests
             ILineEvent lineEvent = events.First();
 
             Assert.AreEqual(LineEventType.Postback, lineEvent.EventType);
+            Assert.IsNull(lineEvent.Postback);
+        }
+
+        [TestMethod]
+        [DeploymentItem(InvalidJson)]
+        public async Task GetEvents_InvalidRequest_BeaconReturnsNull()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(InvalidJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
             Assert.IsNull(lineEvent.Postback);
         }
     }

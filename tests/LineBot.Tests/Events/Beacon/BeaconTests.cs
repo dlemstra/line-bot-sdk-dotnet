@@ -24,6 +24,7 @@ namespace Line.Tests
     {
         private const string BeaconEventJson = "Events\\Beacon\\BeaconEvent.json";
         private const string BeaconEventWithoutBeaconJson = "Events\\Beacon\\BeaconEventWithoutBeacon.json";
+        private const string InvalidJson = "Events\\Invalid.json";
 
         [TestMethod]
         [DeploymentItem(BeaconEventJson)]
@@ -68,6 +69,21 @@ namespace Line.Tests
             ILineEvent lineEvent = events.First();
 
             Assert.AreEqual(LineEventType.Beacon, lineEvent.EventType);
+            Assert.IsNull(lineEvent.Beacon);
+        }
+
+        [TestMethod]
+        [DeploymentItem(InvalidJson)]
+        public async Task GetEvents_InvalidRequest_BeaconReturnsNull()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(InvalidJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
             Assert.IsNull(lineEvent.Beacon);
         }
     }
