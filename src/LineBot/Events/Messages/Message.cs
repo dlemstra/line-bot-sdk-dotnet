@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class Message : ILocation
+    internal sealed class Message : ILocation, ISticker
     {
         [JsonProperty("address")]
         public string Address { get; set; }
@@ -44,6 +44,23 @@ namespace Line
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         public MessageType MessageType { get; set; }
+
+        [JsonProperty("packageid")]
+        public string PackageId { get; set; }
+
+        public ISticker Sticker
+        {
+            get
+            {
+                if (MessageType != MessageType.Sticker)
+                    return null;
+
+                return this;
+            }
+        }
+
+        [JsonProperty("stickerId")]
+        public string StickerId { get; set; }
 
         [JsonProperty("text")]
         public string Text { get; set; }

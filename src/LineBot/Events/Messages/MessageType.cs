@@ -40,6 +40,11 @@ namespace Line
         Location,
 
         /// <summary>
+        /// Sticker message.
+        /// </summary>
+        Sticker,
+
+        /// <summary>
         /// Text message.
         /// </summary>
         Text,

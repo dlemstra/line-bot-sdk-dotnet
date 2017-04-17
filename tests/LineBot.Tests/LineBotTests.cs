@@ -275,6 +275,8 @@ namespace Line.Tests
 
             public string ReplyToken => "testReplyToken";
 
+            public ISticker Sticker { get; }
+
             public string Text => "testText";
         }
 

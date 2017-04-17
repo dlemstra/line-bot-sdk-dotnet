@@ -87,6 +87,8 @@ namespace Line
 
         MessageType IMessage.MessageType => _message.MessageType;
 
+        ISticker IMessage.Sticker => _message.Sticker;
+
         string IMessage.Text => _message.Text;
 
         string IPostback.Data => _postback.Data;

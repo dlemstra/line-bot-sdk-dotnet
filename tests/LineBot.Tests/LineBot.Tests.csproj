@@ -56,6 +56,9 @@
     <None Update="Events\Leave\LeaveEvent.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Events\Messages\Sticker.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Events\Messages\Location.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -15,33 +15,18 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for a message.
+    /// Encapsulates the interface for a sticker.
     /// </summary>
-    public interface IMessage : IReplyToken
+    public interface ISticker
     {
         /// <summary>
-        /// Gets the id of the messge.
+        /// Gets the id of the package.
         /// </summary>
-        string Id { get; }
+        string PackageId { get; }
 
         /// <summary>
-        /// Gets the location data of the message.
+        /// Gets the id of the sticker.
         /// </summary>
-        ILocation Location { get; }
-
-        /// <summary>
-        /// Gets the type of the message.
-        /// </summary>
-        MessageType MessageType { get; }
-
-        /// <summary>
-        /// Gets the sticker data of the message.
-        /// </summary>
-        ISticker Sticker { get; }
-
-        /// <summary>
-        /// Gets the text of the message.
-        /// </summary>
-        string Text { get; }
+        string StickerId { get; }
     }
 }
