@@ -50,7 +50,7 @@ namespace Line
         {
             get
             {
-                if (EventType != LineEventType.Postback)
+                if (EventType != LineEventType.Postback || _postback == null)
                     return null;
 
                 return this;

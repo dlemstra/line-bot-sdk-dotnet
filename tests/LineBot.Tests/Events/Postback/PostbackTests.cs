@@ -23,6 +23,7 @@ namespace Line.Tests
     public class PostbackTests
     {
         private const string PostbackEventJson = "Events\\Postback\\PostbackEvent.json";
+        private const string PostbackEventWithoutPostbackJson = "Events\\Postback\\PostbackEventWithoutPostback.json";
 
         [TestMethod]
         [DeploymentItem(PostbackEventJson)]
@@ -50,6 +51,23 @@ namespace Line.Tests
             Assert.IsNotNull(postback);
             Assert.AreEqual("action=buyItem&itemId=123123&color=red", postback.Data);
             Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", postback.ReplyToken);
+        }
+
+        [TestMethod]
+        [DeploymentItem(PostbackEventWithoutPostbackJson)]
+        public async Task GetEvents_RequestWithoutPostback_PostbackIsNull()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(PostbackEventWithoutPostbackJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.IsNotNull(events);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            Assert.AreEqual(LineEventType.Postback, lineEvent.EventType);
+            Assert.IsNull(lineEvent.Postback);
         }
     }
 }
