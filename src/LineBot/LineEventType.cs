@@ -27,6 +27,11 @@ namespace Line
         /// <summary>
         /// Follow event type.
         /// </summary>
-        Follow
+        Follow,
+
+        /// <summary>
+        /// Unfollow event type.
+        /// </summary>
+        Unfollow
     }
 }

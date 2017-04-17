@@ -1,0 +1,14 @@
+﻿{
+    "events":
+    [
+        {
+            "type": "unfollow",
+            "timestamp": 1462629479859,
+            "source":
+            {
+                "type": "user",
+                "userId": "U206d25c2ea6bd87c17655609a1c37cb8"
+            }
+        }
+    ]
+}

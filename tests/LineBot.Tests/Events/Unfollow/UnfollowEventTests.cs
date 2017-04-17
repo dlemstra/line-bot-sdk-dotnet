@@ -20,17 +20,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class FollowEventTests
+    public class UnfollowEventTests
     {
-        private const string FollowEventJson = "Events\\Follow\\FollowEvent.json";
-        private const string InvalidJson = "Events\\Invalid.json";
+        private const string UnfollowEventJson = "Events\\Unfollow\\UnfollowEvent.json";
 
         [TestMethod]
-        [DeploymentItem(FollowEventJson)]
-        public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
+        [DeploymentItem(UnfollowEventJson)]
+        public async Task GetEvents_ValidRequest_IsUnfollowEvent()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(FollowEventJson);
+            TestHttpRequest request = new TestHttpRequest(UnfollowEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -38,31 +37,12 @@ namespace Line.Tests
 
             ILineEvent lineEvent = events.First();
 
-            Assert.AreEqual(LineEventType.Follow, lineEvent.EventType);
+            Assert.AreEqual(LineEventType.Unfollow, lineEvent.EventType);
 
             IEventSource source = lineEvent.Source;
             Assert.IsNotNull(source);
             Assert.AreEqual(EventSourceType.User, source.SourceType);
             Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
-
-            IFollowEvent followEvent = lineEvent.FollowEvent;
-            Assert.IsNotNull(followEvent);
-            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", followEvent.ReplyToken);
-        }
-
-        [TestMethod]
-        [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_FollowEventReturnsNull()
-        {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.FollowEvent);
         }
     }
 }
