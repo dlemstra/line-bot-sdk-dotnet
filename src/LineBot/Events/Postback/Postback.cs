@@ -12,41 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using Newtonsoft.Json;
+
 namespace Line
 {
-    /// <summary>
-    /// Encapsulates the line event types.
-    /// </summary>
-    public enum LineEventType
+    internal sealed class Postback
     {
-        /// <summary>
-        /// Unknown event type.
-        /// </summary>
-        Unknown,
-
-        /// <summary>
-        /// Follow event type.
-        /// </summary>
-        Follow,
-
-        /// <summary>
-        /// Join event type.
-        /// </summary>
-        Join,
-
-        /// <summary>
-        /// Leave event type.
-        /// </summary>
-        Leave,
-
-        /// <summary>
-        /// Postback event type.
-        /// </summary>
-        Postback,
-
-        /// <summary>
-        /// Unfollow event type.
-        /// </summary>
-        Unfollow
+        [JsonProperty("data")]
+        public string Data { get; set; }
     }
 }

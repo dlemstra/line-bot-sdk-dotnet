@@ -17,13 +17,16 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class LineEvent : ILineEvent, IFollowEvent, IJoinEvent
+    internal sealed class LineEvent : ILineEvent, IFollowEvent, IJoinEvent, IPostback
     {
         [JsonProperty("replyToken")]
         private string _replyToken = null;
 
         [JsonProperty("source")]
         private EventSource _source = null;
+
+        [JsonProperty("postback")]
+        private Postback _postback = null;
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<LineEventType>))]
@@ -51,6 +54,17 @@ namespace Line
             }
         }
 
+        public IPostback Postback
+        {
+            get
+            {
+                if (EventType != LineEventType.Postback)
+                    return null;
+
+                return this;
+            }
+        }
+
         [JsonProperty("timestamp")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime Timestamp { get; set; }
@@ -58,5 +72,7 @@ namespace Line
         IEventSource ILineEvent.Source => _source;
 
         string IReplyToken.ReplyToken => _replyToken;
+
+        string IPostback.Data => _postback.Data;
     }
 }

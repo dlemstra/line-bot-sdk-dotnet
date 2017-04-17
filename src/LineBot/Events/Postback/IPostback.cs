@@ -15,38 +15,13 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the line event types.
+    /// Encapsulates the interface for a postback event.
     /// </summary>
-    public enum LineEventType
+    public interface IPostback : IReplyToken
     {
         /// <summary>
-        /// Unknown event type.
+        /// Gets the postback data.
         /// </summary>
-        Unknown,
-
-        /// <summary>
-        /// Follow event type.
-        /// </summary>
-        Follow,
-
-        /// <summary>
-        /// Join event type.
-        /// </summary>
-        Join,
-
-        /// <summary>
-        /// Leave event type.
-        /// </summary>
-        Leave,
-
-        /// <summary>
-        /// Postback event type.
-        /// </summary>
-        Postback,
-
-        /// <summary>
-        /// Unfollow event type.
-        /// </summary>
-        Unfollow
+        string Data { get; }
     }
 }

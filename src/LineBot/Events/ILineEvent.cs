@@ -27,14 +27,19 @@ namespace Line
         LineEventType EventType { get; }
 
         /// <summary>
-        /// Gets the follow event.
+        /// Gets the follow event information.
         /// </summary>
         IFollowEvent FollowEvent { get; }
 
         /// <summary>
-        /// Gets the join event.
+        /// Gets the join event information.
         /// </summary>
         IJoinEvent JoinEvent { get; }
+
+        /// <summary>
+        /// Gets the postback event information.
+        /// </summary>
+        IPostback Postback { get; }
 
         /// <summary>
         /// Gets the source of the event.
