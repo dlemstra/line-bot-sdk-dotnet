@@ -48,6 +48,18 @@ namespace Line
         /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
+        /// <param name="message">The message</param>
+        /// <returns>The content of the specified message.</returns>
+        public async Task<byte[]> GetContent(IMessage message)
+        {
+            Guard.NotNull(nameof(message), message);
+
+            return await GetContent(message.Id);
+        }
+
+        /// <summary>
+        /// Returns the content of the specified message.
+        /// </summary>
         /// <param name="messageId">The id of the message</param>
         /// <returns>The content of the specified message.</returns>
         public async Task<byte[]> GetContent(string messageId)

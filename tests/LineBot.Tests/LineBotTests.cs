@@ -31,12 +31,22 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task GetContent_MessageIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("message", async () =>
+            {
+                await bot.GetContent((IMessage)null);
+            });
+        }
+
+        [TestMethod]
         public async Task GetContent_MessageIdIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messageId", async () =>
             {
-                await bot.GetContent(null);
+                await bot.GetContent((string)null);
             });
         }
 
@@ -78,7 +88,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task GetContent_CorrectResponse_ReturnsData()
+        public async Task GetContent_WithMessageId_ReturnsData()
         {
             byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
 
@@ -89,6 +99,23 @@ namespace Line.Tests
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
             Assert.AreEqual("message/test/content", httpClient.RequestPath);
+
+            Assert.IsNotNull(data);
+            CollectionAssert.AreEqual(data, input);
+        }
+
+        [TestMethod]
+        public async Task GetContent_WithMessage_ReturnsData()
+        {
+            byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
+
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            byte[] data = await bot.GetContent(new TestMessage(MessageType.Image));
+
+            Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
+            Assert.AreEqual("message/testMessage/content", httpClient.RequestPath);
 
             Assert.IsNotNull(data);
             CollectionAssert.AreEqual(data, input);
@@ -138,7 +165,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveGroup_CorrectGroupId_CallsApi()
+        public async Task LeaveGroup_WithGroupId_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -150,7 +177,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveGroup_CorrectGroup_CallsApi()
+        public async Task LeaveGroup_WithGroup_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -204,7 +231,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveRoom_CorrectRoomId_CallsApi()
+        public async Task LeaveRoom_WithRoomId_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -216,7 +243,7 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task LeaveRoom_CorrectRoom_CallsApi()
+        public async Task LeaveRoom_WithRoom_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -229,6 +256,22 @@ namespace Line.Tests
         private class TestGroup : IGroup
         {
             public string Id => "testGroup";
+        }
+
+        private class TestMessage : IMessage
+        {
+            public TestMessage(MessageType messageType)
+            {
+                MessageType = messageType;
+            }
+
+            public string Id => "testMessage";
+
+            public MessageType MessageType { get; }
+
+            public string ReplyToken => "testReplyToken";
+
+            public string Text => "testText";
         }
 
         private class TestRoom : IRoom
