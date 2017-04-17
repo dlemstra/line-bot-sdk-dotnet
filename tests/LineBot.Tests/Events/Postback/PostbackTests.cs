@@ -44,6 +44,8 @@ namespace Line.Tests
             Assert.AreEqual(EventSourceType.User, source.SourceType);
             Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
 
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
+
             IPostback postback = lineEvent.Postback;
             Assert.IsNotNull(postback);
             Assert.AreEqual("action=buyItem&itemId=123123&color=red", postback.Data);
