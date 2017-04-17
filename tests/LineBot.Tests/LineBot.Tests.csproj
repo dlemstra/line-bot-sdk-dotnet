@@ -59,6 +59,9 @@
     <None Update="Events\Messages\Image.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Events\Messages\Audio.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Events\Messages\Video.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

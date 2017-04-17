@@ -22,6 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class MessageTests
     {
+        private const string AudioJson = "Events\\Messages\\Audio.json";
         private const string ImageJson = "Events\\Messages\\Image.json";
         private const string InvalidJson = "Events\\Invalid.json";
         private const string InvalidMesssageJson = "Events\\Messages\\InvalidMessage.json";
@@ -75,6 +76,32 @@ namespace Line.Tests
             ILineEvent lineEvent = events.First();
 
             Assert.IsNull(lineEvent.Message);
+        }
+
+        [TestMethod]
+        [DeploymentItem(AudioJson)]
+        public async Task Group_MessageTypeIsAudio_ReturnsMessage()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(AudioJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            IEventSource source = lineEvent.Source;
+            Assert.IsNotNull(source);
+            Assert.AreEqual(EventSourceType.User, source.SourceType);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
+
+            Assert.IsNotNull(lineEvent.Message);
+            Assert.AreEqual(MessageType.Audio, lineEvent.Message.MessageType);
+            Assert.AreEqual("325708", lineEvent.Message.Id);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
+            Assert.IsNull(lineEvent.Message.Text);
         }
 
         [TestMethod]

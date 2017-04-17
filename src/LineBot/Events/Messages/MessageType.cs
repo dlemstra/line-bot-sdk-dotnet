@@ -25,6 +25,11 @@ namespace Line
         Unknown,
 
         /// <summary>
+        /// Audio message.
+        /// </summary>
+        Audio,
+
+        /// <summary>
         /// Image message.
         /// </summary>
         Image,
