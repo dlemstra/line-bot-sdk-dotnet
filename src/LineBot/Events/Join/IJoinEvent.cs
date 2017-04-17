@@ -12,38 +12,12 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for a LINE event.
+    /// Encapsulates the interface for a join event.
     /// </summary>
-    public interface ILineEvent
+    public interface IJoinEvent : IReplyToken
     {
-        /// <summary>
-        /// Gets the type of the event.
-        /// </summary>
-        LineEventType EventType { get; }
-
-        /// <summary>
-        /// Gets the follow event.
-        /// </summary>
-        IFollowEvent FollowEvent { get; }
-
-        /// <summary>
-        /// Gets the join event.
-        /// </summary>
-        IJoinEvent JoinEvent { get; }
-
-        /// <summary>
-        /// Gets the source of the event.
-        /// </summary>
-        IEventSource Source { get; }
-
-        /// <summary>
-        /// Gets the time of the event.
-        /// </summary>
-        DateTime Timestamp { get; }
     }
 }

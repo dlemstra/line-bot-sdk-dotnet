@@ -30,6 +30,11 @@ namespace Line
         Follow,
 
         /// <summary>
+        /// Join event type.
+        /// </summary>
+        Join,
+
+        /// <summary>
         /// Unfollow event type.
         /// </summary>
         Unfollow
