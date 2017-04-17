@@ -35,6 +35,11 @@ namespace Line
         Join,
 
         /// <summary>
+        /// Leave event type.
+        /// </summary>
+        Leave,
+
+        /// <summary>
         /// Unfollow event type.
         /// </summary>
         Unfollow
