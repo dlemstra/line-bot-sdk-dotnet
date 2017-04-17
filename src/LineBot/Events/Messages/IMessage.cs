@@ -15,48 +15,13 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the line event types.
+    /// Encapsulates the interface for a message.
     /// </summary>
-    public enum LineEventType
+    public interface IMessage : IReplyToken
     {
         /// <summary>
-        /// Unknown event type.
+        /// Gets the type of the message.
         /// </summary>
-        Unknown,
-
-        /// <summary>
-        /// Beacon event type.
-        /// </summary>
-        Beacon,
-
-        /// <summary>
-        /// Follow event type.
-        /// </summary>
-        Follow,
-
-        /// <summary>
-        /// Join event type.
-        /// </summary>
-        Join,
-
-        /// <summary>
-        /// Leave event type.
-        /// </summary>
-        Leave,
-
-        /// <summary>
-        /// Message event type.
-        /// </summary>
-        Message,
-
-        /// <summary>
-        /// Postback event type.
-        /// </summary>
-        Postback,
-
-        /// <summary>
-        /// Unfollow event type.
-        /// </summary>
-        Unfollow
+        MessageType MessageType { get; }
     }
 }

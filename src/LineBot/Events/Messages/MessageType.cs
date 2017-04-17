@@ -12,43 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for a LINE event.
+    /// Encapsulates the message types.
     /// </summary>
-    public interface ILineEvent : IReplyToken
+    public enum MessageType
     {
         /// <summary>
-        /// Gets the type of the event.
+        /// Unknown
         /// </summary>
-        LineEventType EventType { get; }
+        Unknown,
 
         /// <summary>
-        /// Gets the beacon information.
+        /// Text message
         /// </summary>
-        IBeacon Beacon { get; }
-
-        /// <summary>
-        /// Gets the message.
-        /// </summary>
-        IMessage Message { get; }
-
-        /// <summary>
-        /// Gets the postback information.
-        /// </summary>
-        IPostback Postback { get; }
-
-        /// <summary>
-        /// Gets the source of the event.
-        /// </summary>
-        IEventSource Source { get; }
-
-        /// <summary>
-        /// Gets the time of the event.
-        /// </summary>
-        DateTime Timestamp { get; }
+        Text,
     }
 }

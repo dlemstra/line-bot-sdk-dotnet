@@ -53,6 +53,12 @@
     <None Update="Events\Leave\LeaveEvent.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Events\Messages\InvalidMessage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Events\Messages\MessageEventWithoutMessage.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Events\Postback\PostbackEventWithoutPostback.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
