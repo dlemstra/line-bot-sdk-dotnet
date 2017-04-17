@@ -12,7 +12,9 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Line
 {
@@ -27,6 +29,13 @@ namespace Line
         /// <param name="messageId">The id of the message</param>
         /// <returns>The content of the specified message.</returns>
         Task<byte[]> GetContent(string messageId);
+
+        /// <summary>
+        /// Returns the events from the specified request.
+        /// </summary>
+        /// <param name="request">The http request.</param>
+        /// <returns>The events from the specified request.</returns>
+        Task<IEnumerable<ILineEvent>> GetEvents(HttpRequest request);
 
         /// <summary>
         /// Returns the profile of the specified user.

@@ -12,8 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Line
 {
@@ -56,6 +61,35 @@ namespace Line
                 return null;
 
             return await response.Content.ReadAsByteArrayAsync();
+        }
+
+        /// <summary>
+        /// Returns the events from the specified request.
+        /// </summary>
+        /// <param name="request">The http request.</param>
+        /// <returns>The events from the specified request.</returns>
+        public async Task<IEnumerable<ILineEvent>> GetEvents(HttpRequest request)
+        {
+            Guard.NotNull(nameof(request), request);
+
+            byte[] content = await request.Body.ToArrayAsync();
+
+            if (content == null)
+                return Enumerable.Empty<ILineEvent>();
+
+            string signature = request.Headers["X-Line-Signature"];
+
+            SignatureValidator validator = new SignatureValidator(_configuration);
+            validator.Validate(content, signature);
+
+            string jsonContent = Encoding.UTF8.GetString(content);
+
+            LineEventCollection eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
+
+            if (eventCollection == null || eventCollection.Events == null)
+                return Enumerable.Empty<ILineEvent>();
+
+            return eventCollection.Events;
         }
 
         /// <summary>
