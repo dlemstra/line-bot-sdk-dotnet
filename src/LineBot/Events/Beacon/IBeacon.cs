@@ -15,43 +15,18 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the line event types.
+    /// Encapsulates the interface for a beacon.
     /// </summary>
-    public enum LineEventType
+    public interface IBeacon : IReplyToken
     {
         /// <summary>
-        /// Unknown event type.
+        /// Gets the type of the beacon event.
         /// </summary>
-        Unknown,
+        BeaconType BeaconType { get; }
 
         /// <summary>
-        /// Beacon event type.
+        /// Gets the hardware ID of the beacon that was detected.
         /// </summary>
-        Beacon,
-
-        /// <summary>
-        /// Follow event type.
-        /// </summary>
-        Follow,
-
-        /// <summary>
-        /// Join event type.
-        /// </summary>
-        Join,
-
-        /// <summary>
-        /// Leave event type.
-        /// </summary>
-        Leave,
-
-        /// <summary>
-        /// Postback event type.
-        /// </summary>
-        Postback,
-
-        /// <summary>
-        /// Unfollow event type.
-        /// </summary>
-        Unfollow
+        string Hwid { get; }
     }
 }

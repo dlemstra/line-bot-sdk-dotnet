@@ -27,6 +27,11 @@ namespace Line
         LineEventType EventType { get; }
 
         /// <summary>
+        /// Gets the beacon information.
+        /// </summary>
+        IBeacon Beacon { get; }
+
+        /// <summary>
         /// Gets the postback information.
         /// </summary>
         IPostback Postback { get; }

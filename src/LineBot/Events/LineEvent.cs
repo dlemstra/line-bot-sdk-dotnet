@@ -17,16 +17,30 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class LineEvent : ILineEvent, IPostback
+    internal sealed class LineEvent : ILineEvent, IBeacon, IPostback
     {
+        [JsonProperty("beacon")]
+        private Beacon _beacon = null;
+
+        [JsonProperty("postback")]
+        private Postback _postback = null;
+
         [JsonProperty("replyToken")]
         private string _replyToken = null;
 
         [JsonProperty("source")]
         private EventSource _source = null;
 
-        [JsonProperty("postback")]
-        private Postback _postback = null;
+        public IBeacon Beacon
+        {
+            get
+            {
+                if (EventType != LineEventType.Beacon || _beacon == null)
+                    return null;
+
+                return this;
+            }
+        }
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<LineEventType>))]
@@ -47,6 +61,10 @@ namespace Line
         [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime Timestamp { get; set; }
 
+        BeaconType IBeacon.BeaconType => _beacon.BeaconType;
+
+        string IBeacon.Hwid => _beacon.Hwid;
+
         IEventSource ILineEvent.Source => _source;
 
         string IPostback.Data => _postback.Data;
@@ -55,7 +73,8 @@ namespace Line
         {
             get
             {
-                if (EventType == LineEventType.Follow ||
+                if (EventType == LineEventType.Beacon ||
+                    EventType == LineEventType.Follow ||
                     EventType == LineEventType.Join ||
                     EventType == LineEventType.Postback)
                     return _replyToken;

@@ -15,43 +15,23 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the line event types.
+    /// Encapsulates the beacon types.
     /// </summary>
-    public enum LineEventType
+    public enum BeaconType
     {
         /// <summary>
-        /// Unknown event type.
+        /// Tapped beacon banner.
         /// </summary>
-        Unknown,
+        Banner,
 
         /// <summary>
-        /// Beacon event type.
+        /// Entered beacon’s reception range.
         /// </summary>
-        Beacon,
+        Enter,
 
         /// <summary>
-        /// Follow event type.
+        /// Left beacon’s reception range.
         /// </summary>
-        Follow,
-
-        /// <summary>
-        /// Join event type.
-        /// </summary>
-        Join,
-
-        /// <summary>
-        /// Leave event type.
-        /// </summary>
-        Leave,
-
-        /// <summary>
-        /// Postback event type.
-        /// </summary>
-        Postback,
-
-        /// <summary>
-        /// Unfollow event type.
-        /// </summary>
-        Unfollow
+        Leave
     }
 }
