@@ -253,11 +253,13 @@ namespace Line.Tests
             Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
         }
 
+        [ExcludeFromCodeCoverage]
         private class TestGroup : IGroup
         {
             public string Id => "testGroup";
         }
 
+        [ExcludeFromCodeCoverage]
         private class TestMessage : IMessage
         {
             public TestMessage(MessageType messageType)
@@ -274,6 +276,7 @@ namespace Line.Tests
             public string Text => "testText";
         }
 
+        [ExcludeFromCodeCoverage]
         private class TestRoom : IRoom
         {
             public string Id => "testRoom";
