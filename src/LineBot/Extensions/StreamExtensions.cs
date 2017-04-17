@@ -61,9 +61,6 @@ namespace Line
 
         private static bool IsUtf8Preamable(byte[] content)
         {
-            if (content.Length < Utf8Preamable.Length)
-                return false;
-
             for (int i = 0; i < Utf8Preamable.Length; i++)
             {
                 if (content[i] != Utf8Preamable[i])
