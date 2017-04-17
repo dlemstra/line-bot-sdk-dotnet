@@ -35,6 +35,11 @@ namespace Line
         Image,
 
         /// <summary>
+        /// Location message.
+        /// </summary>
+        Location,
+
+        /// <summary>
         /// Text message.
         /// </summary>
         Text,

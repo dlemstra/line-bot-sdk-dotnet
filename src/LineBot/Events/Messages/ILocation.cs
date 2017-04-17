@@ -15,28 +15,28 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interface for a message.
+    /// Encapsulates the interface for a location.
     /// </summary>
-    public interface IMessage : IReplyToken
+    public interface ILocation
     {
         /// <summary>
-        /// Gets the id of the messge.
+        /// Gets the address of the location.
         /// </summary>
-        string Id { get; }
+        string Address { get; }
 
         /// <summary>
-        /// Gets the location data of the message.
+        /// Gets the latitude of the location.
         /// </summary>
-        ILocation Location { get; }
+        decimal Latitude { get; }
 
         /// <summary>
-        /// Gets the type of the message.
+        /// Gets the longitude of the location.
         /// </summary>
-        MessageType MessageType { get; }
+        decimal Longitude { get; }
 
         /// <summary>
-        /// Gets the text of the message.
+        /// Gets the title of the location.
         /// </summary>
-        string Text { get; }
+        string Title { get; }
     }
 }

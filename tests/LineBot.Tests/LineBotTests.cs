@@ -269,6 +269,8 @@ namespace Line.Tests
 
             public string Id => "testMessage";
 
+            public ILocation Location { get; }
+
             public MessageType MessageType { get; }
 
             public string ReplyToken => "testReplyToken";

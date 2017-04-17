@@ -16,10 +16,30 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class Message
+    internal sealed class Message : ILocation
     {
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        [JsonProperty("latitude")]
+        public decimal Latitude { get; set; }
+
+        public ILocation Location
+        {
+            get
+            {
+                if (MessageType != MessageType.Location)
+                    return null;
+
+                return this;
+            }
+        }
+
+        [JsonProperty("longitude")]
+        public decimal Longitude { get; set; }
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
@@ -27,5 +47,8 @@ namespace Line
 
         [JsonProperty("text")]
         public string Text { get; set; }
+
+        [JsonProperty("title")]
+        public string Title { get; set; }
     }
 }

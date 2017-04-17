@@ -83,6 +83,8 @@ namespace Line
 
         string IMessage.Id => _message.Id;
 
+        ILocation IMessage.Location => _message.Location;
+
         MessageType IMessage.MessageType => _message.MessageType;
 
         string IMessage.Text => _message.Text;
