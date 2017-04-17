@@ -18,6 +18,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Line.Tests
 {
+    [ExcludeFromCodeCoverage]
     public sealed class TestHeaderDictionary : Dictionary<string, StringValues>, IHeaderDictionary
     {
     }
