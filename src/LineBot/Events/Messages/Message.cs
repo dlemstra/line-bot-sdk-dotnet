@@ -18,8 +18,14 @@ namespace Line
 {
     internal sealed class Message
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         public MessageType MessageType { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace Line.Tests
         private const string InvalidJson = "Events\\Invalid.json";
         private const string InvalidMesssageJson = "Events\\Messages\\InvalidMessage.json";
         private const string MessageEventWithoutMessageJson = "Events\\Messages\\MessageEventWithoutMessage.json";
+        private const string TextJson = "Events\\Messages\\Text.json";
 
         [TestMethod]
         [DeploymentItem(MessageEventWithoutMessageJson)]
@@ -72,6 +73,32 @@ namespace Line.Tests
             ILineEvent lineEvent = events.First();
 
             Assert.IsNull(lineEvent.Message);
+        }
+
+        [TestMethod]
+        [DeploymentItem(TextJson)]
+        public async Task Group_MessageTypeIsMessage_ReturnsMessage()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(TextJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            IEventSource source = lineEvent.Source;
+            Assert.IsNotNull(source);
+            Assert.AreEqual(EventSourceType.User, source.SourceType);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
+
+            Assert.IsNotNull(lineEvent.Message);
+            Assert.AreEqual(MessageType.Text, lineEvent.Message.MessageType);
+            Assert.AreEqual("325708", lineEvent.Message.Id);
+            Assert.AreEqual("Hello, world", lineEvent.Message.Text);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
         }
     }
 }

@@ -81,7 +81,11 @@ namespace Line
 
         IEventSource ILineEvent.Source => _source;
 
+        string IMessage.Id => _message.Id;
+
         MessageType IMessage.MessageType => _message.MessageType;
+
+        string IMessage.Text => _message.Text;
 
         string IPostback.Data => _postback.Data;
 
@@ -92,6 +96,7 @@ namespace Line
                 if (EventType == LineEventType.Beacon ||
                     EventType == LineEventType.Follow ||
                     EventType == LineEventType.Join ||
+                    EventType == LineEventType.Message ||
                     EventType == LineEventType.Postback)
                     return _replyToken;
 
