@@ -22,6 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class MessageTests
     {
+        private const string ImageJson = "Events\\Messages\\Image.json";
         private const string InvalidJson = "Events\\Invalid.json";
         private const string InvalidMesssageJson = "Events\\Messages\\InvalidMessage.json";
         private const string MessageEventWithoutMessageJson = "Events\\Messages\\MessageEventWithoutMessage.json";
@@ -77,7 +78,7 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(TextJson)]
-        public async Task Group_MessageTypeIsMessage_ReturnsMessage()
+        public async Task Group_MessageTypeIsText_ReturnsMessage()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             TestHttpRequest request = new TestHttpRequest(TextJson);
@@ -97,8 +98,34 @@ namespace Line.Tests
             Assert.IsNotNull(lineEvent.Message);
             Assert.AreEqual(MessageType.Text, lineEvent.Message.MessageType);
             Assert.AreEqual("325708", lineEvent.Message.Id);
-            Assert.AreEqual("Hello, world", lineEvent.Message.Text);
             Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
+            Assert.AreEqual("Hello, world", lineEvent.Message.Text);
+        }
+
+        [TestMethod]
+        [DeploymentItem(ImageJson)]
+        public async Task Group_MessageTypeIsImage_ReturnsMessage()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            TestHttpRequest request = new TestHttpRequest(ImageJson);
+
+            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            Assert.AreEqual(1, events.Count());
+
+            ILineEvent lineEvent = events.First();
+
+            IEventSource source = lineEvent.Source;
+            Assert.IsNotNull(source);
+            Assert.AreEqual(EventSourceType.User, source.SourceType);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.ReplyToken);
+
+            Assert.IsNotNull(lineEvent.Message);
+            Assert.AreEqual(MessageType.Image, lineEvent.Message.MessageType);
+            Assert.AreEqual("325708", lineEvent.Message.Id);
+            Assert.AreEqual("nHuyWiB7yP5Zw52FIkcQobQuGDXCTA", lineEvent.Message.ReplyToken);
+            Assert.IsNull(lineEvent.Message.Text);
         }
     }
 }
