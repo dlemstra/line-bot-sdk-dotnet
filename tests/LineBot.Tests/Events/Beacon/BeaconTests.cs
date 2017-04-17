@@ -28,7 +28,7 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(BeaconEventJson)]
-        public async Task GetEvents_ValidRequest_ReturnsPostbackEvent()
+        public async Task GetEvents_ValidRequest_ReturnsBeaconEvent()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             TestHttpRequest request = new TestHttpRequest(BeaconEventJson);
@@ -74,7 +74,7 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_BeaconReturnsNull()
+        public async Task GetEvents_InvalidRequest_BeaconIsNull()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             TestHttpRequest request = new TestHttpRequest(InvalidJson);

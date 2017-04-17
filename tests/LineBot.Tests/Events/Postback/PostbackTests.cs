@@ -73,7 +73,7 @@ namespace Line.Tests
 
         [TestMethod]
         [DeploymentItem(InvalidJson)]
-        public async Task GetEvents_InvalidRequest_BeaconReturnsNull()
+        public async Task GetEvents_InvalidRequest_PostbackIsNull()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             TestHttpRequest request = new TestHttpRequest(InvalidJson);
