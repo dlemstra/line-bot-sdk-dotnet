@@ -21,8 +21,6 @@ namespace Line
     internal sealed class EnumConverter<TEnum> : JsonConverter
         where TEnum : struct
     {
-        public override bool CanWrite => false;
-
         public override bool CanConvert(Type objectType)
         {
             return objectType.GetTypeInfo().IsEnum;
@@ -43,7 +41,9 @@ namespace Line
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            throw new NotSupportedException();
+            Enum val = (Enum)value;
+
+            writer.WriteValue(val.ToString("G").ToLowerInvariant());
         }
     }
 }

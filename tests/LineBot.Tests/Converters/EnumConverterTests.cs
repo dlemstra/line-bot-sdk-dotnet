@@ -52,22 +52,11 @@ namespace Line.Tests.Converters
         }
 
         [TestMethod]
-        public void CanConvert_CanWrite_ReturnsFalse()
+        public void CanConvert_CanWrite_ReturnsTrue()
         {
             EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
 
-            Assert.IsFalse(converter.CanWrite);
-        }
-
-        [TestMethod]
-        public void WriteJson_ThrowsException()
-        {
-            EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
-
-            ExceptionAssert.Throws<NotSupportedException>(() =>
-            {
-                converter.WriteJson(null, null, null);
-            });
+            Assert.IsTrue(converter.CanWrite);
         }
 
         [TestMethod]
@@ -106,6 +95,15 @@ namespace Line.Tests.Converters
 
             TestEnum value = JsonConvert.DeserializeObject<TestEnum>(@"""Test""", converter);
             Assert.AreEqual(TestEnum.Test, value);
+        }
+
+        [TestMethod]
+        public void WriteJson_CorrectValue_ReturnsLowercaseString()
+        {
+            EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+
+            string value = JsonConvert.SerializeObject(TestEnum.Test, converter);
+            Assert.AreEqual(@"""test""", value);
         }
     }
 }
