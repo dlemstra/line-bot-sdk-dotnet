@@ -15,4 +15,5 @@ matrix:
 
 script:
   - dotnet restore
-  - dotnet test tests/LineBot.Tests/LineBot.Tests.csproj -c Release
+  - dotnet build LineBot.sln -c Release
+  - dotnet test tests/LineBot.Tests/LineBot.Tests.csproj --no-build -c Release
