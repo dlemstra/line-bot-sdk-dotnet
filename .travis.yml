@@ -1,0 +1,18 @@
+language: csharp
+solution: LineBot.sln
+
+sudo: required
+
+branches:
+  only:
+    - master
+
+matrix:
+  include:
+    - dotnet: 1.0.1
+      mono: none
+      dist: trusty
+
+script:
+  - dotnet restore
+  - dotnet test tests/LineBot.Tests/LineBot.Tests.csproj -c Release
