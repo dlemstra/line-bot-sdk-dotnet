@@ -47,11 +47,17 @@ namespace Line.Tests
 
         public HttpRequestMessage Request { get; set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public string PostedData { get; private set; }
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             Request = request;
 
-            return Task.FromResult(_response);
+            StringContent content = request.Content as StringContent;
+            if (content != null)
+                PostedData = await content.ReadAsStringAsync();
+
+            return await Task.FromResult(_response);
         }
     }
 }

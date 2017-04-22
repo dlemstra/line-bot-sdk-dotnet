@@ -12,32 +12,22 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
+using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class Guard
+    internal sealed class ReplyMessage
     {
-        public static void NotNull(string paramName, object value)
+        public ReplyMessage(string replyToken, ISendMessage[] messages)
         {
-            if (ReferenceEquals(value, null))
-                throw new ArgumentNullException(paramName);
+            ReplyToken = replyToken;
+            Messages = MessageConverter.Convert(messages);
         }
 
-        public static void NotNullOrEmpty(string paramName, string value)
-        {
-            NotNull(paramName, value);
+        [JsonProperty("replyToken")]
+        public string ReplyToken { get; }
 
-            if (value.Length == 0)
-                throw new ArgumentException("Value cannot be empty.", paramName);
-        }
-
-        public static void NotNullOrEmpty<T>(string paramName, T[] value)
-        {
-            NotNull(paramName, value);
-
-            if (value.Length == 0)
-                throw new ArgumentException("Value cannot be empty.", paramName);
-        }
+        [JsonProperty("messages")]
+        public ISendMessage[] Messages { get; }
     }
 }

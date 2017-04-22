@@ -253,6 +253,60 @@ namespace Line.Tests
             Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
         }
 
+        [TestMethod]
+        public async Task Reply_ReplyTokenIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("replyToken", async () =>
+            {
+                await bot.Reply(null, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_ReplyTokenIsEmpty_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("replyToken", async () =>
+            {
+                await bot.Reply(string.Empty, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_MessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Reply("token", null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_NoMessages_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messages", async () =>
+            {
+                await bot.Reply("token", new TextMessage[] { });
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_CorrectInput_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Reply("token", new TextMessage() { Text = "Test1" }, new TextMessage() { Text = "Test2" });
+
+            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
+
+            Assert.AreEqual("message/reply", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestGroup : IGroup
         {

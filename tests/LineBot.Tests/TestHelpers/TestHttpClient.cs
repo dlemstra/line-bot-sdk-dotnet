@@ -33,6 +33,14 @@ namespace Line.Tests
             BaseAddress = TestBaseAddress;
         }
 
+        public string PostedData
+        {
+            get
+            {
+                return _handler.PostedData;
+            }
+        }
+
         public HttpMethod RequestMethod
         {
             get

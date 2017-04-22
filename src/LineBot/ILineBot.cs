@@ -85,5 +85,13 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <returns>.</returns>
         Task LeaveRoom(IRoom room);
+
+        /// <summary>
+        /// Send a reply message.
+        /// </summary>
+        /// <param name="replyToken">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Reply(string replyToken, params ISendMessage[] messages);
     }
 }

@@ -180,5 +180,31 @@ namespace Line
 
             await LeaveRoom(room.Id);
         }
+
+        /// <summary>
+        /// Send a reply message.
+        /// </summary>
+        /// <param name="replyToken">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Reply(string replyToken, params ISendMessage[] messages)
+        {
+            Guard.NotNullOrEmpty(nameof(replyToken), replyToken);
+            Guard.NotNullOrEmpty(nameof(messages), messages);
+
+            ReplyMessage reply = new ReplyMessage(replyToken, messages);
+
+            StringContent content = CreateStringContent(reply);
+
+            HttpResponseMessage response = await _client.PostAsync($"message/reply", content);
+            await response.CheckResult();
+        }
+
+        private static StringContent CreateStringContent<T>(T value)
+        {
+            string content = JsonConvert.SerializeObject(value);
+
+            return new StringContent(content, Encoding.UTF8, "application/json");
+        }
     }
 }
