@@ -22,7 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class UnfollowTests
     {
-        private const string UnfollowEventJson = "Events\\Unfollow\\UnfollowEvent.json";
+        private const string UnfollowEventJson = "Events/Unfollow/UnfollowEvent.json";
 
         [TestMethod]
         [DeploymentItem(UnfollowEventJson)]

@@ -22,9 +22,9 @@ namespace Line.Tests
     [TestClass]
     public class PostbackTests
     {
-        private const string InvalidJson = "Events\\Invalid.json";
-        private const string PostbackEventJson = "Events\\Postback\\PostbackEvent.json";
-        private const string PostbackEventWithoutPostbackJson = "Events\\Postback\\PostbackEventWithoutPostback.json";
+        private const string InvalidJson = "Events/Invalid.json";
+        private const string PostbackEventJson = "Events/Postback/PostbackEvent.json";
+        private const string PostbackEventWithoutPostbackJson = "Events/Postback/PostbackEventWithoutPostback.json";
 
         [TestMethod]
         [DeploymentItem(PostbackEventJson)]

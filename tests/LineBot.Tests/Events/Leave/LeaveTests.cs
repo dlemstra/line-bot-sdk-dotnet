@@ -22,7 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class LeaveTests
     {
-        private const string LeaveEventJson = "Events\\Leave\\LeaveEvent.json";
+        private const string LeaveEventJson = "Events/Leave/LeaveEvent.json";
 
         [TestMethod]
         [DeploymentItem(LeaveEventJson)]

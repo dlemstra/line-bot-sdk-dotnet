@@ -22,7 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class UserProfileTests
     {
-        private const string UserProfileJson = "UserProfile\\UserProfile.json";
+        private const string UserProfileJson = "UserProfile/UserProfile.json";
 
         [TestMethod]
         public async Task GetProfile_UserIsNulll_ThrowsException()

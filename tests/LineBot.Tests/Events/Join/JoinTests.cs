@@ -22,7 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class JoinTests
     {
-        private const string JoinEventJson = "Events\\Join\\JoinEvent.json";
+        private const string JoinEventJson = "Events/Join/JoinEvent.json";
 
         [TestMethod]
         [DeploymentItem(JoinEventJson)]

@@ -22,7 +22,7 @@ namespace Line.Tests.Events
     [TestClass]
     public class ReplyTokenTests
     {
-        private const string InvalidJson = "Events\\Invalid.json";
+        private const string InvalidJson = "Events/Invalid.json";
 
         [TestMethod]
         [DeploymentItem(InvalidJson)]

@@ -22,7 +22,7 @@ namespace Line.Tests
     [TestClass]
     public class FollowTests
     {
-        private const string FollowEventJson = "Events\\Follow\\FollowEvent.json";
+        private const string FollowEventJson = "Events/Follow/FollowEvent.json";
 
         [TestMethod]
         [DeploymentItem(FollowEventJson)]

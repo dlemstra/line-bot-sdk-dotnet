@@ -22,10 +22,10 @@ namespace Line.Tests
     [TestClass]
     public class EventSourceTests
     {
-        private const string GroupJson = "Events\\Sources\\Group.json";
-        private const string InvalidJson = "Events\\Sources\\Invalid.json";
-        private const string RoomJson = "Events\\Sources\\Room.json";
-        private const string UserJson = "Events\\Sources\\User.json";
+        private const string GroupJson = "Events/Sources/Group.json";
+        private const string InvalidJson = "Events/Sources/Invalid.json";
+        private const string RoomJson = "Events/Sources/Room.json";
+        private const string UserJson = "Events/Sources/User.json";
 
         [TestMethod]
         [DeploymentItem(InvalidJson)]

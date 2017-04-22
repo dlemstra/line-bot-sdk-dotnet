@@ -22,15 +22,15 @@ namespace Line.Tests
     [TestClass]
     public class MessageTests
     {
-        private const string AudioJson = "Events\\Messages\\Audio.json";
-        private const string ImageJson = "Events\\Messages\\Image.json";
-        private const string InvalidJson = "Events\\Invalid.json";
-        private const string InvalidMesssageJson = "Events\\Messages\\InvalidMessage.json";
-        private const string LocationJson = "Events\\Messages\\Location.json";
-        private const string MessageEventWithoutMessageJson = "Events\\Messages\\MessageEventWithoutMessage.json";
-        private const string StickerJson = "Events\\Messages\\Sticker.json";
-        private const string TextJson = "Events\\Messages\\Text.json";
-        private const string VideoJson = "Events\\Messages\\Video.json";
+        private const string AudioJson = "Events/Messages/Audio.json";
+        private const string ImageJson = "Events/Messages/Image.json";
+        private const string InvalidJson = "Events/Invalid.json";
+        private const string InvalidMesssageJson = "Events/Messages/InvalidMessage.json";
+        private const string LocationJson = "Events/Messages/Location.json";
+        private const string MessageEventWithoutMessageJson = "Events/Messages/MessageEventWithoutMessage.json";
+        private const string StickerJson = "Events/Messages/Sticker.json";
+        private const string TextJson = "Events/Messages/Text.json";
+        private const string VideoJson = "Events/Messages/Video.json";
 
         [TestMethod]
         [DeploymentItem(MessageEventWithoutMessageJson)]

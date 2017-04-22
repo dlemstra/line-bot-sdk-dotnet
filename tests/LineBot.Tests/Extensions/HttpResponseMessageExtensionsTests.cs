@@ -25,7 +25,7 @@ namespace Line.Tests
     [TestClass]
     public class HttpResponseMessageExtensionsTests
     {
-        private const string LineErrorJson = "Extensions\\LineError.json";
+        private const string LineErrorJson = "Extensions/LineError.json";
 
         [TestMethod]
         public async Task CheckResult_IsSuccess_ThrowsNoException()

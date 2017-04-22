@@ -22,9 +22,9 @@ namespace Line.Tests.Events
     [TestClass]
     public class LineEventTests
     {
-        private const string EmptyObjectJson = "Events\\EmptyObject.json";
-        private const string NoEventsJson = "Events\\NoEvents.json";
-        private const string WhitespaceJson = "Events\\Whitespace.json";
+        private const string EmptyObjectJson = "Events/EmptyObject.json";
+        private const string NoEventsJson = "Events/NoEvents.json";
+        private const string WhitespaceJson = "Events/Whitespace.json";
 
         [TestMethod]
         [DeploymentItem(EmptyObjectJson)]

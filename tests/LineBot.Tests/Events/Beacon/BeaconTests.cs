@@ -22,10 +22,10 @@ namespace Line.Tests
     [TestClass]
     public class BeaconTests
     {
-        private const string BeaconEventJson = "Events\\Beacon\\BeaconEvent.json";
-        private const string BeaconEventWithoutBeaconJson = "Events\\Beacon\\BeaconEventWithoutBeacon.json";
-        private const string InvalidBeaconJson = "Events\\Beacon\\InvalidBeacon.json";
-        private const string InvalidJson = "Events\\Invalid.json";
+        private const string BeaconEventJson = "Events/Beacon/BeaconEvent.json";
+        private const string BeaconEventWithoutBeaconJson = "Events/Beacon/BeaconEventWithoutBeacon.json";
+        private const string InvalidBeaconJson = "Events/Beacon/InvalidBeacon.json";
+        private const string InvalidJson = "Events/Invalid.json";
 
         [TestMethod]
         [DeploymentItem(BeaconEventJson)]
