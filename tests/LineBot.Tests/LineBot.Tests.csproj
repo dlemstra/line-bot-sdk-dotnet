@@ -13,6 +13,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
+    <DelaySign>False</DelaySign>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\LineBot.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>Line.Tests</RootNamespace>
