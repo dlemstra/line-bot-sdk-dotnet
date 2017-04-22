@@ -6,7 +6,7 @@ line-bot-sdk-dotnet
 
 |             |Build Status|Code Coverage|
 |-------------|:----------:|:-----------:|
-|**Linux/Mac**|N/A|[![codecov](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet/branch/master/graph/badge.svg)](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet)|
+|**Linux/Mac**| [![Build Status](https://travis-ci.org/dlemstra/line-bot-sdk-dotnet.svg?branch=master)](https://travis-ci.org/dlemstra/line-bot-sdk-dotnet)|[![codecov](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet/branch/master/graph/badge.svg)](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet)|
 |**Windows**  | [![Build status](https://ci.appveyor.com/api/projects/status/qxa3wd2ijvdi0bq8/branch/master?svg=true)](https://ci.appveyor.com/project/dlemstra/line-bot-sdk-dotnet/branch/master)|[![codecov](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet/branch/master/graph/badge.svg)](https://codecov.io/gh/dlemstra/line-bot-sdk-dotnet)|
 
 
