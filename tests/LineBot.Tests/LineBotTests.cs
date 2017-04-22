@@ -259,7 +259,17 @@ namespace Line.Tests
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("replyToken", async () =>
             {
-                await bot.Reply(null, new TextMessage() { Text = "Test" });
+                await bot.Reply((string)null, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_TokenIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("token", async () =>
+            {
+                await bot.Reply((IReplyToken)null, new TextMessage() { Text = "Test" });
             });
         }
 
@@ -307,6 +317,20 @@ namespace Line.Tests
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 
+        [TestMethod]
+        public async Task Reply_WithIReplyToken_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Reply(new TestMessage(), new TextMessage() { Text = "Test" });
+
+            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""Test""}]}";
+
+            Assert.AreEqual("message/reply", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestGroup : IGroup
         {
@@ -316,6 +340,11 @@ namespace Line.Tests
         [ExcludeFromCodeCoverage]
         private class TestMessage : IMessage
         {
+            public TestMessage()
+                : this(MessageType.Text)
+            {
+            }
+
             public TestMessage(MessageType messageType)
             {
                 MessageType = messageType;

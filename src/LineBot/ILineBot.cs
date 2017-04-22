@@ -89,6 +89,14 @@ namespace Line
         /// <summary>
         /// Send a reply message.
         /// </summary>
+        /// <param name="token">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Reply(IReplyToken token, params ISendMessage[] messages);
+
+        /// <summary>
+        /// Send a reply message.
+        /// </summary>
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>

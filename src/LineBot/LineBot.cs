@@ -184,6 +184,19 @@ namespace Line
         /// <summary>
         /// Send a reply message.
         /// </summary>
+        /// <param name="token">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Reply(IReplyToken token, params ISendMessage[] messages)
+        {
+            Guard.NotNull(nameof(token), token);
+
+            await Reply(token.ReplyToken, messages);
+        }
+
+        /// <summary>
+        /// Send a reply message.
+        /// </summary>
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
