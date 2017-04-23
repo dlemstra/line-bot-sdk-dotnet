@@ -92,7 +92,23 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        Task Push(IGroup group, IEnumerable<ISendMessage> messages);
+
+        /// <summary>
+        /// Send messages to a group at any time.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         Task Push(IGroup group, params ISendMessage[] messages);
+
+        /// <summary>
+        /// Send messages to a room at any time.
+        /// </summary>
+        /// <param name="room">The room.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Push(IRoom room, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a room at any time.
@@ -108,7 +124,24 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        Task Push(IUser user, IEnumerable<ISendMessage> messages);
+
+        /// <summary>
+        /// Send messages to a user at any time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         Task Push(IUser user, params ISendMessage[] messages);
+
+        /// <summary>
+        /// Send messages to a user, group, or room at any time.
+        /// </summary>
+        /// <remarks>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
+        /// <param name="to">ID of the receiver.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Push(string to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.

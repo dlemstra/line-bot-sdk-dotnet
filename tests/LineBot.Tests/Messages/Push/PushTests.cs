@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -53,6 +54,16 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
+        public async Task Push_EnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push("id", (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Push_NoMessages_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
@@ -77,7 +88,43 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
-        public async Task Reply_WithIGroup_CallsApi()
+        public async Task Push_WithEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push("id", messages);
+
+            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Push_GroupIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("group", async () =>
+            {
+                await bot.Push((IGroup)null, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithGroupAndMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestGroup(), null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithGroup_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -91,7 +138,43 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
-        public async Task Reply_WithIRoom_CallsApi()
+        public async Task Push_WithGroupAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push(new TestGroup(), messages);
+
+            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Push_RoomIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("room", async () =>
+            {
+                await bot.Push((IRoom)null, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithRoomAndMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestRoom(), null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithRoom_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -105,7 +188,43 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
-        public async Task Reply_WithIUser_CallsApi()
+        public async Task Push_WithRoomAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push(new TestRoom(), messages);
+
+            string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Push_UserIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("user", async () =>
+            {
+                await bot.Push((IUser)null, new TextMessage() { Text = "Test" });
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithUserAndMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestUser(), null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithUser_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -113,6 +232,22 @@ namespace Line.Tests.Messages.Push
             await bot.Push(new TestUser(), new TestTextMessage());
 
             string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Push_WithUserAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push(new TestUser(), messages);
+
+            string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);

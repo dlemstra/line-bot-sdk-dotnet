@@ -187,11 +187,37 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        public async Task Push(IGroup group, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Push(group, messages.ToArray());
+        }
+
+        /// <summary>
+        /// Send messages to a group at any time.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         public async Task Push(IGroup group, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(group), group);
 
             await Push(group.Id, messages);
+        }
+
+        /// <summary>
+        /// Send messages to a room at any time.
+        /// </summary>
+        /// <param name="room">The room.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Push(IRoom room, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Push(room, messages.ToArray());
         }
 
         /// <summary>
@@ -213,11 +239,38 @@ namespace Line
         /// <param name="user">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        public async Task Push(IUser user, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Push(user, messages.ToArray());
+        }
+
+        /// <summary>
+        /// Send messages to a room at any time.
+        /// </summary>
+        /// <param name="user">The room.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         public async Task Push(IUser user, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(user), user);
 
             await Push(user.Id, messages);
+        }
+
+        /// <summary>
+        /// Send messages to a user, group, or room at any time.
+        /// </summary>
+        /// <remarks>Use the id returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
+        /// <param name="to ">id of the receiver.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Push(string to, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Push(to, messages.ToArray());
         }
 
         /// <summary>
