@@ -182,7 +182,27 @@ namespace Line
         }
 
         /// <summary>
-        /// Send a reply message.
+        /// Send messages to a user, group, or room at any time.
+        /// </summary>
+        /// <remarks>Use the id returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
+        /// <param name="to ">id of the receiver.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Push(string to, params ISendMessage[] messages)
+        {
+            Guard.NotNullOrEmpty(nameof(to), to);
+            Guard.NotNullOrEmpty(nameof(messages), messages);
+
+            PushMessage push = new PushMessage(to, messages);
+
+            StringContent content = CreateStringContent(push);
+
+            HttpResponseMessage response = await _client.PostAsync($"message/push", content);
+            await response.CheckResult();
+        }
+
+        /// <summary>
+        /// Respond to events from users, groups, and rooms.
         /// </summary>
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
@@ -195,7 +215,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Send a reply message.
+        /// Respond to events from users, groups, and rooms.
         /// </summary>
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>

@@ -87,7 +87,16 @@ namespace Line
         Task LeaveRoom(IRoom room);
 
         /// <summary>
-        /// Send a reply message.
+        /// Send messages to a user, group, or room at any time.
+        /// </summary>
+        /// <remarks>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
+        /// <param name="to">ID of the receiver.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Push(string to, params ISendMessage[] messages);
+
+        /// <summary>
+        /// Respond to events from users, groups, and rooms.
         /// </summary>
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
@@ -95,7 +104,7 @@ namespace Line
         Task Reply(IReplyToken token, params ISendMessage[] messages);
 
         /// <summary>
-        /// Send a reply message.
+        /// Respond to events from users, groups, and rooms.
         /// </summary>
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
