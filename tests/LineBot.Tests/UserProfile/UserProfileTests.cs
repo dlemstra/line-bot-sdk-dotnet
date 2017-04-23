@@ -98,10 +98,5 @@ namespace Line.Tests
             Assert.AreEqual("profile/testUser", httpClient.RequestPath);
             Assert.IsNotNull(profile);
         }
-
-        private class TestUser : IUser
-        {
-            public string Id => "testUser";
-        }
     }
 }
