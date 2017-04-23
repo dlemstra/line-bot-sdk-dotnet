@@ -302,11 +302,37 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        public async Task Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Reply(token, messages.ToArray());
+        }
+
+        /// <summary>
+        /// Respond to events from users, groups, and rooms.
+        /// </summary>
+        /// <param name="token">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         public async Task Reply(IReplyToken token, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(token), token);
 
             await Reply(token.ReplyToken, messages);
+        }
+
+        /// <summary>
+        /// Respond to events from users, groups, and rooms.
+        /// </summary>
+        /// <param name="replyToken">The reply token.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Reply(string replyToken, IEnumerable<ISendMessage> messages)
+        {
+            Guard.NotNull(nameof(messages), messages);
+
+            await Reply(replyToken, messages.ToArray());
         }
 
         /// <summary>

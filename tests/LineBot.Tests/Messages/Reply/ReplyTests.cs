@@ -12,6 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -61,6 +63,16 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task Reply_EnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Reply("token", (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Reply_NoMessages_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
@@ -76,7 +88,7 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
-            await bot.Reply("token", new TextMessage() { Text = "Test1" }, new TextMessage() { Text = "Test2" });
+            await bot.Reply("token", new TextMessage("Test1"), new TextMessage("Test2"));
 
             string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
 
@@ -85,7 +97,33 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task Reply_WithIReplyToken_CallsApi()
+        public async Task Push_WithEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Reply("token", messages);
+
+            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/reply", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Reply_WithTokenAndEnumerableMessagesIsNull_CallsApi()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Reply(new TestMessage(), (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Reply_WithToken_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
@@ -93,6 +131,22 @@ namespace Line.Tests
             await bot.Reply(new TestMessage(), new TestTextMessage());
 
             string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/reply", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Reply_WithTokenAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Reply(new TestMessage(), messages);
+
+            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
 
             Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
