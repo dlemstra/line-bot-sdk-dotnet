@@ -13,11 +13,18 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Line
 {
     internal static class MessageConverter
     {
+        public static ISendMessage[] Convert(IEnumerable<ISendMessage> messages)
+        {
+            return Convert(messages.ToArray());
+        }
+
         public static ISendMessage[] Convert(ISendMessage[] messages)
         {
             if (messages.Length > 5)
@@ -33,14 +40,14 @@ namespace Line
                 switch (messages[i])
                 {
                     case ITextMessage textMessage:
-                        messages[i] = ToTextMessage(textMessage);
+                        result[i] = ToTextMessage(textMessage);
                         break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
             }
 
-            return messages;
+            return result;
         }
 
         private static ISendMessage ToTextMessage(ITextMessage message)

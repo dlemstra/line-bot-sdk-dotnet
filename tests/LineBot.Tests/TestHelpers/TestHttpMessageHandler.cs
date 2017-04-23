@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +25,7 @@ namespace Line.Tests
     public class TestHttpMessageHandler : HttpMessageHandler
     {
         private readonly HttpResponseMessage _response;
+        private readonly List<HttpRequestMessage> _requests = new List<HttpRequestMessage>();
 
         public TestHttpMessageHandler(byte[] data)
             : this(HttpStatusCode.OK)
@@ -45,17 +47,13 @@ namespace Line.Tests
             };
         }
 
-        public HttpRequestMessage Request { get; set; }
-
-        public string PostedData { get; private set; }
+        public IEnumerable<HttpRequestMessage> Requests => _requests;
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            Request = request;
+            request.SetPostedData();
 
-            StringContent content = request.Content as StringContent;
-            if (content != null)
-                PostedData = await content.ReadAsStringAsync();
+            _requests.Add(request);
 
             return await Task.FromResult(_response);
         }

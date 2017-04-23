@@ -12,6 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -114,6 +116,37 @@ namespace Line.Tests.Messages.Push
 
             Assert.AreEqual("message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Push_With11Messages_CallsApi3Times()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            TextMessage[] messages = new TextMessage[11];
+            for (int i = 0; i < messages.Length; i++)
+                messages[i] = new TextMessage("Test" + i);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push("id", messages);
+
+            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test0""},{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""},{""type"":""text"",""text"":""Test3""},{""type"":""text"",""text"":""Test4""}]}";
+
+            HttpRequestMessage[] requests = httpClient.Requests.ToArray();
+            Assert.AreEqual(3, requests.Length);
+
+            Assert.AreEqual("/message/push", requests[0].RequestUri.PathAndQuery);
+            Assert.AreEqual(postedData, requests[0].GetPostedData());
+
+            postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test5""},{""type"":""text"",""text"":""Test6""},{""type"":""text"",""text"":""Test7""},{""type"":""text"",""text"":""Test8""},{""type"":""text"",""text"":""Test9""}]}";
+
+            Assert.AreEqual("/message/push", requests[1].RequestUri.PathAndQuery);
+            Assert.AreEqual(postedData, requests[1].GetPostedData());
+
+            postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test10""}]}";
+
+            Assert.AreEqual("/message/push", requests[2].RequestUri.PathAndQuery);
+            Assert.AreEqual(postedData, requests[2].GetPostedData());
         }
     }
 }

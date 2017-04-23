@@ -13,6 +13,8 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 
@@ -33,29 +35,13 @@ namespace Line.Tests
             BaseAddress = TestBaseAddress;
         }
 
-        public string PostedData
-        {
-            get
-            {
-                return _handler.PostedData;
-            }
-        }
+        public string PostedData => _handler.Requests.LastOrDefault()?.GetPostedData();
 
-        public HttpMethod RequestMethod
-        {
-            get
-            {
-                return _handler.Request.Method;
-            }
-        }
+        public IEnumerable<HttpRequestMessage> Requests => _handler.Requests;
 
-        public string RequestPath
-        {
-            get
-            {
-                return _handler.Request.RequestUri.ToString().Substring(TestBaseAddress.ToString().Length);
-            }
-        }
+        public HttpMethod RequestMethod => _handler.Requests.LastOrDefault()?.Method;
+
+        public string RequestPath => _handler.Requests.LastOrDefault()?.RequestUri.ToString().Substring(TestBaseAddress.ToString().Length);
 
         public static TestHttpClient Create()
         {

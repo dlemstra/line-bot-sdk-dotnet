@@ -36,6 +36,15 @@ namespace Line
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextMessage"/> class.
+        /// </summary>
+        /// <param name="text">The text of the message.</param>
+        public TextMessage(string text)
+        {
+            Text = text;
+        }
+
         internal TextMessage(ITextMessage self)
         {
             Text = self.Text;

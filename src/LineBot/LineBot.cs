@@ -232,12 +232,15 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            PushMessage push = new PushMessage(to, messages);
+            foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
+            {
+                PushMessage push = new PushMessage(to, messageSet);
 
-            StringContent content = CreateStringContent(push);
+                StringContent content = CreateStringContent(push);
 
-            HttpResponseMessage response = await _client.PostAsync($"message/push", content);
-            await response.CheckResult();
+                HttpResponseMessage response = await _client.PostAsync($"message/push", content);
+                await response.CheckResult();
+            }
         }
 
         /// <summary>

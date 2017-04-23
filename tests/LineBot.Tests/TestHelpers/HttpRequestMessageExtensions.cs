@@ -12,23 +12,22 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Linq;
+using System.Net.Http;
 
-namespace Line
+namespace Line.Tests
 {
-    internal sealed class PushMessage
+    public static class HttpRequestMessageExtensions
     {
-        public PushMessage(string to, IEnumerable<ISendMessage> messages)
+        public static string GetPostedData(this HttpRequestMessage self)
         {
-            To = to;
-            Messages = MessageConverter.Convert(messages);
+            return self.Headers.GetValues(nameof(HttpRequestMessageExtensions)).First();
         }
 
-        [JsonProperty("to")]
-        public string To { get; }
-
-        [JsonProperty("messages")]
-        public ISendMessage[] Messages { get; }
+        public static void SetPostedData(this HttpRequestMessage self)
+        {
+            if (self.Content is StringContent content)
+                self.Headers.Add(nameof(HttpRequestMessageExtensions), content.ReadAsStringAsync().Result);
+        }
     }
 }

@@ -13,22 +13,19 @@
 // under the License.
 
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Linq;
 
 namespace Line
 {
-    internal sealed class PushMessage
+    internal static class IEnumerableExtensions
     {
-        public PushMessage(string to, IEnumerable<ISendMessage> messages)
+        public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> self, int size)
         {
-            To = to;
-            Messages = MessageConverter.Convert(messages);
+            while (self.Any())
+            {
+                yield return self.Take(size);
+                self = self.Skip(size);
+            }
         }
-
-        [JsonProperty("to")]
-        public string To { get; }
-
-        [JsonProperty("messages")]
-        public ISendMessage[] Messages { get; }
     }
 }
