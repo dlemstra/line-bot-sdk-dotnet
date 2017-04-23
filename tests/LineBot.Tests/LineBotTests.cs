@@ -268,12 +268,6 @@ namespace Line.Tests
         }
 
         [ExcludeFromCodeCoverage]
-        private class TestGroup : IGroup
-        {
-            public string Id => "testGroup";
-        }
-
-        [ExcludeFromCodeCoverage]
         private class TestRoom : IRoom
         {
             public string Id => "testRoom";

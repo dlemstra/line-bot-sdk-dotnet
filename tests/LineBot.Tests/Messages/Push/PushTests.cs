@@ -73,5 +73,19 @@ namespace Line.Tests.Messages.Push
             Assert.AreEqual("message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
+
+        [TestMethod]
+        public async Task Reply_WithIGroup_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Push(new TestGroup(), new TestTextMessage());
+
+            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("message/push", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
     }
 }
