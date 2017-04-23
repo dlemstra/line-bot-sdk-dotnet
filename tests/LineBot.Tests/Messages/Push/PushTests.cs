@@ -72,7 +72,7 @@ namespace Line.Tests.Messages.Push
 
             string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test""}]}";
 
-            Assert.AreEqual("message/push", httpClient.RequestPath);
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 
@@ -86,7 +86,7 @@ namespace Line.Tests.Messages.Push
 
             string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
 
-            Assert.AreEqual("message/push", httpClient.RequestPath);
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 
@@ -100,7 +100,7 @@ namespace Line.Tests.Messages.Push
 
             string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
 
-            Assert.AreEqual("message/push", httpClient.RequestPath);
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 
@@ -114,7 +114,7 @@ namespace Line.Tests.Messages.Push
 
             string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
 
-            Assert.AreEqual("message/push", httpClient.RequestPath);
+            Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 

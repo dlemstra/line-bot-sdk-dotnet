@@ -41,7 +41,7 @@ namespace Line.Tests
 
         public HttpMethod RequestMethod => _handler.Requests.LastOrDefault()?.Method;
 
-        public string RequestPath => _handler.Requests.LastOrDefault()?.RequestUri.ToString().Substring(TestBaseAddress.ToString().Length);
+        public string RequestPath => _handler.Requests.LastOrDefault()?.RequestUri.PathAndQuery;
 
         public static TestHttpClient Create()
         {

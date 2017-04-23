@@ -80,7 +80,7 @@ namespace Line.Tests
 
             string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
 
-            Assert.AreEqual("message/reply", httpClient.RequestPath);
+            Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
 
@@ -94,7 +94,7 @@ namespace Line.Tests
 
             string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
 
-            Assert.AreEqual("message/reply", httpClient.RequestPath);
+            Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
     }

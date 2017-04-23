@@ -77,7 +77,7 @@ namespace Line.Tests
             IUserProfile profile = await bot.GetProfile("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-            Assert.AreEqual("profile/test", httpClient.RequestPath);
+            Assert.AreEqual("/profile/test", httpClient.RequestPath);
 
             Assert.IsNotNull(profile);
             Assert.AreEqual("LINE taro", profile.DisplayName);
@@ -95,7 +95,7 @@ namespace Line.Tests
             ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
             IUserProfile profile = await bot.GetProfile(new TestUser());
 
-            Assert.AreEqual("profile/testUser", httpClient.RequestPath);
+            Assert.AreEqual("/profile/testUser", httpClient.RequestPath);
             Assert.IsNotNull(profile);
         }
     }

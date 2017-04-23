@@ -96,7 +96,7 @@ namespace Line.Tests
             byte[] data = await bot.GetContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-            Assert.AreEqual("message/test/content", httpClient.RequestPath);
+            Assert.AreEqual("/message/test/content", httpClient.RequestPath);
 
             Assert.IsNull(data);
         }
@@ -112,7 +112,7 @@ namespace Line.Tests
             byte[] data = await bot.GetContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-            Assert.AreEqual("message/test/content", httpClient.RequestPath);
+            Assert.AreEqual("/message/test/content", httpClient.RequestPath);
 
             Assert.IsNotNull(data);
             CollectionAssert.AreEqual(data, input);
@@ -129,7 +129,7 @@ namespace Line.Tests
             byte[] data = await bot.GetContent(new TestMessage(MessageType.Image));
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-            Assert.AreEqual("message/testMessage/content", httpClient.RequestPath);
+            Assert.AreEqual("/message/testMessage/content", httpClient.RequestPath);
 
             Assert.IsNotNull(data);
             CollectionAssert.AreEqual(data, input);
@@ -187,7 +187,7 @@ namespace Line.Tests
             await bot.LeaveGroup("test");
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-            Assert.AreEqual("group/test/leave", httpClient.RequestPath);
+            Assert.AreEqual("/group/test/leave", httpClient.RequestPath);
         }
 
         [TestMethod]
@@ -198,7 +198,7 @@ namespace Line.Tests
             ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
             await bot.LeaveGroup(new TestGroup());
 
-            Assert.AreEqual("group/testGroup/leave", httpClient.RequestPath);
+            Assert.AreEqual("/group/testGroup/leave", httpClient.RequestPath);
         }
 
         [TestMethod]
@@ -253,7 +253,7 @@ namespace Line.Tests
             await bot.LeaveRoom("test");
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-            Assert.AreEqual("room/test/leave", httpClient.RequestPath);
+            Assert.AreEqual("/room/test/leave", httpClient.RequestPath);
         }
 
         [TestMethod]
@@ -264,7 +264,7 @@ namespace Line.Tests
             ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
             await bot.LeaveRoom(new TestRoom());
 
-            Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
+            Assert.AreEqual("/room/testRoom/leave", httpClient.RequestPath);
         }
     }
 }
