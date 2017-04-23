@@ -12,7 +12,10 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,12 +25,23 @@ namespace Line.Tests
     public class LineBotTests
     {
         [TestMethod]
-        public void Create_ConfigurationIsNull_ThrowsArgumentNullException()
+        public void Constructor_ConfigurationIsNull_ThrowsArgumentNullException()
         {
             ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
             {
                 new LineBot(null);
             });
+        }
+
+        [TestMethod]
+        public void Constructor_HttpFactoryIsUsed_ThrowsArgumentNullException()
+        {
+            LineBot bot = new LineBot(Configuration.ForTest);
+
+            FieldInfo field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
+            HttpClient client = (HttpClient)field.GetValue(bot);
+
+            Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
         }
 
         [TestMethod]
