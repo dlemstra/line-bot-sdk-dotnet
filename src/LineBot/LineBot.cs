@@ -195,6 +195,19 @@ namespace Line
         }
 
         /// <summary>
+        /// Send messages to a room at any time.
+        /// </summary>
+        /// <param name="room">The room.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Push(IRoom room, params ISendMessage[] messages)
+        {
+            Guard.NotNull(nameof(room), room);
+
+            await Push(room.Id, messages);
+        }
+
+        /// <summary>
         /// Send messages to a user, group, or room at any time.
         /// </summary>
         /// <remarks>Use the id returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>

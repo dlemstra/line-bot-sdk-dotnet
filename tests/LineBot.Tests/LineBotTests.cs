@@ -266,11 +266,5 @@ namespace Line.Tests
 
             Assert.AreEqual("room/testRoom/leave", httpClient.RequestPath);
         }
-
-        [ExcludeFromCodeCoverage]
-        private class TestRoom : IRoom
-        {
-            public string Id => "testRoom";
-        }
     }
 }

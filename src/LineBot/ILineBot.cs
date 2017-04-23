@@ -95,6 +95,14 @@ namespace Line
         Task Push(IGroup group, params ISendMessage[] messages);
 
         /// <summary>
+        /// Send messages to a room at any time.
+        /// </summary>
+        /// <param name="room">The room.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Push(IRoom room, params ISendMessage[] messages);
+
+        /// <summary>
         /// Send messages to a user, group, or room at any time.
         /// </summary>
         /// <remarks>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
