@@ -13,6 +13,8 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Line
 {
@@ -37,6 +39,14 @@ namespace Line
             NotNull(paramName, value);
 
             if (value.Length == 0)
+                throw new ArgumentException("Value cannot be empty.", paramName);
+        }
+
+        public static void NotNullOrEmpty<T>(string paramName, IEnumerable<T> value)
+        {
+            NotNull(paramName, value);
+
+            if (!value.Any())
                 throw new ArgumentException("Value cannot be empty.", paramName);
         }
     }

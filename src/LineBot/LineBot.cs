@@ -182,6 +182,31 @@ namespace Line
         }
 
         /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Multicast(IEnumerable<string> to, params ISendMessage[] messages)
+        {
+            Guard.NotNullOrEmpty(nameof(to), to);
+            Guard.NotNullOrEmpty(nameof(messages), messages);
+
+            foreach (IEnumerable<string> toSet in to.Split(200))
+            {
+                foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
+                {
+                    MulticastMessage multicast = new MulticastMessage(toSet, messageSet);
+
+                    StringContent content = CreateStringContent(multicast);
+
+                    HttpResponseMessage response = await _client.PostAsync($"message/multicast", content);
+                    await response.CheckResult();
+                }
+            }
+        }
+
+        /// <summary>
         /// Send messages to a group at any time.
         /// </summary>
         /// <param name="group">The group.</param>

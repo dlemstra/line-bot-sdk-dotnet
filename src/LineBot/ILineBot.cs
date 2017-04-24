@@ -87,6 +87,14 @@ namespace Line
         Task LeaveRoom(IRoom room);
 
         /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Multicast(IEnumerable<string> to, params ISendMessage[] messages);
+
+        /// <summary>
         /// Send messages to a group at any time.
         /// </summary>
         /// <param name="group">The group.</param>
