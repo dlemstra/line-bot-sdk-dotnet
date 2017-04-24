@@ -24,7 +24,7 @@ namespace Line.Tests.Messages.Push
     public class PushTests
     {
         [TestMethod]
-        public async Task Push_IdIsNull_ThrowsException()
+        public async Task Push_ToIsNull_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
@@ -34,7 +34,7 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
-        public async Task Push_IdIsEmpty_ThrowsException()
+        public async Task Push_ToIsEmpty_ThrowsException()
         {
             ILineBot bot = new LineBot(Configuration.ForTest, null);
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("to", async () =>
