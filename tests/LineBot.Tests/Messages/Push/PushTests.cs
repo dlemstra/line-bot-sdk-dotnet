@@ -265,10 +265,10 @@ namespace Line.Tests.Messages.Push
             ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
             await bot.Push("id", messages);
 
-            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test0""},{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""},{""type"":""text"",""text"":""Test3""},{""type"":""text"",""text"":""Test4""}]}";
-
             HttpRequestMessage[] requests = httpClient.Requests.ToArray();
             Assert.AreEqual(3, requests.Length);
+
+            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test0""},{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""},{""type"":""text"",""text"":""Test3""},{""type"":""text"",""text"":""Test4""}]}";
 
             Assert.AreEqual("/message/push", requests[0].RequestUri.PathAndQuery);
             Assert.AreEqual(postedData, requests[0].GetPostedData());
