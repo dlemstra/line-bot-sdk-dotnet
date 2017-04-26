@@ -187,6 +187,17 @@ namespace Line
         /// <param name="to">IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        public async Task Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
+        {
+            await Multicast(to, messages?.ToArray());
+        }
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         public async Task Multicast(IEnumerable<string> to, params ISendMessage[] messages)
         {
             Guard.NotNullOrEmpty(nameof(to), to);

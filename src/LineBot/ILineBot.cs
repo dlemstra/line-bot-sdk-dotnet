@@ -92,6 +92,14 @@ namespace Line
         /// <param name="to">IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
+        Task Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages);
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
         Task Multicast(IEnumerable<string> to, params ISendMessage[] messages);
 
         /// <summary>

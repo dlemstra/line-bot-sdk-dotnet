@@ -64,6 +64,16 @@ namespace Line.Tests.Messages.Multicast
         }
 
         [TestMethod]
+        public async Task Multicast_EnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new string[] { "id" }, (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Multicast_CorrectInput_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
@@ -72,6 +82,22 @@ namespace Line.Tests.Messages.Multicast
             await bot.Multicast(new string[] { "id1", "id2" }, new TextMessage("Test"));
 
             string postedData = @"{""to"":[""id1"",""id2""],""messages"":[{""type"":""text"",""text"":""Test""}]}";
+
+            Assert.AreEqual("/message/multicast", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Multicast(new string[] { "id" }, messages);
+
+            string postedData = @"{""to"":[""id""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
 
             Assert.AreEqual("/message/multicast", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
