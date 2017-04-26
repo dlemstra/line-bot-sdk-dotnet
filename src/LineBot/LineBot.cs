@@ -225,9 +225,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Push(IGroup group, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Push(group, messages.ToArray());
+            await Push(group, messages?.ToArray());
         }
 
         /// <summary>
@@ -251,9 +249,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Push(IRoom room, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Push(room, messages.ToArray());
+            await Push(room, messages?.ToArray());
         }
 
         /// <summary>
@@ -277,9 +273,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Push(IUser user, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Push(user, messages.ToArray());
+            await Push(user, messages?.ToArray());
         }
 
         /// <summary>
@@ -304,9 +298,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Push(string to, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Push(to, messages.ToArray());
+            await Push(to, messages?.ToArray());
         }
 
         /// <summary>
@@ -340,9 +332,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Reply(token, messages.ToArray());
+            await Reply(token, messages?.ToArray());
         }
 
         /// <summary>
@@ -366,9 +356,7 @@ namespace Line
         /// <returns>.</returns>
         public async Task Reply(string replyToken, IEnumerable<ISendMessage> messages)
         {
-            Guard.NotNull(nameof(messages), messages);
-
-            await Reply(replyToken, messages.ToArray());
+            await Reply(replyToken, messages?.ToArray());
         }
 
         /// <summary>
