@@ -52,10 +52,14 @@ namespace Line
 
         private static ISendMessage ToTextMessage(ITextMessage message)
         {
-            if (message is TextMessage textMessage)
-                return textMessage;
+            TextMessage textMessage = message as TextMessage;
 
-            return new TextMessage(message);
+            if (textMessage == null)
+                textMessage = new TextMessage(message);
+            else
+                textMessage.CheckRequiredFields();
+
+            return textMessage;
         }
     }
 }

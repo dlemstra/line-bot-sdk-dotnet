@@ -32,12 +32,26 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_TextMessage_InstanceIsPreserved()
         {
-            TextMessage textMessage = new TextMessage();
+            TextMessage textMessage = new TextMessage()
+            {
+                Text = "Test"
+            };
 
             ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { textMessage });
 
             Assert.AreEqual(1, messages.Length);
             Assert.AreEqual(textMessage, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_TextMessageWithoutText_ThrowsException()
+        {
+            TextMessage textMessage = new TextMessage();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { textMessage });
+            });
         }
 
         [TestMethod]
