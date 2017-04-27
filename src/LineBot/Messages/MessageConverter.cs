@@ -42,12 +42,27 @@ namespace Line
                     case ITextMessage textMessage:
                         result[i] = ToTextMessage(textMessage);
                         break;
+                    case IImageMessage imageMessage:
+                        result[i] = ToImageMessage(imageMessage);
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
             }
 
             return result;
+        }
+
+        private static ISendMessage ToImageMessage(IImageMessage message)
+        {
+            ImageMessage imageMessage = message as ImageMessage;
+
+            if (imageMessage == null)
+                imageMessage = new ImageMessage(message);
+            else
+                imageMessage.CheckRequiredFields();
+
+            return imageMessage;
         }
 
         private static ISendMessage ToTextMessage(ITextMessage message)

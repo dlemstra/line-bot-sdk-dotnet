@@ -75,19 +75,87 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_CustomITextMessage_ConvertedToTextMessage()
         {
-            TestTextMessage textMessage = new TestTextMessage();
+            TestTextMessage customTextMessage = new TestTextMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { textMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(textMessage, messages[0]);
-            Assert.IsInstanceOfType(messages[0], typeof(TextMessage));
+            Assert.AreNotEqual(customTextMessage, messages[0]);
+
+            TextMessage textMessage = messages[0] as TextMessage;
+            Assert.AreEqual("TestTextMessage", textMessage.Text);
+        }
+
+        [TestMethod]
+        public void Convert_ImageMessage_InstanceIsPreserved()
+        {
+            ImageMessage imageMessage = new ImageMessage()
+            {
+                PreviewUrl = new Uri("https://foo.previewUrl"),
+                Url = new Uri("https://foo.url")
+            };
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { imageMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreEqual(imageMessage, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_ImageMessageWithoutUrl_ThrowsException()
+        {
+            ImageMessage imageMessage = new ImageMessage()
+            {
+                PreviewUrl = new Uri("https://foo.previewUrl")
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { imageMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImageMessageWithoutPreviewUrl_ThrowsException()
+        {
+            ImageMessage imageMessage = new ImageMessage()
+            {
+                Url = new Uri("https://foo.url")
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The preview url cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { imageMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_CustomIImageMessage_ConvertedToImageMessage()
+        {
+            TestImageMessage customImageMessage = new TestImageMessage();
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customImageMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreNotEqual(customImageMessage, messages[0]);
+
+            ImageMessage imageMessage = messages[0] as ImageMessage;
+            Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
+            Assert.AreEqual(new Uri("https://foo.previewUrl"), imageMessage.PreviewUrl);
         }
 
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
             public string Text => nameof(TestTextMessage);
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestImageMessage : IImageMessage
+        {
+            public Uri Url => new Uri("https://foo.url");
+
+            public Uri PreviewUrl => new Uri("https://foo.previewUrl");
         }
 
         [ExcludeFromCodeCoverage]
