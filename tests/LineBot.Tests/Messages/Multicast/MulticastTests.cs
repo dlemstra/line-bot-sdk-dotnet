@@ -14,9 +14,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Net.Http;
 
 namespace Line.Tests.Messages.Multicast
 {
@@ -153,6 +153,58 @@ namespace Line.Tests.Messages.Multicast
 
             Assert.AreEqual("/message/multicast", requests[1].RequestUri.PathAndQuery);
             Assert.AreEqual(postedData, requests[1].GetPostedData());
+        }
+
+        [TestMethod]
+        public async Task Multicast_GroupIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
+            {
+                await bot.Multicast((IEnumerable<IGroup>)null, new TextMessage("Test"));
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_GroupIsNullWithEnumerable_ThrowsException()
+        {
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
+            {
+                await bot.Multicast((IEnumerable<IGroup>)null, messages);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithGroup_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Multicast(new TestGroup[] { new TestGroup() }, new TestTextMessage());
+
+            string postedData = @"{""to"":[""testGroup""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/multicast", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithGroupAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Multicast(new TestGroup[] { new TestGroup() }, messages);
+
+            string postedData = @"{""to"":[""testGroup""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/multicast", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
         }
     }
 }
