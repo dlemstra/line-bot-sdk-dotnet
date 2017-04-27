@@ -96,6 +96,17 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task Reply_TooManyMessages_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+
+            await ExceptionAssert.ThrowsAsync<LineBotException>("The maximum number of messages is 5.", async () =>
+            {
+                await bot.Reply("id", new ISendMessage[6]);
+            });
+        }
+
+        [TestMethod]
         public async Task Reply_CorrectInput_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
