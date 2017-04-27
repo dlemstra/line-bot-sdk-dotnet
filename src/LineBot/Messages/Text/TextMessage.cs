@@ -48,9 +48,9 @@ namespace Line
             Text = text;
         }
 
-        internal TextMessage(ITextMessage self)
+        internal TextMessage(ITextMessage other)
         {
-            Text = self.Text;
+            Text = other.Text;
         }
 
         /// <summary>
