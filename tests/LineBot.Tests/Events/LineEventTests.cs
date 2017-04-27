@@ -30,7 +30,7 @@ namespace Line.Tests.Events
         [DeploymentItem(EmptyObjectJson)]
         public async Task GetEvents_EmptyObject_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(EmptyObjectJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -42,7 +42,7 @@ namespace Line.Tests.Events
         [DeploymentItem(NoEventsJson)]
         public async Task GetEvents_NoEvents_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(NoEventsJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -54,7 +54,7 @@ namespace Line.Tests.Events
         [DeploymentItem(NoEventsJson)]
         public async Task GetEvents_Whitespace_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(WhitespaceJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -66,7 +66,7 @@ namespace Line.Tests.Events
         [DeploymentItem(NoEventsJson)]
         public async Task GetEvents_NoData_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest();
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

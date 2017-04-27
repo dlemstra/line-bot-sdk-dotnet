@@ -88,7 +88,7 @@ namespace Line.Tests
 
             byte[] content = Body.ToArrayAsync().Result;
 
-            byte[] key = Encoding.UTF8.GetBytes(Configuration.ForTest.ChannelSecret);
+            byte[] key = Encoding.UTF8.GetBytes(TestConfiguration.Create().ChannelSecret);
 
             using (HMACSHA256 hmac = new HMACSHA256(key))
             {

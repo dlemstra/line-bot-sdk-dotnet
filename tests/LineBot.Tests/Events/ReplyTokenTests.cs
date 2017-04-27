@@ -28,7 +28,7 @@ namespace Line.Tests.Events
         [DeploymentItem(InvalidJson)]
         public async Task GetEvents_InvalidRequest_ReplyTokenReturnsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

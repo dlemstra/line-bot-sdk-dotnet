@@ -27,7 +27,7 @@ namespace Line.Tests
 
         private readonly TestHttpMessageHandler _handler;
 
-        private TestHttpClient(TestHttpMessageHandler handler)
+        public TestHttpClient(TestHttpMessageHandler handler)
             : base(handler)
         {
             _handler = handler;

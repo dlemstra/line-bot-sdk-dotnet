@@ -36,7 +36,7 @@ namespace Line.Tests
         [DeploymentItem(MessageEventWithoutMessageJson)]
         public async Task GetEvents_RequestWithoutMessage_MessageIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(MessageEventWithoutMessageJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -53,7 +53,7 @@ namespace Line.Tests
         [DeploymentItem(InvalidMesssageJson)]
         public async Task GetEvents_InvalidMessageType_MessageTypeIsUnknown()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidMesssageJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -69,7 +69,7 @@ namespace Line.Tests
         [DeploymentItem(InvalidJson)]
         public async Task GetEvents_InvalidRequest_MessageIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -84,7 +84,7 @@ namespace Line.Tests
         [DeploymentItem(AudioJson)]
         public async Task Group_MessageTypeIsAudio_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(AudioJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -112,7 +112,7 @@ namespace Line.Tests
         [DeploymentItem(ImageJson)]
         public async Task Group_MessageTypeIsImage_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(ImageJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -140,7 +140,7 @@ namespace Line.Tests
         [DeploymentItem(LocationJson)]
         public async Task Group_MessageTypeIsLocation_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(LocationJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -174,7 +174,7 @@ namespace Line.Tests
         [DeploymentItem(StickerJson)]
         public async Task Group_MessageTypeIsSticker_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(StickerJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -206,7 +206,7 @@ namespace Line.Tests
         [DeploymentItem(TextJson)]
         public async Task Group_MessageTypeIsText_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(TextJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -234,7 +234,7 @@ namespace Line.Tests
         [DeploymentItem(VideoJson)]
         public async Task Group_MessageTypeIsVideo_ReturnsMessage()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(VideoJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

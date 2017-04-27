@@ -25,7 +25,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_ReplyTokenIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("replyToken", async () =>
             {
                 await bot.Reply((string)null, new TextMessage() { Text = "Test" });
@@ -35,7 +35,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_ReplyTokenIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("replyToken", async () =>
             {
                 await bot.Reply(string.Empty, new TextMessage() { Text = "Test" });
@@ -45,7 +45,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_TokenIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("token", async () =>
             {
                 await bot.Reply((IReplyToken)null, new TextMessage() { Text = "Test" });
@@ -55,7 +55,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_MessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", null);
@@ -65,7 +65,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_EnumerableMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", (IEnumerable<ISendMessage>)null);
@@ -75,7 +75,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_NoMessages_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", new TextMessage[] { });
@@ -87,7 +87,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply("token", new TextMessage("Test1"), new TextMessage("Test2"));
 
             string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
@@ -103,7 +103,7 @@ namespace Line.Tests
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply("token", messages);
 
             string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -115,7 +115,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Reply_WithTokenAndEnumerableMessagesIsNull_CallsApi()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply(new TestMessage(), (IEnumerable<ISendMessage>)null);
@@ -127,7 +127,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply(new TestMessage(), new TestTextMessage());
 
             string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -143,7 +143,7 @@ namespace Line.Tests
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply(new TestMessage(), messages);
 
             string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";

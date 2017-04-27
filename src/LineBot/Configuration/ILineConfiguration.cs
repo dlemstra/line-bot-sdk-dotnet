@@ -28,5 +28,11 @@ namespace Line
         /// Gets the channel secret.
         /// </summary>
         string ChannelSecret { get; }
+
+        /// <summary>
+        /// Creates a line bot.
+        /// </summary>
+        /// <returns>A line bot</returns>
+        ILineBot CreateBot();
     }
 }

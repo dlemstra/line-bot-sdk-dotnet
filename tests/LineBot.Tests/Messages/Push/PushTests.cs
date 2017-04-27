@@ -26,7 +26,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_ToIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
             {
                 await bot.Push((string)null, new TextMessage() { Text = "Test" });
@@ -36,7 +36,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_ToIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("to", async () =>
             {
                 await bot.Push(string.Empty, new TextMessage() { Text = "Test" });
@@ -46,7 +46,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_MessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push("id", null);
@@ -56,7 +56,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_EnumerableMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push("id", (IEnumerable<ISendMessage>)null);
@@ -66,7 +66,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_NoMessages_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messages", async () =>
             {
                 await bot.Push("id", new TextMessage[] { });
@@ -78,7 +78,7 @@ namespace Line.Tests.Messages.Push
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push("id", new TextMessage() { Text = "Test" });
 
             string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""Test""}]}";
@@ -94,7 +94,7 @@ namespace Line.Tests.Messages.Push
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push("id", messages);
 
             string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -106,7 +106,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_GroupIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("group", async () =>
             {
                 await bot.Push((IGroup)null, new TextMessage() { Text = "Test" });
@@ -116,7 +116,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_WithGroupAndMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push(new TestGroup(), null);
@@ -128,7 +128,7 @@ namespace Line.Tests.Messages.Push
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestGroup(), new TestTextMessage());
 
             string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -144,7 +144,7 @@ namespace Line.Tests.Messages.Push
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestGroup(), messages);
 
             string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -156,7 +156,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_RoomIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("room", async () =>
             {
                 await bot.Push((IRoom)null, new TextMessage() { Text = "Test" });
@@ -166,7 +166,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_WithRoomAndMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push(new TestRoom(), null);
@@ -178,7 +178,7 @@ namespace Line.Tests.Messages.Push
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestRoom(), new TestTextMessage());
 
             string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -194,7 +194,7 @@ namespace Line.Tests.Messages.Push
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestRoom(), messages);
 
             string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -206,7 +206,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_UserIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("user", async () =>
             {
                 await bot.Push((IUser)null, new TextMessage() { Text = "Test" });
@@ -216,7 +216,7 @@ namespace Line.Tests.Messages.Push
         [TestMethod]
         public async Task Push_WithUserAndMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push(new TestUser(), null);
@@ -228,7 +228,7 @@ namespace Line.Tests.Messages.Push
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestUser(), new TestTextMessage());
 
             string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -244,7 +244,7 @@ namespace Line.Tests.Messages.Push
 
             IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestUser(), messages);
 
             string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
@@ -262,7 +262,7 @@ namespace Line.Tests.Messages.Push
             for (int i = 0; i < messages.Length; i++)
                 messages[i] = new TextMessage("Test" + i);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push("id", messages);
 
             HttpRequestMessage[] requests = httpClient.Requests.ToArray();

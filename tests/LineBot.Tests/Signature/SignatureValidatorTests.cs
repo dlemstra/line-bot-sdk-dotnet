@@ -64,7 +64,7 @@ namespace Line.Tests
         {
             ExceptionAssert.Throws<LineBotException>("Invalid signature. Expected aajPtaEL8oyiitLlTbSzkFCTDQ7Lr0m/89eDhe6tFx4=, actual value FooBar.", () =>
              {
-                 SignatureValidator validator = new SignatureValidator(Configuration.ForTest);
+                 SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                  validator.Validate(new byte[] { 42 }, "FooBar");
              });
         }
@@ -72,7 +72,7 @@ namespace Line.Tests
         [TestMethod]
         public void Validate_SignatureValid_ThrowsNoException()
         {
-            SignatureValidator validator = new SignatureValidator(Configuration.ForTest);
+            SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
             validator.Validate(new byte[] { 42 }, "aajPtaEL8oyiitLlTbSzkFCTDQ7Lr0m/89eDhe6tFx4=");
         }
     }

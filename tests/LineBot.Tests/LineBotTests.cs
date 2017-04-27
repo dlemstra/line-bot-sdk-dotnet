@@ -25,29 +25,9 @@ namespace Line.Tests
     public class LineBotTests
     {
         [TestMethod]
-        public void Constructor_ConfigurationIsNull_ThrowsArgumentNullException()
-        {
-            ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
-            {
-                new LineBot(null);
-            });
-        }
-
-        [TestMethod]
-        public void Constructor_HttpFactoryIsUsed_ThrowsArgumentNullException()
-        {
-            LineBot bot = new LineBot(Configuration.ForTest);
-
-            FieldInfo field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
-            HttpClient client = (HttpClient)field.GetValue(bot);
-
-            Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
-        }
-
-        [TestMethod]
         public async Task GetContent_MessageIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("message", async () =>
             {
                 await bot.GetContent((IMessage)null);
@@ -57,7 +37,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task GetContent_MessageIdIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messageId", async () =>
             {
                 await bot.GetContent((string)null);
@@ -67,7 +47,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task GetContent_MessageIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messageId", async () =>
             {
                 await bot.GetContent(string.Empty);
@@ -79,7 +59,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -92,7 +72,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             byte[] data = await bot.GetContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
@@ -108,7 +88,7 @@ namespace Line.Tests
 
             TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             byte[] data = await bot.GetContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
@@ -125,7 +105,7 @@ namespace Line.Tests
 
             TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             byte[] data = await bot.GetContent(new TestMessage(MessageType.Image));
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
@@ -138,7 +118,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveGroup_GroupIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("group", async () =>
             {
                 await bot.LeaveGroup((IGroup)null);
@@ -148,7 +128,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveGroup_GroupIdIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("groupId", async () =>
             {
                 await bot.LeaveGroup((string)null);
@@ -158,7 +138,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveGroup_GroupIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("groupId", async () =>
             {
                 await bot.LeaveGroup(string.Empty);
@@ -170,7 +150,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -183,7 +163,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.LeaveGroup("test");
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
@@ -195,7 +175,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.LeaveGroup(new TestGroup());
 
             Assert.AreEqual("/group/testGroup/leave", httpClient.RequestPath);
@@ -204,7 +184,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveRoom_RoomsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("room", async () =>
             {
                 await bot.LeaveRoom((IRoom)null);
@@ -214,7 +194,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveRoom_RoomIdIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("roomId", async () =>
             {
                 await bot.LeaveRoom((string)null);
@@ -224,7 +204,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task LeaveRoom_RoomIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("roomId", async () =>
             {
                 await bot.LeaveRoom(string.Empty);
@@ -236,7 +216,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -249,7 +229,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.LeaveRoom("test");
 
             Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
@@ -261,7 +241,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.LeaveRoom(new TestRoom());
 
             Assert.AreEqual("/room/testRoom/leave", httpClient.RequestPath);

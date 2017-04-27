@@ -28,7 +28,7 @@ namespace Line.Tests
         [DeploymentItem(LeaveEventJson)]
         public async Task GetEvents_ValidRequest_IsLeaveEvent()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(LeaveEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

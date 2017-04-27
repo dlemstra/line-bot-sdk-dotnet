@@ -28,7 +28,7 @@ namespace Line.Tests
         [DeploymentItem(UnfollowEventJson)]
         public async Task GetEvents_ValidRequest_IsUnfollowEvent()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(UnfollowEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

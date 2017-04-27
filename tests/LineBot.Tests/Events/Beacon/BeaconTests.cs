@@ -31,7 +31,7 @@ namespace Line.Tests
         [DeploymentItem(BeaconEventJson)]
         public async Task GetEvents_ValidRequest_ReturnsBeaconEvent()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(BeaconEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -60,7 +60,7 @@ namespace Line.Tests
         [DeploymentItem(BeaconEventWithoutBeaconJson)]
         public async Task GetEvents_RequestWithoutBeacon_BeaconIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(BeaconEventWithoutBeaconJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -77,7 +77,7 @@ namespace Line.Tests
         [DeploymentItem(InvalidBeaconJson)]
         public async Task GetEvents_InvalidBeaconType_BeaconTypeIsUnknown()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidBeaconJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -93,7 +93,7 @@ namespace Line.Tests
         [DeploymentItem(InvalidJson)]
         public async Task GetEvents_InvalidRequest_BeaconIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

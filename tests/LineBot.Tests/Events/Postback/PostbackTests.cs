@@ -30,7 +30,7 @@ namespace Line.Tests
         [DeploymentItem(PostbackEventJson)]
         public async Task GetEvents_ValidRequest_ReturnsPostbackEvent()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(PostbackEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -58,7 +58,7 @@ namespace Line.Tests
         [DeploymentItem(PostbackEventWithoutPostbackJson)]
         public async Task GetEvents_RequestWithoutPostback_PostbackIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(PostbackEventWithoutPostbackJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
@@ -75,7 +75,7 @@ namespace Line.Tests
         [DeploymentItem(InvalidJson)]
         public async Task GetEvents_InvalidRequest_PostbackIsNull()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(InvalidJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

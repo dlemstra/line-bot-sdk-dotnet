@@ -28,7 +28,7 @@ namespace Line.Tests
         [DeploymentItem(JoinEventJson)]
         public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JoinEventJson);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);

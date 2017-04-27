@@ -27,7 +27,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task GetProfile_UserIsNulll_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("user", async () =>
             {
                 IUserProfile profile = await bot.GetProfile((IUser)null);
@@ -37,7 +37,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task GetProfile_UserIdIsNull_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("userId", async () =>
             {
                 IUserProfile profile = await bot.GetProfile((string)null);
@@ -47,7 +47,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task GetProfile_UserIdIsEmpty_ThrowsException()
         {
-            ILineBot bot = new LineBot(Configuration.ForTest);
+            ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("userId", async () =>
             {
                 IUserProfile profile = await bot.GetProfile(string.Empty);
@@ -59,7 +59,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -73,7 +73,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             IUserProfile profile = await bot.GetProfile("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
@@ -92,7 +92,7 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
 
-            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
             IUserProfile profile = await bot.GetProfile(new TestUser());
 
             Assert.AreEqual("/profile/testUser", httpClient.RequestPath);
