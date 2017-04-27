@@ -24,45 +24,45 @@ namespace Line.Tests
         [TestMethod]
         public void Constructor_SerializedCorrectly()
         {
-            TextMessage textMessage = new TextMessage()
+            TextMessage message = new TextMessage()
             {
                 Text = "Correct"
             };
 
-            string serialized = JsonConvert.SerializeObject(textMessage);
+            string serialized = JsonConvert.SerializeObject(message);
             Assert.AreEqual(@"{""type"":""text"",""text"":""Correct""}", serialized);
         }
 
         [TestMethod]
         public void Text_Null_ThrowsException()
         {
-            TextMessage textMessage = new TextMessage();
+            TextMessage message = new TextMessage();
 
             ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
             {
-                textMessage.Text = null;
+                message.Text = null;
             });
         }
 
         [TestMethod]
         public void Text_Empty_ThrowsException()
         {
-            TextMessage textMessage = new TextMessage();
+            TextMessage message = new TextMessage();
 
             ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
             {
-                textMessage.Text = string.Empty;
+                message.Text = string.Empty;
             });
         }
 
         [TestMethod]
         public void Text_MoreThan2000Chars_ThrowsException()
         {
-            TextMessage textMessage = new TextMessage();
+            TextMessage message = new TextMessage();
 
             ExceptionAssert.Throws<InvalidOperationException>("The text cannot be longer than 2000 characters.", () =>
             {
-                textMessage.Text = new string('x', 2001);
+                message.Text = new string('x', 2001);
             });
         }
 
@@ -71,12 +71,12 @@ namespace Line.Tests
         {
             string value = new string('x', 2000);
 
-            TextMessage textMessage = new TextMessage()
+            TextMessage message = new TextMessage()
             {
                 Text = value
             };
 
-            Assert.AreEqual(value, textMessage.Text);
+            Assert.AreEqual(value, message.Text);
         }
     }
 }
