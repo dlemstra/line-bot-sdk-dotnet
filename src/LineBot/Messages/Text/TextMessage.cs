@@ -80,7 +80,7 @@ namespace Line
         internal void CheckRequiredFields()
         {
             if (Text == null)
-                throw new InvalidOperationException("The text cannot be null or empty.");
+                throw new InvalidOperationException("The text cannot be null.");
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Line.Tests.Messages
         {
             TextMessage textMessage = new TextMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
             {
                 MessageConverter.Convert(new ISendMessage[] { textMessage });
             });
