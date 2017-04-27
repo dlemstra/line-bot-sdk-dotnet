@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Newtonsoft.Json;
 
 namespace Line
@@ -21,6 +22,8 @@ namespace Line
     /// </summary>
     public sealed class TextMessage : ITextMessage
     {
+        private string _text;
+
 #pragma warning disable 0414 // Suppress value is never used.
 
         [JsonProperty("type")]
@@ -53,7 +56,25 @@ namespace Line
         /// <summary>
         /// Gets or sets the text of the message.
         /// </summary>
+        /// <remarks>Max: 2000 characters</remarks>
         [JsonProperty("text")]
-        public string Text { get; set; }
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+
+            set
+            {
+                if (value == null || value.Length == 0)
+                    throw new InvalidOperationException("The text cannot be null or empty.");
+
+                if (value.Length > 2000)
+                    throw new InvalidOperationException("The text cannot be longer than 2000 characters.");
+
+                _text = value;
+            }
+        }
     }
 }

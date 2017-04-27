@@ -42,18 +42,6 @@ namespace Line.Tests.Messages
         }
 
         [TestMethod]
-        public void Convert_TextMessage_SerializedCorrectly()
-        {
-            TextMessage textMessage = new TextMessage()
-            {
-                Text = "Correct"
-            };
-
-            string serialized = JsonConvert.SerializeObject(textMessage);
-            Assert.AreEqual(@"{""type"":""text"",""text"":""Correct""}", serialized);
-        }
-
-        [TestMethod]
         public void Convert_CustomITextMessage_ConvertedToTextMessage()
         {
             TestTextMessage textMessage = new TestTextMessage();
@@ -86,7 +74,7 @@ namespace Line.Tests.Messages
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
-            public string Text { get; }
+            public string Text => nameof(TestTextMessage);
         }
 
         [ExcludeFromCodeCoverage]
