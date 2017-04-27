@@ -83,6 +83,19 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public async Task Reply_ErrorResponse_ThrowsException()
+        {
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+
+            await ExceptionAssert.ThrowsUnknownError(async () =>
+            {
+                await bot.Reply("token", new TextMessage("Test"));
+            });
+        }
+
+        [TestMethod]
         public async Task Reply_CorrectInput_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();

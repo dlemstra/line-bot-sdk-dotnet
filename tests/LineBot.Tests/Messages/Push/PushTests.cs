@@ -74,6 +74,19 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
+        public async Task Push_ErrorResponse_ThrowsException()
+        {
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+
+            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+
+            await ExceptionAssert.ThrowsUnknownError(async () =>
+            {
+                await bot.Push("id", new TextMessage("Test"));
+            });
+        }
+
+        [TestMethod]
         public async Task Push_CorrectInput_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
