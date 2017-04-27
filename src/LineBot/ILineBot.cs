@@ -89,7 +89,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="to">The groups that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         Task Multicast(IEnumerable<IGroup> to, IEnumerable<ISendMessage> messages);
@@ -97,7 +97,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="to">The groups that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         Task Multicast(IEnumerable<IGroup> to, params ISendMessage[] messages);
@@ -105,7 +105,23 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="to">The rooms that should receive the messages.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Multicast(IEnumerable<IRoom> to, IEnumerable<ISendMessage> messages);
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">The rooms that should receive the messages.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        Task Multicast(IEnumerable<IRoom> to, params ISendMessage[] messages);
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         Task Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages);
@@ -113,7 +129,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">IDs of the receivers.</param>
+        /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         Task Multicast(IEnumerable<string> to, params ISendMessage[] messages);

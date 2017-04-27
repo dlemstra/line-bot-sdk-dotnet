@@ -206,5 +206,57 @@ namespace Line.Tests.Messages.Multicast
             Assert.AreEqual("/message/multicast", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
         }
+
+        [TestMethod]
+        public async Task Multicast_RoomIsNull_ThrowsException()
+        {
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
+            {
+                await bot.Multicast((IEnumerable<IRoom>)null, new TextMessage("Test"));
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_RoomIsNullWithEnumerable_ThrowsException()
+        {
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, null);
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
+            {
+                await bot.Multicast((IEnumerable<IRoom>)null, messages);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithRoom_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Multicast(new TestRoom[] { new TestRoom() }, new TestTextMessage());
+
+            string postedData = @"{""to"":[""testRoom""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/multicast", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithRoomAndEnumerable_CallsApi()
+        {
+            TestHttpClient httpClient = TestHttpClient.Create();
+
+            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+
+            ILineBot bot = new LineBot(Configuration.ForTest, httpClient);
+            await bot.Multicast(new TestRoom[] { new TestRoom() }, messages);
+
+            string postedData = @"{""to"":[""testRoom""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+
+            Assert.AreEqual("/message/multicast", httpClient.RequestPath);
+            Assert.AreEqual(postedData, httpClient.PostedData);
+        }
     }
 }
