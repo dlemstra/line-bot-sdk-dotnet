@@ -17,7 +17,7 @@ using System;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates an video message.
+    /// Encapsulates a video message.
     /// </summary>
     public interface IVideoMessage : ISendMessage
     {
@@ -28,7 +28,7 @@ namespace Line
         /// Protocol: HTTPS<para/>
         /// Format: MP4<para/>
         /// Max url length: 1000 characters<para/>
-        /// Max duration: 1024 x 1024<para/>
+        /// Max duration: less than 1 minute<para/>
         /// Max size: 10 MB
         /// </remarks>
         Uri Url { get; }

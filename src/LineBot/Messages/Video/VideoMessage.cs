@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates an video message.
+    /// Encapsulates a video message.
     /// </summary>
     public sealed class VideoMessage : IVideoMessage
     {
@@ -43,8 +43,8 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoMessage"/> class.
         /// </summary>
-        /// <param name="url">The video url.</param>
-        /// <param name="previewUrl">The preview video url.</param>
+        /// <param name="url">The url of the video file.</param>
+        /// <param name="previewUrl">The the preview image url.</param>
         public VideoMessage(string url, string previewUrl)
             : this(new Uri(url), new Uri(previewUrl))
         {
@@ -53,8 +53,8 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoMessage"/> class.
         /// </summary>
-        /// <param name="url">The video url.</param>
-        /// <param name="previewUrl">The preview video url.</param>
+        /// <param name="url">The url of the video file.</param>
+        /// <param name="previewUrl">The the preview image url.</param>
         public VideoMessage(Uri url, Uri previewUrl)
         {
             Url = url;
@@ -74,7 +74,7 @@ namespace Line
         /// Protocol: HTTPS<para/>
         /// Format: MP4<para/>
         /// Max url length: 1000 characters<para/>
-        /// Max duration: 1024 x 1024<para/>
+        /// Max duration: less than 1 minute<para/>
         /// Max size: 10 MB
         /// </remarks>
         [JsonProperty("originalContentUrl")]
@@ -98,7 +98,7 @@ namespace Line
         /// Protocol: HTTPS<para/>
         /// Format: JPEG<para/>
         /// Max url length: 1000 characters<para/>
-        /// Max dimensions: 1024 x 1024<para/>
+        /// Max dimensions: 240 x 240<para/>
         /// Max size: 1 MB
         /// </remarks>
         [JsonProperty("previewImageUrl")]

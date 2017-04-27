@@ -40,7 +40,7 @@ namespace Line
         /// Protocol: HTTPS<para/>
         /// Format: JPEG<para/>
         /// Max url length: 1000 characters<para/>
-        /// Max dimensions: 1024 x 1024<para/>
+        /// Max dimensions: 240 x 240<para/>
         /// Max size: 1 MB
         /// </remarks>
         Uri PreviewUrl { get; }
