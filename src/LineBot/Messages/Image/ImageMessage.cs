@@ -132,8 +132,8 @@ namespace Line
             if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
                 throw new InvalidOperationException("The url should use the https scheme.");
 
-            if (value.ToString().Length > 2000)
-                throw new InvalidOperationException("The url cannot be longer than 2000 characters.");
+            if (value.ToString().Length > 1000)
+                throw new InvalidOperationException("The url cannot be longer than 1000 characters.");
 
             return value;
         }

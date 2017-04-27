@@ -53,20 +53,20 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void Url_MoreThan2000Chars_ThrowsException()
+        public void Url_MoreThan1000Chars_ThrowsException()
         {
             ImageMessage message = new ImageMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be longer than 2000 characters.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be longer than 1000 characters.", () =>
             {
-                message.Url = new Uri("https://foo.bar/" + new string('x', 1985));
+                message.Url = new Uri("https://foo.bar/" + new string('x', 985));
             });
         }
 
         [TestMethod]
-        public void Url_2000Chars_ThrowsNoException()
+        public void Url_1000Chars_ThrowsNoException()
         {
-            Uri value = new Uri("https://foo.bar/" + new string('x', 1984));
+            Uri value = new Uri("https://foo.bar/" + new string('x', 984));
 
             ImageMessage message = new ImageMessage()
             {
@@ -99,20 +99,20 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void PreviewUrl_MoreThan2000Chars_ThrowsException()
+        public void PreviewUrl_MoreThan1000Chars_ThrowsException()
         {
             ImageMessage message = new ImageMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be longer than 2000 characters.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be longer than 1000 characters.", () =>
             {
-                message.PreviewUrl = new Uri("https://foo.bar/" + new string('x', 1985));
+                message.PreviewUrl = new Uri("https://foo.bar/" + new string('x', 985));
             });
         }
 
         [TestMethod]
-        public void PreviewUrl_2000Chars_ThrowsNoException()
+        public void PreviewUrl_1000Chars_ThrowsNoException()
         {
-            Uri value = new Uri("https://foo.bar/" + new string('x', 1984));
+            Uri value = new Uri("https://foo.bar/" + new string('x', 984));
 
             ImageMessage message = new ImageMessage()
             {
