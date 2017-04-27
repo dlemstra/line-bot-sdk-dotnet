@@ -12,6 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     /// <summary>
@@ -36,10 +38,10 @@ namespace Line
         public ILineBot CreateBot()
         {
             if (string.IsNullOrWhiteSpace(ChannelAccessToken))
-                throw new LineBotException("ChannelAccessToken cannot be null or whitespace.");
+                throw new InvalidOperationException("ChannelAccessToken cannot be null or whitespace.");
 
             if (string.IsNullOrWhiteSpace(ChannelSecret))
-                throw new LineBotException("ChannelSecret cannot be null or whitespace.");
+                throw new InvalidOperationException("ChannelSecret cannot be null or whitespace.");
 
             return new LineBot(this, HttpClientFactory.Create(this));
         }

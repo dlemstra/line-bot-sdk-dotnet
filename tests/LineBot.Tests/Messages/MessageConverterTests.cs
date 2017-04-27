@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests.Messages
 {
@@ -24,7 +23,7 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_TooManyMessagesAreNull_ThrowsException()
         {
-            ExceptionAssert.Throws<LineBotException>("The maximum number of messages is 5.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
             {
                 MessageConverter.Convert(new ISendMessage[6]);
             });

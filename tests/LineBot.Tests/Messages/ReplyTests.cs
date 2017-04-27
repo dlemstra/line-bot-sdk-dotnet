@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -100,7 +101,7 @@ namespace Line.Tests
         {
             ILineBot bot = TestConfiguration.CreateBot();
 
-            await ExceptionAssert.ThrowsAsync<LineBotException>("The maximum number of messages is 5.", async () =>
+            await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The maximum number of messages is 5.", async () =>
             {
                 await bot.Reply("id", new ISendMessage[6]);
             });

@@ -32,7 +32,7 @@ namespace Line.Tests
                 ChannelSecret = "ChannelSecret",
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelAccessToken cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelAccessToken cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });
@@ -47,7 +47,7 @@ namespace Line.Tests
                 ChannelSecret = "ChannelSecret",
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelAccessToken cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelAccessToken cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });
@@ -62,7 +62,7 @@ namespace Line.Tests
                 ChannelSecret = "ChannelSecret",
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelAccessToken cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelAccessToken cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });
@@ -77,7 +77,7 @@ namespace Line.Tests
                 ChannelSecret = null,
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelSecret cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelSecret cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });
@@ -92,7 +92,7 @@ namespace Line.Tests
                 ChannelSecret = string.Empty,
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelSecret cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelSecret cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });
@@ -107,7 +107,7 @@ namespace Line.Tests
                 ChannelSecret = "  ",
             };
 
-            ExceptionAssert.Throws<LineBotException>("ChannelSecret cannot be null or whitespace.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("ChannelSecret cannot be null or whitespace.", () =>
             {
                 configuration.CreateBot();
             });

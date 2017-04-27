@@ -28,7 +28,7 @@ namespace Line
         public static ISendMessage[] Convert(ISendMessage[] messages)
         {
             if (messages.Length > 5)
-                throw new LineBotException("The maximum number of messages is 5.");
+                throw new InvalidOperationException("The maximum number of messages is 5.");
 
             ISendMessage[] result = new ISendMessage[messages.Length];
 
