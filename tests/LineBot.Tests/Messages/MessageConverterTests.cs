@@ -14,6 +14,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Line.Tests.Messages
 {
@@ -30,7 +31,7 @@ namespace Line.Tests.Messages
         }
 
         [TestMethod]
-        public void Convert_TextMessages_InstanceIsPreserved()
+        public void Convert_TextMessage_InstanceIsPreserved()
         {
             TextMessage textMessage = new TextMessage();
 
@@ -41,7 +42,19 @@ namespace Line.Tests.Messages
         }
 
         [TestMethod]
-        public void Convert_CustomITextMessages_ConvertedToTextMessage()
+        public void Convert_TextMessage_SerializedCorrectly()
+        {
+            TextMessage textMessage = new TextMessage()
+            {
+                Text = "Correct"
+            };
+
+            string serialized = JsonConvert.SerializeObject(textMessage);
+            Assert.AreEqual(@"{""type"":""text"",""text"":""Correct""}", serialized);
+        }
+
+        [TestMethod]
+        public void Convert_CustomITextMessage_ConvertedToTextMessage()
         {
             TestTextMessage textMessage = new TestTextMessage();
 
