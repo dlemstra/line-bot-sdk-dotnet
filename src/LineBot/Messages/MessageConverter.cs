@@ -35,7 +35,7 @@ namespace Line
             for (int i = 0; i < messages.Length; i++)
             {
                 if (messages[i] == null)
-                    continue;
+                    throw new InvalidOperationException("The message should not be null.");
 
                 switch (messages[i])
                 {

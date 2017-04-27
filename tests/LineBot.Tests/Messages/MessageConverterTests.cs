@@ -30,6 +30,24 @@ namespace Line.Tests.Messages
         }
 
         [TestMethod]
+        public void Convert_NullValueInArray_ThrowsException()
+        {
+            ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
+            {
+                MessageConverter.Convert(new InvalidMessage[1] { null });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_InvalidType_ThrowsException()
+        {
+            ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
+            {
+                MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
+            });
+        }
+
+        [TestMethod]
         public void Convert_TextMessage_InstanceIsPreserved()
         {
             TextMessage textMessage = new TextMessage()
@@ -64,24 +82,6 @@ namespace Line.Tests.Messages
             Assert.AreEqual(1, messages.Length);
             Assert.AreNotEqual(textMessage, messages[0]);
             Assert.IsInstanceOfType(messages[0], typeof(TextMessage));
-        }
-
-        [TestMethod]
-        public void Convert_NullValueInArray_ReturnsArray()
-        {
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { null });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.IsNull(messages[0]);
-        }
-
-        [TestMethod]
-        public void Convert_InvalidType_ReturnsArray()
-        {
-            ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
-            {
-                MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
-            });
         }
 
         [ExcludeFromCodeCoverage]
