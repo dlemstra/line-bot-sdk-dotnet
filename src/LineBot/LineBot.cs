@@ -170,7 +170,7 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            foreach (IEnumerable<string> toSet in to.Split(200))
+            foreach (IEnumerable<string> toSet in to.Split(150))
             {
                 foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
                 {
