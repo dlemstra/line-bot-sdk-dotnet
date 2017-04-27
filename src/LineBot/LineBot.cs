@@ -232,6 +232,30 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
+        /// <param name="to">The users that should receive the messages.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
+        {
+            await Multicast(to, messages?.ToArray());
+        }
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
+        /// <param name="to">The users that should receive the messages.</param>
+        /// <param name="messages">The messages to send.</param>
+        /// <returns>.</returns>
+        public async Task Multicast(IEnumerable<IUser> to, params ISendMessage[] messages)
+        {
+            Guard.NotNull(nameof(to), to);
+
+            await Multicast(to.Select(g => g.Id), messages);
+        }
+
+        /// <summary>
+        /// Send messages to multiple users at any time.
+        /// </summary>
         /// <param name="to">IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
