@@ -22,6 +22,7 @@ namespace Line
         /// <summary>
         /// Gets the text of the message.
         /// </summary>
+        /// <remarks>Max: 2000 characters</remarks>
         string Text { get; }
     }
 }
