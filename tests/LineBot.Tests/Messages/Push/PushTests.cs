@@ -137,6 +137,16 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
+        public async Task Push_WithGroupAndEnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestGroup(), (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Push_WithGroup_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
@@ -187,6 +197,16 @@ namespace Line.Tests.Messages.Push
         }
 
         [TestMethod]
+        public async Task Push_WithRoomAndEnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestRoom(), (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Push_WithRoom_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
@@ -233,6 +253,16 @@ namespace Line.Tests.Messages.Push
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Push(new TestUser(), null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Push_WithUserAndEnumerableMessagesIsNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Push(new TestUser(), (IEnumerable<ISendMessage>)null);
             });
         }
 

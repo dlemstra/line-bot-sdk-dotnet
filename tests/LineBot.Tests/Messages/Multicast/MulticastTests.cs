@@ -191,6 +191,26 @@ namespace Line.Tests.Messages.Multicast
         }
 
         [TestMethod]
+        public async Task Multicast_WithGroupAndMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestGroup[] { new TestGroup() }, null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithGroupAndEnumerableMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestGroup[] { new TestGroup() }, (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Multicast_WithGroup_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
@@ -243,6 +263,26 @@ namespace Line.Tests.Messages.Multicast
         }
 
         [TestMethod]
+        public async Task Multicast_WithRoomAndMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestRoom[] { new TestRoom() }, null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithRoomAndEnumerableMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestRoom[] { new TestRoom() }, (IEnumerable<ISendMessage>)null);
+            });
+        }
+
+        [TestMethod]
         public async Task Multicast_WithRoom_CallsApi()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
@@ -291,6 +331,26 @@ namespace Line.Tests.Messages.Multicast
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
             {
                 await bot.Multicast((IEnumerable<IUser>)null, messages);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithUserAndMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestRoom[] { new TestRoom() }, null);
+            });
+        }
+
+        [TestMethod]
+        public async Task Multicast_WithUserAndEnumerableMessagesAreNull_ThrowsException()
+        {
+            ILineBot bot = TestConfiguration.CreateBot();
+            await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
+            {
+                await bot.Multicast(new TestUser[] { new TestUser() }, (IEnumerable<ISendMessage>)null);
             });
         }
 
