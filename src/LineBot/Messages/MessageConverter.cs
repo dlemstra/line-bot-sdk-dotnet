@@ -48,6 +48,9 @@ namespace Line
                     case IVideoMessage videoMessage:
                         result[i] = ToVideoMessage(videoMessage);
                         break;
+                    case IAudioMessage audioMessage:
+                        result[i] = ToAudioMessage(audioMessage);
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
@@ -90,6 +93,18 @@ namespace Line
                 videoMessage.CheckRequiredFields();
 
             return videoMessage;
+        }
+
+        private static ISendMessage ToAudioMessage(IAudioMessage message)
+        {
+            AudioMessage audioMessage = message as AudioMessage;
+
+            if (audioMessage == null)
+                audioMessage = new AudioMessage(message);
+            else
+                audioMessage.CheckRequiredFields();
+
+            return audioMessage;
         }
     }
 }

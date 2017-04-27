@@ -188,18 +188,76 @@ namespace Line.Tests.Messages
         }
 
         [TestMethod]
-        public void Convert_CustomIVideoMessage_ConvertedTovideoMessage()
+        public void Convert_CustomIVideoMessage_ConvertedToVideoMessage()
         {
-            TestVideoMessage customvideoMessage = new TestVideoMessage();
+            TestVideoMessage customVideoMessage = new TestVideoMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customvideoMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customVideoMessage });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customvideoMessage, messages[0]);
+            Assert.AreNotEqual(customVideoMessage, messages[0]);
 
             VideoMessage videoMessage = messages[0] as VideoMessage;
             Assert.AreEqual(new Uri("https://foo.url"), videoMessage.Url);
             Assert.AreEqual(new Uri("https://foo.previewUrl"), videoMessage.PreviewUrl);
+        }
+
+        [TestMethod]
+        public void Convert_AudioMessage_InstanceIsPreserved()
+        {
+            AudioMessage audioMessage = new AudioMessage()
+            {
+                Url = new Uri("https://foo.url"),
+                Duration = 10000
+            };
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { audioMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreEqual(audioMessage, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_AudioMessageWithoutUrl_ThrowsException()
+        {
+            AudioMessage audioMessage = new AudioMessage()
+            {
+                Duration = 10000
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { audioMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_VideoMessageWithoutDuration_ThrowsException()
+        {
+            AudioMessage audioMessage = new AudioMessage()
+            {
+                Url = new Uri("https://foo.url")
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The duration should be at least 1 millisecond.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { audioMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_CustomIAudioMessage_ConvertedToAudioMessage()
+        {
+            TestAudioMessage customAudioMessage = new TestAudioMessage();
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customAudioMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreNotEqual(customAudioMessage, messages[0]);
+
+            AudioMessage audioMessage = messages[0] as AudioMessage;
+            Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
+            Assert.AreEqual(1000, audioMessage.Duration);
         }
 
         [ExcludeFromCodeCoverage]
@@ -222,6 +280,14 @@ namespace Line.Tests.Messages
             public Uri Url => new Uri("https://foo.url");
 
             public Uri PreviewUrl => new Uri("https://foo.previewUrl");
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestAudioMessage : IAudioMessage
+        {
+            public Uri Url => new Uri("https://foo.url");
+
+            public int Duration => 1000;
         }
 
         [ExcludeFromCodeCoverage]
