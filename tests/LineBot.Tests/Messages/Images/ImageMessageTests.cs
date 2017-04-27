@@ -15,7 +15,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace Line.Tests
 {
@@ -25,11 +24,7 @@ namespace Line.Tests
         [TestMethod]
         public void Constructor_SerializedCorrectly()
         {
-            ImageMessage message = new ImageMessage()
-            {
-                PreviewUrl = new Uri("https://foo.previewUrl"),
-                Url = new Uri("https://foo.url")
-            };
+            ImageMessage message = new ImageMessage("https://foo.url", "https://foo.previewUrl");
 
             string serialized = JsonConvert.SerializeObject(message);
             Assert.AreEqual(@"{""type"":""image"",""originalContentUrl"":""https://foo.url"",""previewImageUrl"":""https://foo.previewUrl""}", serialized);

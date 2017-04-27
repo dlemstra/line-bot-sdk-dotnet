@@ -44,11 +44,21 @@ namespace Line
         /// Initializes a new instance of the <see cref="ImageMessage"/> class.
         /// </summary>
         /// <param name="url">The image url.</param>
-        /// <param name="previewurl">The preview image url.</param>
-        public ImageMessage(Uri url, Uri previewurl)
+        /// <param name="previewUrl">The preview image url.</param>
+        public ImageMessage(string url, string previewUrl)
+            : this(new Uri(url), new Uri(previewUrl))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ImageMessage"/> class.
+        /// </summary>
+        /// <param name="url">The image url.</param>
+        /// <param name="previewUrl">The preview image url.</param>
+        public ImageMessage(Uri url, Uri previewUrl)
         {
             Url = url;
-            PreviewUrl = previewurl;
+            PreviewUrl = previewUrl;
         }
 
         internal ImageMessage(IImageMessage other)
