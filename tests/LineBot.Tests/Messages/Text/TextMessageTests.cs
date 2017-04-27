@@ -69,10 +69,14 @@ namespace Line.Tests
         [TestMethod]
         public void Text_2000Chars_ThrowsNoException()
         {
+            string value = new string('x', 2000);
+
             TextMessage textMessage = new TextMessage()
             {
-                Text = new string('x', 2000)
+                Text = value
             };
+
+            Assert.AreEqual(value, textMessage.Text);
         }
     }
 }
