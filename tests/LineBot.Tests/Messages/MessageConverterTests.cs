@@ -260,6 +260,66 @@ namespace Line.Tests.Messages
             Assert.AreEqual(1000, audioMessage.Duration);
         }
 
+        [TestMethod]
+        public void Convert_LocationMessage_InstanceIsPreserved()
+        {
+            LocationMessage locationmessage = new LocationMessage()
+            {
+                Title = "Title",
+                Address = "Address"
+            };
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { locationmessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreEqual(locationmessage, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_TextMessageWithoutTitle_ThrowsException()
+        {
+            LocationMessage locationmessage = new LocationMessage()
+            {
+                Address = "Address"
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { locationmessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_TextMessageWithoutAddress_ThrowsException()
+        {
+            LocationMessage locationmessage = new LocationMessage()
+            {
+                Title = "Title",
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { locationmessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_CustomILocationMessage_ConvertedToTextMessage()
+        {
+            TestLocationMessage customTextMessage = new TestLocationMessage();
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreNotEqual(customTextMessage, messages[0]);
+
+            LocationMessage textMessage = messages[0] as LocationMessage;
+            Assert.AreEqual("Title", textMessage.Title);
+            Assert.AreEqual("Address", textMessage.Address);
+            Assert.AreEqual(53.2014355m, textMessage.Latitude);
+            Assert.AreEqual(5.7988737m, textMessage.Longitude);
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
@@ -288,6 +348,18 @@ namespace Line.Tests.Messages
             public Uri Url => new Uri("https://foo.url");
 
             public int Duration => 1000;
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestLocationMessage : ILocationMessage
+        {
+            public string Title => "Title";
+
+            public string Address => "Address";
+
+            public decimal Latitude => 53.2014355m;
+
+            public decimal Longitude => 5.7988737m;
         }
 
         [ExcludeFromCodeCoverage]

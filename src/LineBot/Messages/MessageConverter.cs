@@ -51,6 +51,9 @@ namespace Line
                     case IAudioMessage audioMessage:
                         result[i] = ToAudioMessage(audioMessage);
                         break;
+                    case ILocationMessage locationMessage:
+                        result[i] = ToLocationMessage(locationMessage);
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
@@ -105,6 +108,18 @@ namespace Line
                 audioMessage.CheckRequiredFields();
 
             return audioMessage;
+        }
+
+        private static ISendMessage ToLocationMessage(ILocationMessage message)
+        {
+            LocationMessage locationMessage = message as LocationMessage;
+
+            if (locationMessage == null)
+                locationMessage = new LocationMessage(message);
+            else
+                locationMessage.CheckRequiredFields();
+
+            return locationMessage;
         }
     }
 }
