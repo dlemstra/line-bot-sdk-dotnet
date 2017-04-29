@@ -25,6 +25,122 @@ namespace Line.Tests
     public class LineBotTests
     {
         [TestMethod]
+        public void Constructor_ConfigurationIsNull_ThrowsException()
+        {
+            ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
+            {
+                new LineBot(null);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelAccessTokenIsNull_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = null,
+                ChannelSecret = "ChannelSecret",
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelAccessToken cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelAccessTokenIsEmpty_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = string.Empty,
+                ChannelSecret = "ChannelSecret",
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelAccessToken cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelAccessTokenIsWhitespace_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = "  ",
+                ChannelSecret = "ChannelSecret",
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelAccessToken cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelSecretTokenIsNull_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = "ChannelAccessToken",
+                ChannelSecret = null,
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelSecret cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelSecretTokenIsEmpty_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = "ChannelAccessToken",
+                ChannelSecret = string.Empty,
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelSecret cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_ChannelSecretTokenIsWhitespace_ThrowsException()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = "ChannelAccessToken",
+                ChannelSecret = "  ",
+            };
+
+            ExceptionAssert.ThrowsArgumentException("configuration", "The ChannelSecret cannot be null or whitespace.", () =>
+            {
+                new LineBot(configuration);
+            });
+        }
+
+        [TestMethod]
+        public void Constructor_HttpFactoryIsUsed_BaseAddressUsesApi()
+        {
+            LineConfiguration configuration = new LineConfiguration()
+            {
+                ChannelAccessToken = "ChannelAccessToken",
+                ChannelSecret = "ChannelSecret",
+            };
+
+            ILineBot bot = new LineBot(configuration);
+
+            FieldInfo field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
+            HttpClient client = (HttpClient)field.GetValue(bot);
+
+            Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
+        }
+
+        [TestMethod]
         public async Task GetContent_MessageIsNull_ThrowsException()
         {
             ILineBot bot = TestConfiguration.CreateBot();

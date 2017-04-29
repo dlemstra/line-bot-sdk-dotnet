@@ -30,20 +30,5 @@ namespace Line
         /// Gets or sets the channel secret.
         /// </summary>
         public string ChannelSecret { get; set; }
-
-        /// <summary>
-        /// Creates a line bot.
-        /// </summary>
-        /// <returns>A line bot</returns>
-        public ILineBot CreateBot()
-        {
-            if (string.IsNullOrWhiteSpace(ChannelAccessToken))
-                throw new InvalidOperationException("ChannelAccessToken cannot be null or whitespace.");
-
-            if (string.IsNullOrWhiteSpace(ChannelSecret))
-                throw new InvalidOperationException("ChannelSecret cannot be null or whitespace.");
-
-            return new LineBot(this, HttpClientFactory.Create(this));
-        }
     }
 }

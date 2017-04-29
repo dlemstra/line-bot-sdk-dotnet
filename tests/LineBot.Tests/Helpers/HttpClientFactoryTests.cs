@@ -23,54 +23,6 @@ namespace Line.Tests
     public class HttpClientFactoryTests
     {
         [TestMethod]
-        public void Create_ConfigurationIsNull_ThrowsException()
-        {
-            ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
-            {
-                HttpClientFactory.Create(null);
-            });
-        }
-
-        [TestMethod]
-        public void Create_ChannelAccessTokenIsNull_ThrowsException()
-        {
-            LineConfiguration configuration = new LineConfiguration();
-
-            ExceptionAssert.Throws<InvalidOperationException>("The ChannelAccessToken should not be null or whitespace.", () =>
-            {
-                HttpClientFactory.Create(configuration);
-            });
-        }
-
-        [TestMethod]
-        public void Create_ChannelAccessTokenIsEmpty_ThrowsException()
-        {
-            LineConfiguration configuration = new LineConfiguration()
-            {
-                ChannelAccessToken = string.Empty
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The ChannelAccessToken should not be null or whitespace.", () =>
-            {
-                HttpClientFactory.Create(configuration);
-            });
-        }
-
-        [TestMethod]
-        public void Create_ChannelAccessTokenIsWhitespace_ThrowsException()
-        {
-            LineConfiguration configuration = new LineConfiguration()
-            {
-                ChannelAccessToken = " "
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The ChannelAccessToken should not be null or whitespace.", () =>
-            {
-                HttpClientFactory.Create(configuration);
-            });
-        }
-
-        [TestMethod]
         public void Create_SameChannelAccessToken_ReturnsSameInstance()
         {
             LineConfiguration configuration = new LineConfiguration()

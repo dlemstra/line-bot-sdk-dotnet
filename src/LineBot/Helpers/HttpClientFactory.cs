@@ -24,11 +24,6 @@ namespace Line
 
         public static HttpClient Create(ILineConfiguration configuration)
         {
-            Guard.NotNull(nameof(configuration), configuration);
-
-            if (string.IsNullOrWhiteSpace(configuration.ChannelAccessToken))
-                throw new InvalidOperationException($"The {nameof(configuration.ChannelAccessToken)} should not be null or whitespace.");
-
             return Clients.GetOrAdd(configuration.ChannelAccessToken, CreateHttpClient);
         }
 
