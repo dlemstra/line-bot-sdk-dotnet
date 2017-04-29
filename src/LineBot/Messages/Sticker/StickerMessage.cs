@@ -51,12 +51,6 @@ namespace Line
             StickerId = stickerId;
         }
 
-        internal StickerMessage(IStickerMessage other)
-        {
-            PackageId = other.PackageId;
-            StickerId = other.StickerId;
-        }
-
         /// <summary>
         /// Gets or sets the id of the package.
         /// </summary>

@@ -61,12 +61,6 @@ namespace Line
             PreviewUrl = previewUrl;
         }
 
-        internal VideoMessage(IVideoMessage other)
-        {
-            Url = other.Url;
-            PreviewUrl = other.PreviewUrl;
-        }
-
         /// <summary>
         /// Gets or sets the url of the video file.
         /// </summary>

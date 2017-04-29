@@ -61,12 +61,6 @@ namespace Line
             Duration = duration;
         }
 
-        internal AudioMessage(IAudioMessage other)
-        {
-            Url = other.Url;
-            Duration = other.Duration;
-        }
-
         /// <summary>
         /// Gets or sets the url of the audio file.
         /// </summary>

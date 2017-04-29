@@ -35,6 +35,11 @@ namespace Line
         Image,
 
         /// <summary>
+        /// Imagemap message.
+        /// </summary>
+        Imagemap,
+
+        /// <summary>
         /// Location message.
         /// </summary>
         Location,

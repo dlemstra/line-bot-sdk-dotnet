@@ -70,7 +70,7 @@ namespace Line
             ImageMessage imageMessage = message as ImageMessage;
 
             if (imageMessage == null)
-                imageMessage = new ImageMessage(message);
+                imageMessage = message.ToImageMessage();
             else
                 imageMessage.CheckRequiredFields();
 
@@ -82,7 +82,7 @@ namespace Line
             TextMessage textMessage = message as TextMessage;
 
             if (textMessage == null)
-                textMessage = new TextMessage(message);
+                textMessage = message.ToTextMessage();
             else
                 textMessage.CheckRequiredFields();
 
@@ -94,7 +94,7 @@ namespace Line
             VideoMessage videoMessage = message as VideoMessage;
 
             if (videoMessage == null)
-                videoMessage = new VideoMessage(message);
+                videoMessage = message.ToVideoMessage();
             else
                 videoMessage.CheckRequiredFields();
 
@@ -106,7 +106,7 @@ namespace Line
             AudioMessage audioMessage = message as AudioMessage;
 
             if (audioMessage == null)
-                audioMessage = new AudioMessage(message);
+                audioMessage = message.ToAudioMessage();
             else
                 audioMessage.CheckRequiredFields();
 
@@ -118,7 +118,7 @@ namespace Line
             LocationMessage locationMessage = message as LocationMessage;
 
             if (locationMessage == null)
-                locationMessage = new LocationMessage(message);
+                locationMessage = message.ToLocationMessage();
             else
                 locationMessage.CheckRequiredFields();
 
@@ -130,7 +130,7 @@ namespace Line
             StickerMessage stickerMessage = message as StickerMessage;
 
             if (stickerMessage == null)
-                stickerMessage = new StickerMessage(message);
+                stickerMessage = message.ToStickerMessage();
             else
                 stickerMessage.CheckRequiredFields();
 

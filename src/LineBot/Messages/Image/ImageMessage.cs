@@ -61,12 +61,6 @@ namespace Line
             PreviewUrl = previewUrl;
         }
 
-        internal ImageMessage(IImageMessage other)
-        {
-            Url = other.Url;
-            PreviewUrl = other.PreviewUrl;
-        }
-
         /// <summary>
         /// Gets or sets the image url.
         /// </summary>

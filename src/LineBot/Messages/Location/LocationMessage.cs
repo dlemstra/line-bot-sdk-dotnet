@@ -40,14 +40,6 @@ namespace Line
         {
         }
 
-        internal LocationMessage(ILocationMessage other)
-        {
-            Title = other.Title;
-            Address = other.Address;
-            Latitude = other.Latitude;
-            Longitude = other.Longitude;
-        }
-
         /// <summary>
         /// Gets or sets the title.
         /// </summary>

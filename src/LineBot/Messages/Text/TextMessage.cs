@@ -48,11 +48,6 @@ namespace Line
             Text = text;
         }
 
-        internal TextMessage(ITextMessage other)
-        {
-            Text = other.Text;
-        }
-
         /// <summary>
         /// Gets or sets the text of the message.
         /// </summary>
