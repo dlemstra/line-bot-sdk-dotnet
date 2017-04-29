@@ -56,8 +56,8 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length == 0)
-                    throw new InvalidOperationException("The title cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The title cannot be null or whitespace.");
 
                 if (value.Length > 100)
                     throw new InvalidOperationException("The title cannot be longer than 100 characters.");
@@ -82,8 +82,8 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length == 0)
-                    throw new InvalidOperationException("The address cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The address cannot be null or whitespace.");
 
                 if (value.Length > 100)
                     throw new InvalidOperationException("The address cannot be longer than 100 characters.");

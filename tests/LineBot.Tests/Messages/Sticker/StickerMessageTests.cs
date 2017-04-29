@@ -35,7 +35,7 @@ namespace Line.Tests
         {
             StickerMessage message = new StickerMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null or whitespace.", () =>
             {
                 message.PackageId = null;
             });
@@ -46,7 +46,7 @@ namespace Line.Tests
         {
             StickerMessage message = new StickerMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null or whitespace.", () =>
             {
                 message.PackageId = string.Empty;
             });
@@ -57,7 +57,7 @@ namespace Line.Tests
         {
             StickerMessage message = new StickerMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null or whitespace.", () =>
             {
                 message.StickerId = null;
             });
@@ -68,7 +68,7 @@ namespace Line.Tests
         {
             StickerMessage message = new StickerMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null or whitespace.", () =>
             {
                 message.StickerId = string.Empty;
             });

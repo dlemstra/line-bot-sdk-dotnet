@@ -38,7 +38,7 @@ namespace Line.Tests
         {
             TextMessage message = new TextMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or whitespace.", () =>
             {
                 message.Text = null;
             });
@@ -49,7 +49,7 @@ namespace Line.Tests
         {
             TextMessage message = new TextMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null or whitespace.", () =>
             {
                 message.Text = string.Empty;
             });

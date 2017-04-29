@@ -41,7 +41,7 @@ namespace Line.Tests
         {
             LocationMessage message = new LocationMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null or whitespace.", () =>
             {
                 message.Title = null;
             });
@@ -52,7 +52,7 @@ namespace Line.Tests
         {
             LocationMessage message = new LocationMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null or whitespace.", () =>
             {
                 message.Title = string.Empty;
             });
@@ -87,7 +87,7 @@ namespace Line.Tests
         {
             LocationMessage message = new LocationMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null or whitespace.", () =>
             {
                 message.Address = null;
             });
@@ -98,7 +98,7 @@ namespace Line.Tests
         {
             LocationMessage message = new LocationMessage();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null or empty.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null or whitespace.", () =>
             {
                 message.Address = string.Empty;
             });

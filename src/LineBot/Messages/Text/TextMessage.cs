@@ -62,8 +62,8 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length == 0)
-                    throw new InvalidOperationException("The text cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 2000)
                     throw new InvalidOperationException("The text cannot be longer than 2000 characters.");

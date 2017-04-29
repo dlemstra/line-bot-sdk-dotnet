@@ -64,8 +64,8 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length == 0)
-                    throw new InvalidOperationException("The package id cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The package id cannot be null or whitespace.");
 
                 _packageId = value;
             }
@@ -84,8 +84,8 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length == 0)
-                    throw new InvalidOperationException("The sticker id cannot be null or empty.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The sticker id cannot be null or whitespace.");
 
                 _stickerId = value;
             }
