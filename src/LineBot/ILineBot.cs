@@ -89,38 +89,6 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">The groups that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        Task<ILineBot> Multicast(IEnumerable<IGroup> to, IEnumerable<ISendMessage> messages);
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The groups that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        Task<ILineBot> Multicast(IEnumerable<IGroup> to, params ISendMessage[] messages);
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The rooms that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        Task<ILineBot> Multicast(IEnumerable<IRoom> to, IEnumerable<ISendMessage> messages);
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The rooms that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        Task<ILineBot> Multicast(IEnumerable<IRoom> to, params ISendMessage[] messages);
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -137,6 +105,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
+        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -145,6 +114,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
+        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>

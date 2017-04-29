@@ -201,62 +201,6 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
-        /// <param name="to">The groups that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IGroup> to, IEnumerable<ISendMessage> messages)
-        {
-            await Multicast(to, messages?.ToArray());
-
-            return this;
-        }
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The groups that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IGroup> to, params ISendMessage[] messages)
-        {
-            Guard.NotNull(nameof(to), to);
-
-            await Multicast(to.Select(g => g.Id), messages);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The rooms that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IRoom> to, IEnumerable<ISendMessage> messages)
-        {
-            await Multicast(to, messages?.ToArray());
-
-            return this;
-        }
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
-        /// <param name="to">The rooms that should receive the messages.</param>
-        /// <param name="messages">The messages to send.</param>
-        /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IRoom> to, params ISendMessage[] messages)
-        {
-            Guard.NotNull(nameof(to), to);
-
-            await Multicast(to.Select(g => g.Id), messages);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Send messages to multiple users at any time.
-        /// </summary>
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -285,6 +229,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
+        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -298,6 +243,7 @@ namespace Line
         /// <summary>
         /// Send messages to multiple users at any time.
         /// </summary>
+        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
