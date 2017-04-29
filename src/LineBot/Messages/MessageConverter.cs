@@ -54,6 +54,9 @@ namespace Line
                     case ILocationMessage locationMessage:
                         result[i] = ToLocationMessage(locationMessage);
                         break;
+                    case IStickerMessage stickerMessage:
+                        result[i] = ToStickerMessage(stickerMessage);
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
@@ -120,6 +123,18 @@ namespace Line
                 locationMessage.CheckRequiredFields();
 
             return locationMessage;
+        }
+
+        private static ISendMessage ToStickerMessage(IStickerMessage message)
+        {
+            StickerMessage stickerMessage = message as StickerMessage;
+
+            if (stickerMessage == null)
+                stickerMessage = new StickerMessage(message);
+            else
+                stickerMessage.CheckRequiredFields();
+
+            return stickerMessage;
         }
     }
 }

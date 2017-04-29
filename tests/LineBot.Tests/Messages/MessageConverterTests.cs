@@ -320,6 +320,64 @@ namespace Line.Tests.Messages
             Assert.AreEqual(5.7988737m, textMessage.Longitude);
         }
 
+        [TestMethod]
+        public void Convert_StickerMessage_InstanceIsPreserved()
+        {
+            StickerMessage stickerMessage = new StickerMessage()
+            {
+                PackageId = "PackageId",
+                StickerId = "StickerId"
+            };
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreEqual(stickerMessage, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_StickerMessageWithoutPackageId_ThrowsException()
+        {
+            StickerMessage stickerMessage = new StickerMessage()
+            {
+                StickerId = "StickerId"
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_StickerMessageWithoutStickerId_ThrowsException()
+        {
+            StickerMessage stickerMessage = new StickerMessage()
+            {
+                PackageId = "PackageId"
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_CustomIStickerMessage_ConvertedToTextMessage()
+        {
+            TestStickerMessage customTextMessage = new TestStickerMessage();
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreNotEqual(customTextMessage, messages[0]);
+
+            StickerMessage textMessage = messages[0] as StickerMessage;
+            Assert.AreEqual("PackageId", textMessage.PackageId);
+            Assert.AreEqual("StickerId", textMessage.StickerId);
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
@@ -360,6 +418,14 @@ namespace Line.Tests.Messages
             public decimal Latitude => 53.2014355m;
 
             public decimal Longitude => 5.7988737m;
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestStickerMessage : IStickerMessage
+        {
+            public string PackageId => nameof(PackageId);
+
+            public string StickerId => nameof(StickerId);
         }
 
         [ExcludeFromCodeCoverage]
