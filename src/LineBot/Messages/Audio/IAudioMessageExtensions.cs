@@ -12,12 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class IAudioMessageExtensions
     {
         public static AudioMessage ToAudioMessage(this IAudioMessage self)
         {
+            if (self.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (self.Duration == 0)
+                throw new InvalidOperationException("The duration should be at least 1 millisecond.");
+
+            if (self is AudioMessage audioMessage)
+                return audioMessage;
+
             return new AudioMessage()
             {
                 Url = self.Url,

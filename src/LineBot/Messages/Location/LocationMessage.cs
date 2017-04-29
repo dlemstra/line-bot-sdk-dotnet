@@ -103,14 +103,5 @@ namespace Line
         /// </summary>
         [JsonProperty("longitude")]
         public decimal Longitude { get; set; }
-
-        internal void CheckRequiredFields()
-        {
-            if (Title == null)
-                throw new InvalidOperationException("The title cannot be null.");
-
-            if (Address == null)
-                throw new InvalidOperationException("The address cannot be null.");
-        }
     }
 }

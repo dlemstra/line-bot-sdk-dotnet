@@ -116,14 +116,5 @@ namespace Line
                 _duration = value;
             }
         }
-
-        internal void CheckRequiredFields()
-        {
-            if (Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
-
-            if (Duration == 0)
-                throw new InvalidOperationException("The duration should be at least 1 millisecond.");
-        }
     }
 }

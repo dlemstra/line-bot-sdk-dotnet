@@ -12,12 +12,20 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class ITextMessageExtensions
     {
         public static TextMessage ToTextMessage(this ITextMessage self)
         {
+            if (self.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (self is TextMessage textMessage)
+                return textMessage;
+
             return new TextMessage()
             {
                 Text = self.Text

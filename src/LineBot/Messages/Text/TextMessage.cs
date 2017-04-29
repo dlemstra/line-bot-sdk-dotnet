@@ -71,11 +71,5 @@ namespace Line
                 _text = value;
             }
         }
-
-        internal void CheckRequiredFields()
-        {
-            if (Text == null)
-                throw new InvalidOperationException("The text cannot be null.");
-        }
     }
 }

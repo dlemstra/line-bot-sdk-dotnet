@@ -12,12 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class IStickerMessageExtensions
     {
         public static StickerMessage ToStickerMessage(this IStickerMessage self)
         {
+            if (self.PackageId == null)
+                throw new InvalidOperationException("The package id cannot be null.");
+
+            if (self.StickerId == null)
+                throw new InvalidOperationException("The sticker id cannot be null.");
+
+            if (self is StickerMessage stickerMessage)
+                return stickerMessage;
+
             return new StickerMessage()
             {
                 PackageId = self.PackageId,

@@ -12,12 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class IImageMessageExtensions
     {
         public static ImageMessage ToImageMessage(this IImageMessage self)
         {
+            if (self.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (self.PreviewUrl == null)
+                throw new InvalidOperationException("The preview url cannot be null.");
+
+            if (self is ImageMessage imageMessage)
+                return imageMessage;
+
             return new ImageMessage()
             {
                 Url = self.Url,

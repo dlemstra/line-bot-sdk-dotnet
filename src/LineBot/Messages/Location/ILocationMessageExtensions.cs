@@ -12,12 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class ILocationMessageExtensions
     {
         public static LocationMessage ToLocationMessage(this ILocationMessage self)
         {
+            if (self.Title == null)
+                throw new InvalidOperationException("The title cannot be null.");
+
+            if (self.Address == null)
+                throw new InvalidOperationException("The address cannot be null.");
+
+            if (self is LocationMessage locationMessage)
+                return locationMessage;
+
             return new LocationMessage()
             {
                 Title = self.Title,

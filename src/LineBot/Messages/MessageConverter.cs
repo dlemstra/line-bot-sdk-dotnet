@@ -40,22 +40,22 @@ namespace Line
                 switch (messages[i])
                 {
                     case ITextMessage textMessage:
-                        result[i] = ToTextMessage(textMessage);
+                        result[i] = textMessage.ToTextMessage();
                         break;
                     case IImageMessage imageMessage:
-                        result[i] = ToImageMessage(imageMessage);
+                        result[i] = imageMessage.ToImageMessage();
                         break;
                     case IVideoMessage videoMessage:
-                        result[i] = ToVideoMessage(videoMessage);
+                        result[i] = videoMessage.ToVideoMessage();
                         break;
                     case IAudioMessage audioMessage:
-                        result[i] = ToAudioMessage(audioMessage);
+                        result[i] = audioMessage.ToAudioMessage();
                         break;
                     case ILocationMessage locationMessage:
-                        result[i] = ToLocationMessage(locationMessage);
+                        result[i] = locationMessage.ToLocationMessage();
                         break;
                     case IStickerMessage stickerMessage:
-                        result[i] = ToStickerMessage(stickerMessage);
+                        result[i] = stickerMessage.ToStickerMessage();
                         break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
@@ -63,78 +63,6 @@ namespace Line
             }
 
             return result;
-        }
-
-        private static ISendMessage ToImageMessage(IImageMessage message)
-        {
-            ImageMessage imageMessage = message as ImageMessage;
-
-            if (imageMessage == null)
-                imageMessage = message.ToImageMessage();
-            else
-                imageMessage.CheckRequiredFields();
-
-            return imageMessage;
-        }
-
-        private static ISendMessage ToTextMessage(ITextMessage message)
-        {
-            TextMessage textMessage = message as TextMessage;
-
-            if (textMessage == null)
-                textMessage = message.ToTextMessage();
-            else
-                textMessage.CheckRequiredFields();
-
-            return textMessage;
-        }
-
-        private static ISendMessage ToVideoMessage(IVideoMessage message)
-        {
-            VideoMessage videoMessage = message as VideoMessage;
-
-            if (videoMessage == null)
-                videoMessage = message.ToVideoMessage();
-            else
-                videoMessage.CheckRequiredFields();
-
-            return videoMessage;
-        }
-
-        private static ISendMessage ToAudioMessage(IAudioMessage message)
-        {
-            AudioMessage audioMessage = message as AudioMessage;
-
-            if (audioMessage == null)
-                audioMessage = message.ToAudioMessage();
-            else
-                audioMessage.CheckRequiredFields();
-
-            return audioMessage;
-        }
-
-        private static ISendMessage ToLocationMessage(ILocationMessage message)
-        {
-            LocationMessage locationMessage = message as LocationMessage;
-
-            if (locationMessage == null)
-                locationMessage = message.ToLocationMessage();
-            else
-                locationMessage.CheckRequiredFields();
-
-            return locationMessage;
-        }
-
-        private static ISendMessage ToStickerMessage(IStickerMessage message)
-        {
-            StickerMessage stickerMessage = message as StickerMessage;
-
-            if (stickerMessage == null)
-                stickerMessage = message.ToStickerMessage();
-            else
-                stickerMessage.CheckRequiredFields();
-
-            return stickerMessage;
         }
     }
 }

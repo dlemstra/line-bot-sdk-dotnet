@@ -109,15 +109,6 @@ namespace Line
             }
         }
 
-        internal void CheckRequiredFields()
-        {
-            if (Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
-
-            if (PreviewUrl == null)
-                throw new InvalidOperationException("The preview url cannot be null.");
-        }
-
         private Uri CheckUrl(Uri value)
         {
             if (value == null)

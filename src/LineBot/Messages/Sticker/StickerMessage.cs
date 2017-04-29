@@ -90,14 +90,5 @@ namespace Line
                 _stickerId = value;
             }
         }
-
-        internal void CheckRequiredFields()
-        {
-            if (PackageId == null)
-                throw new InvalidOperationException("The package id cannot be null.");
-
-            if (StickerId == null)
-                throw new InvalidOperationException("The sticker id cannot be null.");
-        }
     }
 }

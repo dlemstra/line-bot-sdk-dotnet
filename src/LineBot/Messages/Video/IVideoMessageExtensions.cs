@@ -12,12 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     internal static class IVideoMessageExtensions
     {
         public static VideoMessage ToVideoMessage(this IVideoMessage self)
         {
+            if (self.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (self.PreviewUrl == null)
+                throw new InvalidOperationException("The preview url cannot be null.");
+
+            if (self is VideoMessage videoMessage)
+                return videoMessage;
+
             return new VideoMessage()
             {
                 Url = self.Url,
