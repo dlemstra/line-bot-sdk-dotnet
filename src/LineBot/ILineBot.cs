@@ -63,28 +63,28 @@ namespace Line
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
-        Task LeaveGroup(string groupId);
+        Task<ILineBot> LeaveGroup(string groupId);
 
         /// <summary>
         /// Leave the specified group.
         /// </summary>
         /// <param name="group">The group.</param>
         /// <returns>.</returns>
-        Task LeaveGroup(IGroup group);
+        Task<ILineBot> LeaveGroup(IGroup group);
 
         /// <summary>
         /// Leave the specified room.
         /// </summary>
         /// <param name="roomId">The id of the room.</param>
         /// <returns>.</returns>
-        Task LeaveRoom(string roomId);
+        Task<ILineBot> LeaveRoom(string roomId);
 
         /// <summary>
         /// Leave the specified room.
         /// </summary>
         /// <param name="room">The room.</param>
         /// <returns>.</returns>
-        Task LeaveRoom(IRoom room);
+        Task<ILineBot> LeaveRoom(IRoom room);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -92,7 +92,7 @@ namespace Line
         /// <param name="to">The groups that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IGroup> to, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Multicast(IEnumerable<IGroup> to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -100,7 +100,7 @@ namespace Line
         /// <param name="to">The groups that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IGroup> to, params ISendMessage[] messages);
+        Task<ILineBot> Multicast(IEnumerable<IGroup> to, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -108,7 +108,7 @@ namespace Line
         /// <param name="to">The rooms that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IRoom> to, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Multicast(IEnumerable<IRoom> to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -116,7 +116,7 @@ namespace Line
         /// <param name="to">The rooms that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IRoom> to, params ISendMessage[] messages);
+        Task<ILineBot> Multicast(IEnumerable<IRoom> to, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -124,7 +124,7 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -132,7 +132,7 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<IUser> to, params ISendMessage[] messages);
+        Task<ILineBot> Multicast(IEnumerable<IUser> to, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -140,7 +140,7 @@ namespace Line
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -148,7 +148,7 @@ namespace Line
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Multicast(IEnumerable<string> to, params ISendMessage[] messages);
+        Task<ILineBot> Multicast(IEnumerable<string> to, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to a group at any time.
@@ -156,7 +156,7 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IGroup group, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a group at any time.
@@ -164,7 +164,7 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IGroup group, params ISendMessage[] messages);
+        Task<ILineBot> Push(IGroup group, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to a room at any time.
@@ -172,7 +172,7 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IRoom room, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a room at any time.
@@ -180,7 +180,7 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IRoom room, params ISendMessage[] messages);
+        Task<ILineBot> Push(IRoom room, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to a user at any time.
@@ -188,7 +188,7 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IUser user, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a user at any time.
@@ -196,7 +196,7 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(IUser user, params ISendMessage[] messages);
+        Task<ILineBot> Push(IUser user, params ISendMessage[] messages);
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.
@@ -205,7 +205,7 @@ namespace Line
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(string to, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.
@@ -214,7 +214,7 @@ namespace Line
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Push(string to, params ISendMessage[] messages);
+        Task<ILineBot> Push(string to, params ISendMessage[] messages);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.
@@ -222,7 +222,7 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Reply(IReplyToken token, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.
@@ -230,7 +230,7 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Reply(IReplyToken token, params ISendMessage[] messages);
+        Task<ILineBot> Reply(IReplyToken token, params ISendMessage[] messages);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.
@@ -238,7 +238,7 @@ namespace Line
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Reply(string replyToken, IEnumerable<ISendMessage> messages);
+        Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.
@@ -246,6 +246,6 @@ namespace Line
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        Task Reply(string replyToken, params ISendMessage[] messages);
+        Task<ILineBot> Reply(string replyToken, params ISendMessage[] messages);
     }
 }
