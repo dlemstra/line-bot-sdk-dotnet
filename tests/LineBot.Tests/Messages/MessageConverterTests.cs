@@ -391,13 +391,24 @@ namespace Line.Tests.Messages
                 Actions = new ImagemapAction[]
                 {
                     new ImagemapMessageAction("Text", 1, 2, 3, 4),
+                    new ImagemapUriAction("https://url.foo", 1, 2, 3, 4),
                 }
             };
 
             ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(message, messages[0]);
+
+            IImagemapMessage imagemapMessage = messages[0] as IImagemapMessage;
+            Assert.AreEqual(message, imagemapMessage);
+            Assert.AreEqual(message.BaseSize, imagemapMessage.BaseSize);
+
+            IImagemapAction[] actions = imagemapMessage.Actions.ToArray();
+            Assert.AreEqual(message.Actions.First(), actions[0]);
+
+            ImagemapAction action = message.Actions.Skip(1).First();
+            Assert.AreEqual(action, actions[1]);
+            Assert.AreEqual(action.Area, actions[1].Area);
         }
 
         [TestMethod]
