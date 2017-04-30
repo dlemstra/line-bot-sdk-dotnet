@@ -586,6 +586,26 @@ namespace Line.Tests.Messages
             });
         }
 
+        [TestMethod]
+        public void Convert_ImagemapMessageActionWithoutText_ThrowsException()
+        {
+            TestImagemapMessage message = new TestImagemapMessage()
+            {
+                Actions = new TestImagemapMessageAction[]
+                {
+                    new TestImagemapMessageAction()
+                    {
+                        Text = null
+                    }
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
@@ -682,7 +702,12 @@ namespace Line.Tests.Messages
         [ExcludeFromCodeCoverage]
         private class TestImagemapMessageAction : IImagemapMessageAction
         {
-            public string Text => nameof(TestImagemapMessageAction);
+            public TestImagemapMessageAction()
+            {
+                Text = nameof(TestImagemapMessageAction);
+            }
+
+            public string Text { get; set; }
 
             public IImagemapArea Area => new TestImagemapArea();
         }
