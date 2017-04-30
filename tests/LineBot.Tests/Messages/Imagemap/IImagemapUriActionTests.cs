@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 
 namespace Line.Tests.Messages.Imagemap
 {
+    [TestClass]
     public class IImagemapUriActionTests
     {
         [TestMethod]
