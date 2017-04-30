@@ -13,6 +13,8 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests.Messages
@@ -34,7 +36,7 @@ namespace Line.Tests.Messages
         {
             ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
             {
-                MessageConverter.Convert(new InvalidMessage[1] { null });
+                MessageConverter.Convert(new ISendMessage[1] { null });
             });
         }
 
@@ -50,37 +52,37 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_TextMessage_InstanceIsPreserved()
         {
-            TextMessage textMessage = new TextMessage()
+            TextMessage messsage = new TextMessage()
             {
                 Text = "Test"
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { textMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { messsage });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(textMessage, messages[0]);
+            Assert.AreEqual(messsage, messages[0]);
         }
 
         [TestMethod]
         public void Convert_TextMessageWithoutText_ThrowsException()
         {
-            TextMessage textMessage = new TextMessage();
+            TextMessage message = new TextMessage();
 
             ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { textMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomITextMessage_ConvertedToTextMessage()
         {
-            TestTextMessage customTextMessage = new TestTextMessage();
+            TestTextMessage message = new TestTextMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customTextMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             TextMessage textMessage = messages[0] as TextMessage;
             Assert.AreEqual("TestTextMessage", textMessage.Text);
@@ -89,55 +91,55 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_ImageMessage_InstanceIsPreserved()
         {
-            ImageMessage imageMessage = new ImageMessage()
+            ImageMessage message = new ImageMessage()
             {
                 PreviewUrl = new Uri("https://foo.previewUrl"),
                 Url = new Uri("https://foo.url")
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { imageMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(imageMessage, messages[0]);
+            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_ImageMessageWithoutUrl_ThrowsException()
         {
-            ImageMessage imageMessage = new ImageMessage()
+            ImageMessage message = new ImageMessage()
             {
                 PreviewUrl = new Uri("https://foo.previewUrl")
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { imageMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_ImageMessageWithoutPreviewUrl_ThrowsException()
         {
-            ImageMessage imageMessage = new ImageMessage()
+            ImageMessage message = new ImageMessage()
             {
                 Url = new Uri("https://foo.url")
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The preview url cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { imageMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomIImageMessage_ConvertedToImageMessage()
         {
-            TestImageMessage customImageMessage = new TestImageMessage();
+            TestImageMessage message = new TestImageMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customImageMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customImageMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             ImageMessage imageMessage = messages[0] as ImageMessage;
             Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
@@ -147,55 +149,55 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_VideoMessage_InstanceIsPreserved()
         {
-            VideoMessage videoMessage = new VideoMessage()
+            VideoMessage message = new VideoMessage()
             {
                 PreviewUrl = new Uri("https://foo.previewUrl"),
                 Url = new Uri("https://foo.url")
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { videoMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(videoMessage, messages[0]);
+            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_VideoMessageWithoutUrl_ThrowsException()
         {
-            VideoMessage videoMessage = new VideoMessage()
+            VideoMessage message = new VideoMessage()
             {
                 PreviewUrl = new Uri("https://foo.previewUrl")
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { videoMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_VideoMessageWithoutPreviewUrl_ThrowsException()
         {
-            VideoMessage videoMessage = new VideoMessage()
+            VideoMessage message = new VideoMessage()
             {
                 Url = new Uri("https://foo.url")
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The preview url cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { videoMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomIVideoMessage_ConvertedToVideoMessage()
         {
-            TestVideoMessage customVideoMessage = new TestVideoMessage();
+            TestVideoMessage message = new TestVideoMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customVideoMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customVideoMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             VideoMessage videoMessage = messages[0] as VideoMessage;
             Assert.AreEqual(new Uri("https://foo.url"), videoMessage.Url);
@@ -205,55 +207,55 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_AudioMessage_InstanceIsPreserved()
         {
-            AudioMessage audioMessage = new AudioMessage()
+            AudioMessage message = new AudioMessage()
             {
                 Url = new Uri("https://foo.url"),
                 Duration = 10000
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { audioMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(audioMessage, messages[0]);
+            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_AudioMessageWithoutUrl_ThrowsException()
         {
-            AudioMessage audioMessage = new AudioMessage()
+            AudioMessage message = new AudioMessage()
             {
                 Duration = 10000
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { audioMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_VideoMessageWithoutDuration_ThrowsException()
         {
-            AudioMessage audioMessage = new AudioMessage()
+            AudioMessage message = new AudioMessage()
             {
                 Url = new Uri("https://foo.url")
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The duration should be at least 1 millisecond.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { audioMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomIAudioMessage_ConvertedToAudioMessage()
         {
-            TestAudioMessage customAudioMessage = new TestAudioMessage();
+            TestAudioMessage message = new TestAudioMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customAudioMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customAudioMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             AudioMessage audioMessage = messages[0] as AudioMessage;
             Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
@@ -263,55 +265,55 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_LocationMessage_InstanceIsPreserved()
         {
-            LocationMessage locationmessage = new LocationMessage()
+            LocationMessage message = new LocationMessage()
             {
                 Title = "Title",
                 Address = "Address"
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { locationmessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(locationmessage, messages[0]);
+            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_TextMessageWithoutTitle_ThrowsException()
         {
-            LocationMessage locationmessage = new LocationMessage()
+            LocationMessage message = new LocationMessage()
             {
                 Address = "Address"
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { locationmessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_TextMessageWithoutAddress_ThrowsException()
         {
-            LocationMessage locationmessage = new LocationMessage()
+            LocationMessage message = new LocationMessage()
             {
                 Title = "Title",
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { locationmessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomILocationMessage_ConvertedToTextMessage()
         {
-            TestLocationMessage customTextMessage = new TestLocationMessage();
+            TestLocationMessage message = new TestLocationMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customTextMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             LocationMessage textMessage = messages[0] as LocationMessage;
             Assert.AreEqual("Title", textMessage.Title);
@@ -323,59 +325,199 @@ namespace Line.Tests.Messages
         [TestMethod]
         public void Convert_StickerMessage_InstanceIsPreserved()
         {
-            StickerMessage stickerMessage = new StickerMessage()
+            StickerMessage message = new StickerMessage()
             {
                 PackageId = "PackageId",
                 StickerId = "StickerId"
             };
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(stickerMessage, messages[0]);
+            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_StickerMessageWithoutPackageId_ThrowsException()
         {
-            StickerMessage stickerMessage = new StickerMessage()
+            StickerMessage message = new StickerMessage()
             {
                 StickerId = "StickerId"
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_StickerMessageWithoutStickerId_ThrowsException()
         {
-            StickerMessage stickerMessage = new StickerMessage()
+            StickerMessage message = new StickerMessage()
             {
                 PackageId = "PackageId"
             };
 
             ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null.", () =>
             {
-                MessageConverter.Convert(new ISendMessage[] { stickerMessage });
+                MessageConverter.Convert(new ISendMessage[] { message });
             });
         }
 
         [TestMethod]
         public void Convert_CustomIStickerMessage_ConvertedToTextMessage()
         {
-            TestStickerMessage customTextMessage = new TestStickerMessage();
+            TestStickerMessage message = new TestStickerMessage();
 
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { customTextMessage });
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
 
             Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(customTextMessage, messages[0]);
+            Assert.AreNotEqual(message, messages[0]);
 
             StickerMessage textMessage = messages[0] as StickerMessage;
             Assert.AreEqual("PackageId", textMessage.PackageId);
             Assert.AreEqual("StickerId", textMessage.StickerId);
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessage_InstanceIsPreserved()
+        {
+            ImagemapMessage message = new ImagemapMessage()
+            {
+                BaseUrl = new Uri("https://foo.bar"),
+                BaseSize = new ImagemapSize(1040, 1040),
+                AlternativeText = "Alternative",
+                Actions = new ImagemapAction[]
+                {
+                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
+                }
+            };
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreEqual(message, messages[0]);
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageWithoutBaseUrl_ThrowsException()
+        {
+            ImagemapMessage message = new ImagemapMessage()
+            {
+                BaseSize = new ImagemapSize(1040, 1040),
+                AlternativeText = "Alternative",
+                Actions = new ImagemapAction[]
+                {
+                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The base url cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageWithoutBaseSize_ThrowsException()
+        {
+            ImagemapMessage message = new ImagemapMessage()
+            {
+                BaseUrl = new Uri("https://foo.bar"),
+                AlternativeText = "Alternative",
+                Actions = new ImagemapAction[]
+                {
+                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The base size cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageWithoutAlternativeText_ThrowsException()
+        {
+            ImagemapMessage message = new ImagemapMessage()
+            {
+                BaseUrl = new Uri("https://foo.bar"),
+                BaseSize = new ImagemapSize(1040, 1040),
+                Actions = new ImagemapAction[]
+                {
+                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The alternative text cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageWithoutActions_ThrowsException()
+        {
+            ImagemapMessage message = new ImagemapMessage()
+            {
+                BaseUrl = new Uri("https://foo.bar"),
+                BaseSize = new ImagemapSize(1040, 1040),
+                AlternativeText = "Alternative"
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_CustomIImageMapMessage_ConvertedToTextMessage()
+        {
+            TestImagemapMessage message = new TestImagemapMessage();
+
+            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+            Assert.AreEqual(1, messages.Length);
+            Assert.AreNotEqual(message, messages[0]);
+
+            ImagemapMessage imagemapMessage = messages[0] as ImagemapMessage;
+            Assert.AreEqual(new Uri("https://foo.url"), imagemapMessage.BaseUrl);
+            Assert.AreEqual(1040, imagemapMessage.BaseSize.Width);
+            Assert.AreEqual(520, imagemapMessage.BaseSize.Height);
+            Assert.AreEqual("Alternative", imagemapMessage.AlternativeText);
+
+            IImagemapAction[] actions = imagemapMessage.Actions.ToArray();
+
+            ImagemapUriAction uriAction = actions[0] as ImagemapUriAction;
+            Assert.AreEqual(new Uri("https://foo.bar"), uriAction.Url);
+            Assert.AreEqual(4, uriAction.Area.X);
+            Assert.AreEqual(3, uriAction.Area.Y);
+            Assert.AreEqual(2, uriAction.Area.Width);
+            Assert.AreEqual(1, uriAction.Area.Height);
+
+            ImagemapMessageAction messageAction = actions[1] as ImagemapMessageAction;
+            Assert.AreEqual("TestImagemapMessageAction", messageAction.Text);
+            Assert.AreEqual(4, messageAction.Area.X);
+            Assert.AreEqual(3, messageAction.Area.Y);
+            Assert.AreEqual(2, messageAction.Area.Width);
+            Assert.AreEqual(1, messageAction.Area.Height);
+        }
+
+        [TestMethod]
+        public void Convert_InvalidAction_ThrowsException()
+        {
+            TestImagemapMessage message = new TestImagemapMessage()
+            {
+                Actions = new InvalidAction[] { new InvalidAction() }
+            };
+
+            ExceptionAssert.Throws<NotSupportedException>("Invalid action type.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[1] { message });
+            });
         }
 
         [ExcludeFromCodeCoverage]
@@ -429,8 +571,71 @@ namespace Line.Tests.Messages
         }
 
         [ExcludeFromCodeCoverage]
+        private class TestImagemapMessage : IImagemapMessage
+        {
+            public TestImagemapMessage()
+            {
+                Actions = new IImagemapAction[]
+                {
+                    new TestImagemapUriAction(),
+                    new TestImagemapMessageAction()
+                };
+            }
+
+            public Uri BaseUrl => new Uri("https://foo.url");
+
+            public string AlternativeText => "Alternative";
+
+            public IImagemapSize BaseSize => new TestImageMapSize();
+
+            public IEnumerable<IImagemapAction> Actions { get; set; }
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestImageMapSize : IImagemapSize
+        {
+            public int Width => 1040;
+
+            public int Height => 520;
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestImagemapUriAction : IImagemapUriAction
+        {
+            public Uri Url => new Uri("https://foo.bar");
+
+            public IImagemapArea Area => new TestImagemapArea();
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestImagemapMessageAction : IImagemapMessageAction
+        {
+            public string Text => nameof(TestImagemapMessageAction);
+
+            public IImagemapArea Area => new TestImagemapArea();
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestImagemapArea : IImagemapArea
+        {
+            public int X => 4;
+
+            public int Y => 3;
+
+            public int Width => 2;
+
+            public int Height => 1;
+        }
+
+        [ExcludeFromCodeCoverage]
         private class InvalidMessage : ISendMessage
         {
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class InvalidAction : IImagemapAction
+        {
+            public IImagemapArea Area => throw new NotImplementedException();
         }
     }
 }

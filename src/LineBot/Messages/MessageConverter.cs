@@ -57,6 +57,9 @@ namespace Line
                     case IStickerMessage stickerMessage:
                         result[i] = stickerMessage.ToStickerMessage();
                         break;
+                    case IImagemapMessage imagemapMessage:
+                        result[i] = imagemapMessage.ToImagemapMessage();
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
