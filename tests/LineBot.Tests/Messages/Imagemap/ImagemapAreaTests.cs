@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -33,6 +34,28 @@ namespace Line.Tests
 
             string serialized = JsonConvert.SerializeObject(area);
             Assert.AreEqual(@"{""x"":10,""y"":20,""width"":30,""height"":40}", serialized);
+        }
+
+        [TestMethod]
+        public void X_BelowZero_ThrowsException()
+        {
+            ImagemapArea area = new ImagemapArea();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The x position should be at least 0.", () =>
+            {
+                area.X = -1;
+            });
+        }
+
+        [TestMethod]
+        public void Y_BelowZero_ThrowsException()
+        {
+            ImagemapArea area = new ImagemapArea();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The y position should be at least 0.", () =>
+            {
+                area.Y = -1;
+            });
         }
     }
 }

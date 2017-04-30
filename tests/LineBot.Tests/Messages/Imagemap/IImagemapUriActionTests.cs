@@ -45,7 +45,7 @@ namespace Line.Tests.Messages.Imagemap
         }
 
         [TestMethod]
-        public void Text_MoreThan400Chars_ThrowsException()
+        public void Url_MoreThan400Chars_ThrowsException()
         {
             ImagemapUriAction action = new ImagemapUriAction();
 
@@ -56,7 +56,7 @@ namespace Line.Tests.Messages.Imagemap
         }
 
         [TestMethod]
-        public void Text_400Chars_ThrowsNoException()
+        public void Url_400Chars_ThrowsNoException()
         {
             Uri value = new Uri("https://foo.bar/" + new string('x', 984));
 

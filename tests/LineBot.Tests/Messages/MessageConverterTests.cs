@@ -520,6 +520,72 @@ namespace Line.Tests.Messages
             });
         }
 
+        [TestMethod]
+        public void Convert_ImagemapMessageAreaWithoutWidth_ThrowsException()
+        {
+            TestImagemapMessage message = new TestImagemapMessage()
+            {
+                Actions = new TestImagemapUriAction[]
+                {
+                    new TestImagemapUriAction()
+                    {
+                        Area = new TestImagemapArea()
+                        {
+                            Width = 0
+                        }
+                    }
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageAreaUrlIsNull_ThrowsException()
+        {
+            TestImagemapMessage message = new TestImagemapMessage()
+            {
+                Actions = new TestImagemapUriAction[]
+                {
+                    new TestImagemapUriAction()
+                    {
+                       Url = null
+                    }
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
+        [TestMethod]
+        public void Convert_ImagemapMessageAreaWithoutHeight_ThrowsException()
+        {
+            TestImagemapMessage message = new TestImagemapMessage()
+            {
+                Actions = new TestImagemapUriAction[]
+                {
+                    new TestImagemapUriAction()
+                    {
+                        Area = new TestImagemapArea()
+                        {
+                            Height = 0
+                        }
+                    }
+                }
+            };
+
+            ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
@@ -602,9 +668,15 @@ namespace Line.Tests.Messages
         [ExcludeFromCodeCoverage]
         private class TestImagemapUriAction : IImagemapUriAction
         {
-            public Uri Url => new Uri("https://foo.bar");
+            public TestImagemapUriAction()
+            {
+                Area = new TestImagemapArea();
+                Url = new Uri("https://foo.bar");
+            }
 
-            public IImagemapArea Area => new TestImagemapArea();
+            public Uri Url { get; set; }
+
+            public IImagemapArea Area { get; set; }
         }
 
         [ExcludeFromCodeCoverage]
@@ -618,13 +690,19 @@ namespace Line.Tests.Messages
         [ExcludeFromCodeCoverage]
         private class TestImagemapArea : IImagemapArea
         {
+            public TestImagemapArea()
+            {
+                Width = 2;
+                Height = 1;
+            }
+
             public int X => 4;
 
             public int Y => 3;
 
-            public int Width => 2;
+            public int Width { get; set; }
 
-            public int Height => 1;
+            public int Height { get; set; }
         }
 
         [ExcludeFromCodeCoverage]
