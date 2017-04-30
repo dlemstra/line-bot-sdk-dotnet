@@ -31,7 +31,7 @@ namespace Line.Tests.Messages.Imagemap
             };
 
             string serialized = JsonConvert.SerializeObject(action);
-            Assert.AreEqual(@"{""type"":""url"",""linkUri"":""https://foo.bar"",""area"":{""x"":0,""y"":10,""width"":20,""height"":30}}", serialized);
+            Assert.AreEqual(@"{""type"":""uri"",""linkUri"":""https://foo.bar"",""area"":{""x"":0,""y"":10,""width"":20,""height"":30}}", serialized);
         }
 
         [TestMethod]
@@ -46,18 +46,18 @@ namespace Line.Tests.Messages.Imagemap
         }
 
         [TestMethod]
-        public void Url_MoreThan400Chars_ThrowsException()
+        public void Url_MoreThan1000Chars_ThrowsException()
         {
             ImagemapUriAction action = new ImagemapUriAction();
 
             ExceptionAssert.Throws<InvalidOperationException>("The url cannot be longer than 1000 characters.", () =>
             {
-                action.Url = new Uri("https://foo.bar/" + new string('x', 984));
+                action.Url = new Uri("https://foo.bar/" + new string('x', 985));
             });
         }
 
         [TestMethod]
-        public void Url_400Chars_ThrowsNoException()
+        public void Url_1000Chars_ThrowsNoException()
         {
             Uri value = new Uri("https://foo.bar/" + new string('x', 984));
 
