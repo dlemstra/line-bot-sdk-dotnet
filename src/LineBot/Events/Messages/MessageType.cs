@@ -50,6 +50,11 @@ namespace Line
         Sticker,
 
         /// <summary>
+        /// Template message.
+        /// </summary>
+        Template,
+
+        /// <summary>
         /// Text message.
         /// </summary>
         Text,
