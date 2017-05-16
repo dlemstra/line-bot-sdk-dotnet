@@ -16,7 +16,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Line.Tests.Messages.Imagemap
+namespace Line.Tests
 {
     [TestClass]
     public class IImagemapUriActionTests
