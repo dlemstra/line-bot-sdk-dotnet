@@ -30,7 +30,7 @@ namespace Line.Tests
             };
 
             string serialized = JsonConvert.SerializeObject(message);
-            Assert.AreEqual(@"{""type"":""template"",""altText"":""Alternative""}", serialized);
+            Assert.AreEqual(@"{""type"":""template"",""altText"":""Alternative"",""template"":null}", serialized);
         }
 
         [TestMethod]
@@ -77,6 +77,42 @@ namespace Line.Tests
             };
 
             Assert.AreEqual(value, message.AlternativeText);
+        }
+
+        [TestMethod]
+        public void Template_Null_ThrowsException()
+        {
+            TemplateMessage message = new TemplateMessage();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The template cannot be null.", () =>
+            {
+                message.Template = null;
+            });
+        }
+
+        [TestMethod]
+        public void Template_InvalidTemplateType_ThrowsException()
+        {
+            TemplateMessage message = new TemplateMessage();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The template type is invalid.", () =>
+            {
+                message.Template = new TestTemplate();
+            });
+        }
+
+        [TestMethod]
+        public void Template_SetToButtonsTemplate_ThrowsNoException()
+        {
+            TemplateMessage message = new TemplateMessage()
+            {
+                Template = new ButtonsTemplate()
+            };
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class TestTemplate : ITemplate
+        {
         }
     }
 }

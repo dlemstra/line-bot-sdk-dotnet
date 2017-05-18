@@ -12,22 +12,41 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a template message.
+    /// Encapsulates a buttons template.
     /// </summary>
-    public interface ITemplateMessage : ISendMessage
+    public interface IButtonsTemplate : ITemplate
     {
         /// <summary>
-        /// Gets the alternative text for devices that do not support this type of message.
+        /// Gets the image url for the thumbnail.
         /// </summary>
-        /// <remarks>Max: 400 characters</remarks>
-        string AlternativeText { get; }
+        /// <remarks>
+        /// Protocol: HTTPS<para/>
+        /// Format: JPEG or PNG<para/>
+        /// Max url length: 1000 characters<para/>
+        /// Aspect ratio: 1:1.51<para/>
+        /// Max width: 1024px<para/>
+        /// Max size: 1 MB
+        /// </remarks>
+        Uri ThumbnailUrl { get; }
 
         /// <summary>
-        /// Gets the template of the template message.
+        /// Gets the title.
         /// </summary>
-        ITemplate Template { get; }
+        /// <remarks>Max: 400 characters</remarks>
+        string Title { get; }
+
+        /// <summary>
+        /// Gets the message text.
+        /// </summary>
+        /// <remarks>
+        /// Max: 160 characters (no image or title)
+        /// Max: 60 characters(message with an image or title)
+        /// </remarks>
+        string Text { get; }
     }
 }

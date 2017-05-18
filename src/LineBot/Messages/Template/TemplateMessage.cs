@@ -13,6 +13,8 @@
 // under the License.
 
 using System;
+using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Line
@@ -23,6 +25,7 @@ namespace Line
     public sealed class TemplateMessage : ITemplateMessage
     {
         private string _alternateText;
+        private ITemplate _template;
 
 #pragma warning disable 0414 // Suppress value is never used.
 
@@ -60,6 +63,30 @@ namespace Line
                     throw new InvalidOperationException("The alternative text cannot be longer than 400 characters.");
 
                 _alternateText = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the template of the template message.
+        /// </summary>
+        [JsonProperty("template")]
+        public ITemplate Template
+        {
+            get
+            {
+                return _template;
+            }
+
+            set
+            {
+                if (value == null)
+                    throw new InvalidOperationException("The template cannot be null.");
+
+                var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
+                if (!interfaces.Contains(typeof(IButtonsTemplate)))
+                    throw new InvalidOperationException("The template type is invalid.");
+
+                _template = value;
             }
         }
     }

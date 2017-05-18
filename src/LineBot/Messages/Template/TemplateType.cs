@@ -14,20 +14,8 @@
 
 namespace Line
 {
-    /// <summary>
-    /// Encapsulates a template message.
-    /// </summary>
-    public interface ITemplateMessage : ISendMessage
+    internal enum TemplateType
     {
-        /// <summary>
-        /// Gets the alternative text for devices that do not support this type of message.
-        /// </summary>
-        /// <remarks>Max: 400 characters</remarks>
-        string AlternativeText { get; }
-
-        /// <summary>
-        /// Gets the template of the template message.
-        /// </summary>
-        ITemplate Template { get; }
+        Buttons,
     }
 }
