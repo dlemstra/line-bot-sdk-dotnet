@@ -148,7 +148,8 @@ namespace Line
                 foreach (var action in value)
                 {
                     var interfaces = action.GetType().GetTypeInfo().ImplementedInterfaces;
-                    if (!interfaces.Contains(typeof(IPostbackAction)))
+                    if (!interfaces.Contains(typeof(IPostbackAction)) &&
+                        !interfaces.Contains(typeof(IMessageAction)))
                         throw new InvalidOperationException("The template action type is invalid.");
                 }
 

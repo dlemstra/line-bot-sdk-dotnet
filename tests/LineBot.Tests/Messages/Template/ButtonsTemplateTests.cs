@@ -237,7 +237,7 @@ namespace Line.Tests.Messages.Template
                 Actions = new ITemplateAction[]
                 {
                     new PostbackAction(),
-                    new PostbackAction(),
+                    new MessageAction(),
                     new PostbackAction(),
                     new PostbackAction()
                 }
