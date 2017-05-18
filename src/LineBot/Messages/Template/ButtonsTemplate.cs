@@ -13,6 +13,9 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Line
@@ -25,6 +28,7 @@ namespace Line
         private Uri _thumbnailUrl;
         private string _title;
         private string _text;
+        private IEnumerable<ITemplateAction> _actions;
 
 #pragma warning disable 0414 // Suppress value is never used.
 
@@ -94,7 +98,7 @@ namespace Line
         /// </summary>
         /// <remarks>
         /// Max: 160 characters (no image or title)
-        /// Max: 60 characters(message with an image or title)
+        /// Max: 60 characters (message with an image or title)
         /// </remarks>
         [JsonProperty("text")]
         public string Text
@@ -116,6 +120,39 @@ namespace Line
                     throw new InvalidOperationException("The text cannot be longer than 60 characters when the thumnail url or title are set.");
 
                 _text = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the actions when tapped.
+        /// </summary>
+        /// <remarks>
+        /// Max: 4
+        /// </remarks>
+        [JsonProperty("actions")]
+        public IEnumerable<ITemplateAction> Actions
+        {
+            get
+            {
+                return _actions;
+            }
+
+            set
+            {
+                if (value == null)
+                    throw new InvalidOperationException("The actions cannot be null.");
+
+                if (value.Count() > 4)
+                    throw new InvalidOperationException("The maximum number of actions is 4.");
+
+                foreach (var action in value)
+                {
+                    var interfaces = action.GetType().GetTypeInfo().ImplementedInterfaces;
+                    if (!interfaces.Contains(typeof(IPostbackAction)))
+                        throw new InvalidOperationException("The template action type is invalid.");
+                }
+
+                _actions = value;
             }
         }
     }

@@ -32,7 +32,7 @@ namespace Line.Tests.Messages.Template
             };
 
             string serialized = JsonConvert.SerializeObject(template);
-            Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""title"":""Foo"",""text"":""Test""}", serialized);
+            Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""title"":""Foo"",""text"":""Test"",""actions"":null}", serialized);
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace Line.Tests.Messages.Template
         }
 
         [TestMethod]
-        public void Text_MoreThan2000Chars_ThrowsException()
+        public void Text_MoreThan160Chars_ThrowsException()
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
@@ -171,7 +171,7 @@ namespace Line.Tests.Messages.Template
         }
 
         [TestMethod]
-        public void TextWithThumbnailUrlSet_60Chars_ThrowsException()
+        public void TextWithThumbnailUrlSet_60Chars_ThrowsNoException()
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
@@ -192,12 +192,71 @@ namespace Line.Tests.Messages.Template
         }
 
         [TestMethod]
-        public void TextWithTitleSet_60Chars_ThrowsException()
+        public void TextWithTitleSet_60Chars_ThrowsNoException()
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
             template.Title = "Test";
             template.Text = new string('x', 60);
+        }
+
+        [TestMethod]
+        public void Actions_Null_ThrowsException()
+        {
+            ButtonsTemplate template = new ButtonsTemplate();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
+            {
+                template.Actions = null;
+            });
+        }
+
+        [TestMethod]
+        public void Actions_MoreThan4_ThrowsException()
+        {
+            ButtonsTemplate template = new ButtonsTemplate();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The maximum number of actions is 4.", () =>
+            {
+                template.Actions = new ITemplateAction[]
+                {
+                    new PostbackAction(),
+                    new PostbackAction(),
+                    new PostbackAction(),
+                    new PostbackAction(),
+                    new PostbackAction()
+                };
+            });
+        }
+
+        [TestMethod]
+        public void Actions_4_ThrowsNoException()
+        {
+            ButtonsTemplate template = new ButtonsTemplate()
+            {
+                Actions = new ITemplateAction[]
+                {
+                    new PostbackAction(),
+                    new PostbackAction(),
+                    new PostbackAction(),
+                    new PostbackAction()
+                }
+            };
+        }
+
+        [TestMethod]
+        public void Action_InvalidTemplateActionType_ThrowsException()
+        {
+            ButtonsTemplate message = new ButtonsTemplate();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid.", () =>
+            {
+                message.Actions = new ITemplateAction[] { new TestTemplateAction() };
+            });
+        }
+
+        private class TestTemplateAction : ITemplateAction
+        {
         }
     }
 }

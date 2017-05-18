@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
 
 namespace Line
 {
@@ -48,5 +49,13 @@ namespace Line
         /// Max: 60 characters(message with an image or title)
         /// </remarks>
         string Text { get; }
+
+        /// <summary>
+        /// Gets or sets the actions when tapped.
+        /// </summary>
+        /// <remarks>
+        /// Max: 4
+        /// </remarks>
+        IEnumerable<ITemplateAction> Actions { get; }
     }
 }
