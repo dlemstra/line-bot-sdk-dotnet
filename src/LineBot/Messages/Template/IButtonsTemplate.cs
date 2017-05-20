@@ -51,7 +51,7 @@ namespace Line
         string Text { get; }
 
         /// <summary>
-        /// Gets or sets the actions when tapped.
+        /// Gets the actions when tapped.
         /// </summary>
         /// <remarks>
         /// Max: 4
