@@ -12,12 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
+
 namespace Line
 {
-    internal enum TemplateType
+    /// <summary>
+    /// Encapsulates a carousel template.
+    /// </summary>
+    public interface ICarouselTemplate
     {
-        Buttons,
-        Confirm,
-        Carousel
+        /// <summary>
+        /// Gets the columns.
+        /// </summary>
+        /// <remarks>
+        /// Max: 5
+        /// </remarks>
+        IEnumerable<ICarouselColumn> Columns { get; }
     }
 }
