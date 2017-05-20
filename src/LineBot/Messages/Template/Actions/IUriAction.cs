@@ -12,12 +12,28 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line
 {
-    internal enum TemplateActionType
+    /// <summary>
+    /// Encapsulates a template uri action.
+    /// </summary>
+    public interface IUriAction : ITemplateAction
     {
-        Postback,
-        Message,
-        Uri,
+        /// <summary>
+        /// Gets the label.
+        /// </summary>
+        /// <remarks>Max: 20 characters</remarks>
+        string Label { get; }
+
+        /// <summary>
+        /// Gets the url opened when the action is performed.
+        /// </summary>
+        /// <remarks>
+        /// Protocol: HTTP, HTTPS, TEL<para/>
+        /// Max url length: 1000 characters<para/>
+        /// </remarks>
+        Uri Url { get; }
     }
 }

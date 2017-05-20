@@ -149,7 +149,8 @@ namespace Line
                 {
                     var interfaces = action.GetType().GetTypeInfo().ImplementedInterfaces;
                     if (!interfaces.Contains(typeof(IPostbackAction)) &&
-                        !interfaces.Contains(typeof(IMessageAction)))
+                        !interfaces.Contains(typeof(IMessageAction)) &&
+                        !interfaces.Contains(typeof(IUriAction)))
                         throw new InvalidOperationException("The template action type is invalid.");
                 }
 
