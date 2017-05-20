@@ -105,20 +105,9 @@ namespace Line.Tests
         {
             ConfirmTemplate template = new ConfirmTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+            ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
             {
                 template.OkAction = new TestTemplateAction();
-            });
-        }
-
-        [TestMethod]
-        public void CancelAction_InvalidTemplateActionType_ThrowsException()
-        {
-            ConfirmTemplate template = new ConfirmTemplate();
-
-            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
-            {
-                template.CancelAction = new TestTemplateAction();
             });
         }
 
@@ -130,6 +119,17 @@ namespace Line.Tests
             ExceptionAssert.Throws<InvalidOperationException>("The cancel action cannot be null.", () =>
             {
                 template.CancelAction = null;
+            });
+        }
+
+        [TestMethod]
+        public void CancelAction_InvalidTemplateActionType_ThrowsException()
+        {
+            ConfirmTemplate template = new ConfirmTemplate();
+
+            ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+            {
+                template.CancelAction = new TestTemplateAction();
             });
         }
     }

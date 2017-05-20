@@ -260,7 +260,7 @@ namespace Line.Tests
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+            ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
             {
                 template.Actions = new ITemplateAction[] { new TestTemplateAction() };
             });

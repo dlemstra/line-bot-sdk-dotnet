@@ -26,7 +26,12 @@ namespace Line
             if (!interfaces.Contains(typeof(IPostbackAction)) &&
                 !interfaces.Contains(typeof(IMessageAction)) &&
                 !interfaces.Contains(typeof(IUriAction)))
-                throw new InvalidOperationException($"The template action type is invalid. Supported types are: {nameof(IPostbackAction)}, {nameof(IMessageAction)} and {nameof(IUriAction)}.");
+                ThrowException();
+        }
+
+        private static void ThrowException()
+        {
+            throw new NotSupportedException($"The template action type is invalid. Supported types are: {nameof(IPostbackAction)}, {nameof(IMessageAction)} and {nameof(IUriAction)}.");
         }
     }
 }
