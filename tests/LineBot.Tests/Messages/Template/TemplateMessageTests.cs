@@ -26,11 +26,26 @@ namespace Line.Tests
         {
             TemplateMessage message = new TemplateMessage()
             {
-                AlternativeText = "Alternative"
+                AlternativeText = "Alternative",
+                Template = new ConfirmTemplate
+                {
+                    Text = "Confirm",
+                    OkAction = new UriAction()
+                    {
+                        Label = "OkLabel",
+                        Url = new Uri("https://foo.bar")
+                    },
+                    CancelAction = new PostbackAction()
+                    {
+                        Label = "CancelLabel",
+                        Data = "Postback",
+                        Text = "CancelText"
+                    }
+                }
             };
 
             string serialized = JsonConvert.SerializeObject(message);
-            Assert.AreEqual(@"{""type"":""template"",""altText"":""Alternative"",""template"":null}", serialized);
+            Assert.AreEqual(@"{""type"":""template"",""altText"":""Alternative"",""template"":{""type"":""confirm"",""text"":""Confirm"",""actions"":[{""type"":""uri"",""label"":""OkLabel"",""uri"":""https://foo.bar""},{""type"":""postback"",""label"":""CancelLabel"",""data"":""Postback"",""text"":""CancelText""}]}}", serialized);
         }
 
         [TestMethod]
@@ -91,6 +106,33 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public void Template_SetToButtonsTemplate_ThrowsNoException()
+        {
+            TemplateMessage message = new TemplateMessage()
+            {
+                Template = new ButtonsTemplate()
+            };
+        }
+
+        [TestMethod]
+        public void Template_SetToConfirmTemplate_ThrowsNoException()
+        {
+            TemplateMessage message = new TemplateMessage()
+            {
+                Template = new ConfirmTemplate()
+            };
+        }
+
+        [TestMethod]
+        public void Template_SetToCarouselTemplate_ThrowsNoException()
+        {
+            TemplateMessage message = new TemplateMessage()
+            {
+                Template = new CarouselTemplate()
+            };
+        }
+
+        [TestMethod]
         public void Template_InvalidTemplateType_ThrowsException()
         {
             TemplateMessage message = new TemplateMessage();
@@ -99,15 +141,6 @@ namespace Line.Tests
             {
                 message.Template = new TestTemplate();
             });
-        }
-
-        [TestMethod]
-        public void Template_SetToButtonsTemplate_ThrowsNoException()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-                Template = new ButtonsTemplate()
-            };
         }
 
         [ExcludeFromCodeCoverage]
