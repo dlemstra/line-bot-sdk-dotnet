@@ -141,7 +141,12 @@ namespace Line
                 if (value == null)
                     throw new InvalidOperationException("The actions cannot be null.");
 
-                if (value.Count() > 4)
+                int count = value.Count();
+
+                if (count < 1)
+                    throw new InvalidOperationException("The minimum number of actions is 1.");
+
+                if (count > 4)
                     throw new InvalidOperationException("The maximum number of actions is 4.");
 
                 foreach (var action in value)

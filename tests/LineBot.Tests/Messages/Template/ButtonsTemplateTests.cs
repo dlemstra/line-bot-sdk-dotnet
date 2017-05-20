@@ -212,6 +212,17 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public void Actions_LessThan1_ThrowsException()
+        {
+            ButtonsTemplate template = new ButtonsTemplate();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The minimum number of actions is 1.", () =>
+            {
+                template.Actions = new ITemplateAction[] { };
+            });
+        }
+
+        [TestMethod]
         public void Actions_MoreThan4_ThrowsException()
         {
             ButtonsTemplate template = new ButtonsTemplate();
