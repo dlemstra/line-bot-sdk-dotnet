@@ -163,7 +163,7 @@ namespace Line.Tests
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be longer than 60 characters when the thumnail url or title are set.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be longer than 60 characters when the thumbnail url or title are set.", () =>
             {
                 template.ThumbnailUrl = new Uri("https://foo.bar/");
                 template.Text = new string('x', 61);
@@ -184,7 +184,7 @@ namespace Line.Tests
         {
             ButtonsTemplate template = new ButtonsTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be longer than 60 characters when the thumnail url or title are set.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be longer than 60 characters when the thumbnail url or title are set.", () =>
             {
                 template.Title = "Test";
                 template.Text = new string('x', 61);

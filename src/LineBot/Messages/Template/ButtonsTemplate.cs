@@ -116,7 +116,7 @@ namespace Line
                     throw new InvalidOperationException("The text cannot be longer than 160 characters.");
 
                 if ((ThumbnailUrl != null || Title != null) && value.Length > 60)
-                    throw new InvalidOperationException("The text cannot be longer than 60 characters when the thumnail url or title are set.");
+                    throw new InvalidOperationException("The text cannot be longer than 60 characters when the thumbnail url or title are set.");
 
                 _text = value;
             }
