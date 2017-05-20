@@ -18,6 +18,6 @@ namespace Line
     {
         Postback,
         Message,
-        Uri,
+        Uri
     }
 }
