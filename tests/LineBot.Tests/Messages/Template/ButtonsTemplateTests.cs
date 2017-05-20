@@ -245,18 +245,14 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void Action_InvalidTemplateActionType_ThrowsException()
+        public void Actions_InvalidTemplateActionType_ThrowsException()
         {
-            ButtonsTemplate message = new ButtonsTemplate();
+            ButtonsTemplate template = new ButtonsTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
             {
-                message.Actions = new ITemplateAction[] { new TestTemplateAction() };
+                template.Actions = new ITemplateAction[] { new TestTemplateAction() };
             });
-        }
-
-        private class TestTemplateAction : ITemplateAction
-        {
         }
     }
 }

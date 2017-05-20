@@ -12,11 +12,9 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line
+namespace Line.Tests
 {
-    internal enum TemplateType
+    public class TestTemplateAction : ITemplateAction
     {
-        Buttons,
-        Confirm,
     }
 }

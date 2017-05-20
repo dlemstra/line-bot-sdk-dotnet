@@ -14,9 +14,27 @@
 
 namespace Line
 {
-    internal enum TemplateType
+    /// <summary>
+    /// Encapsulates a confirm template.
+    /// </summary>
+    public interface IConfirmTemplate
     {
-        Buttons,
-        Confirm,
+        /// <summary>
+        /// Gets the message text.
+        /// </summary>
+        /// <remarks>
+        /// Max: 240 characters
+        /// </remarks>
+        string Text { get; }
+
+        /// <summary>
+        /// Gets the action for the OK button.
+        /// </summary>
+        ITemplateAction OkAction { get; }
+
+        /// <summary>
+        /// Gets the action for the Cancel button.
+        /// </summary>
+        ITemplateAction CancelAction { get; }
     }
 }

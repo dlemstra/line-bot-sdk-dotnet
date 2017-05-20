@@ -12,11 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+using System.Linq;
+using System.Reflection;
+
 namespace Line
 {
-    internal enum TemplateType
+    internal static class ITemplateActionExtensions
     {
-        Buttons,
-        Confirm,
+        public static void CheckActionType(this ITemplateAction self)
+        {
+            var interfaces = self.GetType().GetTypeInfo().ImplementedInterfaces;
+            if (!interfaces.Contains(typeof(IPostbackAction)) &&
+                !interfaces.Contains(typeof(IMessageAction)) &&
+                !interfaces.Contains(typeof(IUriAction)))
+                throw new InvalidOperationException($"The template action type is invalid. Supported types are: {nameof(IPostbackAction)}, {nameof(IMessageAction)} and {nameof(IUriAction)}.");
+        }
     }
 }

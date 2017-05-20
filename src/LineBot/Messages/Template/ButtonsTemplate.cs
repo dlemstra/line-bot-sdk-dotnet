@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Line
@@ -147,11 +146,7 @@ namespace Line
 
                 foreach (var action in value)
                 {
-                    var interfaces = action.GetType().GetTypeInfo().ImplementedInterfaces;
-                    if (!interfaces.Contains(typeof(IPostbackAction)) &&
-                        !interfaces.Contains(typeof(IMessageAction)) &&
-                        !interfaces.Contains(typeof(IUriAction)))
-                        throw new InvalidOperationException("The template action type is invalid.");
+                    action.CheckActionType();
                 }
 
                 _actions = value;
