@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages
+namespace Line.Tests
 {
     [TestClass]
     public class MessageConverterTests

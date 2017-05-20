@@ -16,7 +16,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
     [TestClass]
     public class ButtonsTemplateTests
@@ -238,7 +238,7 @@ namespace Line.Tests.Messages.Template
                 {
                     new PostbackAction(),
                     new MessageAction(),
-                    new PostbackAction(),
+                    new UriAction(),
                     new PostbackAction()
                 }
             };
