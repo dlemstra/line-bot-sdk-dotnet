@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a confirm template.
     /// </summary>
-    public interface IConfirmTemplate
+    public interface IConfirmTemplate : ITemplate
     {
         /// <summary>
         /// Gets the message text.
