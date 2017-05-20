@@ -97,7 +97,7 @@ namespace Line
         /// Gets or sets the message text.
         /// </summary>
         /// <remarks>
-        /// Max: 160 characters (no image or title)
+        /// Max: 160 characters (no image or title)<para/>
         /// Max: 60 characters (message with an image or title)
         /// </remarks>
         [JsonProperty("text")]
