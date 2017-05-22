@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -27,6 +28,30 @@ namespace Line
                 !interfaces.Contains(typeof(IMessageAction)) &&
                 !interfaces.Contains(typeof(IUriAction)))
                 ThrowException();
+        }
+
+        public static IEnumerable<ITemplateAction> ToTemplateAction(this IEnumerable<ITemplateAction> self)
+        {
+            foreach (ITemplateAction action in self)
+            {
+                yield return action.ToTemplateAction();
+            }
+        }
+
+        public static ITemplateAction ToTemplateAction(this ITemplateAction self)
+        {
+            switch (self)
+            {
+                case IPostbackAction postbackAction:
+                    return postbackAction.ToPostbackAction();
+                case IMessageAction messageAction:
+                    return messageAction.ToMessageAction();
+                case IUriAction uriAction:
+                    return uriAction.ToUriAction();
+                default:
+                    ThrowException();
+                    return null;
+            }
         }
 
         private static void ThrowException()

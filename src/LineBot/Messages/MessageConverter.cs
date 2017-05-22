@@ -60,6 +60,9 @@ namespace Line
                     case IImagemapMessage imagemapMessage:
                         result[i] = imagemapMessage.ToImagemapMessage();
                         break;
+                    case ITemplateMessage templateMessage:
+                        result[i] = templateMessage.ToTemplateMessage();
+                        break;
                     default:
                         throw new NotSupportedException("Invalid message type.");
                 }
