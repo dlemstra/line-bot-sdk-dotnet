@@ -1205,6 +1205,20 @@ namespace Line.Tests
             });
         }
 
+        [TestMethod]
+        public void Convert_TemplateMessageInvalidTemplateType_ThrowsException()
+        {
+            TestTemplateMessage message = new TestTemplateMessage()
+            {
+                Template = new InvalidTemplate()
+            };
+
+            ExceptionAssert.Throws<NotSupportedException>("Invalid template type.", () =>
+            {
+                MessageConverter.Convert(new ISendMessage[] { message });
+            });
+        }
+
         [ExcludeFromCodeCoverage]
         private class TestTextMessage : ITextMessage
         {
@@ -1412,6 +1426,11 @@ namespace Line.Tests
             public string Label => "UriLabel";
 
             public Uri Url => new Uri("tel://uri");
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class InvalidTemplate : ITemplate
+        {
         }
     }
 }

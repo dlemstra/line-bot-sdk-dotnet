@@ -29,7 +29,7 @@ namespace Line
                 case ICarouselTemplate carouselTemplate:
                     return carouselTemplate.ToCarouselTemplate();
                 default:
-                    throw new NotSupportedException("Invalid template type type.");
+                    throw new NotSupportedException("Invalid template type.");
             }
         }
     }
