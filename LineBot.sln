@@ -1,11 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot", "src\LineBot\LineBot.csproj", "{0CFDBD19-D680-43BF-8006-9A750ED4FC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineBot.Tests", "tests\LineBot.Tests\LineBot.Tests.csproj", "{A4912707-DF3E-47A1-B4DF-BE727571124A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot.Tests", "tests\LineBot.Tests\LineBot.Tests.csproj", "{A4912707-DF3E-47A1-B4DF-BE727571124A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D50535FB-E16E-406A-B609-9CA748FBAAC7}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		build\build.cmd = build\build.cmd
+		build\packages.config = build\packages.config
+		build\test.cmd = build\test.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
