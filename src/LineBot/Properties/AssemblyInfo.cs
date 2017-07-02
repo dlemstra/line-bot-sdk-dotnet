@@ -12,6 +12,17 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Reflection;
 using System.Runtime.CompilerServices;
+
+[assembly: AssemblyDescription("C# SDK for a Line bot")]
+[assembly: AssemblyCompany("Dirk Lemstra")]
+[assembly: AssemblyProduct("LineBot")]
+[assembly: AssemblyCopyright("Copyright 2017 Dirk Lemstra")]
+[assembly: AssemblyTitle("LineBot")]
+
+[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0")]
 
 [assembly: InternalsVisibleTo("LineBot.Tests")]
