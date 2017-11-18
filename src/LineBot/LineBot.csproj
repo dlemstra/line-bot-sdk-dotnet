@@ -1,60 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <RootNamespace>Line</RootNamespace>
-    <TargetFramework>netstandard1.3</TargetFramework>
-    <DebugType Condition="$(codecov) != ''">full</DebugType>
-    <DebugType Condition="$(codecov) == ''">portable</DebugType>
-    <DebugSymbols>True</DebugSymbols>
-    <Version>1.0.0</Version>
-    <PackageId>Line.Bot.SDK</PackageId>
-    <Authors>Dirk Lemstra</Authors>
-    <Description>C# SDK for a Line bot</Description>
-    <Copyright>Copyright 2017 Dirk Lemstra</Copyright>
-    <PackageTags>Line LineBot SDK</PackageTags>
-    <PackageLicenseUrl>https://github.com/dlemstra/line-bot-sdk-dotnet/blob/master/License.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/dlemstra/line-bot-sdk-dotnet</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/dlemstra/line-bot-sdk-dotnet/raw/master/logo/Line.Bot.SDK.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/dlemstra/line-bot-sdk-dotnet</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Version>1.0.0</Version>
+        <Authors>Dirk Lemstra</Authors>
+        <TargetFramework>netstandard1.3</TargetFramework>
+        <DebugType Condition="$(codecov) != ''">full</DebugType>
+        <DebugType Condition="$(codecov) == ''">portable</DebugType>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <RootNamespace>Line</RootNamespace>
+        <PackageId>Line.Bot.SDK</PackageId>
+        <Description>C# SDK for a Line bot</Description>
+        <Copyright>Copyright 2017 Dirk Lemstra</Copyright>
+        <PackageTags>Line LineBot SDK</PackageTags>
+        <PackageLicenseUrl>https://github.com/dlemstra/line-bot-sdk-dotnet/blob/master/License.txt</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/dlemstra/line-bot-sdk-dotnet</PackageProjectUrl>
+        <PackageIconUrl>https://github.com/dlemstra/line-bot-sdk-dotnet/raw/master/logo/Line.Bot.SDK.png</PackageIconUrl>
+        <RepositoryUrl>https://github.com/dlemstra/line-bot-sdk-dotnet</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard1.3\LineBot.xml</DocumentationFile>
-  </PropertyGroup>
+    <ItemGroup>
+        <AdditionalFiles Include="..\..\stylecop.json" />
+    </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.3\LineBot.xml</DocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+        <PackageReference Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+            <PrivateAssets>All</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-    <PackageReference Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
-  </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
 </Project>
