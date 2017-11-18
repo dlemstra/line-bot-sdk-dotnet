@@ -53,14 +53,19 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void Columns_MoreThan5_ThrowsException()
+        public void Columns_MoreThan10_ThrowsException()
         {
             CarouselTemplate template = new CarouselTemplate();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The maximum number of columns is 5.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The maximum number of columns is 10.", () =>
             {
                 template.Columns = new ICarouselColumn[]
                 {
+                    new CarouselColumn(),
+                    new CarouselColumn(),
+                    new CarouselColumn(),
+                    new CarouselColumn(),
+                    new CarouselColumn(),
                     new CarouselColumn(),
                     new CarouselColumn(),
                     new CarouselColumn(),

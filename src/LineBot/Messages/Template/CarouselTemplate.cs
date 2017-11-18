@@ -59,7 +59,7 @@ namespace Line
                     throw new InvalidOperationException("The minimum number of columns is 1.");
 
                 if (count > 5)
-                    throw new InvalidOperationException("The maximum number of columns is 5.");
+                    throw new InvalidOperationException("The maximum number of columns is 10.");
 
                 _columns = value;
             }
