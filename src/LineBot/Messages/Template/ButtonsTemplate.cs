@@ -25,6 +25,7 @@ namespace Line
     public sealed class ButtonsTemplate : IButtonsTemplate
     {
         private Uri _thumbnailUrl;
+        private string _color = "#FFFFFF";
         private string _title;
         private string _text;
         private IEnumerable<ITemplateAction> _actions;
@@ -68,6 +69,46 @@ namespace Line
                 }
 
                 _thumbnailUrl = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the aspect ratio of the image.
+        /// </summary>
+        [JsonProperty("imageAspectRatio")]
+        [JsonConverter(typeof(EnumConverter<ImageAspectRatio>))]
+        public ImageAspectRatio ImageAspectRatio { get; set; } = ImageAspectRatio.Rectangle;
+
+        /// <summary>
+        /// Gets or sets the size of the image.
+        /// </summary>
+        [JsonProperty("imageSize")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        public ImageSize ImageSize { get; set; } = ImageSize.Cover;
+
+        /// <summary>
+        /// Gets or sets the background color of the image.
+        /// </summary>
+        [JsonProperty("imageBackgroundColor")]
+        public string ImageBackgroundColor
+        {
+            get
+            {
+                return _color;
+            }
+
+            set
+            {
+                if (value == null || value.Length != 7)
+                    throw new InvalidOperationException("The color should be 7 characters long.");
+
+                if (value[0] != '#')
+                    throw new InvalidOperationException("The color should start with #.");
+
+                if (!IsValidColor(value))
+                    throw new InvalidOperationException("The color contains invalid characters.");
+
+                _color = value.ToUpperInvariant();
             }
         }
 
@@ -156,6 +197,30 @@ namespace Line
 
                 _actions = value;
             }
+        }
+
+        private static bool IsValidColor(string value)
+        {
+            for (int i = 1; i < value.Length; i++)
+            {
+                char character = value[i];
+
+                // 0-9
+                if (character >= 48 && character <= 57)
+                    continue;
+
+                // A-F
+                if (character >= 65 && character <= 70)
+                    continue;
+
+                // a-f
+                if (character >= 97 && character <= 102)
+                    continue;
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

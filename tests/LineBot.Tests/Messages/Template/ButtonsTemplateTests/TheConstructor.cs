@@ -34,7 +34,7 @@ namespace Line.Tests.Messages.Template
                 };
 
                 string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""title"":""Foo"",""text"":""Test"",""actions"":null}", serialized);
+                Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""imageAspectRatio"":""rectangle"",""imageSize"":""cover"",""imageBackgroundColor"":""#FFFFFF"",""title"":""Foo"",""text"":""Test"",""actions"":null}", serialized);
             }
         }
     }
