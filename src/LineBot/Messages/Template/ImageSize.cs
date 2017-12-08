@@ -12,24 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-
-namespace Line.Tests.Messages.Template
+namespace Line
 {
-    public partial class CarouselTemplateTests
+    /// <summary>
+    /// Encapsulates the image sizes
+    /// </summary>
+    public enum ImageSize
     {
-        [TestClass]
-        public class TheConstructor
-        {
-            [TestMethod]
-            public void ShouldInitializeTheInstance()
-            {
-                CarouselTemplate template = new CarouselTemplate();
+        /// <summary>
+        ///  The image fills the entire image area. Parts of the image that do not fit in the area are not displayed.
+        /// </summary>
+        Cover,
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
-            }
-        }
+        /// <summary>
+        /// The entire image is displayed in the image area. A background is displayed in the unused areas to the left and right of vertical images and in the areas above and below horizontal images.
+        /// </summary>
+        Contain,
     }
 }

@@ -64,5 +64,19 @@ namespace Line
                 _columns = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the aspect ratio of the image.
+        /// </summary>
+        [JsonProperty("imageAspectRatio")]
+        [JsonConverter(typeof(EnumConverter<ImageAspectRatio>))]
+        public ImageAspectRatio ImageAspectRatio { get; set; } = ImageAspectRatio.Rectangle;
+
+        /// <summary>
+        /// Gets or sets the size of the image.
+        /// </summary>
+        [JsonProperty("imageSize")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        public ImageSize ImageSize { get; set; } = ImageSize.Cover;
     }
 }

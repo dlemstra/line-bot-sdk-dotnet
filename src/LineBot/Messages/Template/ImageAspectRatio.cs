@@ -12,24 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-
-namespace Line.Tests.Messages.Template
+namespace Line
 {
-    public partial class CarouselTemplateTests
+    /// <summary>
+    /// Encapsulates the image aspect ratios
+    /// </summary>
+    public enum ImageAspectRatio
     {
-        [TestClass]
-        public class TheConstructor
-        {
-            [TestMethod]
-            public void ShouldInitializeTheInstance()
-            {
-                CarouselTemplate template = new CarouselTemplate();
+        /// <summary>
+        /// 1.51:1
+        /// </summary>
+        Rectangle,
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
-            }
-        }
+        /// <summary>
+        /// 1:1
+        /// </summary>
+        Square,
     }
 }
