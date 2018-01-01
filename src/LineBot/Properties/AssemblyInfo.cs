@@ -1,4 +1,4 @@
-﻿// Copyright 2017 Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet)
+﻿// Copyright 2017-2018 Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet)
 //
 // Dirk Lemstra licenses this file to you under the Apache License,
 // version 2.0 (the "License"); you may not use this file except in compliance
@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: AssemblyDescription("C# SDK for a Line bot")]
 [assembly: AssemblyCompany("Dirk Lemstra")]
 [assembly: AssemblyProduct("LineBot")]
-[assembly: AssemblyCopyright("Copyright 2017 Dirk Lemstra")]
+[assembly: AssemblyCopyright("Copyright 2017-2018 Dirk Lemstra")]
 [assembly: AssemblyTitle("LineBot")]
 
 [assembly: AssemblyVersion("1.1.0")]
