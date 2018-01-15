@@ -21,6 +21,7 @@ namespace Line.Tests.Converters
         [TestClass]
         public class TheCanConvertMethod
         {
+            [TestMethod]
             public void ShouldReturnTrueWhenTypeIsEnum()
             {
                 EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
@@ -28,6 +29,7 @@ namespace Line.Tests.Converters
                 Assert.IsTrue(converter.CanConvert(typeof(TestEnum)));
             }
 
+            [TestMethod]
             public void ShouldReturnTrueWhenTypeIsNullableEnum()
             {
                 EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
