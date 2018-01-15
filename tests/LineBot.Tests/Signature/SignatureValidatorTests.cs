@@ -20,11 +20,20 @@ namespace Line.Tests
     public class SignatureValidatorTests
     {
         [TestMethod]
+        public void Constructor_ConfigurationNull_ThrowsException()
+        {
+            ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
+            {
+                new SignatureValidator(null);
+            });
+        }
+
+        [TestMethod]
         public void Validate_ContentNull_ThrowsException()
         {
             ExceptionAssert.ThrowsArgumentNullException("content", () =>
             {
-                SignatureValidator validator = new SignatureValidator(null);
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                 validator.Validate(null, "test");
             });
         }
@@ -34,7 +43,7 @@ namespace Line.Tests
         {
             ExceptionAssert.ThrowsArgumentEmptyException("content", () =>
             {
-                SignatureValidator validator = new SignatureValidator(null);
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                 validator.Validate(new byte[] { }, "test");
             });
         }
@@ -44,7 +53,7 @@ namespace Line.Tests
         {
             ExceptionAssert.ThrowsArgumentNullException("signature", () =>
             {
-                SignatureValidator validator = new SignatureValidator(null);
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                 validator.Validate(new byte[] { 0 }, null);
             });
         }
@@ -54,7 +63,7 @@ namespace Line.Tests
         {
             ExceptionAssert.ThrowsArgumentEmptyException("signature", () =>
             {
-                SignatureValidator validator = new SignatureValidator(null);
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                 validator.Validate(new byte[] { 0 }, string.Empty);
             });
         }
@@ -62,11 +71,21 @@ namespace Line.Tests
         [TestMethod]
         public void Validate_SignatureInvalid_ThrowsException()
         {
-            ExceptionAssert.Throws<LineBotException>("Invalid signature. Expected aajPtaEL8oyiitLlTbSzkFCTDQ7Lr0m/89eDhe6tFx4=, actual value FooBar.", () =>
-             {
-                 SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
-                 validator.Validate(new byte[] { 42 }, "FooBar");
-             });
+            ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
+            {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                validator.Validate(new byte[] { 42 }, "FooBar");
+            });
+        }
+
+        [TestMethod]
+        public void Validate_SignatureIncorrectLength_ThrowsException()
+        {
+            ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
+            {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                validator.Validate(new byte[] { 42 }, "NDI=");
+            });
         }
 
         [TestMethod]

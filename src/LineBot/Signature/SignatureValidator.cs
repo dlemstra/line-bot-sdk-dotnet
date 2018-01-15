@@ -18,13 +18,16 @@ using System.Text;
 
 namespace Line
 {
-    internal class SignatureValidator
+    internal sealed class SignatureValidator
     {
-        private readonly ILineConfiguration _configuration;
+        private const int SignatureLength = 32;
+        private readonly byte[] _key;
 
         public SignatureValidator(ILineConfiguration configuration)
         {
-            _configuration = configuration;
+            Guard.NotNull(nameof(configuration), configuration);
+
+            _key = Encoding.UTF8.GetBytes(configuration.ChannelSecret);
         }
 
         public void Validate(byte[] content, string signature)
@@ -32,15 +35,41 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(content), content);
             Guard.NotNullOrEmpty(nameof(signature), signature);
 
-            byte[] key = Encoding.UTF8.GetBytes(_configuration.ChannelSecret);
+            if (!IsValidHash(content, signature))
+                throw new LineBotException($"Invalid signature.");
+        }
 
-            using (HMACSHA256 hmac = new HMACSHA256(key))
+        private bool IsValidHash(byte[] content, string signature)
+        {
+            byte[] expectedHash;
+
+            try
+            {
+                expectedHash = Convert.FromBase64String(signature);
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+
+            // It is no secret wich hashing method is used to validate the signature so we can do a quick exit here.
+            if (expectedHash.Length != SignatureLength)
+            {
+                return false;
+            }
+
+            using (HMACSHA256 hmac = new HMACSHA256(_key))
             {
                 byte[] hash = hmac.ComputeHash(content);
 
-                string base64 = Convert.ToBase64String(hash);
-                if (signature != base64)
-                    throw new LineBotException($"Invalid signature. Expected {base64}, actual value {signature}.");
+                int result = 0;
+
+                for (int i = 0; i < SignatureLength; i++)
+                {
+                    result |= hash[i] ^ expectedHash[i];
+                }
+
+                return result == 0;
             }
         }
     }
