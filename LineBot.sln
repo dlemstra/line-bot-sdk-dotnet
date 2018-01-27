@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot", "src\LineBot\LineBot.csproj", "{0CFDBD19-D680-43BF-8006-9A750ED4FC97}"
 EndProject
@@ -20,6 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publish", "Publish", "{76B4
 	ProjectSection(SolutionItems) = preProject
 		publish\publish.cmd = publish\publish.cmd
 		publish\push.cmd = publish\push.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{7B689779-DCF4-440A-9936-31693B7CA13A}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Global
