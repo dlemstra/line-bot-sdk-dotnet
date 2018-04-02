@@ -35,7 +35,9 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapUriAction"/> class.
         /// </summary>
-        /// <param name="url">The webpage url.</param>
+        /// <param name="url">
+        /// The webpage url.
+        /// <para>Max url length: 1000 characters</para></param>
         public ImagemapUriAction(string url)
             : this(new Uri(url))
         {
@@ -44,7 +46,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapUriAction"/> class.
         /// </summary>
-        /// <param name="url">The webpage url.</param>
+        /// <param name="url">
+        /// The webpage url.
+        /// <para>Max url length: 1000 characters</para>
+        /// </param>
         public ImagemapUriAction(Uri url)
             : this()
         {
@@ -54,7 +59,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapUriAction"/> class.
         /// </summary>
-        /// <param name="url">The webpage url.</param>
+        /// <param name="url">
+        /// The webpage url.
+        /// <para>Max url length: 1000 characters</para>
+        /// </param>
         /// <param name="x">The x position.</param>
         /// <param name="y">The y position.</param>
         /// <param name="width">The width.</param>
@@ -67,7 +75,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapUriAction"/> class.
         /// </summary>
-        /// <param name="url">The webpage url.</param>
+        /// <param name="url">
+        /// The webpage url.
+        /// <para>Max url length: 1000 characters</para>
+        /// </param>
         /// <param name="x">The x position.</param>
         /// <param name="y">The y position.</param>
         /// <param name="width">The width.</param>

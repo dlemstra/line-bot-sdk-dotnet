@@ -42,7 +42,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="TextMessage"/> class.
         /// </summary>
-        /// <param name="text">The text of the message.</param>
+        /// <param name="text">
+        /// The text of the message.
+        /// <para>Max: 2000 characters</para>
+        /// </param>
         public TextMessage(string text)
         {
             Text = text;

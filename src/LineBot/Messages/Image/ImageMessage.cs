@@ -43,7 +43,14 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageMessage"/> class.
         /// </summary>
-        /// <param name="url">The image url.</param>
+        /// <param name="url">
+        /// The image url.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: JPEG</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max dimensions: 1024 x 1024</para>
+        /// <para>Max size: 1 MB</para>
+        /// </param>
         /// <param name="previewUrl">The preview image url.</param>
         public ImageMessage(string url, string previewUrl)
             : this(new Uri(url), new Uri(previewUrl))
@@ -53,7 +60,14 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageMessage"/> class.
         /// </summary>
-        /// <param name="url">The image url.</param>
+        /// <param name="url">
+        /// The image url.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: JPEG</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max dimensions: 1024 x 1024</para>
+        /// <para>Max size: 1 MB</para>
+        /// </param>
         /// <param name="previewUrl">The preview image url.</param>
         public ImageMessage(Uri url, Uri previewUrl)
         {

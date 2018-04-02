@@ -43,7 +43,14 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioMessage"/> class.
         /// </summary>
-        /// <param name="url">The url of the audio file.</param>
+        /// <param name="url">
+        /// The url of the audio file.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: M4A</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max duration: 1 minute</para>
+        /// <para>Max size: 10 MB</para>
+        /// </param>
         /// <param name="duration">The length of audio file in milliseconds.</param>
         public AudioMessage(string url, int duration)
             : this(new Uri(url), duration)
@@ -53,7 +60,14 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioMessage"/> class.
         /// </summary>
-        /// <param name="url">The url of the audio file.</param>
+        /// <param name="url">
+        /// The url of the audio file.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: M4A</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max duration: 1 minute</para>
+        /// <para>Max size: 10 MB</para>
+        /// </param>
         /// <param name="duration">The length of audio file in milliseconds.</param>
         public AudioMessage(Uri url, int duration)
         {

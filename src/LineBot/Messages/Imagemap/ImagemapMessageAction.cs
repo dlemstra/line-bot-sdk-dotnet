@@ -35,7 +35,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapMessageAction"/> class.
         /// </summary>
-        /// <param name="text">The text of the message</param>
+        /// <param name="text">
+        /// The text of the message
+        /// <para>Max: 400 characters</para>
+        /// </param>
         public ImagemapMessageAction(string text)
             : this()
         {
@@ -45,7 +48,10 @@ namespace Line
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapMessageAction"/> class.
         /// </summary>
-        /// <param name="text">The text of the message</param>
+        /// <param name="text">
+        /// The text of the message
+        /// <para>Max: 400 characters</para>
+        /// </param>
         /// <param name="x">The x position.</param>
         /// <param name="y">The y position.</param>
         /// <param name="width">The width.</param>
