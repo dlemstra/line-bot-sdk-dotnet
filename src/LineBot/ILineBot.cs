@@ -104,8 +104,8 @@ namespace Line
 
         /// <summary>
         /// Send messages to multiple users at any time.
+        /// <para>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</para>
         /// </summary>
-        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -113,8 +113,8 @@ namespace Line
 
         /// <summary>
         /// Send messages to multiple users at any time.
+        /// <para>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</para>
         /// </summary>
-        /// <remarks>Use IDs returned via the webhook event of source users. IDs of groups or rooms cannot be used. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -170,8 +170,8 @@ namespace Line
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.
+        /// <para>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</para>
         /// </summary>
-        /// <remarks>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
@@ -179,8 +179,8 @@ namespace Line
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.
+        /// <para>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</para>
         /// </summary>
-        /// <remarks>Use the ID returned via the webhook event of the source user, group, or room as the ID of the receiver. Do not use the LINE ID found on the LINE app.</remarks>
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>

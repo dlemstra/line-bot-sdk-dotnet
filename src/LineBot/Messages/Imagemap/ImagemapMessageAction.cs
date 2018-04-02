@@ -58,8 +58,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the text of the message.
+        /// <para>Max: 400 characters</para>
         /// </summary>
-        /// <remarks>Max: 400 characters</remarks>
         [JsonProperty("text")]
         public string Text
         {

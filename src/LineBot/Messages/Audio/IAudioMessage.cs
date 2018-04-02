@@ -23,14 +23,12 @@ namespace Line
     {
         /// <summary>
         /// Gets the url of the video file.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: MP4</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max duration: 1024 x 1024</para>
+        /// <para>Max size: 10 MB</para>
         /// </summary>
-        /// <remarks>
-        /// Protocol: HTTPS<para/>
-        /// Format: MP4<para/>
-        /// Max url length: 1000 characters<para/>
-        /// Max duration: 1024 x 1024<para/>
-        /// Max size: 10 MB
-        /// </remarks>
         Uri Url { get; }
 
         /// <summary>

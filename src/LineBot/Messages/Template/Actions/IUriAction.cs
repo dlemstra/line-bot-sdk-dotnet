@@ -23,17 +23,15 @@ namespace Line
     {
         /// <summary>
         /// Gets the label.
+        /// <para>Max: 20 characters</para>
         /// </summary>
-        /// <remarks>Max: 20 characters</remarks>
         string Label { get; }
 
         /// <summary>
         /// Gets the url opened when the action is performed.
+        /// <para>Protocol: HTTP, HTTPS, TEL</para>
+        /// <para>Max url length: 1000 characters</para>
         /// </summary>
-        /// <remarks>
-        /// Protocol: HTTP, HTTPS, TEL<para/>
-        /// Max url length: 1000 characters<para/>
-        /// </remarks>
         Uri Url { get; }
     }
 }

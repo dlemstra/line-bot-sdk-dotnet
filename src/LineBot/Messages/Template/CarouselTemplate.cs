@@ -36,10 +36,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the columns.
+        /// <para>Max: 5</para>
         /// </summary>
-        /// <remarks>
-        /// Max: 5
-        /// </remarks>
         [JsonProperty("columns")]
         public IEnumerable<ICarouselColumn> Columns
         {

@@ -24,20 +24,18 @@ namespace Line
     {
         /// <summary>
         /// Gets the base url of the image.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: JPEG or PNG</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max dimensions: 1024 x (max 1024)</para>
+        /// <para>Max size: 1 MB</para>
         /// </summary>
-        /// <remarks>
-        /// Protocol: HTTPS<para/>
-        /// Format: JPEG or PNG<para/>
-        /// Max url length: 1000 characters<para/>
-        /// Max dimensions: 1024 x (max 1024)<para/>
-        /// Max size: 1 MB
-        /// </remarks>
         Uri BaseUrl { get; }
 
         /// <summary>
         /// Gets the alternative text for devices that do not support this type of message.
+        /// <para>Max: 400 characters</para>
         /// </summary>
-        /// <remarks>Max: 400 characters</remarks>
         string AlternativeText { get; }
 
         /// <summary>

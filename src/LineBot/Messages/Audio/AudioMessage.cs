@@ -63,14 +63,12 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the url of the audio file.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: M4A</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max duration: 1 minute</para>
+        /// <para>Max size: 10 MB</para>
         /// </summary>
-        /// <remarks>
-        /// Protocol: HTTPS<para/>
-        /// Format: M4A<para/>
-        /// Max url length: 1000 characters<para/>
-        /// Max duration: 1 minute<para/>
-        /// Max size: 10 MB
-        /// </remarks>
         [JsonProperty("originalContentUrl")]
         public Uri Url
         {

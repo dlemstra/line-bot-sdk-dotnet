@@ -42,10 +42,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the title.
+        /// <para>Max: 100 characters</para>
         /// </summary>
-        /// <remarks>
-        /// Max: 100 characters
-        /// </remarks>
         [JsonProperty("title")]
         public string Title
         {
@@ -68,10 +66,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the address.
+        /// <para>Max: 100 characters</para>
         /// </summary>
-        /// <remarks>
-        /// Max: 100 characters
-        /// </remarks>
         [JsonProperty("address")]
         public string Address
         {

@@ -21,8 +21,8 @@ namespace Line
     {
         /// <summary>
         /// Gets the alternative text for devices that do not support this type of message.
+        /// <para>Max: 400 characters</para>
         /// </summary>
-        /// <remarks>Max: 400 characters</remarks>
         string AlternativeText { get; }
 
         /// <summary>

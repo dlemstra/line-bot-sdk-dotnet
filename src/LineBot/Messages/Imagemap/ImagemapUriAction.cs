@@ -80,8 +80,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the webpage url.
+        /// <para>Max url length: 1000 characters</para>
         /// </summary>
-        /// <remarks>Max url length: 1000 characters</remarks>
         [JsonProperty("linkUri")]
         public Uri Url
         {
