@@ -28,14 +28,14 @@ namespace Line
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The content of the specified message.</returns>
-        Task<byte[]> GetContent(IMessage message);
+        Task<byte[]> GetMessageContent(IMessage message);
 
         /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="messageId">The id of the message</param>
         /// <returns>The content of the specified message.</returns>
-        Task<byte[]> GetContent(string messageId);
+        Task<byte[]> GetMessageContent(string messageId);
 
         /// <summary>
         /// Returns the events from the specified request.

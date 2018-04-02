@@ -141,37 +141,37 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task GetContent_MessageIsNull_ThrowsException()
+        public async Task GetMessageContent_MessageIsNull_ThrowsException()
         {
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("message", async () =>
             {
-                await bot.GetContent((IMessage)null);
+                await bot.GetMessageContent((IMessage)null);
             });
         }
 
         [TestMethod]
-        public async Task GetContent_MessageIdIsNull_ThrowsException()
+        public async Task GetMessageContent_MessageIdIsNull_ThrowsException()
         {
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messageId", async () =>
             {
-                await bot.GetContent((string)null);
+                await bot.GetMessageContent((string)null);
             });
         }
 
         [TestMethod]
-        public async Task GetContent_MessageIsEmpty_ThrowsException()
+        public async Task GetMessageContent_MessageIsEmpty_ThrowsException()
         {
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messageId", async () =>
             {
-                await bot.GetContent(string.Empty);
+                await bot.GetMessageContent(string.Empty);
             });
         }
 
         [TestMethod]
-        public async Task GetContent_ErrorResponse_ThrowsException()
+        public async Task GetMessageContent_ErrorResponse_ThrowsException()
         {
             TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
 
@@ -179,17 +179,17 @@ namespace Line.Tests
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
-                await bot.GetContent("test");
+                await bot.GetMessageContent("test");
             });
         }
 
         [TestMethod]
-        public async Task GetContent_EmptyResponse_ReturnsNull()
+        public async Task GetMessageContent_EmptyResponse_ReturnsNull()
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            byte[] data = await bot.GetContent("test");
+            byte[] data = await bot.GetMessageContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
             Assert.AreEqual("/message/test/content", httpClient.RequestPath);
@@ -198,14 +198,14 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task GetContent_WithMessageId_ReturnsData()
+        public async Task GetMessageContent_WithMessageId_ReturnsData()
         {
             byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
 
             TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            byte[] data = await bot.GetContent("test");
+            byte[] data = await bot.GetMessageContent("test");
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
             Assert.AreEqual("/message/test/content", httpClient.RequestPath);
@@ -215,14 +215,14 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public async Task GetContent_WithMessage_ReturnsData()
+        public async Task GetMessageContent_WithMessage_ReturnsData()
         {
             byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
 
             TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            byte[] data = await bot.GetContent(new TestMessage(MessageType.Image));
+            byte[] data = await bot.GetMessageContent(new TestMessage(MessageType.Image));
 
             Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
             Assert.AreEqual("/message/testMessage/content", httpClient.RequestPath);

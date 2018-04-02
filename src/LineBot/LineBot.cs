@@ -59,11 +59,11 @@ namespace Line
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>The content of the specified message.</returns>
-        public async Task<byte[]> GetContent(IMessage message)
+        public async Task<byte[]> GetMessageContent(IMessage message)
         {
             Guard.NotNull(nameof(message), message);
 
-            return await GetContent(message.Id);
+            return await GetMessageContent(message.Id);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Line
         /// </summary>
         /// <param name="messageId">The id of the message</param>
         /// <returns>The content of the specified message.</returns>
-        public async Task<byte[]> GetContent(string messageId)
+        public async Task<byte[]> GetMessageContent(string messageId)
         {
             Guard.NotNullOrEmpty(nameof(messageId), messageId);
 
