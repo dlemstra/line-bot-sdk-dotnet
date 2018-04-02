@@ -29,7 +29,7 @@ namespace Line
     public sealed class LineBot : ILineBot
     {
         private readonly HttpClient _client;
-        private readonly ILineConfiguration _configuration;
+        private readonly SignatureValidator _signatureValidator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LineBot"/> class.
@@ -50,8 +50,8 @@ namespace Line
             if (string.IsNullOrWhiteSpace(configuration.ChannelSecret))
                 throw new ArgumentException($"The {nameof(configuration.ChannelSecret)} cannot be null or whitespace.", nameof(configuration));
 
-            _configuration = configuration;
             _client = client ?? HttpClientFactory.Create(configuration);
+            _signatureValidator = new SignatureValidator(configuration);
         }
 
         /// <summary>
@@ -100,8 +100,7 @@ namespace Line
 
             string signature = request.Headers["X-Line-Signature"];
 
-            SignatureValidator validator = new SignatureValidator(_configuration);
-            validator.Validate(content, signature);
+            _signatureValidator.Validate(content, signature);
 
             string jsonContent = Encoding.UTF8.GetString(content);
 
