@@ -32,12 +32,12 @@ namespace Line.Tests
 
         public static ILineBot CreateBot()
         {
-            return new LineBot(new TestConfiguration(), TestHttpClient.Create(), null);
+            return new LineBot(new TestConfiguration(), TestHttpClient.Create(), new EmptyLineBotLogger());
         }
 
         public static ILineBot CreateBot(TestHttpClient httpClient)
         {
-            return new LineBot(new TestConfiguration(), httpClient, null);
+            return new LineBot(new TestConfiguration(), httpClient, new EmptyLineBotLogger());
         }
 
         public static ILineBot CreateBot(ILineBotLogger logger)
