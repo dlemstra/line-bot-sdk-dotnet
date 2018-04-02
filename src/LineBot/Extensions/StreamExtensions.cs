@@ -21,42 +21,73 @@ namespace Line
 {
     internal static class StreamExtensions
     {
+        private const int BufferSize = 8192;
         private static readonly byte[] Utf8Preamable = Encoding.UTF8.GetPreamble();
 
-        public static async Task<byte[]> ToArrayAsync(this Stream self)
+        public static Task<byte[]> ToArrayAsync(this Stream self)
+        {
+            if (self.CanSeek)
+                return ToArrayWithSeekableStream(self);
+            else
+                return ToArrayWithNonSeekableStream(self);
+        }
+
+        private static async Task<byte[]> ToArrayWithSeekableStream(Stream self)
         {
             if (self.Length == 0)
                 return null;
 
-            byte[] content = new byte[self.Length];
+            var buffer = new byte[self.Length];
 
-            if (content.Length < Utf8Preamable.Length)
+            if (buffer.Length < Utf8Preamable.Length)
             {
-                await self.ReadAsync(content, 0, content.Length);
-                return content;
+                await self.ReadAsync(buffer, 0, buffer.Length);
+                return buffer;
             }
 
             int offset = 0;
-            int remaining = content.Length;
+            int remaining = buffer.Length;
 
-            int length = await self.ReadAsync(content, 0, Utf8Preamable.Length);
+            int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length);
             remaining -= length;
 
             /* Ignore the UTF8 Preamable */
-            if (IsUtf8Preamable(content))
-                Array.Resize(ref content, content.Length - Utf8Preamable.Length);
+            if (IsUtf8Preamable(buffer))
+                Array.Resize(ref buffer, buffer.Length - Utf8Preamable.Length);
             else
                 offset += length;
 
             while (remaining > 0)
             {
-                length = await self.ReadAsync(content, offset, Math.Min(remaining, 8192));
+                length = await self.ReadAsync(buffer, offset, Math.Min(remaining, 8192));
 
                 remaining -= length;
                 offset += length;
             }
 
-            return content;
+            return buffer;
+        }
+
+        private static async Task<byte[]> ToArrayWithNonSeekableStream(Stream self)
+        {
+            var buffer = new byte[BufferSize];
+            using (var memStream = new MemoryStream())
+            {
+                int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length);
+                if (length == 0)
+                    return null;
+
+                /* Ignore the UTF8 Preamable */
+                if (!IsUtf8Preamable(buffer))
+                    await memStream.WriteAsync(buffer, 0, length);
+
+                while ((length = await self.ReadAsync(buffer, 0, BufferSize)) != 0)
+                {
+                    memStream.Write(buffer, 0, length);
+                }
+
+                return memStream.ToArray();
+            }
         }
 
         private static bool IsUtf8Preamable(byte[] content)
