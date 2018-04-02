@@ -25,3 +25,7 @@ Japanese: [https://devdocs.line.me/ja/](https://devdocs.line.me/ja/)
 ### Installation
 
 The package for this library is available on [NuGet](https://www.nuget.org/packages/Line.Bot.SDK).
+
+### Example
+
+An example of how to use the library can be found here: [line-bot-sdk-dotnet-sample](https://github.com/dlemstra/line-bot-sdk-dotnet-sample).
