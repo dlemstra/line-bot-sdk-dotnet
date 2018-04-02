@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class LineBotTests
+    public partial class LineBotTests
     {
         [TestMethod]
         public void Constructor_ConfigurationIsNull_ThrowsException()

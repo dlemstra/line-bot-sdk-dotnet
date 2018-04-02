@@ -14,22 +14,32 @@
 
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class HttpClientFactory
+    [ExcludeFromCodeCoverage]
+    public sealed class TestLogger : ILineBotLogger
     {
-        public static HttpClient Create(ILineConfiguration configuration, ILineBotLogger logger)
+        public byte[] LogReceivedEventsEventsData { get; private set; }
+
+        public Uri LogApiCallUri { get; private set; }
+
+        public HttpContent LogApiCallHttpContent { get; private set; }
+
+        public Task LogApiCall(Uri uri, HttpContent httpContent)
         {
-            var loggingDelegatingHandler = new LoggingDelegatingHandler(logger);
+            LogApiCallUri = uri;
+            LogApiCallHttpContent = httpContent;
 
-            var client = new HttpClient(loggingDelegatingHandler)
-            {
-                BaseAddress = new Uri("https://api.line.me/v2/bot/")
-            };
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {configuration.ChannelAccessToken}");
+            return Task.CompletedTask;
+        }
 
-            return client;
+        public Task LogReceivedEvents(byte[] eventsData)
+        {
+            LogReceivedEventsEventsData = eventsData;
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Line
     /// </summary>
     public sealed class LineBot : ILineBot
     {
+        private readonly ILineBotLogger _logger;
         private readonly HttpClient _client;
         private readonly SignatureValidator _signatureValidator;
 
@@ -36,11 +37,21 @@ namespace Line
         /// </summary>
         /// <param name="configuration">The configuration for the client.</param>
         public LineBot(ILineConfiguration configuration)
-            : this(configuration, null)
+            : this(configuration, null, null)
         {
         }
 
-        internal LineBot(ILineConfiguration configuration, HttpClient client)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LineBot"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration for the client.</param>
+        /// <param name="logger">The logger.</param>
+        public LineBot(ILineConfiguration configuration, ILineBotLogger logger)
+            : this(configuration, null, logger)
+        {
+        }
+
+        internal LineBot(ILineConfiguration configuration, HttpClient client, ILineBotLogger logger)
         {
             Guard.NotNull(nameof(configuration), configuration);
 
@@ -50,7 +61,8 @@ namespace Line
             if (string.IsNullOrWhiteSpace(configuration.ChannelSecret))
                 throw new ArgumentException($"The {nameof(configuration.ChannelSecret)} cannot be null or whitespace.", nameof(configuration));
 
-            _client = client ?? HttpClientFactory.Create(configuration);
+            _logger = logger ?? new EmptyLineBotLogger();
+            _client = client ?? HttpClientFactory.Create(configuration, _logger);
             _signatureValidator = new SignatureValidator(configuration);
         }
 
@@ -97,6 +109,8 @@ namespace Line
 
             if (content == null)
                 return Enumerable.Empty<ILineEvent>();
+
+            await _logger.LogReceivedEvents(content);
 
             string signature = request.Headers["X-Line-Signature"];
 
