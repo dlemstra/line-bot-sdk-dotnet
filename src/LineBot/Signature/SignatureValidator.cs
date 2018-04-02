@@ -52,7 +52,7 @@ namespace Line
                 return false;
             }
 
-            // It is no secret wich hashing method is used to validate the signature so we can do a quick exit here.
+            // It is no secret which hashing method is used to validate the signature so we can do a quick exit here.
             if (expectedHash.Length != SignatureLength)
             {
                 return false;
