@@ -12,13 +12,30 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+using System.Collections.Generic;
+
 namespace Line
 {
-    internal enum TemplateType
+    /// <summary>
+    /// Encapsulates a carousel column.
+    /// </summary>
+    public interface IImageCarouselColumn
     {
-        Buttons,
-        Confirm,
-        Carousel,
-        Image_Carousel
+        /// <summary>
+        /// Gets the image url for the thumbnail.
+        /// <para>Protocol: HTTPS</para>
+        /// <para>Format: JPEG or PNG</para>
+        /// <para>Max url length: 1000 characters</para>
+        /// <para>Aspect ratio: 1:1.51</para>
+        /// <para>Max width: 1024px</para>
+        /// <para>Max size: 1 MB</para>
+        /// </summary>
+        Uri ImageUrl { get; }
+
+        /// <summary>
+        /// Gets Action when image is tapped
+        /// </summary>
+        ITemplateAction Action { get; }
     }
 }
