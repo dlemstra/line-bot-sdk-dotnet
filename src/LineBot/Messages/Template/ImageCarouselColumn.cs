@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a carousel column.
+    /// Encapsulates a image carousel column.
     /// </summary>
     public sealed class ImageCarouselColumn : IImageCarouselColumn
     {
@@ -49,10 +49,10 @@ namespace Line
                 if (value != null)
                 {
                     if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
-                        throw new InvalidOperationException("The thumbnail url should use the https scheme.");
+                        throw new InvalidOperationException("The image url should use the https scheme.");
 
                     if (value.ToString().Length > 1000)
-                        throw new InvalidOperationException("The thumbnail url cannot be longer than 1000 characters.");
+                        throw new InvalidOperationException("The image url cannot be longer than 1000 characters.");
                 }
 
                 _imageUrl = value;
@@ -60,8 +60,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the actions when tapped.
-        /// <para>Max: 4</para>
+        /// Gets or sets the action when image is tapped.
         /// </summary>
         [JsonProperty("action")]
         public ITemplateAction Action

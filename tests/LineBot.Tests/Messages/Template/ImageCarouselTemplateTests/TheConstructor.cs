@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 
 namespace Line.Tests.Messages.Template
 {
-    public partial class ImageCarCarouselTemplateTests
+    public partial class ImageCarouselTemplateTests
     {
         [TestClass]
         public class TheConstructor

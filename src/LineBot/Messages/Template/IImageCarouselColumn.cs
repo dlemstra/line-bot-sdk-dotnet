@@ -23,18 +23,18 @@ namespace Line
     public interface IImageCarouselColumn
     {
         /// <summary>
-        /// Gets the image url for the thumbnail.
+        /// Gets the image url.
         /// <para>Protocol: HTTPS</para>
         /// <para>Format: JPEG or PNG</para>
         /// <para>Max url length: 1000 characters</para>
-        /// <para>Aspect ratio: 1:1.51</para>
+        /// <para>Aspect ratio: 1:1</para>
         /// <para>Max width: 1024px</para>
         /// <para>Max size: 1 MB</para>
         /// </summary>
         Uri ImageUrl { get; }
 
         /// <summary>
-        /// Gets Action when image is tapped
+        /// Gets the action when image is tapped.
         /// </summary>
         ITemplateAction Action { get; }
     }

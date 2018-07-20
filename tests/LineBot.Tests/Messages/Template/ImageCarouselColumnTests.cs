@@ -48,7 +48,7 @@ namespace Line.Tests
         {
             ImageCarouselColumn column = new ImageCarouselColumn();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The thumbnail url should use the https scheme.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The image url should use the https scheme.", () =>
             {
                 column.ImageUrl = new Uri("http://foo.bar");
             });
@@ -59,7 +59,7 @@ namespace Line.Tests
         {
             ImageCarouselColumn column = new ImageCarouselColumn();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The thumbnail url cannot be longer than 1000 characters.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The image url cannot be longer than 1000 characters.", () =>
             {
                 column.ImageUrl = new Uri("https://foo.bar/" + new string('x', 985));
             });
