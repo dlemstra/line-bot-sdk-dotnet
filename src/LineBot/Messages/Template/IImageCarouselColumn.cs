@@ -18,7 +18,7 @@ using System.Collections.Generic;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a carousel column.
+    /// Encapsulates a image carousel column.
     /// </summary>
     public interface IImageCarouselColumn
     {
