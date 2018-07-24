@@ -45,11 +45,11 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The url of the audio file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: M4A</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: M4A.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </param>
         /// <param name="duration">The length of audio file in milliseconds.</param>
         public AudioMessage(string url, int duration)
@@ -62,11 +62,11 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The url of the audio file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: M4A</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: M4A.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </param>
         /// <param name="duration">The length of audio file in milliseconds.</param>
         public AudioMessage(Uri url, int duration)
@@ -77,11 +77,11 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the url of the audio file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: M4A</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: M4A.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </summary>
         [JsonProperty("originalContentUrl")]
         public Uri Url

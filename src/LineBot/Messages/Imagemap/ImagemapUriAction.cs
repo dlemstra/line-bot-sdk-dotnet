@@ -37,7 +37,8 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The webpage url.
-        /// <para>Max url length: 1000 characters</para></param>
+        /// <para>Max url length: 1000 characters.</para>
+        /// </param>
         public ImagemapUriAction(string url)
             : this(new Uri(url))
         {
@@ -48,7 +49,7 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The webpage url.
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </param>
         public ImagemapUriAction(Uri url)
             : this()
@@ -61,7 +62,7 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The webpage url.
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </param>
         /// <param name="x">The x position.</param>
         /// <param name="y">The y position.</param>
@@ -77,7 +78,7 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The webpage url.
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </param>
         /// <param name="x">The x position.</param>
         /// <param name="y">The y position.</param>
@@ -91,7 +92,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the webpage url.
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </summary>
         [JsonProperty("linkUri")]
         public Uri Url

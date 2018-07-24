@@ -23,7 +23,7 @@ namespace Line
     {
         /// <summary>
         /// Gets the webpage url.
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </summary>
         Uri Url { get; }
     }

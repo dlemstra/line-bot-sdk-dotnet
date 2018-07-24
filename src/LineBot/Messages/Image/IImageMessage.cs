@@ -23,21 +23,21 @@ namespace Line
     {
         /// <summary>
         /// Gets the image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 1024 x 1024</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 1024 x 1024.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         Uri Url { get; }
 
         /// <summary>
         /// Gets the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 240 x 240</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 240 x 240.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         Uri PreviewUrl { get; }
     }

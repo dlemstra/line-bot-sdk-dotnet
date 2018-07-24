@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Collections.Generic;
 
 namespace Line
 {
@@ -24,12 +23,12 @@ namespace Line
     {
         /// <summary>
         /// Gets the image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG or PNG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Aspect ratio: 1:1</para>
-        /// <para>Max width: 1024px</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG or PNG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Aspect ratio: 1:1.</para>
+        /// <para>Max width: 1024px.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         Uri ImageUrl { get; }
 

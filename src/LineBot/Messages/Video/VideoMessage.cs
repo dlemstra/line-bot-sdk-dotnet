@@ -45,19 +45,19 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The url of the video file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: MP4</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: less than 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: MP4.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: less than 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </param>
         /// <param name="previewUrl">
         /// The the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 240 x 240</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 240 x 240.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </param>
         public VideoMessage(string url, string previewUrl)
             : this(new Uri(url), new Uri(previewUrl))
@@ -69,19 +69,19 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The url of the video file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: MP4</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: less than 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: MP4.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: less than 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </param>
         /// <param name="previewUrl">
         /// The the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 240 x 240</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 240 x 240.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </param>
         public VideoMessage(Uri url, Uri previewUrl)
         {
@@ -91,11 +91,11 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the url of the video file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: MP4</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: less than 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: MP4.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: less than 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </summary>
         [JsonProperty("originalContentUrl")]
         public Uri Url
@@ -113,11 +113,11 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 240 x 240</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 240 x 240.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("previewImageUrl")]
         public Uri PreviewUrl

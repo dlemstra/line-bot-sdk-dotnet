@@ -36,7 +36,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the message text.
-        /// <para>Max: 240 characters (no image or title)</para>
+        /// <para>Max: 240 characters (no image or title).</para>
         /// </summary>
         [JsonProperty("text")]
         public string Text

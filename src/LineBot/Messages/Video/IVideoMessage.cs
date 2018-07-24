@@ -23,21 +23,21 @@ namespace Line
     {
         /// <summary>
         /// Gets the url of the video file.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: MP4</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max duration: less than 1 minute</para>
-        /// <para>Max size: 10 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: MP4.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max duration: less than 1 minute.</para>
+        /// <para>Max size: 10 MB.</para>
         /// </summary>
         Uri Url { get; }
 
         /// <summary>
         /// Gets the the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 1024 x 1024</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 1024 x 1024.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         Uri PreviewUrl { get; }
     }

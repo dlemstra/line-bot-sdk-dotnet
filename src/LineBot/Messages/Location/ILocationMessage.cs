@@ -21,13 +21,13 @@ namespace Line
     {
         /// <summary>
         /// Gets the title.
-        /// <para>Max: 100 characters</para>
+        /// <para>Max: 100 characters.</para>
         /// </summary>
         string Title { get; }
 
         /// <summary>
         /// Gets the address.
-        /// <para>Max: 100 characters</para>
+        /// <para>Max: 100 characters.</para>
         /// </summary>
         string Address { get; }
 

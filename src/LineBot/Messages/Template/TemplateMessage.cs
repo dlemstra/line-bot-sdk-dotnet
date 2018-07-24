@@ -44,7 +44,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the alternative text for devices that do not support this type of message.
-        /// <para>Max: 400 characters</para>
+        /// <para>Max: 400 characters.</para>
         /// </summary>
         [JsonProperty("altText")]
         public string AlternativeText

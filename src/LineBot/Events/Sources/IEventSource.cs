@@ -36,7 +36,7 @@ namespace Line
         IRoom Room { get; }
 
         /// <summary>
-        /// Gets the type of the source
+        /// Gets the type of the source.
         /// </summary>
         EventSourceType SourceType { get; }
 

@@ -23,7 +23,7 @@ namespace Line
     {
         /// <summary>
         /// Gets the columns.
-        /// <para>Max: 5</para>
+        /// <para>Max: 5.</para>
         /// </summary>
         IEnumerable<ICarouselColumn> Columns { get; }
     }

@@ -31,12 +31,12 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the image url for the thumbnail.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG or PNG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Aspect ratio: 1:1.51</para>
-        /// <para>Max width: 1024px</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG or PNG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Aspect ratio: 1:1.51.</para>
+        /// <para>Max width: 1024px.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("thumbnailImageUrl")]
         public Uri ThumbnailUrl
@@ -63,7 +63,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the title.
-        /// <para>Max: 40 characters</para>
+        /// <para>Max: 40 characters.</para>
         /// </summary>
         [JsonProperty("title")]
         public string Title
@@ -84,8 +84,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the message text.
-        /// <para>Max: 120 characters (no image or title)</para>
-        /// <para>Max: 60 characters (message with an image or title)</para>
+        /// <para>Max: 120 characters (no image or title).</para>
+        /// <para>Max: 60 characters (message with an image or title).</para>
         /// </summary>
         [JsonProperty("text")]
         public string Text
@@ -112,7 +112,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the actions when tapped.
-        /// <para>Max: 4</para>
+        /// <para>Max: 4.</para>
         /// </summary>
         [JsonProperty("actions")]
         public IEnumerable<ITemplateAction> Actions

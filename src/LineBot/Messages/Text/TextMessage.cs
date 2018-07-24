@@ -44,7 +44,7 @@ namespace Line
         /// </summary>
         /// <param name="text">
         /// The text of the message.
-        /// <para>Max: 2000 characters</para>
+        /// <para>Max: 2000 characters.</para>
         /// </param>
         public TextMessage(string text)
         {
@@ -53,7 +53,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the text of the message.
-        /// <para>Max: 2000 characters</para>
+        /// <para>Max: 2000 characters.</para>
         /// </summary>
         [JsonProperty("text")]
         public string Text

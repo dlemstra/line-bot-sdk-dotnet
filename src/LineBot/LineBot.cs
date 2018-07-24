@@ -69,7 +69,7 @@ namespace Line
         /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
-        /// <param name="message">The message</param>
+        /// <param name="message">The message.</param>
         /// <returns>The content of the specified message.</returns>
         public async Task<byte[]> GetMessageContent(IMessage message)
         {
@@ -81,7 +81,7 @@ namespace Line
         /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
-        /// <param name="messageId">The id of the message</param>
+        /// <param name="messageId">The id of the message.</param>
         /// <returns>The content of the specified message.</returns>
         public async Task<byte[]> GetMessageContent(string messageId)
         {

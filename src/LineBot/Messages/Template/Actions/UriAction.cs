@@ -35,7 +35,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the label.
-        /// <para>Max: 20 characters</para>
+        /// <para>Max: 20 characters.</para>
         /// </summary>
         [JsonProperty("label")]
         public string Label
@@ -59,8 +59,8 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the url opened when the action is performed.
-        /// <para>Protocol: HTTP, HTTPS, TEL</para>
-        /// <para>Max url length: 1000 characters</para>
+        /// <para>Protocol: HTTP, HTTPS, TEL.</para>
+        /// <para>Max url length: 1000 characters.</para>
         /// </summary>
         [JsonProperty("uri")]
         public Uri Url

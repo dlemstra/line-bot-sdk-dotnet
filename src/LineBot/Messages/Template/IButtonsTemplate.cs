@@ -24,31 +24,31 @@ namespace Line
     {
         /// <summary>
         /// Gets the image url for the thumbnail.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG or PNG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Aspect ratio: 1:1.51</para>
-        /// <para>Max width: 1024px</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG or PNG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Aspect ratio: 1:1.51.</para>
+        /// <para>Max width: 1024px.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         Uri ThumbnailUrl { get; }
 
         /// <summary>
         /// Gets the title.
-        /// <para>Max: 400 characters</para>
+        /// <para>Max: 400 characters.</para>
         /// </summary>
         string Title { get; }
 
         /// <summary>
         /// Gets the message text.
-        /// <para>Max: 160 characters (no image or title)</para>
-        /// <para>Max: 60 characters(message with an image or title)</para>
+        /// <para>Max: 160 characters (no image or title).</para>
+        /// <para>Max: 60 characters(message with an image or title).</para>
         /// </summary>
         string Text { get; }
 
         /// <summary>
         /// Gets the actions when tapped.
-        /// <para>Max: 4</para>
+        /// <para>Max: 4.</para>
         /// </summary>
         IEnumerable<ITemplateAction> Actions { get; }
     }

@@ -45,11 +45,11 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 1024 x 1024</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 1024 x 1024.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </param>
         /// <param name="previewUrl">The preview image url.</param>
         public ImageMessage(string url, string previewUrl)
@@ -62,11 +62,11 @@ namespace Line
         /// </summary>
         /// <param name="url">
         /// The image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 1024 x 1024</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 1024 x 1024.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </param>
         /// <param name="previewUrl">The preview image url.</param>
         public ImageMessage(Uri url, Uri previewUrl)
@@ -77,11 +77,11 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 1024 x 1024</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 1024 x 1024.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("originalContentUrl")]
         public Uri Url
@@ -99,11 +99,11 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the preview image url.
-        /// <para>Protocol: HTTPS</para>
-        /// <para>Format: JPEG</para>
-        /// <para>Max url length: 1000 characters</para>
-        /// <para>Max dimensions: 240 x 240</para>
-        /// <para>Max size: 1 MB</para>
+        /// <para>Protocol: HTTPS.</para>
+        /// <para>Format: JPEG.</para>
+        /// <para>Max url length: 1000 characters.</para>
+        /// <para>Max dimensions: 240 x 240.</para>
+        /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("previewImageUrl")]
         public Uri PreviewUrl

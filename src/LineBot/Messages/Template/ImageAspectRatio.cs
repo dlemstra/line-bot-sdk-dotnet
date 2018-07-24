@@ -15,7 +15,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the image aspect ratios
+    /// Encapsulates the image aspect ratios.
     /// </summary>
     public enum ImageAspectRatio
     {

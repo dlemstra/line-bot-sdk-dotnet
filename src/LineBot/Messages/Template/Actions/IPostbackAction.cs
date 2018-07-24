@@ -21,19 +21,19 @@ namespace Line
     {
         /// <summary>
         /// Gets the label.
-        /// <para>Max: 20 characters</para>
+        /// <para>Max: 20 characters.</para>
         /// </summary>
         string Label { get; }
 
         /// <summary>
         /// Gets the string returned via webhook in the postback.data property of the <see cref="IPostback"/> event.
-        /// <para>Max: 300 characters</para>
+        /// <para>Max: 300 characters.</para>
         /// </summary>
         string Data { get; }
 
         /// <summary>
         /// Gets the text sent when the action is performed.
-        /// <para>Max: 300 characters</para>
+        /// <para>Max: 300 characters.</para>
         /// </summary>
         string Text { get; }
     }

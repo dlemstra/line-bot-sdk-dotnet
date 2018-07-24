@@ -36,7 +36,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the columns.
-        /// <para>Max: 10</para>
+        /// <para>Max: 10.</para>
         /// </summary>
         [JsonProperty("columns")]
         public IEnumerable<IImageCarouselColumn> Columns

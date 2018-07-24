@@ -15,7 +15,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the image sizes
+    /// Encapsulates the image sizes.
     /// </summary>
     public enum ImageSize
     {
