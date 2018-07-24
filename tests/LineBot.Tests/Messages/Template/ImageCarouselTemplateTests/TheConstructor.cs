@@ -12,13 +12,24 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+
+namespace Line.Tests.Messages.Template
 {
-    internal enum TemplateType
+    public partial class ImageCarouselTemplateTests
     {
-        Buttons,
-        Confirm,
-        Carousel,
-        Image_Carousel
+        [TestClass]
+        public class TheConstructor
+        {
+            [TestMethod]
+            public void ShouldInitializeTheInstance()
+            {
+                ImageCarouselTemplate template = new ImageCarouselTemplate();
+
+                string serialized = JsonConvert.SerializeObject(template);
+                Assert.AreEqual(@"{""type"":""image_carousel"",""columns"":null}", serialized);
+            }
+        }
     }
 }

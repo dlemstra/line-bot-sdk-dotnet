@@ -17,15 +17,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests.Messages.Template
 {
-    public partial class CarouselTemplateTests
+    public partial class ImageCarCarouselTemplateTests
     {
         [TestClass]
-        public class TheColumnsProperty
+        public class TheImageCarouselColumnsProperty
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenSetToNull()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                ImageCarouselTemplate template = new ImageCarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The columns cannot be null.", () =>
                 {
@@ -36,34 +36,34 @@ namespace Line.Tests.Messages.Template
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                ImageCarouselTemplate template = new ImageCarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of columns is 1.", () =>
                 {
-                    template.Columns = new ICarouselColumn[] { };
+                    template.Columns = new IImageCarouselColumn[] { };
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenValueContainsMoreThan10Items()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                ImageCarouselTemplate template = new ImageCarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of columns is 10.", () =>
                 {
-                    template.Columns = new ICarouselColumn[]
+                    template.Columns = new IImageCarouselColumn[]
                     {
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn()
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn()
                     };
                 });
             }
@@ -71,20 +71,15 @@ namespace Line.Tests.Messages.Template
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValueContains10Items()
             {
-                CarouselTemplate template = new CarouselTemplate()
+                ImageCarouselTemplate template = new ImageCarouselTemplate()
                 {
-                    Columns = new ICarouselColumn[]
+                    Columns = new IImageCarouselColumn[]
                     {
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn(),
-                        new CarouselColumn()
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn(),
+                        new ImageCarouselColumn()
                     }
                 };
             }

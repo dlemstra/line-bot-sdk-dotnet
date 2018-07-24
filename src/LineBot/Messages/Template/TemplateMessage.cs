@@ -85,7 +85,8 @@ namespace Line
                 var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
                 if (!interfaces.Contains(typeof(IButtonsTemplate)) &&
                     !interfaces.Contains(typeof(IConfirmTemplate)) &&
-                    !interfaces.Contains(typeof(ICarouselTemplate)))
+                    !interfaces.Contains(typeof(ICarouselTemplate)) &&
+                    !interfaces.Contains(typeof(IImageCarouselTemplate)))
                     throw new InvalidOperationException("The template type is invalid.");
 
                 _template = value;
