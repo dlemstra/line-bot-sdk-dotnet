@@ -20,17 +20,17 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a carousel template.
+    /// Encapsulates a image carousel template.
     /// </summary>
-    public sealed class CarouselTemplate : ICarouselTemplate
+    public sealed class ImageCarouselTemplate : IImageCarouselTemplate
     {
-        private IEnumerable<ICarouselColumn> _columns;
+        private IEnumerable<IImageCarouselColumn> _columns;
 
 #pragma warning disable 0414 // Suppress value is never used.
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private TemplateType _type = TemplateType.Carousel;
+        private TemplateType _type = TemplateType.Image_Carousel;
 
 #pragma warning restore 0414
 
@@ -39,7 +39,7 @@ namespace Line
         /// <para>Max: 10</para>
         /// </summary>
         [JsonProperty("columns")]
-        public IEnumerable<ICarouselColumn> Columns
+        public IEnumerable<IImageCarouselColumn> Columns
         {
             get
             {
@@ -62,19 +62,5 @@ namespace Line
                 _columns = value;
             }
         }
-
-        /// <summary>
-        /// Gets or sets the aspect ratio of the image.
-        /// </summary>
-        [JsonProperty("imageAspectRatio")]
-        [JsonConverter(typeof(EnumConverter<ImageAspectRatio>))]
-        public ImageAspectRatio ImageAspectRatio { get; set; } = ImageAspectRatio.Rectangle;
-
-        /// <summary>
-        /// Gets or sets the size of the image.
-        /// </summary>
-        [JsonProperty("imageSize")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        public ImageSize ImageSize { get; set; } = ImageSize.Cover;
     }
 }

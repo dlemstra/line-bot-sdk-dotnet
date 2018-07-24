@@ -12,13 +12,27 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+using System.Linq;
+
 namespace Line
 {
-    internal enum TemplateType
+    internal static class IImageCarouselTemplateExtensions
     {
-        Buttons,
-        Confirm,
-        Carousel,
-        Image_Carousel
+        public static ImageCarouselTemplate ToImageCarouselTemplate(this IImageCarouselTemplate self)
+        {
+            ImageCarouselTemplate imageCarouselTemplate = self as ImageCarouselTemplate;
+            if (imageCarouselTemplate == null)
+            {
+                imageCarouselTemplate = new ImageCarouselTemplate();
+            }
+
+            if (self.Columns == null)
+                throw new InvalidOperationException("The columns cannot be null.");
+
+            imageCarouselTemplate.Columns = self.Columns.ToImageCarouselColumn().ToArray();
+
+            return imageCarouselTemplate;
+        }
     }
 }

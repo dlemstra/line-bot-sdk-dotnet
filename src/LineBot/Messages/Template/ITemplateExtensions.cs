@@ -28,6 +28,8 @@ namespace Line
                     return confirmTemplate.ToConfirmTemplate();
                 case ICarouselTemplate carouselTemplate:
                     return carouselTemplate.ToCarouselTemplate();
+                case IImageCarouselTemplate imageCarouselTemplate:
+                    return imageCarouselTemplate.ToImageCarouselTemplate();
                 default:
                     throw new NotSupportedException("Invalid template type.");
             }
