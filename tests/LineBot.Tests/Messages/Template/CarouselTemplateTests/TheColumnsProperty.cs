@@ -79,6 +79,11 @@ namespace Line.Tests.Messages.Template
                         new CarouselColumn(),
                         new CarouselColumn(),
                         new CarouselColumn(),
+                        new CarouselColumn(),
+                        new CarouselColumn(),
+                        new CarouselColumn(),
+                        new CarouselColumn(),
+                        new CarouselColumn(),
                         new CarouselColumn()
                     }
                 };

@@ -36,7 +36,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the columns.
-        /// <para>Max: 5</para>
+        /// <para>Max: 10</para>
         /// </summary>
         [JsonProperty("columns")]
         public IEnumerable<ICarouselColumn> Columns
@@ -56,7 +56,7 @@ namespace Line
                 if (count < 1)
                     throw new InvalidOperationException("The minimum number of columns is 1.");
 
-                if (count > 5)
+                if (count > 10)
                     throw new InvalidOperationException("The maximum number of columns is 10.");
 
                 _columns = value;
