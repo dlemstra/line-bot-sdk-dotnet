@@ -17,10 +17,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests.Messages.Template
 {
-    public partial class ImageCarCarouselTemplateTests
+    public partial class ImageCarouselTemplateTests
     {
         [TestClass]
-        public class TheImageCarouselColumnsProperty
+        public class TheColumnsProperty
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenSetToNull()
