@@ -25,18 +25,18 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldPreserveInstanceWhenValueIsTextMessage()
             {
-                var textMessage = new TextMessage()
+                var message = new TextMessage()
                 {
                     Text = "Test"
                 };
 
-                var message = TextMessage.Convert(textMessage);
+                var textMessage = TextMessage.Convert(message);
 
-                Assert.AreEqual(textMessage, message);
+                Assert.AreEqual(message, textMessage);
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenMessageTextIsNull()
+            public void ShouldThrowExceptionWhenTextIsNull()
             {
                 var message = new TextMessage();
 
@@ -49,12 +49,12 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomITextMessageToTextMessage()
             {
-                var textMessage = new TestTextMessage();
+                var message = new TestTextMessage();
 
-                var message = TextMessage.Convert(textMessage);
+                var textMessage = TextMessage.Convert(message);
 
-                Assert.AreNotEqual(textMessage, message);
-                Assert.AreEqual("TestTextMessage", message.Text);
+                Assert.AreNotEqual(message, textMessage);
+                Assert.AreEqual("TestTextMessage", textMessage.Text);
             }
         }
     }
