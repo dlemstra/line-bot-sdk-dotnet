@@ -74,5 +74,21 @@ namespace Line
                 _text = value;
             }
         }
+
+        internal static TextMessage Convert(ITextMessage message)
+        {
+            if (message.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (message is TextMessage textMessage)
+            {
+                return textMessage;
+            }
+
+            return new TextMessage()
+            {
+                Text = message.Text
+            };
+        }
     }
 }

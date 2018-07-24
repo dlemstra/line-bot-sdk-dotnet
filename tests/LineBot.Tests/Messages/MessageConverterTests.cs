@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class MessageConverterTests
+    public partial class MessageConverterTests
     {
         [TestMethod]
         public void Convert_TooManyMessagesAreNull_ThrowsException()
@@ -47,45 +47,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
             });
-        }
-
-        [TestMethod]
-        public void Convert_TextMessage_InstanceIsPreserved()
-        {
-            TextMessage messsage = new TextMessage()
-            {
-                Text = "Test"
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { messsage });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(messsage, messages[0]);
-        }
-
-        [TestMethod]
-        public void Convert_TextMessageWithoutText_ThrowsException()
-        {
-            TextMessage message = new TextMessage();
-
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_CustomITextMessage_ConvertedToTextMessage()
-        {
-            TestTextMessage message = new TestTextMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            TextMessage textMessage = messages[0] as TextMessage;
-            Assert.AreEqual("TestTextMessage", textMessage.Text);
         }
 
         [TestMethod]
@@ -1217,12 +1178,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestTextMessage : ITextMessage
-        {
-            public string Text => nameof(TestTextMessage);
         }
 
         [ExcludeFromCodeCoverage]

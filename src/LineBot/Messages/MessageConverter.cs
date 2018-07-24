@@ -40,7 +40,7 @@ namespace Line
                 switch (messages[i])
                 {
                     case ITextMessage textMessage:
-                        result[i] = textMessage.ToTextMessage();
+                        result[i] = TextMessage.Convert(textMessage);
                         break;
                     case IImageMessage imageMessage:
                         result[i] = imageMessage.ToImageMessage();
