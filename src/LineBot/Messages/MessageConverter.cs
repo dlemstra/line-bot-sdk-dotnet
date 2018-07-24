@@ -43,7 +43,7 @@ namespace Line
                         result[i] = TextMessage.Convert(textMessage);
                         break;
                     case IImageMessage imageMessage:
-                        result[i] = imageMessage.ToImageMessage();
+                        result[i] = ImageMessage.Convert(imageMessage);
                         break;
                     case IVideoMessage videoMessage:
                         result[i] = videoMessage.ToVideoMessage();

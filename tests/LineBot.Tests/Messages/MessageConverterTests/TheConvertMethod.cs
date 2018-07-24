@@ -25,9 +25,9 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomITextMessageToTextMessage()
             {
-                TestTextMessage message = new TestTextMessage();
+                var message = new TestTextMessage();
 
-                ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -39,9 +39,9 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomIAudioMessageToAudioMessage()
             {
-                TestAudioMessage message = new TestAudioMessage();
+                var message = new TestAudioMessage();
 
-                ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -49,6 +49,21 @@ namespace Line.Tests
                 AudioMessage audioMessage = messages[0] as AudioMessage;
                 Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
                 Assert.AreEqual(1000, audioMessage.Duration);
+            }
+
+            [TestMethod]
+            public void ShouldConvertCustomIImageMessageToImageMessage()
+            {
+                var message = new TestImageMessage();
+
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                ImageMessage imageMessage = messages[0] as ImageMessage;
+                Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
+                Assert.AreEqual(new Uri("https://foo.previewUrl"), imageMessage.PreviewUrl);
             }
         }
     }

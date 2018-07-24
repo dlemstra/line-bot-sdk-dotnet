@@ -14,26 +14,13 @@
 
 using System;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImageMessageExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestImageMessage : IImageMessage
     {
-        public static ImageMessage ToImageMessage(this IImageMessage self)
-        {
-            if (self.Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
+        public Uri Url => new Uri("https://foo.url");
 
-            if (self.PreviewUrl == null)
-                throw new InvalidOperationException("The preview url cannot be null.");
-
-            if (self is ImageMessage imageMessage)
-                return imageMessage;
-
-            return new ImageMessage()
-            {
-                Url = self.Url,
-                PreviewUrl = self.PreviewUrl
-            };
-        }
+        public Uri PreviewUrl => new Uri("https://foo.previewUrl");
     }
 }
