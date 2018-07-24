@@ -23,6 +23,33 @@ namespace Line.Tests
         public class TheConvertMethod
         {
             [TestMethod]
+            public void ShouldThrowExceptionWhenCalledWithMoreThanFiveMessages()
+            {
+                ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
+                {
+                    MessageConverter.Convert(new ISendMessage[6]);
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenArrarHasNullValue()
+            {
+                ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
+                {
+                    MessageConverter.Convert(new ISendMessage[1] { null });
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenMessageTypeIsInvalid()
+            {
+                ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
+                {
+                    MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
+                });
+            }
+
+            [TestMethod]
             public void ShouldConvertCustomITextMessageToTextMessage()
             {
                 var message = new TestTextMessage();
@@ -64,6 +91,11 @@ namespace Line.Tests
                 ImageMessage imageMessage = messages[0] as ImageMessage;
                 Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
                 Assert.AreEqual(new Uri("https://foo.previewUrl"), imageMessage.PreviewUrl);
+            }
+
+            [ExcludeFromCodeCoverage]
+            private class InvalidMessage : ISendMessage
+            {
             }
         }
     }

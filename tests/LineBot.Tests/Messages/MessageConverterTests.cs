@@ -23,33 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_TooManyMessagesAreNull_ThrowsException()
-        {
-            ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[6]);
-            });
-        }
-
-        [TestMethod]
-        public void Convert_NullValueInArray_ThrowsException()
-        {
-            ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[1] { null });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_InvalidType_ThrowsException()
-        {
-            ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
-            {
-                MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
-            });
-        }
-
-        [TestMethod]
         public void Convert_VideoMessage_InstanceIsPreserved()
         {
             VideoMessage message = new VideoMessage()
@@ -1164,11 +1137,6 @@ namespace Line.Tests
             public int Width { get; set; }
 
             public int Height { get; set; }
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class InvalidMessage : ISendMessage
-        {
         }
 
         [ExcludeFromCodeCoverage]
