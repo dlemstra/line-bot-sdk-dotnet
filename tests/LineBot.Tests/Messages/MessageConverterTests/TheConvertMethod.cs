@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -33,6 +34,21 @@ namespace Line.Tests
 
                 TextMessage textMessage = messages[0] as TextMessage;
                 Assert.AreEqual("TestTextMessage", textMessage.Text);
+            }
+
+            [TestMethod]
+            public void ShouldConvertCustomIAudioMessageToAudioMessage()
+            {
+                TestAudioMessage message = new TestAudioMessage();
+
+                ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                AudioMessage audioMessage = messages[0] as AudioMessage;
+                Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
+                Assert.AreEqual(1000, audioMessage.Duration);
             }
         }
     }

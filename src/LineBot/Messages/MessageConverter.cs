@@ -49,7 +49,7 @@ namespace Line
                         result[i] = videoMessage.ToVideoMessage();
                         break;
                     case IAudioMessage audioMessage:
-                        result[i] = audioMessage.ToAudioMessage();
+                        result[i] = AudioMessage.Convert(audioMessage);
                         break;
                     case ILocationMessage locationMessage:
                         result[i] = locationMessage.ToLocationMessage();

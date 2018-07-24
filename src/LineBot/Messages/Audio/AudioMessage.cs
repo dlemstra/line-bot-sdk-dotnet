@@ -128,5 +128,23 @@ namespace Line
                 _duration = value;
             }
         }
+
+        internal static AudioMessage Convert(IAudioMessage message)
+        {
+            if (message.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (message.Duration == 0)
+                throw new InvalidOperationException("The duration should be at least 1 millisecond.");
+
+            if (message is AudioMessage audioMessage)
+                return audioMessage;
+
+            return new AudioMessage()
+            {
+                Url = message.Url,
+                Duration = message.Duration
+            };
+        }
     }
 }

@@ -166,64 +166,6 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void Convert_AudioMessage_InstanceIsPreserved()
-        {
-            AudioMessage message = new AudioMessage()
-            {
-                Url = new Uri("https://foo.url"),
-                Duration = 10000
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(message, messages[0]);
-        }
-
-        [TestMethod]
-        public void Convert_AudioMessageWithoutUrl_ThrowsException()
-        {
-            AudioMessage message = new AudioMessage()
-            {
-                Duration = 10000
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_VideoMessageWithoutDuration_ThrowsException()
-        {
-            AudioMessage message = new AudioMessage()
-            {
-                Url = new Uri("https://foo.url")
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The duration should be at least 1 millisecond.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_CustomIAudioMessage_ConvertedToAudioMessage()
-        {
-            TestAudioMessage message = new TestAudioMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            AudioMessage audioMessage = messages[0] as AudioMessage;
-            Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
-            Assert.AreEqual(1000, audioMessage.Duration);
-        }
-
-        [TestMethod]
         public void Convert_LocationMessage_InstanceIsPreserved()
         {
             LocationMessage message = new LocationMessage()
@@ -1194,14 +1136,6 @@ namespace Line.Tests
             public Uri Url => new Uri("https://foo.url");
 
             public Uri PreviewUrl => new Uri("https://foo.previewUrl");
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestAudioMessage : IAudioMessage
-        {
-            public Uri Url => new Uri("https://foo.url");
-
-            public int Duration => 1000;
         }
 
         [ExcludeFromCodeCoverage]

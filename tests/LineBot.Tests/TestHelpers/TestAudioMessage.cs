@@ -14,26 +14,13 @@
 
 using System;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IAudioMessageExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestAudioMessage : IAudioMessage
     {
-        public static AudioMessage ToAudioMessage(this IAudioMessage self)
-        {
-            if (self.Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
+        public Uri Url => new Uri("https://foo.url");
 
-            if (self.Duration == 0)
-                throw new InvalidOperationException("The duration should be at least 1 millisecond.");
-
-            if (self is AudioMessage audioMessage)
-                return audioMessage;
-
-            return new AudioMessage()
-            {
-                Url = self.Url,
-                Duration = self.Duration
-            };
-        }
+        public int Duration => 1000;
     }
 }
