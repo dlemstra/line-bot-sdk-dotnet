@@ -133,6 +133,15 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public void Template_SetToImageCarouselTemplate_ThrowsNoException()
+        {
+            TemplateMessage message = new TemplateMessage()
+            {
+                Template = new ImageCarouselTemplate()
+            };
+        }
+
+        [TestMethod]
         public void Template_InvalidTemplateType_ThrowsException()
         {
             TemplateMessage message = new TemplateMessage();
