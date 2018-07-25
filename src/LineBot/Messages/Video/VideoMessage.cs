@@ -133,6 +133,24 @@ namespace Line
             }
         }
 
+        internal static VideoMessage Convert(IVideoMessage message)
+        {
+            if (message.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (message.PreviewUrl == null)
+                throw new InvalidOperationException("The preview url cannot be null.");
+
+            if (message is VideoMessage videoMessage)
+                return videoMessage;
+
+            return new VideoMessage()
+            {
+                Url = message.Url,
+                PreviewUrl = message.PreviewUrl
+            };
+        }
+
         private Uri CheckUrl(Uri value)
         {
             if (value == null)

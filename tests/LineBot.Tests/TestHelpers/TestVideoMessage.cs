@@ -14,26 +14,13 @@
 
 using System;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IVideoMessageExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestVideoMessage : IVideoMessage
     {
-        public static VideoMessage ToVideoMessage(this IVideoMessage self)
-        {
-            if (self.Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
+        public Uri Url => new Uri("https://foo.url");
 
-            if (self.PreviewUrl == null)
-                throw new InvalidOperationException("The preview url cannot be null.");
-
-            if (self is VideoMessage videoMessage)
-                return videoMessage;
-
-            return new VideoMessage()
-            {
-                Url = self.Url,
-                PreviewUrl = self.PreviewUrl
-            };
-        }
+        public Uri PreviewUrl => new Uri("https://foo.previewUrl");
     }
 }

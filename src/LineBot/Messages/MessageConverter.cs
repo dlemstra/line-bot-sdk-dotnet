@@ -46,7 +46,7 @@ namespace Line
                         result[i] = ImageMessage.Convert(imageMessage);
                         break;
                     case IVideoMessage videoMessage:
-                        result[i] = videoMessage.ToVideoMessage();
+                        result[i] = VideoMessage.Convert(videoMessage);
                         break;
                     case IAudioMessage audioMessage:
                         result[i] = AudioMessage.Convert(audioMessage);

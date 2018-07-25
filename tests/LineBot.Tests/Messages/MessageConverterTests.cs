@@ -23,64 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_VideoMessage_InstanceIsPreserved()
-        {
-            VideoMessage message = new VideoMessage()
-            {
-                PreviewUrl = new Uri("https://foo.previewUrl"),
-                Url = new Uri("https://foo.url")
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(message, messages[0]);
-        }
-
-        [TestMethod]
-        public void Convert_VideoMessageWithoutUrl_ThrowsException()
-        {
-            VideoMessage message = new VideoMessage()
-            {
-                PreviewUrl = new Uri("https://foo.previewUrl")
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_VideoMessageWithoutPreviewUrl_ThrowsException()
-        {
-            VideoMessage message = new VideoMessage()
-            {
-                Url = new Uri("https://foo.url")
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The preview url cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_CustomIVideoMessage_ConvertedToVideoMessage()
-        {
-            TestVideoMessage message = new TestVideoMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            VideoMessage videoMessage = messages[0] as VideoMessage;
-            Assert.AreEqual(new Uri("https://foo.url"), videoMessage.Url);
-            Assert.AreEqual(new Uri("https://foo.previewUrl"), videoMessage.PreviewUrl);
-        }
-
-        [TestMethod]
         public void Convert_LocationMessage_InstanceIsPreserved()
         {
             LocationMessage message = new LocationMessage()
@@ -1035,14 +977,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestVideoMessage : IVideoMessage
-        {
-            public Uri Url => new Uri("https://foo.url");
-
-            public Uri PreviewUrl => new Uri("https://foo.previewUrl");
         }
 
         [ExcludeFromCodeCoverage]

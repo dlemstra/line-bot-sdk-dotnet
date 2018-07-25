@@ -59,7 +59,7 @@ namespace Line.Tests
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
 
-                TextMessage textMessage = messages[0] as TextMessage;
+                var textMessage = messages[0] as TextMessage;
                 Assert.AreEqual("TestTextMessage", textMessage.Text);
             }
 
@@ -73,7 +73,7 @@ namespace Line.Tests
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
 
-                AudioMessage audioMessage = messages[0] as AudioMessage;
+                var audioMessage = messages[0] as AudioMessage;
                 Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
                 Assert.AreEqual(1000, audioMessage.Duration);
             }
@@ -88,9 +88,24 @@ namespace Line.Tests
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
 
-                ImageMessage imageMessage = messages[0] as ImageMessage;
+                var imageMessage = messages[0] as ImageMessage;
                 Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
                 Assert.AreEqual(new Uri("https://foo.previewUrl"), imageMessage.PreviewUrl);
+            }
+
+            [TestMethod]
+            public void ShouldConvertCustomIVideoMessageToImageMessage()
+            {
+                var message = new TestVideoMessage();
+
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                var videoMessage = messages[0] as VideoMessage;
+                Assert.AreEqual(new Uri("https://foo.url"), videoMessage.Url);
+                Assert.AreEqual(new Uri("https://foo.previewUrl"), videoMessage.PreviewUrl);
             }
 
             [ExcludeFromCodeCoverage]
