@@ -100,23 +100,23 @@ namespace Line
         [JsonProperty("longitude")]
         public decimal Longitude { get; set; }
 
-        internal static LocationMessage Convert(ILocationMessage self)
+        internal static LocationMessage Convert(ILocationMessage message)
         {
-            if (self.Title == null)
+            if (message.Title == null)
                 throw new InvalidOperationException("The title cannot be null.");
 
-            if (self.Address == null)
+            if (message.Address == null)
                 throw new InvalidOperationException("The address cannot be null.");
 
-            if (self is LocationMessage locationMessage)
+            if (message is LocationMessage locationMessage)
                 return locationMessage;
 
             return new LocationMessage()
             {
-                Title = self.Title,
-                Address = self.Address,
-                Latitude = self.Latitude,
-                Longitude = self.Longitude
+                Title = message.Title,
+                Address = message.Address,
+                Latitude = message.Latitude,
+                Longitude = message.Longitude
             };
         }
     }

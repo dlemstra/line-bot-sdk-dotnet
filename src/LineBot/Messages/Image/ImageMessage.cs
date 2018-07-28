@@ -119,21 +119,21 @@ namespace Line
             }
         }
 
-        internal static ImageMessage Convert(IImageMessage self)
+        internal static ImageMessage Convert(IImageMessage message)
         {
-            if (self.Url == null)
+            if (message.Url == null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (self.PreviewUrl == null)
+            if (message.PreviewUrl == null)
                 throw new InvalidOperationException("The preview url cannot be null.");
 
-            if (self is ImageMessage imageMessage)
+            if (message is ImageMessage imageMessage)
                 return imageMessage;
 
             return new ImageMessage()
             {
-                Url = self.Url,
-                PreviewUrl = self.PreviewUrl
+                Url = message.Url,
+                PreviewUrl = message.PreviewUrl
             };
         }
 
