@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
@@ -135,5 +136,34 @@ namespace Line
         IEnumerable<IImagemapAction> IImagemapMessage.Actions => Actions;
 
         IImagemapSize IImagemapMessage.BaseSize => BaseSize;
+
+        internal static ImagemapMessage Convert(IImagemapMessage message)
+        {
+            if (message.BaseUrl == null)
+                throw new InvalidOperationException("The base url cannot be null.");
+
+            if (message.AlternativeText == null)
+                throw new InvalidOperationException("The alternative text cannot be null.");
+
+            if (message.BaseSize == null)
+                throw new InvalidOperationException("The base size cannot be null.");
+
+            if (message.Actions == null)
+                throw new InvalidOperationException("The actions cannot be null.");
+
+            if (!(message is ImagemapMessage imagemapMessage))
+            {
+                imagemapMessage = new ImagemapMessage()
+                {
+                    BaseUrl = message.BaseUrl,
+                    AlternativeText = message.AlternativeText,
+                };
+            }
+
+            imagemapMessage.BaseSize = message.BaseSize.ToImagemapSize();
+            imagemapMessage.Actions = message.Actions.ToImagemapActions().ToArray();
+
+            return imagemapMessage;
+        }
     }
 }

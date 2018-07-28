@@ -58,7 +58,7 @@ namespace Line
                         result[i] = StickerMessage.Convert(stickerMessage);
                         break;
                     case IImagemapMessage imagemapMessage:
-                        result[i] = imagemapMessage.ToImagemapMessage();
+                        result[i] = ImagemapMessage.Convert(imagemapMessage);
                         break;
                     case ITemplateMessage templateMessage:
                         result[i] = templateMessage.ToTemplateMessage();

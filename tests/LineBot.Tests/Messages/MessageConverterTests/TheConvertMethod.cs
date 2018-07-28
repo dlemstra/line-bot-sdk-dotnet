@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -128,16 +129,49 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomIStickerMessageToStickerMessage()
             {
-                TestStickerMessage message = new TestStickerMessage();
+                var message = new TestStickerMessage();
 
-                ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
 
-                StickerMessage textMessage = messages[0] as StickerMessage;
+                var textMessage = messages[0] as StickerMessage;
                 Assert.AreEqual("PackageId", textMessage.PackageId);
                 Assert.AreEqual("StickerId", textMessage.StickerId);
+            }
+
+            [TestMethod]
+            public void ShouldConvertCustomIImagemapMessageToImagemapMessage()
+            {
+                var message = new TestImagemapMessage();
+
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                var imagemapMessage = messages[0] as ImagemapMessage;
+                Assert.AreEqual(new Uri("https://foo.url"), imagemapMessage.BaseUrl);
+                Assert.AreEqual(1040, imagemapMessage.BaseSize.Width);
+                Assert.AreEqual(520, imagemapMessage.BaseSize.Height);
+                Assert.AreEqual("Alternative", imagemapMessage.AlternativeText);
+
+                var actions = imagemapMessage.Actions.ToArray();
+
+                var uriAction = actions[0] as ImagemapUriAction;
+                Assert.AreEqual(new Uri("https://foo.bar"), uriAction.Url);
+                Assert.AreEqual(4, uriAction.Area.X);
+                Assert.AreEqual(3, uriAction.Area.Y);
+                Assert.AreEqual(2, uriAction.Area.Width);
+                Assert.AreEqual(1, uriAction.Area.Height);
+
+                var messageAction = actions[1] as ImagemapMessageAction;
+                Assert.AreEqual("TestImagemapMessageAction", messageAction.Text);
+                Assert.AreEqual(4, messageAction.Area.X);
+                Assert.AreEqual(3, messageAction.Area.Y);
+                Assert.AreEqual(2, messageAction.Area.Width);
+                Assert.AreEqual(1, messageAction.Area.Height);
             }
 
             [ExcludeFromCodeCoverage]

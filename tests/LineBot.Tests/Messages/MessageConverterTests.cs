@@ -25,138 +25,26 @@ namespace Line.Tests
         [TestMethod]
         public void Convert_ImagemapMessage_InstanceIsPreserved()
         {
-            ImagemapMessage message = new ImagemapMessage()
-            {
-                BaseUrl = new Uri("https://foo.bar"),
-                BaseSize = new ImagemapSize(1040, 1040),
-                AlternativeText = "Alternative",
-                Actions = new ImagemapAction[]
-                {
-                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
-                    new ImagemapUriAction("https://url.foo", 1, 2, 3, 4),
-                }
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-
-            IImagemapMessage imagemapMessage = messages[0] as IImagemapMessage;
-            Assert.AreEqual(message, imagemapMessage);
-            Assert.AreEqual(message.BaseSize, imagemapMessage.BaseSize);
-
-            IImagemapAction[] actions = imagemapMessage.Actions.ToArray();
-            Assert.AreEqual(message.Actions.First(), actions[0]);
-
-            ImagemapAction action = message.Actions.Skip(1).First();
-            Assert.AreEqual(action, actions[1]);
-            Assert.AreEqual(action.Area, actions[1].Area);
         }
 
         [TestMethod]
         public void Convert_ImagemapMessageWithoutBaseUrl_ThrowsException()
         {
-            ImagemapMessage message = new ImagemapMessage()
-            {
-                BaseSize = new ImagemapSize(1040, 1040),
-                AlternativeText = "Alternative",
-                Actions = new ImagemapAction[]
-                {
-                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The base url cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
         }
 
         [TestMethod]
         public void Convert_ImagemapMessageWithoutBaseSize_ThrowsException()
         {
-            ImagemapMessage message = new ImagemapMessage()
-            {
-                BaseUrl = new Uri("https://foo.bar"),
-                AlternativeText = "Alternative",
-                Actions = new ImagemapAction[]
-                {
-                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The base size cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
         }
 
         [TestMethod]
-        public void Convert_ImagemapMessageWithoutAlternativeText_ThrowsException()
+        public void Convert_ImagemapMessageWithout_ThrowsException()
         {
-            ImagemapMessage message = new ImagemapMessage()
-            {
-                BaseUrl = new Uri("https://foo.bar"),
-                BaseSize = new ImagemapSize(1040, 1040),
-                Actions = new ImagemapAction[]
-                {
-                    new ImagemapMessageAction("Text", 1, 2, 3, 4),
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The alternative text cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
         }
 
         [TestMethod]
         public void Convert_ImagemapMessageWithoutActions_ThrowsException()
         {
-            ImagemapMessage message = new ImagemapMessage()
-            {
-                BaseUrl = new Uri("https://foo.bar"),
-                BaseSize = new ImagemapSize(1040, 1040),
-                AlternativeText = "Alternative"
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_CustomIImageMapMessage_ConvertedToTextMessage()
-        {
-            TestImagemapMessage message = new TestImagemapMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            ImagemapMessage imagemapMessage = messages[0] as ImagemapMessage;
-            Assert.AreEqual(new Uri("https://foo.url"), imagemapMessage.BaseUrl);
-            Assert.AreEqual(1040, imagemapMessage.BaseSize.Width);
-            Assert.AreEqual(520, imagemapMessage.BaseSize.Height);
-            Assert.AreEqual("Alternative", imagemapMessage.AlternativeText);
-
-            IImagemapAction[] actions = imagemapMessage.Actions.ToArray();
-
-            ImagemapUriAction uriAction = actions[0] as ImagemapUriAction;
-            Assert.AreEqual(new Uri("https://foo.bar"), uriAction.Url);
-            Assert.AreEqual(4, uriAction.Area.X);
-            Assert.AreEqual(3, uriAction.Area.Y);
-            Assert.AreEqual(2, uriAction.Area.Width);
-            Assert.AreEqual(1, uriAction.Area.Height);
-
-            ImagemapMessageAction messageAction = actions[1] as ImagemapMessageAction;
-            Assert.AreEqual("TestImagemapMessageAction", messageAction.Text);
-            Assert.AreEqual(4, messageAction.Area.X);
-            Assert.AreEqual(3, messageAction.Area.Y);
-            Assert.AreEqual(2, messageAction.Area.Width);
-            Assert.AreEqual(1, messageAction.Area.Height);
         }
 
         [TestMethod]
@@ -859,80 +747,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestImagemapMessage : IImagemapMessage
-        {
-            public TestImagemapMessage()
-            {
-                Actions = new IImagemapAction[]
-                {
-                    new TestImagemapUriAction(),
-                    new TestImagemapMessageAction()
-                };
-            }
-
-            public Uri BaseUrl => new Uri("https://foo.url");
-
-            public string AlternativeText => "Alternative";
-
-            public IImagemapSize BaseSize => new TestImageMapSize();
-
-            public IEnumerable<IImagemapAction> Actions { get; set; }
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestImageMapSize : IImagemapSize
-        {
-            public int Width => 1040;
-
-            public int Height => 520;
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestImagemapUriAction : IImagemapUriAction
-        {
-            public TestImagemapUriAction()
-            {
-                Area = new TestImagemapArea();
-                Url = new Uri("https://foo.bar");
-            }
-
-            public Uri Url { get; set; }
-
-            public IImagemapArea Area { get; set; }
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestImagemapMessageAction : IImagemapMessageAction
-        {
-            public TestImagemapMessageAction()
-            {
-                Text = nameof(TestImagemapMessageAction);
-            }
-
-            public string Text { get; set; }
-
-            public IImagemapArea Area => new TestImagemapArea();
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestImagemapArea : IImagemapArea
-        {
-            public TestImagemapArea()
-            {
-                Width = 2;
-                Height = 1;
-            }
-
-            public int X => 4;
-
-            public int Y => 3;
-
-            public int Width { get; set; }
-
-            public int Height { get; set; }
         }
 
         [ExcludeFromCodeCoverage]
