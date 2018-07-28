@@ -160,7 +160,7 @@ namespace Line
                 };
             }
 
-            imagemapMessage.BaseSize = message.BaseSize.ToImagemapSize();
+            imagemapMessage.BaseSize = ImagemapSize.Convert(message.BaseSize);
             imagemapMessage.Actions = message.Actions.ToImagemapActions().ToArray();
 
             return imagemapMessage;

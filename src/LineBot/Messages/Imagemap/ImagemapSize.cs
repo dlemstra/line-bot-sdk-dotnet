@@ -82,5 +82,14 @@ namespace Line
                 _height = value;
             }
         }
+
+        internal static ImagemapSize Convert(IImagemapSize size)
+        {
+            return new ImagemapSize()
+            {
+                Width = size.Width,
+                Height = size.Height
+            };
+        }
     }
 }
