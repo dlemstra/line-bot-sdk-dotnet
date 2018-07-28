@@ -51,5 +51,18 @@ namespace Line
         }
 
         IImagemapArea IImagemapAction.Area => Area;
+
+        internal static ImagemapAction Convert(IImagemapAction action)
+        {
+            switch (action)
+            {
+                case IImagemapUriAction uriAction:
+                    return uriAction.ToImagemapUriAction();
+                case IImagemapMessageAction messageAction:
+                    return messageAction.ToImagemapMessageAction();
+                default:
+                    throw new NotSupportedException("Invalid action type.");
+            }
+        }
     }
 }

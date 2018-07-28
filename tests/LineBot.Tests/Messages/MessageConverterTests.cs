@@ -23,45 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_ImagemapMessage_InstanceIsPreserved()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_ImagemapMessageWithoutBaseUrl_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_ImagemapMessageWithoutBaseSize_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_ImagemapMessageWithout_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_ImagemapMessageWithoutActions_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_InvalidAction_ThrowsException()
-        {
-            TestImagemapMessage message = new TestImagemapMessage()
-            {
-                Actions = new InvalidAction[] { new InvalidAction() }
-            };
-
-            ExceptionAssert.Throws<NotSupportedException>("Invalid action type.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[1] { message });
-            });
-        }
-
-        [TestMethod]
         public void Convert_ImagemapMessageAreaWithoutWidth_ThrowsException()
         {
             TestImagemapMessage message = new TestImagemapMessage()
@@ -747,12 +708,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class InvalidAction : IImagemapAction
-        {
-            public IImagemapArea Area => throw new NotImplementedException();
         }
 
         [ExcludeFromCodeCoverage]

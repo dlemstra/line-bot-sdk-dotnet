@@ -13,27 +13,30 @@
 // under the License.
 
 using System;
-using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImagemapActionExtensions
+    public partial class ImagemapActionTests
     {
-        public static IEnumerable<ImagemapAction> ToImagemapActions(this IEnumerable<IImagemapAction> self)
+        [TestClass]
+        public class TheConvertMethod
         {
-            foreach (IImagemapAction action in self)
+            [TestMethod]
+            public void ShouldThrowExceptionWhenActionIsInvalid()
             {
-                switch (action)
+                var action = new InvalidAction();
+
+                ExceptionAssert.Throws<NotSupportedException>("Invalid action type.", () =>
                 {
-                    case IImagemapUriAction uriAction:
-                        yield return uriAction.ToImagemapUriAction();
-                        break;
-                    case IImagemapMessageAction messageAction:
-                        yield return messageAction.ToImagemapMessageAction();
-                        break;
-                    default:
-                        throw new NotSupportedException("Invalid action type.");
-                }
+                    ImagemapAction.Convert(action);
+                });
+            }
+
+            [ExcludeFromCodeCoverage]
+            private class InvalidAction : IImagemapAction
+            {
+                public IImagemapArea Area => throw new NotImplementedException();
             }
         }
     }

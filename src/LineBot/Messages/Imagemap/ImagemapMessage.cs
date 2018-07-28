@@ -161,9 +161,21 @@ namespace Line
             }
 
             imagemapMessage.BaseSize = ImagemapSize.Convert(message.BaseSize);
-            imagemapMessage.Actions = message.Actions.ToImagemapActions().ToArray();
+            imagemapMessage.Actions = ConvertActions(message.Actions);
 
             return imagemapMessage;
+        }
+
+        private static IEnumerable<ImagemapAction> ConvertActions(IEnumerable<IImagemapAction> actions)
+        {
+            var imagemapActions = actions.ToArray();
+            var result = new ImagemapAction[imagemapActions.Length];
+            for (int i = 0; i < imagemapActions.Length; i++)
+            {
+                result[i] = ImagemapAction.Convert(imagemapActions[i]);
+            }
+
+            return result;
         }
     }
 }
