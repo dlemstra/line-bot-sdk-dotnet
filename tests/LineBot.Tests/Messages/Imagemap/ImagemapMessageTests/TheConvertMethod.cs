@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages.Audio
+namespace Line.Tests
 {
     public partial class ImagemapMessageTests
     {

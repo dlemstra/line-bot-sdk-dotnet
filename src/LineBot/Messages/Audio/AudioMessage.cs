@@ -29,7 +29,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private MessageType _type = MessageType.Audio;
+        private readonly MessageType _type = MessageType.Audio;
 
 #pragma warning restore 0414
 

@@ -29,7 +29,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
-        private TemplateActionType _type = TemplateActionType.Message;
+        private readonly TemplateActionType _type = TemplateActionType.Message;
 
 #pragma warning restore 0414
 

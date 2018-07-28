@@ -29,7 +29,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private MessageType _type = MessageType.Sticker;
+        private readonly MessageType _type = MessageType.Sticker;
 
 #pragma warning restore 0414
 

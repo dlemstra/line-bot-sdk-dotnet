@@ -12,7 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line.Tests.Converters
+namespace Line.Tests
 {
     public partial class EnumConverterTests
     {

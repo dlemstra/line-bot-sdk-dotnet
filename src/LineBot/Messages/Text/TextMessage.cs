@@ -28,7 +28,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private MessageType _type = MessageType.Text;
+        private readonly MessageType _type = MessageType.Text;
 
 #pragma warning restore 0414
 

@@ -16,7 +16,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {

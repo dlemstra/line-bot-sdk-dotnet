@@ -13,10 +13,9 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages.Audio
+namespace Line.Tests
 {
     public partial class ConfirmTemplateTests
     {

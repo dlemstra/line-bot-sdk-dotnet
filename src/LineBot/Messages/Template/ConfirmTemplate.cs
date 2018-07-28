@@ -30,7 +30,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private TemplateType _type = TemplateType.Confirm;
+        private readonly TemplateType _type = TemplateType.Confirm;
 
 #pragma warning restore 0414
 

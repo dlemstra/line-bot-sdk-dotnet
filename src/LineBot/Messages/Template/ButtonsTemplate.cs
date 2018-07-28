@@ -34,7 +34,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private TemplateType _type = TemplateType.Buttons;
+        private readonly TemplateType _type = TemplateType.Buttons;
 
 #pragma warning restore 0414
 

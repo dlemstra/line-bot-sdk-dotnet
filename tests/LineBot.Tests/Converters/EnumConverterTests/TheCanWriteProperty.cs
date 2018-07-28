@@ -14,7 +14,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Converters
+namespace Line.Tests
 {
     public partial class EnumConverterTests
     {

@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenValueIsEmpty()
+            public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var action = new MessageAction();
 

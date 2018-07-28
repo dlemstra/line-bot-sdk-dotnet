@@ -17,7 +17,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Logging
+namespace Line.Tests
 {
     public partial class LoggingDelegatingHandlerTests
     {

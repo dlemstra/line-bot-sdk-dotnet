@@ -15,7 +15,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages.Audio
+namespace Line.Tests
 {
     public partial class ImageMessageTests
     {

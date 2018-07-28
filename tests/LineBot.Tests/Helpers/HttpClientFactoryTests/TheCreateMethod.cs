@@ -18,7 +18,7 @@ using System.Net.Http;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Helpers
+namespace Line.Tests
 {
     public partial class HttpClientFactoryTests
     {

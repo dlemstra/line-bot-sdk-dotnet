@@ -15,7 +15,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
@@ -34,7 +34,7 @@ namespace Line.Tests.Messages.Template
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenValueIsEmpty()
+            public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 ButtonsTemplate template = new ButtonsTemplate();
 

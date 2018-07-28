@@ -30,7 +30,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
-        private TemplateActionType _type = TemplateActionType.Postback;
+        private readonly TemplateActionType _type = TemplateActionType.Postback;
 
 #pragma warning restore 0414
 

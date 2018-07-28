@@ -15,7 +15,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
     public partial class ConfirmTemplateTests
     {

@@ -30,7 +30,7 @@ namespace Line
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private TemplateType _type = TemplateType.Image_Carousel;
+        private readonly TemplateType _type = TemplateType.Image_Carousel;
 
 #pragma warning restore 0414
 
