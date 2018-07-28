@@ -108,6 +108,23 @@ namespace Line.Tests
                 Assert.AreEqual(new Uri("https://foo.previewUrl"), videoMessage.PreviewUrl);
             }
 
+            [TestMethod]
+            public void ShouldConvertCustomILocationMessageToLocationMessage()
+            {
+                var message = new TestLocationMessage();
+
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                var locationMessage = messages[0] as LocationMessage;
+                Assert.AreEqual("Title", locationMessage.Title);
+                Assert.AreEqual("Address", locationMessage.Address);
+                Assert.AreEqual(53.2014355m, locationMessage.Latitude);
+                Assert.AreEqual(5.7988737m, locationMessage.Longitude);
+            }
+
             [ExcludeFromCodeCoverage]
             private class InvalidMessage : ISendMessage
             {

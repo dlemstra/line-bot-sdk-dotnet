@@ -52,7 +52,7 @@ namespace Line
                         result[i] = AudioMessage.Convert(audioMessage);
                         break;
                     case ILocationMessage locationMessage:
-                        result[i] = locationMessage.ToLocationMessage();
+                        result[i] = LocationMessage.Convert(locationMessage);
                         break;
                     case IStickerMessage stickerMessage:
                         result[i] = stickerMessage.ToStickerMessage();

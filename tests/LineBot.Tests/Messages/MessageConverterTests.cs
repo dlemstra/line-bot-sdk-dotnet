@@ -25,61 +25,21 @@ namespace Line.Tests
         [TestMethod]
         public void Convert_LocationMessage_InstanceIsPreserved()
         {
-            LocationMessage message = new LocationMessage()
-            {
-                Title = "Title",
-                Address = "Address"
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(message, messages[0]);
         }
 
         [TestMethod]
         public void Convert_TextMessageWithoutTitle_ThrowsException()
         {
-            LocationMessage message = new LocationMessage()
-            {
-                Address = "Address"
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
         }
 
         [TestMethod]
         public void Convert_TextMessageWithoutAddress_ThrowsException()
         {
-            LocationMessage message = new LocationMessage()
-            {
-                Title = "Title",
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
         }
 
         [TestMethod]
         public void Convert_CustomILocationMessage_ConvertedToTextMessage()
         {
-            TestLocationMessage message = new TestLocationMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            LocationMessage textMessage = messages[0] as LocationMessage;
-            Assert.AreEqual("Title", textMessage.Title);
-            Assert.AreEqual("Address", textMessage.Address);
-            Assert.AreEqual(53.2014355m, textMessage.Latitude);
-            Assert.AreEqual(5.7988737m, textMessage.Longitude);
         }
 
         [TestMethod]
@@ -977,18 +937,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestLocationMessage : ILocationMessage
-        {
-            public string Title => "Title";
-
-            public string Address => "Address";
-
-            public decimal Latitude => 53.2014355m;
-
-            public decimal Longitude => 5.7988737m;
         }
 
         [ExcludeFromCodeCoverage]
