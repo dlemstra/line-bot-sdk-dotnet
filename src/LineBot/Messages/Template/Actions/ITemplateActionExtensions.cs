@@ -43,7 +43,7 @@ namespace Line
             switch (self)
             {
                 case IPostbackAction postbackAction:
-                    return postbackAction.ToPostbackAction();
+                    return PostbackAction.Convert(postbackAction);
                 case IMessageAction messageAction:
                     return MessageAction.Convert(messageAction);
                 case IUriAction uriAction:

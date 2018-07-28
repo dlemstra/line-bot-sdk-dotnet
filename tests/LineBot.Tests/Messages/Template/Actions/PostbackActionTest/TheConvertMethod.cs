@@ -17,21 +17,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class MessageActionTests
+    public partial class PostbackActionTest
     {
         [TestClass]
         public class TheConvertMethod
         {
             [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsMessageAction()
+            public void ShouldPreserveInstanceWhenValueIsPostbackAction()
             {
-                var action = new MessageAction()
+                var action = new PostbackAction()
                 {
-                    Label = "Foo",
-                    Text = "Test"
+                    Label = "PostbackLabel",
+                    Data = "PostbackData",
+                    Text = "PostbackText",
                 };
 
-                var messageAction = MessageAction.Convert(action);
+                var messageAction = PostbackAction.Convert(action);
 
                 Assert.AreEqual(action, messageAction);
             }
@@ -39,42 +40,43 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                var action = new MessageAction()
+                var action = new PostbackAction()
                 {
-                    Text = "Foo"
+                    Data = "PostbackData"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
-                    var messageAction = MessageAction.Convert(action);
+                    var messageAction = PostbackAction.Convert(action);
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var action = new MessageAction()
+                var action = new PostbackAction()
                 {
-                    Label = "Test"
+                    Label = "PostbackLabel"
                 };
 
-                ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null.", () =>
                 {
-                    var messageAction = MessageAction.Convert(action);
+                    var messageAction = PostbackAction.Convert(action);
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIActionMessageToActionMessage()
+            public void ShouldConvertCustomIPostbackMessageToPostbackMessage()
             {
-                var action = new TestMessageAction();
+                var action = new TestPostbackAction();
 
-                var messageAction = MessageAction.Convert(action);
+                var postbackAction = PostbackAction.Convert(action);
 
-                Assert.AreNotEqual(action, messageAction);
+                Assert.AreNotEqual(action, postbackAction);
 
-                Assert.AreEqual("MessageLabel", messageAction.Label);
-                Assert.AreEqual("MessageText", messageAction.Text);
+                Assert.AreEqual("PostbackLabel", postbackAction.Label);
+                Assert.AreEqual("PostbackData", postbackAction.Data);
+                Assert.AreEqual("PostbackText", postbackAction.Text);
             }
         }
     }

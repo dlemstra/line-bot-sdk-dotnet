@@ -101,5 +101,24 @@ namespace Line
                 _text = value;
             }
         }
+
+        internal static PostbackAction Convert(IPostbackAction action)
+        {
+            if (action.Label == null)
+                throw new InvalidOperationException("The label cannot be null.");
+
+            if (action.Data == null)
+                throw new InvalidOperationException("The data cannot be null.");
+
+            if (action is PostbackAction postbackAction)
+                return postbackAction;
+
+            return new PostbackAction()
+            {
+                Label = action.Label,
+                Data = action.Data,
+                Text = action.Text
+            };
+        }
     }
 }

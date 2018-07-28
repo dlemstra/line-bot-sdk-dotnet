@@ -12,29 +12,29 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IPostbackActionExtensions
+    public partial class PostbackActionTest
     {
-        public static PostbackAction ToPostbackAction(this IPostbackAction self)
+        [TestClass]
+        public class TheConstructor
         {
-            if (self.Label == null)
-                throw new InvalidOperationException("The label cannot be null.");
-
-            if (self.Data == null)
-                throw new InvalidOperationException("The data cannot be null.");
-
-            if (self is PostbackAction postbackAction)
-                return postbackAction;
-
-            return new PostbackAction()
+            [TestMethod]
+            public void ShouldCreateSerializeableObject()
             {
-                Label = self.Label,
-                Data = self.Data,
-                Text = self.Text
-            };
+                var action = new PostbackAction
+                {
+                    Label = "Foo",
+                    Data = "Bar",
+                    Text = "Test"
+                };
+
+                var serialized = JsonConvert.SerializeObject(action);
+                Assert.AreEqual(@"{""type"":""postback"",""label"":""Foo"",""data"":""Bar"",""text"":""Test""}", serialized);
+            }
         }
     }
 }
