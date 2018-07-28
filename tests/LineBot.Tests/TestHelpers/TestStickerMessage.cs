@@ -12,28 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
-namespace Line
+namespace Line.Tests
 {
-    internal static class IStickerMessageExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestStickerMessage : IStickerMessage
     {
-        public static StickerMessage ToStickerMessage(this IStickerMessage self)
-        {
-            if (self.PackageId == null)
-                throw new InvalidOperationException("The package id cannot be null.");
+        public string PackageId => nameof(PackageId);
 
-            if (self.StickerId == null)
-                throw new InvalidOperationException("The sticker id cannot be null.");
-
-            if (self is StickerMessage stickerMessage)
-                return stickerMessage;
-
-            return new StickerMessage()
-            {
-                PackageId = self.PackageId,
-                StickerId = self.StickerId
-            };
-        }
+        public string StickerId => nameof(StickerId);
     }
 }

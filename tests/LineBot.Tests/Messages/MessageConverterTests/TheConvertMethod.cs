@@ -125,6 +125,21 @@ namespace Line.Tests
                 Assert.AreEqual(5.7988737m, locationMessage.Longitude);
             }
 
+            [TestMethod]
+            public void ShouldConvertCustomIStickerMessageToStickerMessage()
+            {
+                TestStickerMessage message = new TestStickerMessage();
+
+                ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                StickerMessage textMessage = messages[0] as StickerMessage;
+                Assert.AreEqual("PackageId", textMessage.PackageId);
+                Assert.AreEqual("StickerId", textMessage.StickerId);
+            }
+
             [ExcludeFromCodeCoverage]
             private class InvalidMessage : ISendMessage
             {

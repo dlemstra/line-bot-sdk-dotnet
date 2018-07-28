@@ -23,84 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_LocationMessage_InstanceIsPreserved()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_TextMessageWithoutTitle_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_TextMessageWithoutAddress_ThrowsException()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_CustomILocationMessage_ConvertedToTextMessage()
-        {
-        }
-
-        [TestMethod]
-        public void Convert_StickerMessage_InstanceIsPreserved()
-        {
-            StickerMessage message = new StickerMessage()
-            {
-                PackageId = "PackageId",
-                StickerId = "StickerId"
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreEqual(message, messages[0]);
-        }
-
-        [TestMethod]
-        public void Convert_StickerMessageWithoutPackageId_ThrowsException()
-        {
-            StickerMessage message = new StickerMessage()
-            {
-                StickerId = "StickerId"
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The package id cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_StickerMessageWithoutStickerId_ThrowsException()
-        {
-            StickerMessage message = new StickerMessage()
-            {
-                PackageId = "PackageId"
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The sticker id cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_CustomIStickerMessage_ConvertedToTextMessage()
-        {
-            TestStickerMessage message = new TestStickerMessage();
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            StickerMessage textMessage = messages[0] as StickerMessage;
-            Assert.AreEqual("PackageId", textMessage.PackageId);
-            Assert.AreEqual("StickerId", textMessage.StickerId);
-        }
-
-        [TestMethod]
         public void Convert_ImagemapMessage_InstanceIsPreserved()
         {
             ImagemapMessage message = new ImagemapMessage()
@@ -937,14 +859,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestStickerMessage : IStickerMessage
-        {
-            public string PackageId => nameof(PackageId);
-
-            public string StickerId => nameof(StickerId);
         }
 
         [ExcludeFromCodeCoverage]

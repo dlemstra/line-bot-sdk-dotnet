@@ -55,7 +55,7 @@ namespace Line
                         result[i] = LocationMessage.Convert(locationMessage);
                         break;
                     case IStickerMessage stickerMessage:
-                        result[i] = stickerMessage.ToStickerMessage();
+                        result[i] = StickerMessage.Convert(stickerMessage);
                         break;
                     case IImagemapMessage imagemapMessage:
                         result[i] = imagemapMessage.ToImagemapMessage();

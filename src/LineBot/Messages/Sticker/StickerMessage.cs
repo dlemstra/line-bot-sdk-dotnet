@@ -90,5 +90,23 @@ namespace Line
                 _stickerId = value;
             }
         }
+
+        internal static StickerMessage Convert(IStickerMessage self)
+        {
+            if (self.PackageId == null)
+                throw new InvalidOperationException("The package id cannot be null.");
+
+            if (self.StickerId == null)
+                throw new InvalidOperationException("The sticker id cannot be null.");
+
+            if (self is StickerMessage stickerMessage)
+                return stickerMessage;
+
+            return new StickerMessage()
+            {
+                PackageId = self.PackageId,
+                StickerId = self.StickerId
+            };
+        }
     }
 }
