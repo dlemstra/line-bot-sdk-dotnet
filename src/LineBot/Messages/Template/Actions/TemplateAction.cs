@@ -19,7 +19,7 @@ using System.Reflection;
 
 namespace Line
 {
-    internal static class ITemplateActionExtensions
+    internal static class TemplateAction
     {
         public static void CheckActionType(this ITemplateAction self)
         {
@@ -30,15 +30,15 @@ namespace Line
                 ThrowException();
         }
 
-        public static IEnumerable<ITemplateAction> ToTemplateAction(this IEnumerable<ITemplateAction> self)
+        public static IEnumerable<ITemplateAction> Convert(this IEnumerable<ITemplateAction> self)
         {
             foreach (ITemplateAction action in self)
             {
-                yield return action.ToTemplateAction();
+                yield return Convert(action);
             }
         }
 
-        public static ITemplateAction ToTemplateAction(this ITemplateAction self)
+        public static ITemplateAction Convert(this ITemplateAction self)
         {
             switch (self)
             {
@@ -47,7 +47,7 @@ namespace Line
                 case IMessageAction messageAction:
                     return MessageAction.Convert(messageAction);
                 case IUriAction uriAction:
-                    return uriAction.ToUriAction();
+                    return UriAction.Convert(uriAction);
                 default:
                     ThrowException();
                     return null;

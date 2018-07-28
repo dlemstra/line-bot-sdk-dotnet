@@ -25,9 +25,10 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
-                var action = new PostbackAction();
-
-                action.Text = null;
+                var action = new PostbackAction
+                {
+                    Text = null
+                };
             }
 
             [TestMethod]

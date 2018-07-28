@@ -47,7 +47,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
-                    var messageAction = PostbackAction.Convert(action);
+                    PostbackAction.Convert(action);
                 });
             }
 
@@ -61,12 +61,12 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null.", () =>
                 {
-                    var messageAction = PostbackAction.Convert(action);
+                    PostbackAction.Convert(action);
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIPostbackMessageToPostbackMessage()
+            public void ShouldConvertCustomIPostbackActionToPostbackAction()
             {
                 var action = new TestPostbackAction();
 

@@ -86,5 +86,23 @@ namespace Line
                 _url = value;
             }
         }
+
+        internal static UriAction Convert(IUriAction action)
+        {
+            if (action.Label == null)
+                throw new InvalidOperationException("The label cannot be null.");
+
+            if (action.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (action is UriAction uriAction)
+                return uriAction;
+
+            return new UriAction()
+            {
+                Label = action.Label,
+                Url = action.Url
+            };
+        }
     }
 }

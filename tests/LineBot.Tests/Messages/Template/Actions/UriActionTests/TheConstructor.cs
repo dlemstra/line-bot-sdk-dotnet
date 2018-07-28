@@ -13,27 +13,28 @@
 // under the License.
 
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IUriActionExtensions
+    public partial class UriActionTests
     {
-        public static UriAction ToUriAction(this IUriAction self)
+        [TestClass]
+        public class TheConstructor
         {
-            if (self.Label == null)
-                throw new InvalidOperationException("The label cannot be null.");
-
-            if (self.Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
-
-            if (self is UriAction uriAction)
-                return uriAction;
-
-            return new UriAction()
+            [TestMethod]
+            public void ShouldCreateSerializeableObject()
             {
-                Label = self.Label,
-                Url = self.Url
-            };
+                var action = new UriAction
+                {
+                    Label = "Foo",
+                    Url = new Uri("http://foo.bar")
+                };
+
+                string serialized = JsonConvert.SerializeObject(action);
+                Assert.AreEqual(@"{""type"":""uri"",""label"":""Foo"",""uri"":""http://foo.bar""}", serialized);
+            }
         }
     }
 }

@@ -17,21 +17,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class MessageActionTests
+    public partial class UriActionTests
     {
         [TestClass]
         public class TheConvertMethod
         {
             [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsMessageAction()
+            public void ShouldPreserveInstanceWhenValueIsUriAction()
             {
-                var action = new MessageAction()
+                var action = new PostbackAction()
                 {
-                    Label = "Foo",
-                    Text = "Test"
+                    Label = "PostbackLabel",
+                    Data = "PostbackData",
+                    Text = "PostbackText",
                 };
 
-                var messageAction = MessageAction.Convert(action);
+                var messageAction = PostbackAction.Convert(action);
 
                 Assert.AreEqual(action, messageAction);
             }
@@ -39,42 +40,42 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                var action = new MessageAction()
+                var action = new UriAction()
                 {
-                    Text = "Foo"
+                    Url = new Uri("https://foo.bar")
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
-                    MessageAction.Convert(action);
+                    UriAction.Convert(action);
                 });
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenTextIsNull()
+            public void ShouldThrowExceptionWhenUriIsNull()
             {
-                var action = new MessageAction()
+                var action = new UriAction()
                 {
-                    Label = "Test"
+                    Label = "UriLabel"
                 };
 
-                ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
                 {
-                    MessageAction.Convert(action);
+                    UriAction.Convert(action);
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIActionMessageToActionMessage()
+            public void ShouldConvertCustomIUriActioneToUriAction()
             {
-                var action = new TestMessageAction();
+                var action = new TestUriAction();
 
-                var messageAction = MessageAction.Convert(action);
+                var uriAction = UriAction.Convert(action);
 
-                Assert.AreNotEqual(action, messageAction);
+                Assert.AreNotEqual(action, uriAction);
 
-                Assert.AreEqual("MessageLabel", messageAction.Label);
-                Assert.AreEqual("MessageText", messageAction.Text);
+                Assert.AreEqual("UriLabel", uriAction.Label);
+                Assert.AreEqual("tel://uri/", uriAction.Url.ToString());
             }
         }
     }

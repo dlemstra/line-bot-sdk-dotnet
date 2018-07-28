@@ -44,7 +44,7 @@ namespace Line
             if (self.Action == null)
                 throw new InvalidOperationException("The action cannot be null.");
 
-            imageCarouselColumn.Action = self.Action.ToTemplateAction();
+            imageCarouselColumn.Action = TemplateAction.Convert(self.Action);
 
             return imageCarouselColumn;
         }

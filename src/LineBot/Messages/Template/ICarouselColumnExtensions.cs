@@ -47,7 +47,7 @@ namespace Line
             if (self.Actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            carouselColumn.Actions = self.Actions.ToTemplateAction().ToArray();
+            carouselColumn.Actions = TemplateAction.Convert(self.Actions);
 
             return carouselColumn;
         }
