@@ -14,27 +14,34 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests.Messages.Template
 {
-    public partial class ButtonsTemplateTests
+    public partial class ConfirmTemplateTests
     {
         [TestClass]
-        public class TheConstructor
+        public class TheCancelActionProperty
         {
             [TestMethod]
-            public void ShouldCreateSerializeableObject()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
-                var template = new ButtonsTemplate
-                {
-                    ThumbnailUrl = new Uri("https://foo.bar"),
-                    Title = "Foo",
-                    Text = "Test"
-                };
+                var template = new ConfirmTemplate();
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""imageAspectRatio"":""rectangle"",""imageSize"":""cover"",""imageBackgroundColor"":""#FFFFFF"",""title"":""Foo"",""text"":""Test"",""actions"":null}", serialized);
+                ExceptionAssert.Throws<InvalidOperationException>("The cancel action cannot be null.", () =>
+                {
+                    template.CancelAction = null;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValueIsInvalidType()
+            {
+                var template = new ConfirmTemplate();
+
+                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+                {
+                    template.CancelAction = new TestTemplateAction();
+                });
             }
         }
     }

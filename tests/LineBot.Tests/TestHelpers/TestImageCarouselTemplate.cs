@@ -12,11 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
+using System.Collections.Generic;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImagemapUriActionExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestImageCarouselTemplate : IImageCarouselTemplate
     {
+        public IEnumerable<IImageCarouselColumn> Columns => new IImageCarouselColumn[] { new TestImageCarouselColumn() };
     }
 }

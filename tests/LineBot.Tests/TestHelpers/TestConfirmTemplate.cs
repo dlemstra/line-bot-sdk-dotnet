@@ -12,11 +12,15 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImagemapMessageActionExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestConfirmTemplate : IConfirmTemplate
     {
+        public string Text => "ConfirmText";
+
+        public ITemplateAction OkAction => new TestMessageAction();
+
+        public ITemplateAction CancelAction => new TestUriAction();
     }
 }

@@ -13,26 +13,19 @@
 // under the License.
 
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class ICarouselTemplateExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestCarouselColumn : ICarouselColumn
     {
-        public static CarouselTemplate ToCarouselTemplate(this ICarouselTemplate self)
-        {
-            CarouselTemplate carouselTemplate = self as CarouselTemplate;
-            if (carouselTemplate == null)
-            {
-                carouselTemplate = new CarouselTemplate();
-            }
+        public Uri ThumbnailUrl => new Uri("https://carousel.url");
 
-            if (self.Columns == null)
-                throw new InvalidOperationException("The columns cannot be null.");
+        public string Title => "CarouselTitle";
 
-            carouselTemplate.Columns = self.Columns.ToCarouselColumn().ToArray();
+        public string Text => "CarouselText";
 
-            return carouselTemplate;
-        }
+        public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new TestMessageAction() };
     }
 }

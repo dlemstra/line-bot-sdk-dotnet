@@ -76,5 +76,31 @@ namespace Line
         [JsonProperty("imageSize")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         public ImageSize ImageSize { get; set; } = ImageSize.Cover;
+
+        internal static CarouselTemplate Convert(ICarouselTemplate template)
+        {
+            if (!(template is CarouselTemplate carouselTemplate))
+            {
+                carouselTemplate = new CarouselTemplate();
+            }
+
+            if (template.Columns == null)
+                throw new InvalidOperationException("The columns cannot be null.");
+
+            carouselTemplate.Columns = Convert(template.Columns.ToArray());
+
+            return carouselTemplate;
+        }
+
+        private static IEnumerable<CarouselColumn> Convert(ICarouselColumn[] columns)
+        {
+            var result = new CarouselColumn[columns.Length];
+            for (int i = 0; i < columns.Length; i++)
+            {
+                result[i] = columns[i].ToCarouselColumn();
+            }
+
+            return result;
+        }
     }
 }

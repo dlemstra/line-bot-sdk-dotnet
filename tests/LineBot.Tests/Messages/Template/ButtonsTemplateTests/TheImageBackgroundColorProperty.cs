@@ -20,7 +20,7 @@ namespace Line.Tests.Messages.Template
     public partial class ButtonsTemplateTests
     {
         [TestClass]
-        public class TheimageBackgroundColorProperty
+        public class TheImageBackgroundColorProperty
         {
             [TestMethod]
             public void ShouldThowExceptionWhenValueIsNull()

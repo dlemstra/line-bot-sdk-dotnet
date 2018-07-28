@@ -12,23 +12,36 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests.Messages.Template
 {
-    public partial class CarouselTemplateTests
+    public partial class ConfirmTemplateTests
     {
         [TestClass]
-        public class TheConstructor
+        public class TheOkActionProperty
         {
             [TestMethod]
-            public void ShouldCreateSerializeableObject()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
-                var template = new CarouselTemplate();
+                var template = new ConfirmTemplate();
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
+                ExceptionAssert.Throws<InvalidOperationException>("The ok action cannot be null.", () =>
+                {
+                    template.OkAction = null;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValueIsInvalidType()
+            {
+                var template = new ConfirmTemplate();
+
+                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+                {
+                    template.OkAction = new TestTemplateAction();
+                });
             }
         }
     }

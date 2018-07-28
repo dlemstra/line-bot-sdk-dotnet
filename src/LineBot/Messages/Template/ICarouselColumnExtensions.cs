@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Line
 {
@@ -29,7 +28,7 @@ namespace Line
             }
         }
 
-        public static ICarouselColumn ToCarouselColumn(this ICarouselColumn self)
+        public static CarouselColumn ToCarouselColumn(this ICarouselColumn self)
         {
             if (self.Text == null)
                 throw new InvalidOperationException("The text cannot be null.");

@@ -104,5 +104,30 @@ namespace Line
 
         [JsonProperty("actions")]
         private ITemplateAction[] Actions => new ITemplateAction[] { _okAction, _cancelAction };
+
+        internal static ConfirmTemplate Convert(IConfirmTemplate template)
+        {
+            if (template.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (!(template is ConfirmTemplate confirmTemplate))
+            {
+                confirmTemplate = new ConfirmTemplate()
+                {
+                    Text = template.Text
+                };
+            }
+
+            if (template.OkAction == null)
+                throw new InvalidOperationException("The ok action cannot be null.");
+
+            if (template.CancelAction == null)
+                throw new InvalidOperationException("The cancel action cannot be null.");
+
+            confirmTemplate.OkAction = template.OkAction.ToTemplateAction();
+            confirmTemplate.CancelAction = template.CancelAction.ToTemplateAction();
+
+            return confirmTemplate;
+        }
     }
 }

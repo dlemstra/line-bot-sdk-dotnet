@@ -23,9 +23,9 @@ namespace Line.Tests.Messages.Template
         public class TheConstructor
         {
             [TestMethod]
-            public void ShouldInitializeTheInstance()
+            public void ShouldCreateSerializeableObject()
             {
-                ImageCarouselTemplate template = new ImageCarouselTemplate();
+                var template = new ImageCarouselTemplate();
 
                 string serialized = JsonConvert.SerializeObject(template);
                 Assert.AreEqual(@"{""type"":""image_carousel"",""columns"":null}", serialized);

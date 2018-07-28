@@ -109,9 +109,26 @@ namespace Line
             if (message.Template == null)
                 throw new InvalidOperationException("The template cannot be null.");
 
-            templateMessage.Template = message.Template.ToTemplate();
+            templateMessage.Template = Convert(message.Template);
 
             return templateMessage;
+        }
+
+        private static ITemplate Convert(ITemplate template)
+        {
+            switch (template)
+            {
+                case IButtonsTemplate buttonsTemplate:
+                    return ButtonsTemplate.Convert(buttonsTemplate);
+                case IConfirmTemplate confirmTemplate:
+                    return ConfirmTemplate.Convert(confirmTemplate);
+                case ICarouselTemplate carouselTemplate:
+                    return CarouselTemplate.Convert(carouselTemplate);
+                case IImageCarouselTemplate imageCarouselTemplate:
+                    return ImageCarouselTemplate.Convert(imageCarouselTemplate);
+                default:
+                    throw new NotSupportedException("Invalid template type.");
+            }
         }
     }
 }

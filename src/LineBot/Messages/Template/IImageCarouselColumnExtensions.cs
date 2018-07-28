@@ -27,7 +27,7 @@ namespace Line
             }
         }
 
-        public static IImageCarouselColumn ToImageCarouselColumn(this IImageCarouselColumn self)
+        public static ImageCarouselColumn ToImageCarouselColumn(this IImageCarouselColumn self)
         {
             if (self.ImageUrl == null)
                 throw new InvalidOperationException("The ImageUrl cannot be null.");

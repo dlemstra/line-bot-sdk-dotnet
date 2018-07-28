@@ -193,6 +193,29 @@ namespace Line
             }
         }
 
+        internal static ButtonsTemplate Convert(IButtonsTemplate template)
+        {
+            if (template.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (!(template is ButtonsTemplate buttonsTemplate))
+            {
+                buttonsTemplate = new ButtonsTemplate()
+                {
+                    ThumbnailUrl = template.ThumbnailUrl,
+                    Title = template.Title,
+                    Text = template.Text,
+                };
+            }
+
+            if (template.Actions == null)
+                throw new InvalidOperationException("The actions cannot be null.");
+
+            buttonsTemplate.Actions = template.Actions.ToTemplateAction().ToArray();
+
+            return buttonsTemplate;
+        }
+
         private static bool IsValidColor(string value)
         {
             for (int i = 1; i < value.Length; i++)

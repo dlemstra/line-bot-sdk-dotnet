@@ -13,26 +13,14 @@
 // under the License.
 
 using System;
-using System.Linq;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImageCarouselTemplateExtensions
+    [ExcludeFromCodeCoverage]
+    public class TestUriAction : IUriAction
     {
-        public static ImageCarouselTemplate ToImageCarouselTemplate(this IImageCarouselTemplate self)
-        {
-            ImageCarouselTemplate imageCarouselTemplate = self as ImageCarouselTemplate;
-            if (imageCarouselTemplate == null)
-            {
-                imageCarouselTemplate = new ImageCarouselTemplate();
-            }
+        public string Label => "UriLabel";
 
-            if (self.Columns == null)
-                throw new InvalidOperationException("The columns cannot be null.");
-
-            imageCarouselTemplate.Columns = self.Columns.ToImageCarouselColumn().ToArray();
-
-            return imageCarouselTemplate;
-        }
+        public Uri Url => new Uri("tel://uri");
     }
 }

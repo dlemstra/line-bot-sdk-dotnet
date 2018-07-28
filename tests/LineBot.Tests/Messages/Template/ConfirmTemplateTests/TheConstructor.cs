@@ -15,9 +15,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
-    public partial class CarouselTemplateTests
+    public partial class ConfirmTemplateTests
     {
         [TestClass]
         public class TheConstructor
@@ -25,10 +25,23 @@ namespace Line.Tests.Messages.Template
             [TestMethod]
             public void ShouldCreateSerializeableObject()
             {
-                var template = new CarouselTemplate();
+                var template = new ConfirmTemplate
+                {
+                    Text = "Test",
+                    OkAction = new MessageAction()
+                    {
+                        Label = "OkLabel",
+                        Text = "OkText"
+                    },
+                    CancelAction = new MessageAction()
+                    {
+                        Label = "CancelLabel",
+                        Text = "CancelText"
+                    }
+                };
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
+                var serialized = JsonConvert.SerializeObject(template);
+                Assert.AreEqual(@"{""type"":""confirm"",""text"":""Test"",""actions"":[{""type"":""message"",""label"":""OkLabel"",""text"":""OkText""},{""type"":""message"",""label"":""CancelLabel"",""text"":""CancelText""}]}", serialized);
             }
         }
     }

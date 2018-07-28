@@ -12,24 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace Line.Tests.Messages.Template
+namespace Line.Tests
 {
-    public partial class CarouselTemplateTests
+    [ExcludeFromCodeCoverage]
+    public class TestCarouselTemplate : ICarouselTemplate
     {
-        [TestClass]
-        public class TheConstructor
-        {
-            [TestMethod]
-            public void ShouldCreateSerializeableObject()
-            {
-                var template = new CarouselTemplate();
-
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
-            }
-        }
+        public IEnumerable<ICarouselColumn> Columns => new ICarouselColumn[] { new TestCarouselColumn() };
     }
 }
