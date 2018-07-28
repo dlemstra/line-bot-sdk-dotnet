@@ -23,99 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_TemplateMessageAlternativeTextIsNull_ThrowsException()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The alternative text cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_TemplateMessageTemplateIsNull_ThrowsException()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-                AlternativeText = "AlternativeText"
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The template cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_TemplateMessageWithButtonsTemplate_InstanceIsPreserved()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-                AlternativeText = "Alternative",
-                Template = new ButtonsTemplate()
-                {
-                    ThumbnailUrl = new Uri("https://foo.bar"),
-                    Title = "ButtonsTitle",
-                    Text = "ButtonsText",
-                    Actions = new ITemplateAction[]
-                    {
-                        new PostbackAction()
-                        {
-                            Label = "PostbackLabel",
-                            Text = "PostbackText",
-                            Data = "PostbackData",
-                        }
-                    }
-                }
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-
-            ITemplateMessage templateMessage = messages[0] as ITemplateMessage;
-            Assert.AreEqual(message, templateMessage);
-
-            IButtonsTemplate buttonsTemplate = templateMessage.Template as IButtonsTemplate;
-            Assert.AreEqual(message.Template, buttonsTemplate);
-
-            ITemplateAction action = buttonsTemplate.Actions.First();
-            Assert.AreEqual(action, ((ButtonsTemplate)message.Template).Actions.First());
-        }
-
-        [TestMethod]
-        public void Convert_TemplateMessageWithCustomIButtonsTemplate_ConvertedToConfirmTemplate()
-        {
-            TestTemplateMessage message = new TestTemplateMessage()
-            {
-                Template = new TestButtonsTemplate()
-            };
-
-            ISendMessage[] messages = MessageConverter.Convert(new ISendMessage[] { message });
-
-            Assert.AreEqual(1, messages.Length);
-            Assert.AreNotEqual(message, messages[0]);
-
-            TemplateMessage templateMessage = messages[0] as TemplateMessage;
-            Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
-
-            ButtonsTemplate template = templateMessage.Template as ButtonsTemplate;
-            Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
-            Assert.AreEqual("ButtonsTitle", template.Title);
-            Assert.AreEqual("ButtonsText", template.Text);
-
-            ITemplateAction[] actions = template.Actions.ToArray();
-
-            PostbackAction action = actions[0] as PostbackAction;
-            Assert.AreEqual("PostbackLabel", action.Label);
-            Assert.AreEqual("PostbackData", action.Data);
-            Assert.AreEqual("PostbackText", action.Text);
-        }
-
-        [TestMethod]
         public void Convert_TemplateMessageWithButtonsTemplateAndTextIsNull_ThrowsException()
         {
             TemplateMessage message = new TemplateMessage()
@@ -625,26 +532,6 @@ namespace Line.Tests
         }
 
         [ExcludeFromCodeCoverage]
-        private class TestTemplateMessage : ITemplateMessage
-        {
-            public string AlternativeText => "AlternativeText";
-
-            public ITemplate Template { get; set; }
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestButtonsTemplate : IButtonsTemplate
-        {
-            public Uri ThumbnailUrl => new Uri("https://bar.foo");
-
-            public string Title => "ButtonsTitle";
-
-            public string Text => "ButtonsText";
-
-            public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new TestPostbackAction() };
-        }
-
-        [ExcludeFromCodeCoverage]
         private class TestConfirmTemplate : IConfirmTemplate
         {
             public string Text => "ConfirmText";
@@ -670,16 +557,6 @@ namespace Line.Tests
             public string Text => "CarouselText";
 
             public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new TestMessageAction() };
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class TestPostbackAction : IPostbackAction
-        {
-            public string Label => "PostbackLabel";
-
-            public string Data => "PostbackData";
-
-            public string Text => "PostbackText";
         }
 
         [ExcludeFromCodeCoverage]

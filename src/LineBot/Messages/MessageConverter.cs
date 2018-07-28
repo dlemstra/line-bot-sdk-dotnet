@@ -61,7 +61,7 @@ namespace Line
                         result[i] = ImagemapMessage.Convert(imagemapMessage);
                         break;
                     case ITemplateMessage templateMessage:
-                        result[i] = templateMessage.ToTemplateMessage();
+                        result[i] = TemplateMessage.Convert(templateMessage);
                         break;
                     default:
                         throw new NotSupportedException("Invalid message type.");

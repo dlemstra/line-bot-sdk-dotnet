@@ -23,7 +23,7 @@ namespace Line.Tests.Messages.Audio
         public class TheConvertMethod
         {
             [TestMethod]
-            public void ShouldPreserveInstanceWhenValueImageMessage()
+            public void ShouldPreserveInstanceWhenValueIsImageMessage()
             {
                 var message = new ImageMessage()
                 {
@@ -65,7 +65,7 @@ namespace Line.Tests.Messages.Audio
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIAudioMessageToAudioMessage()
+            public void ShouldConvertCustomIImageMessageToImageMessage()
             {
                 var message = new TestImageMessage();
 

@@ -174,6 +174,35 @@ namespace Line.Tests
                 Assert.AreEqual(1, messageAction.Area.Height);
             }
 
+            [TestMethod]
+            public void ShouldConvertCustomITemplateMessageToTemplateMessage()
+            {
+                var message = new TestTemplateMessage()
+                {
+                    Template = new TestButtonsTemplate()
+                };
+
+                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+
+                Assert.AreEqual(1, messages.Length);
+                Assert.AreNotEqual(message, messages[0]);
+
+                var templateMessage = messages[0] as TemplateMessage;
+                Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
+
+                var template = templateMessage.Template as ButtonsTemplate;
+                Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
+                Assert.AreEqual("ButtonsTitle", template.Title);
+                Assert.AreEqual("ButtonsText", template.Text);
+
+                var actions = template.Actions.ToArray();
+
+                PostbackAction action = actions[0] as PostbackAction;
+                Assert.AreEqual("PostbackLabel", action.Label);
+                Assert.AreEqual("PostbackData", action.Data);
+                Assert.AreEqual("PostbackText", action.Text);
+            }
+
             [ExcludeFromCodeCoverage]
             private class InvalidMessage : ISendMessage
             {

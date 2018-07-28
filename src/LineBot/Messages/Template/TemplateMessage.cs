@@ -92,5 +92,26 @@ namespace Line
                 _template = value;
             }
         }
+
+        internal static TemplateMessage Convert(ITemplateMessage message)
+        {
+            if (message.AlternativeText == null)
+                throw new InvalidOperationException("The alternative text cannot be null.");
+
+            if (!(message is TemplateMessage templateMessage))
+            {
+                templateMessage = new TemplateMessage()
+                {
+                    AlternativeText = message.AlternativeText,
+                };
+            }
+
+            if (message.Template == null)
+                throw new InvalidOperationException("The template cannot be null.");
+
+            templateMessage.Template = message.Template.ToTemplate();
+
+            return templateMessage;
+        }
     }
 }
