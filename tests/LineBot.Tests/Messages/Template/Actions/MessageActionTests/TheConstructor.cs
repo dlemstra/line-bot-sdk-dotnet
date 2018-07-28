@@ -12,28 +12,28 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IMessageActionExtensions
+    public partial class MessageActionTests
     {
-        public static MessageAction ToMessageAction(this IMessageAction self)
+        [TestClass]
+        public class TheConstructor
         {
-            if (self.Label == null)
-                throw new InvalidOperationException("The label cannot be null.");
-
-            if (self.Text == null)
-                throw new InvalidOperationException("The text cannot be null.");
-
-            if (self is MessageAction messageAction)
-                return messageAction;
-
-            return new MessageAction()
+            [TestMethod]
+            public void ShouldCreateSerializeableObject()
             {
-                Label = self.Label,
-                Text = self.Text
-            };
+                var action = new MessageAction
+                {
+                    Label = "Foo",
+                    Text = "Test"
+                };
+
+                string serialized = JsonConvert.SerializeObject(action);
+                Assert.AreEqual(@"{""type"":""message"",""label"":""Foo"",""text"":""Test""}", serialized);
+            }
         }
     }
 }

@@ -23,60 +23,6 @@ namespace Line.Tests
     public partial class MessageConverterTests
     {
         [TestMethod]
-        public void Convert_TemplateMessageWithConfirmTemplateAndMessageActionLabelIsNull_ThrowsException()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-                AlternativeText = "Alternative",
-                Template = new ConfirmTemplate()
-                {
-                    Text = "ConfirmText",
-                    OkAction = new MessageAction()
-                    {
-                        Text = "PostbackText"
-                    },
-                    CancelAction = new UriAction()
-                    {
-                        Label = "PostbackLabel",
-                        Url = new Uri("http://foo.bar")
-                    }
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
-        public void Convert_TemplateMessageWithConfirmTemplateAndMessageActionTextIsNull_ThrowsException()
-        {
-            TemplateMessage message = new TemplateMessage()
-            {
-                AlternativeText = "Alternative",
-                Template = new ConfirmTemplate()
-                {
-                    Text = "ConfirmText",
-                    OkAction = new MessageAction()
-                    {
-                        Label = "PostbackLabel"
-                    },
-                    CancelAction = new UriAction()
-                    {
-                        Label = "PostbackLabel",
-                        Url = new Uri("http://foo.bar")
-                    }
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
         public void Convert_TemplateMessageWithConfirmTemplateAndUriActionLabelIsNull_ThrowsException()
         {
             TemplateMessage message = new TemplateMessage()
@@ -187,25 +133,6 @@ namespace Line.Tests
             {
                 MessageConverter.Convert(new ISendMessage[] { message });
             });
-        }
-
-        [TestMethod]
-        public void Convert_TemplateMessageInvalidTemplateType_ThrowsException()
-        {
-            TestTemplateMessage message = new TestTemplateMessage()
-            {
-                Template = new InvalidTemplate()
-            };
-
-            ExceptionAssert.Throws<NotSupportedException>("Invalid template type.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [ExcludeFromCodeCoverage]
-        private class InvalidTemplate : ITemplate
-        {
         }
     }
 }

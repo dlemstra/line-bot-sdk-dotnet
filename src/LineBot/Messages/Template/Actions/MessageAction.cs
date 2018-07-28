@@ -79,5 +79,23 @@ namespace Line
                 _text = value;
             }
         }
+
+        internal static MessageAction Convert(IMessageAction action)
+        {
+            if (action.Label == null)
+                throw new InvalidOperationException("The label cannot be null.");
+
+            if (action.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (action is MessageAction messageAction)
+                return messageAction;
+
+            return new MessageAction()
+            {
+                Label = action.Label,
+                Text = action.Text
+            };
+        }
     }
 }

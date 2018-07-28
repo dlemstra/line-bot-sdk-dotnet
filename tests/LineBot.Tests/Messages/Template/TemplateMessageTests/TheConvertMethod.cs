@@ -86,6 +86,20 @@ namespace Line.Tests.Messages.Audio
             }
 
             [TestMethod]
+            public void ShouldThrowExceptionWhenTemplateIsInvalid()
+            {
+                var message = new TestTemplateMessage()
+                {
+                    Template = new InvalidTemplate()
+                };
+
+                ExceptionAssert.Throws<NotSupportedException>("Invalid template type.", () =>
+                {
+                    TemplateMessage.Convert(message);
+                });
+            }
+
+            [TestMethod]
             public void ShouldConvertCustomITemplateMessageToTemplateMessage()
             {
                 var message = new TestTemplateMessage()
@@ -110,6 +124,11 @@ namespace Line.Tests.Messages.Audio
                 Assert.AreEqual("PostbackLabel", action.Label);
                 Assert.AreEqual("PostbackData", action.Data);
                 Assert.AreEqual("PostbackText", action.Text);
+            }
+
+            [ExcludeFromCodeCoverage]
+            private class InvalidTemplate : ITemplate
+            {
             }
         }
     }

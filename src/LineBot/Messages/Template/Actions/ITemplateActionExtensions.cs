@@ -45,7 +45,7 @@ namespace Line
                 case IPostbackAction postbackAction:
                     return postbackAction.ToPostbackAction();
                 case IMessageAction messageAction:
-                    return messageAction.ToMessageAction();
+                    return MessageAction.Convert(messageAction);
                 case IUriAction uriAction:
                     return uriAction.ToUriAction();
                 default:
