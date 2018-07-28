@@ -18,24 +18,5 @@ namespace Line
 {
     internal static class IImagemapMessageActionExtensions
     {
-        public static ImagemapMessageAction ToImagemapMessageAction(this IImagemapMessageAction self)
-        {
-            if (self.Text == null)
-                throw new InvalidOperationException("The text cannot be null.");
-
-            ImagemapMessageAction imagemapMessageAction = self as ImagemapMessageAction;
-
-            if (imagemapMessageAction == null)
-            {
-                imagemapMessageAction = new ImagemapMessageAction()
-                {
-                    Text = self.Text
-                };
-            }
-
-            imagemapMessageAction.Area = self.Area.ToImagemapArea();
-
-            return imagemapMessageAction;
-        }
     }
 }

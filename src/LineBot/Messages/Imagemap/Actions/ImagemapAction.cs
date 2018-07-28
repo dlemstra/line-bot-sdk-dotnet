@@ -59,7 +59,7 @@ namespace Line
                 case IImagemapUriAction uriAction:
                     return uriAction.ToImagemapUriAction();
                 case IImagemapMessageAction messageAction:
-                    return messageAction.ToImagemapMessageAction();
+                    return ImagemapMessageAction.Convert(messageAction);
                 default:
                     throw new NotSupportedException("Invalid action type.");
             }

@@ -89,26 +89,6 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        public void Convert_ImagemapMessageActionWithoutText_ThrowsException()
-        {
-            TestImagemapMessage message = new TestImagemapMessage()
-            {
-                Actions = new TestImagemapMessageAction[]
-                {
-                    new TestImagemapMessageAction()
-                    {
-                        Text = null
-                    }
-                }
-            };
-
-            ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
-            {
-                MessageConverter.Convert(new ISendMessage[] { message });
-            });
-        }
-
-        [TestMethod]
         public void Convert_TemplateMessageAlternativeTextIsNull_ThrowsException()
         {
             TemplateMessage message = new TemplateMessage()

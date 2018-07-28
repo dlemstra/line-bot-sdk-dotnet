@@ -39,10 +39,12 @@ namespace Line
         /// The text of the message.
         /// <para>Max: 400 characters.</para>
         /// </param>
-        public ImagemapMessageAction(string text)
+        /// <param name="area">The tappable area.</param>
+        public ImagemapMessageAction(string text, ImagemapArea area)
             : this()
         {
             Text = text;
+            Area = area;
         }
 
         /// <summary>
@@ -57,9 +59,8 @@ namespace Line
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
         public ImagemapMessageAction(string text, int x, int y, int width, int height)
-            : this(text)
+            : this(text, new ImagemapArea(x, y, width, height))
         {
-            Area = new ImagemapArea(x, y, width, height);
         }
 
         /// <summary>
@@ -84,6 +85,27 @@ namespace Line
 
                 _text = value;
             }
+        }
+
+        internal static ImagemapMessageAction Convert(IImagemapMessageAction action)
+        {
+            if (action.Area == null)
+                throw new InvalidOperationException("The area cannot be null.");
+
+            if (action.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (!(action is ImagemapMessageAction imagemapMessageAction))
+            {
+                imagemapMessageAction = new ImagemapMessageAction()
+                {
+                    Text = action.Text
+                };
+            }
+
+            imagemapMessageAction.Area = action.Area.ToImagemapArea();
+
+            return imagemapMessageAction;
         }
     }
 }
