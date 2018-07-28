@@ -132,7 +132,7 @@ namespace Line
                 };
             }
 
-            imagemapUriAction.Area = action.Area.ToImagemapArea();
+            imagemapUriAction.Area = ImagemapArea.Convert(action.Area);
 
             return imagemapUriAction;
         }

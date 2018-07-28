@@ -103,7 +103,7 @@ namespace Line
                 };
             }
 
-            imagemapMessageAction.Area = action.Area.ToImagemapArea();
+            imagemapMessageAction.Area = ImagemapArea.Convert(action.Area);
 
             return imagemapMessageAction;
         }

@@ -86,5 +86,16 @@ namespace Line
                 _y = value;
             }
         }
+
+        internal static ImagemapArea Convert(IImagemapArea area)
+        {
+            return new ImagemapArea()
+            {
+                X = area.X,
+                Y = area.Y,
+                Width = area.Width,
+                Height = area.Height
+            };
+        }
     }
 }

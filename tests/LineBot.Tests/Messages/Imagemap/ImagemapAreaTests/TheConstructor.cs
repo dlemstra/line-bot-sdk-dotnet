@@ -12,36 +12,40 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Line.Tests
 {
-    public partial class ImagemapSizeTests
+    public partial class ImagemapAreaTests
     {
         [TestClass]
-        public class TheHeightProperty
+        public class TheConstructor
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenValueIsZero()
+            public void ShouldCreateSerializeableObject()
             {
-                var size = new ImagemapSize();
-
-                ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
+                var area = new ImagemapArea()
                 {
-                    size.Height = 0;
-                });
+                    X = 10,
+                    Y = 20,
+                    Width = 30,
+                    Height = 40
+                };
+
+                var serialized = JsonConvert.SerializeObject(area);
+                Assert.AreEqual(@"{""x"":10,""y"":20,""width"":30,""height"":40}", serialized);
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenValueIsNegative()
+            public void ShouldSetTheProperties()
             {
-                var size = new ImagemapSize();
+                var action = new ImagemapArea(1, 2, 3, 4);
 
-                ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
-                {
-                    size.Height = -1;
-                });
+                Assert.AreEqual(1, action.X);
+                Assert.AreEqual(2, action.Y);
+                Assert.AreEqual(3, action.Width);
+                Assert.AreEqual(4, action.Height);
             }
         }
     }

@@ -20,27 +20,27 @@ namespace Line.Tests
     public partial class ImagemapSizeTests
     {
         [TestClass]
-        public class TheHeightProperty
+        public class ImagemapAreaTests
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsZero()
             {
-                var size = new ImagemapSize();
+                var area = new ImagemapArea();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
                 {
-                    size.Height = 0;
+                    area.Width = 0;
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNegative()
             {
-                var size = new ImagemapSize();
+                var area = new ImagemapArea();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
                 {
-                    size.Height = -1;
+                    area.Width = -1;
                 });
             }
         }

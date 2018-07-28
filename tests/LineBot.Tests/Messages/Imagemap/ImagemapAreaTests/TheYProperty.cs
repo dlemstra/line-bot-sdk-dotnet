@@ -13,29 +13,25 @@
 // under the License.
 
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImagemapAreaExtensions
+    public partial class ImagemapAreaTests
     {
-        public static ImagemapArea ToImagemapArea(this IImagemapArea self)
+        [TestClass]
+        public class TheYProperty
         {
-            if (self.Width == 0)
-                throw new InvalidOperationException("The width should be at least 1.");
-
-            if (self.Height == 0)
-                throw new InvalidOperationException("The height should be at least 1.");
-
-            if (self is ImagemapArea imagemapArea)
-                return imagemapArea;
-
-            return new ImagemapArea()
+            [TestMethod]
+            public void ShouldThrowExceptionWhenValueBelowZero()
             {
-                X = self.X,
-                Y = self.Y,
-                Width = self.Width,
-                Height = self.Height
-            };
+                var area = new ImagemapArea();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The y position should be at least 0.", () =>
+                {
+                    area.Y = -1;
+                });
+            }
         }
     }
 }

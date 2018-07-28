@@ -13,11 +13,25 @@
 // under the License.
 
 using System;
-using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IImagemapActionExtensions
+    public partial class ImagemapAreaTests
     {
+        [TestClass]
+        public class TheXProperty
+        {
+            [TestMethod]
+            public void ShouldThrowExceptionWhenValueBelowZero()
+            {
+                var area = new ImagemapArea();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The x position should be at least 0.", () =>
+                {
+                    area.X = -1;
+                });
+            }
+        }
     }
 }

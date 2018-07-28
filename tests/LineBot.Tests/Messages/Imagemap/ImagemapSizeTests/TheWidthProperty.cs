@@ -25,22 +25,22 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsZero()
             {
-                var area = new ImagemapSize();
+                var size = new ImagemapSize();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
                 {
-                    area.Width = 0;
+                    size.Width = 0;
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNegative()
             {
-                var area = new ImagemapSize();
+                var size = new ImagemapSize();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
                 {
-                    area.Width = -1;
+                    size.Width = -1;
                 });
             }
         }

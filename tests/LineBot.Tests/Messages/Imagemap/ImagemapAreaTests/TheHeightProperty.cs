@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class ImagemapSizeTests
+    public partial class ImagemapAreaTests
     {
         [TestClass]
         public class TheHeightProperty
@@ -25,22 +25,22 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsZero()
             {
-                var size = new ImagemapSize();
+                var area = new ImagemapArea();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
                 {
-                    size.Height = 0;
+                    area.Height = 0;
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNegative()
             {
-                var size = new ImagemapSize();
+                var area = new ImagemapArea();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
                 {
-                    size.Height = -1;
+                    area.Height = -1;
                 });
             }
         }
