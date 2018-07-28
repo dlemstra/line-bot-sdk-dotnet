@@ -35,10 +35,7 @@ namespace Line.Tests
                     {
                         new ImagemapMessageAction("Text", 1, 2, 3, 4),
                         new ImagemapUriAction("https://bar.foo", 5, 6, 7, 8),
-                        new ImagemapUriAction("https://bar.foo")
-                        {
-                            Area = new ImagemapArea(9, 10, 11, 12)
-                        }
+                        new ImagemapUriAction("https://bar.foo", new ImagemapArea(9, 10, 11, 12))
                     }
                 };
 

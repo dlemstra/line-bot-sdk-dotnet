@@ -18,24 +18,5 @@ namespace Line
 {
     internal static class IImagemapUriActionExtensions
     {
-        public static ImagemapUriAction ToImagemapUriAction(this IImagemapUriAction self)
-        {
-            if (self.Url == null)
-                throw new InvalidOperationException("The url cannot be null.");
-
-            ImagemapUriAction imagemapUriAction = self as ImagemapUriAction;
-
-            if (imagemapUriAction == null)
-            {
-                imagemapUriAction = new ImagemapUriAction()
-                {
-                    Url = self.Url
-                };
-            }
-
-            imagemapUriAction.Area = self.Area.ToImagemapArea();
-
-            return imagemapUriAction;
-        }
     }
 }

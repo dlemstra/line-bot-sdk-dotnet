@@ -39,8 +39,9 @@ namespace Line
         /// The webpage url.
         /// <para>Max url length: 1000 characters.</para>
         /// </param>
-        public ImagemapUriAction(string url)
-            : this(new Uri(url))
+        /// <param name="area">The tappable area.</param>
+        public ImagemapUriAction(string url, ImagemapArea area)
+            : this(new Uri(url), area)
         {
         }
 
@@ -51,10 +52,12 @@ namespace Line
         /// The webpage url.
         /// <para>Max url length: 1000 characters.</para>
         /// </param>
-        public ImagemapUriAction(Uri url)
+        /// <param name="area">The tappable area.</param>
+        public ImagemapUriAction(Uri url, ImagemapArea area)
             : this()
         {
             Url = url;
+            Area = area;
         }
 
         /// <summary>
@@ -85,9 +88,8 @@ namespace Line
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
         public ImagemapUriAction(Uri url, int x, int y, int width, int height)
-            : this(url)
+            : this(url, new ImagemapArea(x, y, width, height))
         {
-            Area = new ImagemapArea(x, y, width, height);
         }
 
         /// <summary>
@@ -112,6 +114,27 @@ namespace Line
 
                 _url = value;
             }
+        }
+
+        internal static ImagemapUriAction Convert(IImagemapUriAction action)
+        {
+            if (action.Area == null)
+                throw new InvalidOperationException("The area cannot be null.");
+
+            if (action.Url == null)
+                throw new InvalidOperationException("The url cannot be null.");
+
+            if (!(action is ImagemapUriAction imagemapUriAction))
+            {
+                imagemapUriAction = new ImagemapUriAction()
+                {
+                    Url = action.Url
+                };
+            }
+
+            imagemapUriAction.Area = action.Area.ToImagemapArea();
+
+            return imagemapUriAction;
         }
     }
 }

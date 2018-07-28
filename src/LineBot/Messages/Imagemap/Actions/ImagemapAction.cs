@@ -57,7 +57,7 @@ namespace Line
             switch (action)
             {
                 case IImagemapUriAction uriAction:
-                    return uriAction.ToImagemapUriAction();
+                    return ImagemapUriAction.Convert(uriAction);
                 case IImagemapMessageAction messageAction:
                     return ImagemapMessageAction.Convert(messageAction);
                 default:
