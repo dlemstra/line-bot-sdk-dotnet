@@ -23,14 +23,14 @@ namespace Line.Tests
         public class TheConstructor
         {
             [TestMethod]
-            public void ShouldCreateCreateSerializeableObject()
+            public void ShouldCreateSerializeableObject()
             {
                 var message = new TextMessage()
                 {
                     Text = "Correct"
                 };
 
-                string serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonConvert.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""text"",""text"":""Correct""}", serialized);
             }
 

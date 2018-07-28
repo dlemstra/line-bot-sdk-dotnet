@@ -24,7 +24,7 @@ namespace Line.Tests
         public class TheConstructor
         {
             [TestMethod]
-            public void ShouldCreateCreateSerializeableObject()
+            public void ShouldCreateSerializeableObject()
             {
                 var message = new AudioMessage()
                 {
@@ -32,7 +32,7 @@ namespace Line.Tests
                     Duration = 10000
                 };
 
-                string serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonConvert.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""audio"",""originalContentUrl"":""https://foo.url"",""duration"":10000}", serialized);
             }
 

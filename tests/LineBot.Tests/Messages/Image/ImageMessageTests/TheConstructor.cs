@@ -24,7 +24,7 @@ namespace Line.Tests
         public class TheConstructor
         {
             [TestMethod]
-            public void ShouldCreateCreateSerializeableObject()
+            public void ShouldCreateSerializeableObject()
             {
                 var message = new ImageMessage()
                 {
@@ -32,7 +32,7 @@ namespace Line.Tests
                     PreviewUrl = new Uri("https://foo.previewUrl"),
                 };
 
-                string serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonConvert.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""image"",""originalContentUrl"":""https://foo.url"",""previewImageUrl"":""https://foo.previewUrl""}", serialized);
             }
 
