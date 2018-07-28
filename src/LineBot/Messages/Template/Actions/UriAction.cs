@@ -22,16 +22,14 @@ namespace Line
     /// </summary>
     public sealed class UriAction : IUriAction
     {
-        private string _label;
-        private Uri _url;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
         private readonly TemplateActionType _type = TemplateActionType.Uri;
-
 #pragma warning restore 0414
+
+        private string _label;
+        private Uri _url;
 
         /// <summary>
         /// Gets or sets the label.

@@ -24,18 +24,16 @@ namespace Line
     /// </summary>
     public sealed class ImagemapMessage : IImagemapMessage
     {
+#pragma warning disable 0414 // Suppress value is never used.
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        private readonly MessageType _type = MessageType.Imagemap;
+#pragma warning restore 0414
+
         private Uri _baseUrl;
         private string _alternateText;
         private ImagemapSize _baseSize;
         private IEnumerable<ImagemapAction> _actions;
-
-#pragma warning disable 0414 // Suppress value is never used.
-
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Imagemap;
-
-#pragma warning restore 0414
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapMessage"/> class.

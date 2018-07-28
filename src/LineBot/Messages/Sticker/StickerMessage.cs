@@ -22,16 +22,14 @@ namespace Line
     /// </summary>
     public sealed class StickerMessage : IStickerMessage
     {
-        private string _packageId;
-        private string _stickerId;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Sticker;
-
 #pragma warning restore 0414
+
+        private string _packageId;
+        private string _stickerId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StickerMessage"/> class.

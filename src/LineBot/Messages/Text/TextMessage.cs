@@ -22,15 +22,13 @@ namespace Line
     /// </summary>
     public sealed class TextMessage : ITextMessage
     {
-        private string _text;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Text;
-
 #pragma warning restore 0414
+
+        private string _text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextMessage"/> class.

@@ -22,16 +22,14 @@ namespace Line
     /// </summary>
     public sealed class AudioMessage : IAudioMessage
     {
-        private Uri _url;
-        private int _duration;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Audio;
-
 #pragma warning restore 0414
+
+        private Uri _url;
+        private int _duration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AudioMessage"/> class.

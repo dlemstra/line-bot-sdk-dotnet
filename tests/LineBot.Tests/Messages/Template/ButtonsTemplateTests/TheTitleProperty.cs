@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheTitleProperty
         {
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenSetToNull()
+            public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 ButtonsTemplate template = new ButtonsTemplate
                 {

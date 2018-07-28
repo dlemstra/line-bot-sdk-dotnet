@@ -24,19 +24,17 @@ namespace Line
     /// </summary>
     public sealed class ButtonsTemplate : IButtonsTemplate
     {
+#pragma warning disable 0414 // Suppress value is never used.
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<TemplateType>))]
+        private readonly TemplateType _type = TemplateType.Buttons;
+#pragma warning restore 0414
+
         private Uri _thumbnailUrl;
         private string _color = "#FFFFFF";
         private string _title;
         private string _text;
         private IEnumerable<ITemplateAction> _actions;
-
-#pragma warning disable 0414 // Suppress value is never used.
-
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private readonly TemplateType _type = TemplateType.Buttons;
-
-#pragma warning restore 0414
 
         /// <summary>
         /// Gets or sets the image url for the thumbnail.

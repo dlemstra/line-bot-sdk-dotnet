@@ -22,16 +22,14 @@ namespace Line
     /// </summary>
     public sealed class ImageMessage : IImageMessage
     {
-        private Uri _url;
-        private Uri _previewUrl;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Image;
-
 #pragma warning restore 0414
+
+        private Uri _url;
+        private Uri _previewUrl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageMessage"/> class.

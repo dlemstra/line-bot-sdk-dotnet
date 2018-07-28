@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheTextProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenSetToNull()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var column = new CarouselColumn();
 

@@ -22,17 +22,15 @@ namespace Line
     /// </summary>
     public sealed class ConfirmTemplate : IConfirmTemplate
     {
-        private string _text;
-        private ITemplateAction _okAction;
-        private ITemplateAction _cancelAction;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
         private readonly TemplateType _type = TemplateType.Confirm;
-
 #pragma warning restore 0414
+
+        private string _text;
+        private ITemplateAction _okAction;
+        private ITemplateAction _cancelAction;
 
         /// <summary>
         /// Gets or sets the message text.

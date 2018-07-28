@@ -22,17 +22,15 @@ namespace Line
     /// </summary>
     public sealed class PostbackAction : IPostbackAction
     {
-        private string _label;
-        private string _data;
-        private string _text;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
         private readonly TemplateActionType _type = TemplateActionType.Postback;
-
 #pragma warning restore 0414
+
+        private string _label;
+        private string _data;
+        private string _text;
 
         /// <summary>
         /// Gets or sets the label.

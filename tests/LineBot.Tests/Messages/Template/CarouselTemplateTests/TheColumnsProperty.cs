@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheColumnsProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenSetToNull()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 CarouselTemplate template = new CarouselTemplate();
 

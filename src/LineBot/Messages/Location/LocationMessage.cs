@@ -22,16 +22,14 @@ namespace Line
     /// </summary>
     public sealed class LocationMessage : ILocationMessage
     {
-        private string _title;
-        private string _address;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Location;
-
 #pragma warning restore 0414
+
+        private string _title;
+        private string _address;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMessage"/> class.

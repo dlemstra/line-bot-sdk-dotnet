@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheThumbnailUrlProperty
         {
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenSetToNull()
+            public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 ButtonsTemplate template = new ButtonsTemplate
                 {

@@ -24,16 +24,14 @@ namespace Line
     /// </summary>
     public sealed class TemplateMessage : ITemplateMessage
     {
-        private string _alternateText;
-        private ITemplate _template;
-
 #pragma warning disable 0414 // Suppress value is never used.
-
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         private readonly MessageType _type = MessageType.Template;
-
 #pragma warning restore 0414
+
+        private string _alternateText;
+        private ITemplate _template;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateMessage"/> class.
