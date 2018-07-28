@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Line
@@ -77,6 +78,35 @@ namespace Line
 
                 _action = value;
             }
+        }
+
+        internal static IEnumerable<ImageCarouselColumn> Convert(IEnumerable<IImageCarouselColumn> columns)
+        {
+            foreach (IImageCarouselColumn column in columns)
+            {
+                yield return Convert(column);
+            }
+        }
+
+        private static ImageCarouselColumn Convert(IImageCarouselColumn column)
+        {
+            if (column.ImageUrl == null)
+                throw new InvalidOperationException("The image url cannot be null.");
+
+            if (!(column is ImageCarouselColumn imageCarouselColumn))
+            {
+                imageCarouselColumn = new ImageCarouselColumn()
+                {
+                    ImageUrl = column.ImageUrl,
+                };
+            }
+
+            if (column.Action == null)
+                throw new InvalidOperationException("The action cannot be null.");
+
+            imageCarouselColumn.Action = TemplateAction.Convert(column.Action);
+
+            return imageCarouselColumn;
         }
     }
 }

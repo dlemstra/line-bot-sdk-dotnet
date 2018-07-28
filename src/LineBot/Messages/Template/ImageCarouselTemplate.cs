@@ -73,20 +73,9 @@ namespace Line
             if (template.Columns == null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
-            imageCarouselTemplate.Columns = Convert(template.Columns.ToArray());
+            imageCarouselTemplate.Columns = ImageCarouselColumn.Convert(template.Columns);
 
             return imageCarouselTemplate;
-        }
-
-        private static IEnumerable<ImageCarouselColumn> Convert(IImageCarouselColumn[] columns)
-        {
-            var result = new ImageCarouselColumn[columns.Length];
-            for (int i = 0; i < columns.Length; i++)
-            {
-                result[i] = columns[i].ToImageCarouselColumn();
-            }
-
-            return result;
         }
     }
 }
