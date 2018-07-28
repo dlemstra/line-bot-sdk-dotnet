@@ -143,5 +143,36 @@ namespace Line
                 _actions = value;
             }
         }
+
+        internal static IEnumerable<CarouselColumn> Convert(IEnumerable<ICarouselColumn> columns)
+        {
+            foreach (ICarouselColumn column in columns)
+            {
+                yield return Convert(column);
+            }
+        }
+
+        private static CarouselColumn Convert(ICarouselColumn column)
+        {
+            if (column.Text == null)
+                throw new InvalidOperationException("The text cannot be null.");
+
+            if (!(column is CarouselColumn carouselColumn))
+            {
+                carouselColumn = new CarouselColumn()
+                {
+                    ThumbnailUrl = column.ThumbnailUrl,
+                    Title = column.Title,
+                    Text = column.Text,
+                };
+            }
+
+            if (column.Actions == null)
+                throw new InvalidOperationException("The actions cannot be null.");
+
+            carouselColumn.Actions = TemplateAction.Convert(column.Actions);
+
+            return carouselColumn;
+        }
     }
 }
