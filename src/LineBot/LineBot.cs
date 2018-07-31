@@ -26,7 +26,7 @@ namespace Line
     /// <summary>
     /// Encapsulates the bot that can be used to communicatie with the Line API.
     /// </summary>
-    public sealed class LineBot : ILineBot
+    public sealed partial class LineBot : ILineBot
     {
         private readonly ILineBotLogger _logger;
         private readonly HttpClient _client;
@@ -471,6 +471,16 @@ namespace Line
             string content = JsonConvert.SerializeObject(value);
 
             return new StringContent(content, Encoding.UTF8, "application/json");
+        }
+
+        private static MultipartFormDataContent CreateImageContent(byte[] paramFileBytes)
+        {
+            MultipartFormDataContent form = new MultipartFormDataContent();
+
+            form.Headers.Add("Content-Type", "image/jpeg");
+            form.Add(new ByteArrayContent(paramFileBytes), "richMenu", "image.jpg");
+
+            return form;
         }
     }
 }
