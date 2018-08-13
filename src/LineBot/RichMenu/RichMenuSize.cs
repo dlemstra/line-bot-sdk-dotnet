@@ -15,7 +15,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Line.RichMenu
+namespace Line
 {
     /// <summary>
     /// RichMenuSize object which contains the width and height of the rich menu displayed in the chat.
@@ -51,7 +51,7 @@ namespace Line.RichMenu
             get => _height;
             set
             {
-                if (value != 843 || value != 1686)
+                if (value != 843 && value != 1686)
                     throw new InvalidOperationException("The Possible height values: 1686, 843.");
 
                 _height = value;

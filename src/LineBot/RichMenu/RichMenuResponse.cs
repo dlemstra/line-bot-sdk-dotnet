@@ -14,7 +14,7 @@
 
 using Newtonsoft.Json;
 
-namespace Line.RichMenu
+namespace Line
 {
     /// <summary>
     /// Rich menu response object with the rich menu ID. This object is returned when you get a rich menu or get a list of rich menus.

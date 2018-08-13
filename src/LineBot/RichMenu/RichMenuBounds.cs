@@ -14,7 +14,7 @@
 
 using Newtonsoft.Json;
 
-namespace Line.RichMenu
+namespace Line
 {
     /// <summary>
     /// Object describing the boundaries of the area in pixels.

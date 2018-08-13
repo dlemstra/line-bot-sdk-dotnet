@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Line.RichMenu
+namespace Line
 {
     /// <summary>
     /// Rich Menu object. Without the rich menu ID.

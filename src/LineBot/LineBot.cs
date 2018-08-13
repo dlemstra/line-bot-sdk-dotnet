@@ -26,7 +26,7 @@ namespace Line
     /// <summary>
     /// Encapsulates the bot that can be used to communicatie with the Line API.
     /// </summary>
-    public sealed partial class LineBot : ILineBot
+    public sealed class LineBot : ILineBot
     {
         private readonly ILineBotLogger _logger;
         private readonly HttpClient _client;
@@ -464,6 +464,27 @@ namespace Line
             await response.CheckResult();
 
             return this;
+        }
+
+        /// <summary>
+        /// Creates a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
+        /// <returns>.</returns>
+        public async Task<string> CreateRichMenu(RichMenu richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            StringContent content = CreateStringContent(richMenu);
+
+            HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
+            await response.CheckResult();
+
+            string stringResponseResult = await response.Content.ReadAsStringAsync();
+            
+            var objectResult = JsonConvert.DeserializeObject<RichMenuResponse>(stringResponseResult);
+
+            return objectResult.RichMenuId;
         }
 
         private static StringContent CreateStringContent<T>(T value)

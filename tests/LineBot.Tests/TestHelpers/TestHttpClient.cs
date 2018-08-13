@@ -62,5 +62,10 @@ namespace Line.Tests
         {
             return new TestHttpClient(new TestHttpMessageHandler(data));
         }
+
+        public static TestHttpClient ThatReturnsJsonString(string jsonData)
+        {
+            return new TestHttpClient(new TestHttpMessageHandler(jsonData, true));
+        }
     }
 }

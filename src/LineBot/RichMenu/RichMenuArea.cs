@@ -15,7 +15,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Line.RichMenu
+namespace Line
 {
     /// <summary>
     /// Define the coordinates and size of tappable area.
