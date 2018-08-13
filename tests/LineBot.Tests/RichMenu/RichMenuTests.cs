@@ -53,7 +53,7 @@ namespace Line.Tests
                     },
                     new RichMenuArea
                     {
-                        Action = new UriAction {Label = "testLabel2", Url = new Uri("http://www.bing.com") },
+                        Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
                         RichMenuBounds = new RichMenuBounds()
                         {
                             Height = 200,
@@ -80,6 +80,5 @@ namespace Line.Tests
 
             Assert.AreEqual(result, "richmenu-801b2cd26b2f13587329ed501d279d27");
         }
-
     }
 }

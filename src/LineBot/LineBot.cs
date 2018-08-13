@@ -481,7 +481,7 @@ namespace Line
             await response.CheckResult();
 
             string stringResponseResult = await response.Content.ReadAsStringAsync();
-            
+
             var objectResult = JsonConvert.DeserializeObject<RichMenuResponse>(stringResponseResult);
 
             return objectResult.RichMenuId;

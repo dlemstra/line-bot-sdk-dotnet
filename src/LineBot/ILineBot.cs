@@ -218,7 +218,6 @@ namespace Line
         /// <returns>.</returns>
         Task<ILineBot> Reply(string replyToken, params ISendMessage[] messages);
 
-
         /// <summary>
         /// Creates a rich menu.
         /// </summary>
