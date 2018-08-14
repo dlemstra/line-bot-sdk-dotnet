@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Rich Menu object. Without the rich menu ID.
+    /// Rich menu object.
     /// </summary>
     public class RichMenu
     {
@@ -28,21 +28,20 @@ namespace Line
         private string _name;
 
         /// <summary>
-        /// Gets or sets object which contains the width and height of the rich menu displayed in the chat.
+        /// Gets or sets the object which contains the width and height of the rich menu displayed in the chat.
         /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
         /// </summary>
         [JsonProperty("size")]
         public RichMenuSize RichMenuSize { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether rich menu is selected.
-        /// True to display the rich menu by default. Otherwise, false.
+        /// Gets or sets a value indicating whether the rich menu should be displayed by default.
         /// </summary>
         [JsonProperty("selected")]
         public bool Selected { get; set; }
 
         /// <summary>
-        /// Gets or sets name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
+        /// Gets or sets the name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
         /// Max: 300 characters.
         /// </summary>
         [JsonProperty("name")]
@@ -51,6 +50,9 @@ namespace Line
             get => _name;
             set
             {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The name cannot be null or whitespace.");
+
                 if (value.Length > 300)
                     throw new InvalidOperationException("The name cannot be longer than 300 characters.");
 
@@ -59,7 +61,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets text displayed in the chat bar
+        /// Gets or sets the text displayed in the chat bar.
         /// Max: 14 characters.
         /// </summary>
         [JsonProperty("chatBarText")]
@@ -68,6 +70,9 @@ namespace Line
             get => _chatBarText;
             set
             {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The chat bar text cannot be null or whitespace.");
+
                 if (value.Length > 14)
                     throw new InvalidOperationException("The chat bar text cannot be longer than 14 characters.");
 
@@ -76,7 +81,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets array of area objects which define the coordinates and size of tappable areas
+        /// Gets or sets the array of area objects which define the coordinates and size of tappable areas
         /// Max: 20 area objects.
         /// </summary>
         [JsonProperty("areas")]
@@ -85,7 +90,10 @@ namespace Line
             get => _richMenuAreas;
             set
             {
-                if (value.Count() > 20)
+                if (value == null)
+                    throw new InvalidOperationException("The richMenuAreas cannot be null.");
+
+                if (value.Length > 20)
                     throw new InvalidOperationException("The maximum number of areas is 20.");
 
                 _richMenuAreas = value;

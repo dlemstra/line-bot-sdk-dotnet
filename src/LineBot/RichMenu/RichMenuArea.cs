@@ -26,7 +26,7 @@ namespace Line
         private ITemplateAction _action;
 
         /// <summary>
-        /// Gets or sets object describing the boundaries of the area in pixels.
+        /// Gets or sets the objects describing the boundaries of the area in pixels.
         /// </summary>
         [JsonProperty("bounds")]
         public RichMenuBounds RichMenuBounds
@@ -42,7 +42,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets action performed when the area is tapped.
+        /// Gets or sets the action performed when the area is tapped.
         /// </summary>
         [JsonProperty("action")]
         public ITemplateAction Action

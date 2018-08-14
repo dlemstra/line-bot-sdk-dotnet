@@ -27,7 +27,7 @@ namespace Line
         private int _height;
 
         /// <summary>
-        /// Gets or sets width of the rich menu. Must be 2500.
+        /// Gets or sets the width of the rich menu. Must be 2500.
         /// </summary>
         [JsonProperty("width")]
         public int Width
@@ -43,7 +43,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets height of the rich menu. Possible values: 1686, 843.
+        /// Gets or sets the height of the rich menu. Possible values: 1686, 843.
         /// </summary>
         [JsonProperty("height")]
         public int Height
@@ -52,7 +52,7 @@ namespace Line
             set
             {
                 if (value != 843 && value != 1686)
-                    throw new InvalidOperationException("The Possible height values: 1686, 843.");
+                    throw new InvalidOperationException("The possible height values: 1686, 843.");
 
                 _height = value;
             }

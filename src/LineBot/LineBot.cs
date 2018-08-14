@@ -67,6 +67,27 @@ namespace Line
         }
 
         /// <summary>
+        /// Creates a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
+        /// <returns>.</returns>
+        public async Task<string> CreateRichMenu(RichMenu richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            StringContent content = CreateStringContent(richMenu);
+
+            HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
+            await response.CheckResult();
+
+            string stringResponseResult = await response.Content.ReadAsStringAsync();
+
+            var objectResult = JsonConvert.DeserializeObject<RichMenuResponse>(stringResponseResult);
+
+            return objectResult.RichMenuId;
+        }
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -466,42 +487,11 @@ namespace Line
             return this;
         }
 
-        /// <summary>
-        /// Creates a rich menu.
-        /// </summary>
-        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
-        /// <returns>.</returns>
-        public async Task<string> CreateRichMenu(RichMenu richMenu)
-        {
-            Guard.NotNull(nameof(richMenu), richMenu);
-
-            StringContent content = CreateStringContent(richMenu);
-
-            HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
-            await response.CheckResult();
-
-            string stringResponseResult = await response.Content.ReadAsStringAsync();
-
-            var objectResult = JsonConvert.DeserializeObject<RichMenuResponse>(stringResponseResult);
-
-            return objectResult.RichMenuId;
-        }
-
         private static StringContent CreateStringContent<T>(T value)
         {
             string content = JsonConvert.SerializeObject(value);
 
             return new StringContent(content, Encoding.UTF8, "application/json");
-        }
-
-        private static MultipartFormDataContent CreateImageContent(byte[] paramFileBytes)
-        {
-            MultipartFormDataContent form = new MultipartFormDataContent();
-
-            form.Headers.Add("Content-Type", "image/jpeg");
-            form.Add(new ByteArrayContent(paramFileBytes), "richMenu", "image.jpg");
-
-            return form;
         }
     }
 }

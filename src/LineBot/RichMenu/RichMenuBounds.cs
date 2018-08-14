@@ -22,25 +22,25 @@ namespace Line
     public class RichMenuBounds
     {
         /// <summary>
-        /// Gets or sets horizontal position relative to the top-left corner of the area.
+        /// Gets or sets the horizontal position relative to the top-left corner of the area.
         /// </summary>
         [JsonProperty("x")]
         public int X { get; set; }
 
         /// <summary>
-        /// Gets or sets vertical position relative to the top-left corner of the area.
+        /// Gets or sets the vertical position relative to the top-left corner of the area.
         /// </summary>
         [JsonProperty("y")]
         public int Y { get; set; }
 
         /// <summary>
-        /// Gets or sets width of the area.
+        /// Gets or sets the width of the area.
         /// </summary>
         [JsonProperty("width")]
         public int Width { get; set; }
 
         /// <summary>
-        /// Gets or sets height of the area.
+        /// Gets or sets the height of the area.
         /// </summary>
         [JsonProperty("height")]
         public int Height { get; set; }
