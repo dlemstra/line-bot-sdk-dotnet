@@ -47,12 +47,6 @@ namespace Line.Tests
             };
         }
 
-        public TestHttpMessageHandler(string stringData, bool isString)
-            : this(HttpStatusCode.OK)
-        {
-            _response.Content = new StringContent(stringData);
-        }
-
         public IEnumerable<HttpRequestMessage> Requests => _requests;
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

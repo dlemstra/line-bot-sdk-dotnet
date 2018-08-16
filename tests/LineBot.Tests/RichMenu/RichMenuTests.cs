@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -68,7 +69,7 @@ namespace Line.Tests
             };
 
             var richMenuIdJson = @"{""richMenuId"": ""richmenu-801b2cd26b2f13587329ed501d279d27""}";
-            TestHttpClient httpClient = TestHttpClient.ThatReturnsJsonString(richMenuIdJson);
+            TestHttpClient httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(richMenuIdJson));
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             var result = await bot.CreateRichMenu(richMenu);
