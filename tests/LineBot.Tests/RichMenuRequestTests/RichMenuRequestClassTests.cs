@@ -19,12 +19,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class RichMenuClassTests
+    public class RichMenuRequestClassTests
     {
         [TestMethod]
         public void ShouldNotThrowExceptionWhenNameIsNull()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The name cannot be null or whitespace.", () =>
             {
@@ -35,7 +35,7 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldNotThrowExceptionWhenNameIsWhitespace()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The name cannot be null or whitespace.", () =>
             {
@@ -46,7 +46,7 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldThrowExceptionWhenNameIsMoreThan300Chars()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The name cannot be longer than 300 characters.", () =>
             {
@@ -59,7 +59,7 @@ namespace Line.Tests
         {
             var value = new string('x', 300);
 
-            var richMenu = new RichMenu
+            var richMenu = new RichMenuRequest
             {
                 Name = value
             };
@@ -70,7 +70,7 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldNotThrowExceptionWhenChatBarTextIsNull()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be null or whitespace.", () =>
             {
@@ -81,7 +81,7 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldNotThrowExceptionWhenChatBarTextIsWhitespace()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be null or whitespace.", () =>
             {
@@ -92,7 +92,7 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldThrowExceptionWhenChatBarTextIsMoreThan14Chars()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be longer than 14 characters.", () =>
             {
@@ -105,7 +105,7 @@ namespace Line.Tests
         {
             var value = new string('x', 14);
 
-            var richMenu = new RichMenu
+            var richMenu = new RichMenuRequest
             {
                 ChatBarText = value
             };
@@ -116,11 +116,11 @@ namespace Line.Tests
         [TestMethod]
         public void ShouldThrowExceptionWhenRichMenuAreasIsNull()
         {
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
-            ExceptionAssert.Throws<InvalidOperationException>("The richMenuAreas cannot be null.", () =>
+            ExceptionAssert.Throws<InvalidOperationException>("The areas cannot be null.", () =>
             {
-                richMenu.RichMenuAreas = null;
+                richMenu.Areas = null;
             });
         }
 
@@ -142,11 +142,11 @@ namespace Line.Tests
                 richMenuArea
             };
 
-            var richMenu = new RichMenu();
+            var richMenu = new RichMenuRequest();
 
             ExceptionAssert.Throws<InvalidOperationException>("The maximum number of areas is 20.", () =>
             {
-                richMenu.RichMenuAreas = value;
+                richMenu.Areas = value;
             });
         }
 
@@ -166,10 +166,10 @@ namespace Line.Tests
                 richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea
             };
 
-            var richMenu = new RichMenu();
-            richMenu.RichMenuAreas = value;
+            var richMenu = new RichMenuRequest();
+            richMenu.Areas = value;
 
-            Assert.AreEqual(value, richMenu.RichMenuAreas);
+            Assert.AreEqual(value, richMenu.Areas);
         }
 
         [TestMethod]

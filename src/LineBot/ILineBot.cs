@@ -26,9 +26,9 @@ namespace Line
         /// <summary>
         /// Creates a rich menu.
         /// </summary>
-        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
+        /// <param name="richMenuRequest">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        Task<string> CreateRichMenu(RichMenu richMenu);
+        Task<string> CreateRichMenuRequest(IRichMenuRequest richMenuRequest);
 
         /// <summary>
         /// Returns the content of the specified message.
