@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Newtonsoft.Json;
 
 namespace Line
@@ -21,28 +22,81 @@ namespace Line
     /// </summary>
     public class RichMenuBounds
     {
+        private int _x;
+        private int _y;
+        private int _width;
+        private int _height;
+
         /// <summary>
         /// Gets or sets the horizontal position relative to the top-left corner of the area.
         /// </summary>
         [JsonProperty("x")]
-        public int X { get; set; }
+        public int X
+        {
+            get => _x;
+            set
+            {
+                if (value > 2500)
+                {
+                    throw new InvalidOperationException("The horizontal position cannot be bigger than 2500.");
+                }
+
+                _x = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the vertical position relative to the top-left corner of the area.
         /// </summary>
         [JsonProperty("y")]
-        public int Y { get; set; }
+        public int Y
+        {
+            get => _y;
+            set
+            {
+                if (value > 1686)
+                {
+                    throw new InvalidOperationException("The vertical position cannot be bigger than 1686.");
+                }
+
+                _y = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the width of the area.
         /// </summary>
         [JsonProperty("width")]
-        public int Width { get; set; }
+        public int Width
+        {
+            get => _width;
+            set
+            {
+                if (value > 2500)
+                {
+                    throw new InvalidOperationException("The width cannot be bigger than 2500.");
+                }
+
+                _width = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the height of the area.
         /// </summary>
         [JsonProperty("height")]
-        public int Height { get; set; }
+        public int Height
+        {
+            get => _height;
+            set
+            {
+                if (value > 1686)
+                {
+                    throw new InvalidOperationException("The height cannot be bigger than 1686.");
+                }
+
+                _height = value;
+            }
+        }
     }
 }

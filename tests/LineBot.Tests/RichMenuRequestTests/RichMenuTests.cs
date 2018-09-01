@@ -28,7 +28,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuRequest", async () =>
             {
-                await bot.CreateRichMenuRequest(null);
+                await bot.CreateRichMenu(null);
             });
         }
 
@@ -41,7 +41,7 @@ namespace Line.Tests
             var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(richMenuIdJson));
 
             var bot = TestConfiguration.CreateBot(httpClient);
-            var result = await bot.CreateRichMenuRequest(richMenu);
+            var result = await bot.CreateRichMenu(richMenu);
 
             Assert.AreEqual("/richmenu", httpClient.RequestPath);
 

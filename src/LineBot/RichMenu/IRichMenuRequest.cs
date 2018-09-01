@@ -15,7 +15,7 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a richMenu Request.
+    /// Encapsulates a rich menu request.
     /// </summary>
     public interface IRichMenuRequest
     {

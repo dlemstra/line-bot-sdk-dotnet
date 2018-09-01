@@ -122,7 +122,7 @@ namespace Line
                 return request;
             }
 
-            return null;
+            return new RichMenuRequest();
         }
     }
 }

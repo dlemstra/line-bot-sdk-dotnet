@@ -20,7 +20,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Line.Tests
 {
     [TestClass]
-    public class TheConvertMethodTest
+    public class TheConvertMethodTests
     {
         [TestMethod]
         public void ShouldPreserveInstanceWhenValueIsRichMenuRequest()
@@ -34,7 +34,7 @@ namespace Line.Tests
                     new RichMenuArea
                     {
                         Action = new UriAction { Label = "testLabel", Url = new Uri("http://www.google.com") },
-                        RichMenuBounds = new RichMenuBounds
+                        Bounds = new RichMenuBounds
                         {
                             Width = 110,
                             Height = 120,
@@ -45,7 +45,7 @@ namespace Line.Tests
                     new RichMenuArea
                     {
                         Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
-                        RichMenuBounds = new RichMenuBounds
+                        Bounds = new RichMenuBounds
                         {
                             Width = 210,
                             Height = 220,

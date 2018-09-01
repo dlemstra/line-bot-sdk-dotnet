@@ -71,7 +71,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenuRequest">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        public async Task<string> CreateRichMenuRequest(IRichMenuRequest richMenuRequest)
+        public async Task<string> CreateRichMenu(IRichMenuRequest richMenuRequest)
         {
             Guard.NotNull(nameof(richMenuRequest), richMenuRequest);
 

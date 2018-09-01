@@ -19,12 +19,11 @@ namespace Line
     /// <summary>
     /// Rich menu response object with the rich menu ID. This object is returned when you get a rich menu or get a list of rich menus.
     /// </summary>
-    internal sealed class RichMenu : IRichMenu
+    internal interface IRichMenu
     {
         /// <summary>
-        /// Gets or sets the rich menu ID.
+        /// Gets the rich menu ID.
         /// </summary>
-        [JsonProperty("richMenuId")]
-        public string RichMenuId { get; set; }
+        string RichMenuId { get; }
     }
 }

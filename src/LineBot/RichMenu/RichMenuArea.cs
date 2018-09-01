@@ -22,22 +22,22 @@ namespace Line
     /// </summary>
     public class RichMenuArea
     {
-        private RichMenuBounds _richMenuBounds;
+        private RichMenuBounds _bounds;
         private ITemplateAction _action;
 
         /// <summary>
         /// Gets or sets the objects describing the boundaries of the area in pixels.
         /// </summary>
         [JsonProperty("bounds")]
-        public RichMenuBounds RichMenuBounds
+        public RichMenuBounds Bounds
         {
-            get => _richMenuBounds;
+            get => _bounds;
             set
             {
                 if (value == null)
                     throw new InvalidOperationException("The bounds cannot be null.");
 
-                _richMenuBounds = value;
+                _bounds = value;
             }
         }
 
