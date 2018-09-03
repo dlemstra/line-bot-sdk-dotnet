@@ -41,6 +41,11 @@ namespace Line
                     throw new InvalidOperationException("The horizontal position cannot be bigger than 2500.");
                 }
 
+                if (value < 0)
+                {
+                    throw new InvalidOperationException("The horizontal position cannot be less than 0.");
+                }
+
                 _x = value;
             }
         }
@@ -57,6 +62,11 @@ namespace Line
                 if (value > 1686)
                 {
                     throw new InvalidOperationException("The vertical position cannot be bigger than 1686.");
+                }
+
+                if (value < 0)
+                {
+                    throw new InvalidOperationException("The vertical position cannot be less than 0.");
                 }
 
                 _y = value;
@@ -77,6 +87,11 @@ namespace Line
                     throw new InvalidOperationException("The width cannot be bigger than 2500.");
                 }
 
+                if (value < 1)
+                {
+                    throw new InvalidOperationException("The width cannot be less than 1.");
+                }
+
                 _width = value;
             }
         }
@@ -93,6 +108,11 @@ namespace Line
                 if (value > 1686)
                 {
                     throw new InvalidOperationException("The height cannot be bigger than 1686.");
+                }
+
+                if (value < 1)
+                {
+                    throw new InvalidOperationException("The height cannot be less than 1.");
                 }
 
                 _height = value;

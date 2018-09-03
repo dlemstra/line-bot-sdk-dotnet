@@ -45,6 +45,28 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public void ShouldThrowExceptionWhenXIsLessThan0()
+        {
+            var richMenuBounds = new RichMenuBounds();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The horizontal position cannot be less than 0.", () =>
+            {
+                richMenuBounds.X = -1;
+            });
+        }
+
+        [TestMethod]
+        public void ShouldNotThrowExceptionWhenXIs0()
+        {
+            var richMenuBounds = new RichMenuBounds()
+            {
+                X = 0
+            };
+
+            Assert.AreEqual(0, richMenuBounds.X);
+        }
+
+        [TestMethod]
         public void ShouldThrowExceptionWhenYIsBiggerThan1686()
         {
             var richMenuBounds = new RichMenuBounds();
@@ -64,6 +86,28 @@ namespace Line.Tests
             };
 
             Assert.AreEqual(1686, richMenuBounds.Y);
+        }
+
+        [TestMethod]
+        public void ShouldThrowExceptionWhenYIsLessThan0()
+        {
+            var richMenuBounds = new RichMenuBounds();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The vertical position cannot be less than 0.", () =>
+            {
+                richMenuBounds.Y = -1;
+            });
+        }
+
+        [TestMethod]
+        public void ShouldNotThrowExceptionWhenYIs0()
+        {
+            var richMenuBounds = new RichMenuBounds()
+            {
+                Y = 0
+            };
+
+            Assert.AreEqual(0, richMenuBounds.Y);
         }
 
         [TestMethod]
@@ -89,6 +133,28 @@ namespace Line.Tests
         }
 
         [TestMethod]
+        public void ShouldThrowExceptionWhenWidthIsLessThan1()
+        {
+            var richMenuBounds = new RichMenuBounds();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The width cannot be less than 1.", () =>
+            {
+                richMenuBounds.Width = 0;
+            });
+        }
+
+        [TestMethod]
+        public void ShouldNotThrowExceptionWhenWidthIs1()
+        {
+            var richMenuBounds = new RichMenuBounds()
+            {
+                Width = 1
+            };
+
+            Assert.AreEqual(1, richMenuBounds.Width);
+        }
+
+        [TestMethod]
         public void ShouldThrowExceptionWhenHeightIsBiggerThan1686()
         {
             var richMenuBounds = new RichMenuBounds();
@@ -108,6 +174,28 @@ namespace Line.Tests
             };
 
             Assert.AreEqual(1686, richMenuBounds.Height);
+        }
+
+        [TestMethod]
+        public void ShouldThrowExceptionWhenHeightIsLessThan1()
+        {
+            var richMenuBounds = new RichMenuBounds();
+
+            ExceptionAssert.Throws<InvalidOperationException>("The height cannot be less than 1.", () =>
+            {
+                richMenuBounds.Height = 0;
+            });
+        }
+
+        [TestMethod]
+        public void ShouldNotThrowExceptionWhenheightIs1()
+        {
+            var richMenuBounds = new RichMenuBounds()
+            {
+                Height = 1
+            };
+
+            Assert.AreEqual(1, richMenuBounds.Height);
         }
     }
 }
