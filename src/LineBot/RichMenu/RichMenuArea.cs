@@ -20,16 +20,16 @@ namespace Line
     /// <summary>
     /// Define the coordinates and size of tappable area.
     /// </summary>
-    public class RichMenuArea
+    public class RichMenuArea : IRichMenuArea
     {
-        private RichMenuBounds _bounds;
+        private IRichMenuBounds _bounds;
         private ITemplateAction _action;
 
         /// <summary>
         /// Gets or sets the objects describing the boundaries of the area in pixels.
         /// </summary>
         [JsonProperty("bounds")]
-        public RichMenuBounds Bounds
+        public IRichMenuBounds Bounds
         {
             get => _bounds;
             set
@@ -55,6 +55,18 @@ namespace Line
 
                 _action = value;
             }
+        }
+
+        internal static RichMenuArea Convert(IRichMenuArea iRichMenuArea)
+        {
+            if (iRichMenuArea is RichMenuArea richMenuArea)
+                return richMenuArea;
+
+            return new RichMenuArea()
+            {
+                Action = iRichMenuArea.Action,
+                Bounds = iRichMenuArea.Bounds
+            };
         }
     }
 }

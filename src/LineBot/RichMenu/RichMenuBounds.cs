@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Object describing the boundaries of the area in pixels.
     /// </summary>
-    public class RichMenuBounds
+    public class RichMenuBounds : IRichMenuBounds
     {
         private int _x;
         private int _y;
@@ -37,14 +37,10 @@ namespace Line
             set
             {
                 if (value > 2500)
-                {
                     throw new InvalidOperationException("The horizontal position cannot be bigger than 2500.");
-                }
 
                 if (value < 0)
-                {
                     throw new InvalidOperationException("The horizontal position cannot be less than 0.");
-                }
 
                 _x = value;
             }
@@ -60,14 +56,10 @@ namespace Line
             set
             {
                 if (value > 1686)
-                {
                     throw new InvalidOperationException("The vertical position cannot be bigger than 1686.");
-                }
 
                 if (value < 0)
-                {
                     throw new InvalidOperationException("The vertical position cannot be less than 0.");
-                }
 
                 _y = value;
             }
@@ -83,14 +75,10 @@ namespace Line
             set
             {
                 if (value > 2500)
-                {
                     throw new InvalidOperationException("The width cannot be bigger than 2500.");
-                }
 
                 if (value < 1)
-                {
                     throw new InvalidOperationException("The width cannot be less than 1.");
-                }
 
                 _width = value;
             }
@@ -106,14 +94,10 @@ namespace Line
             set
             {
                 if (value > 1686)
-                {
                     throw new InvalidOperationException("The height cannot be bigger than 1686.");
-                }
 
                 if (value < 1)
-                {
                     throw new InvalidOperationException("The height cannot be less than 1.");
-                }
 
                 _height = value;
             }

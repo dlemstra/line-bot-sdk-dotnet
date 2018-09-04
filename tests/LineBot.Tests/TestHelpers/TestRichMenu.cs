@@ -19,10 +19,10 @@ using Newtonsoft.Json;
 namespace Line.Tests
 {
     [ExcludeFromCodeCoverage]
-    public class TestRichMenuRequest : IRichMenuRequest
+    public class TestRichMenu : IRichMenu
     {
         [JsonProperty("size")]
-        public RichMenuSize Size => new RichMenuSize { Height = 1686, Width = 2500 };
+        public IRichMenuSize Size => new RichMenuSize { Height = 1686 };
 
         [JsonProperty("selected")]
         public bool Selected => false;
@@ -34,7 +34,7 @@ namespace Line.Tests
         public string ChatBarText => "testChatBarTxt";
 
         [JsonProperty("areas")]
-        public RichMenuArea[] Areas => new[]
+        public IRichMenuArea[] Areas => new[]
         {
             new RichMenuArea
             {

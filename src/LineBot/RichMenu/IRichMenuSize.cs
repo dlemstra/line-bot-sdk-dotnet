@@ -12,39 +12,21 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-using Newtonsoft.Json;
-
 namespace Line
 {
     /// <summary>
-    /// RichMenuSize object which contains the width and height of the rich menu displayed in the chat.
-    /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
+    /// Encapsulates a rich menu size.
     /// </summary>
-    public class RichMenuSize : IRichMenuSize
+    public interface IRichMenuSize
     {
-        private int _height;
-
         /// <summary>
-        /// Gets the width of the rich menu. Will always be 2500.
+        /// Gets the width of the rich menu. Must be 2500.
         /// </summary>
-        [JsonProperty("width")]
-        public int Width => 2500;
+        int Width { get; }
 
         /// <summary>
         /// Gets or sets the height of the rich menu. Possible values: 1686, 843.
         /// </summary>
-        [JsonProperty("height")]
-        public int Height
-        {
-            get => _height;
-            set
-            {
-                if (value != 843 && value != 1686)
-                    throw new InvalidOperationException("The possible height values: 1686, 843.");
-
-                _height = value;
-            }
-        }
+        int Height { get; set; }
     }
 }

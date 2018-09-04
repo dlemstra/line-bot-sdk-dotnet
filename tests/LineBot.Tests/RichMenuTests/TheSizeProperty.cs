@@ -13,36 +13,38 @@
 // under the License.
 
 using System;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    [TestClass]
-    public class TheRichMenuAreaClassTests
+    public partial class RichMenuTests
     {
-        [TestMethod]
-        public void ShouldThrowExceptionWhenActionIsNull()
+        [TestClass]
+        public class TheSizeProperty
         {
-            var richMenuArea = new RichMenuArea();
-
-            ExceptionAssert.Throws<InvalidOperationException>("The action cannot be null.", () =>
+            [TestMethod]
+            public void ShouldThrowExceptionWhenHeightIsNot1686_843()
             {
-                richMenuArea.Action = null;
-            });
-        }
+                var richMenu = new RichMenu();
 
-        [TestMethod]
-        public void ShouldNotThrowExceptionWhenActionIsNotNull()
-        {
-            var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
+                ExceptionAssert.Throws<InvalidOperationException>("The size cannot be null.", () =>
+                {
+                    richMenu.Size = null;
+                });
+            }
 
-            var richMenuArea = new RichMenuArea
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenSizeIsNotNull()
             {
-                Action = action
-            };
+                var size = new RichMenuSize()
+                {
+                    Height = 1686
+                };
+                var richMenu = new RichMenu();
+                richMenu.Size = size;
 
-            Assert.AreEqual(action, richMenuArea.Action);
+                Assert.AreEqual(size, richMenu.Size);
+            }
         }
     }
 }

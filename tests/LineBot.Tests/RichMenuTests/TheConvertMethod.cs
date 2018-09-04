@@ -13,24 +13,24 @@
 // under the License.
 
 using System;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    [TestClass]
-    public class TheConvertMethodTests
+    public partial class RichMenuTests
     {
-        [TestMethod]
-        public void ShouldPreserveInstanceWhenValueIsRichMenuRequest()
+        [TestClass]
+        public class TheConvertMethod
         {
-            var richMenuRequest = new RichMenuRequest
+            [TestMethod]
+            public void ShouldPreserveInstanceWhenValueIsRichMenu()
             {
-                ChatBarText = "testChatBarTxt",
-                Name = "testName",
-                Areas = new[]
+                var richMenu = new RichMenu
                 {
+                    ChatBarText = "testChatBarTxt",
+                    Name = "testName",
+                    Areas = new[]
+                    {
                     new RichMenuArea
                     {
                         Action = new UriAction { Label = "testLabel", Url = new Uri("http://www.google.com") },
@@ -54,12 +54,13 @@ namespace Line.Tests
                         }
                     }
                 },
-                Size = new RichMenuSize { Height = 1686, Width = 2500 },
-                Selected = false
-            };
-            var convertedRichMenuRequest = RichMenuRequest.Convert(richMenuRequest);
+                    Size = new RichMenuSize { Height = 1686 },
+                    Selected = false
+                };
+                var convertedRichMenu = RichMenu.Convert(richMenu);
 
-            Assert.AreEqual(richMenuRequest, convertedRichMenuRequest);
+                Assert.AreEqual(richMenu, convertedRichMenu);
+            }
         }
     }
 }

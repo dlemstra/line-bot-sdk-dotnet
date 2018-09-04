@@ -69,20 +69,20 @@ namespace Line
         /// <summary>
         /// Creates a rich menu.
         /// </summary>
-        /// <param name="richMenuRequest">The rich menu represented as a rich menu object.</param>
+        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        public async Task<string> CreateRichMenu(IRichMenuRequest richMenuRequest)
+        public async Task<string> CreateRichMenu(IRichMenu richMenu)
         {
-            Guard.NotNull(nameof(richMenuRequest), richMenuRequest);
+            Guard.NotNull(nameof(richMenu), richMenu);
 
-            StringContent content = CreateStringContent(richMenuRequest);
+            StringContent content = CreateStringContent(richMenu);
 
             HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();
 
             string stringResponseResult = await response.Content.ReadAsStringAsync();
 
-            var objectResult = JsonConvert.DeserializeObject<RichMenu>(stringResponseResult);
+            var objectResult = JsonConvert.DeserializeObject<RichMenuIdResponse>(stringResponseResult);
 
             return objectResult.RichMenuId;
         }
