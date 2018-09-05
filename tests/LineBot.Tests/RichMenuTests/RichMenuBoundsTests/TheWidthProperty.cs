@@ -59,6 +59,31 @@ namespace Line.Tests
 
                 Assert.AreEqual(1, richMenuBounds.Width);
             }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenWidthPlusXIsBiggerThan2500()
+            {
+                var richMenuBounds = new RichMenuBounds();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The horizontal postion and width will exceed the richMenu's max width.", () =>
+                {
+                    richMenuBounds.X = 200;
+                    richMenuBounds.Width = 2301;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenWidthPlusXIs2500()
+            {
+                var richMenuBounds = new RichMenuBounds()
+                {
+                    X = 200,
+                    Width = 2300
+                };
+
+                Assert.AreEqual(200, richMenuBounds.X);
+                Assert.AreEqual(2300, richMenuBounds.Width);
+            }
         }
     }
 }

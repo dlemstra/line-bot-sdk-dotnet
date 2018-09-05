@@ -59,6 +59,31 @@ namespace Line.Tests
 
                 Assert.AreEqual(1, richMenuBounds.Height);
             }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenHeightPlusYIsBiggerThan1686()
+            {
+                var richMenuBounds = new RichMenuBounds();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the richMenu's max height.", () =>
+                {
+                    richMenuBounds.Y = 200;
+                    richMenuBounds.Height = 1487;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenHeightPlusYIs1686()
+            {
+                var richMenuBounds = new RichMenuBounds()
+                {
+                    Y = 200,
+                    Height = 1486
+                };
+
+                Assert.AreEqual(200, richMenuBounds.Y);
+                Assert.AreEqual(1486, richMenuBounds.Height);
+            }
         }
     }
 }

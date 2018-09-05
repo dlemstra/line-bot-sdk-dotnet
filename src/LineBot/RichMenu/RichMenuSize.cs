@@ -41,7 +41,7 @@ namespace Line
             set
             {
                 if (value != 843 && value != 1686)
-                    throw new InvalidOperationException("The possible height values: 1686, 843.");
+                    throw new InvalidOperationException("The possible height values are: 1686, 843.");
 
                 _height = value;
             }
