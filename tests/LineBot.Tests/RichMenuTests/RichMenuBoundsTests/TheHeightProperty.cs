@@ -65,7 +65,7 @@ namespace Line.Tests
             {
                 var richMenuBounds = new RichMenuBounds();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the richMenu's max height.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the rich menu's max height.", () =>
                 {
                     richMenuBounds.Y = 200;
                     richMenuBounds.Height = 1487;

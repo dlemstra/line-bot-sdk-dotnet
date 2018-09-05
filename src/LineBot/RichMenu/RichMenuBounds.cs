@@ -42,6 +42,9 @@ namespace Line
                 if (value < 0)
                     throw new InvalidOperationException("The horizontal position cannot be less than 0.");
 
+                if (value + _width > 2500)
+                    throw new InvalidOperationException("The horizontal postion and width will exceed the rich menu's max width.");
+
                 _x = value;
             }
         }
@@ -60,6 +63,9 @@ namespace Line
 
                 if (value < 0)
                     throw new InvalidOperationException("The vertical position cannot be less than 0.");
+
+                if (value + _height > 1686)
+                    throw new InvalidOperationException("The vertical postion and height will exceed the rich menu's max height.");
 
                 _y = value;
             }
@@ -81,7 +87,7 @@ namespace Line
                     throw new InvalidOperationException("The width cannot be less than 1.");
 
                 if (value + _x > 2500)
-                    throw new InvalidOperationException("The horizontal postion and width will exceed the richMenu's max width.");
+                    throw new InvalidOperationException("The horizontal postion and width will exceed the rich menu's max width.");
 
                 _width = value;
             }
@@ -103,7 +109,7 @@ namespace Line
                     throw new InvalidOperationException("The height cannot be less than 1.");
 
                 if (value + _y > 1686)
-                    throw new InvalidOperationException("The vertical postion and height will exceed the richMenu's max height.");
+                    throw new InvalidOperationException("The vertical postion and height will exceed the rich menu's max height.");
 
                 _height = value;
             }

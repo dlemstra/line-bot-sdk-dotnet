@@ -65,7 +65,7 @@ namespace Line.Tests
             {
                 var richMenuBounds = new RichMenuBounds();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The horizontal postion and width will exceed the richMenu's max width.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The horizontal postion and width will exceed the rich menu's max width.", () =>
                 {
                     richMenuBounds.X = 200;
                     richMenuBounds.Width = 2301;
@@ -83,6 +83,18 @@ namespace Line.Tests
 
                 Assert.AreEqual(200, richMenuBounds.X);
                 Assert.AreEqual(2300, richMenuBounds.Width);
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenHeightPlusYIsBiggerThan1686()
+            {
+                var richMenuBounds = new RichMenuBounds();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the rich menu's max height.", () =>
+                {
+                    richMenuBounds.Height = 1486;
+                    richMenuBounds.Y = 201;
+                });
             }
         }
     }
