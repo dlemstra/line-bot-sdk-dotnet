@@ -46,5 +46,21 @@ namespace Line
                 _height = value;
             }
         }
+
+        internal static RichMenuSize Convert(IRichMenuSize richMenuSize)
+        {
+            if (richMenuSize.Height == 0)
+                throw new InvalidOperationException("The height is not set.");
+
+            if (richMenuSize is RichMenuSize size)
+            {
+                return size;
+            }
+
+            return new RichMenuSize()
+            {
+                Height = richMenuSize.Height
+            };
+        }
     }
 }
