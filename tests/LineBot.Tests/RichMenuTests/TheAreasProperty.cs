@@ -13,6 +13,7 @@
 // under the License.
 
 using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -23,7 +24,7 @@ namespace Line.Tests
         public class TheAreasProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenRichMenuAreasIsNull()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
 
@@ -34,7 +35,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenRichMenuAreasMoreThan20()
+            public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var richMenuArea = new RichMenuArea
                 {
@@ -42,14 +43,26 @@ namespace Line.Tests
                     Bounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 }
                 };
 
-                var value = new RichMenuArea[]
+                var value = new RichMenuArea[0];
+
+                var richMenu = new RichMenu();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The minimum number of areas is 1.", () =>
                 {
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea
+                    richMenu.Areas = value;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenLengthOfValueMoreThan20()
+            {
+                var richMenuArea = new RichMenuArea
+                {
+                    Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
+                    Bounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 }
                 };
+
+                var value = Enumerable.Repeat(richMenuArea, 21).ToArray();
 
                 var richMenu = new RichMenu();
 
@@ -60,20 +73,15 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenRichMenuAreasIs20()
+            public void ShouldNotThrowExceptionWhenLengthOfValueIs20()
             {
                 var richMenuArea = new RichMenuArea
                 {
                     Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
                     Bounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 }
                 };
-                var value = new RichMenuArea[]
-                {
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea,
-                    richMenuArea, richMenuArea, richMenuArea, richMenuArea, richMenuArea
-                };
+
+                var value = Enumerable.Repeat(richMenuArea, 20).ToArray();
 
                 var richMenu = new RichMenu();
                 richMenu.Areas = value;

@@ -40,6 +40,9 @@ namespace Line
                 if (value == null)
                     throw new InvalidOperationException("The areas cannot be null.");
 
+                if (value.Length < 1)
+                    throw new InvalidOperationException("The minimum number of areas is 1.");
+
                 if (value.Length > 20)
                     throw new InvalidOperationException("The maximum number of areas is 20.");
 
