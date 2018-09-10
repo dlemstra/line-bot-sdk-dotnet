@@ -12,15 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
 namespace Line.Tests
 {
     [ExcludeFromCodeCoverage]
     public class TestRichMenuSize : IRichMenuSize
     {
-        public int Width { get; set; }
+        public int Width => 2500;
 
-        public int Height { get; set; }
+        public int Height => 1686;
     }
 }

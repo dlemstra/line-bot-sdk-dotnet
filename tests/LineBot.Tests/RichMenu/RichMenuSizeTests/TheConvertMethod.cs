@@ -49,16 +49,13 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomIRichMenuSizeToRichMenuSize()
             {
-                var richMenuSize = new TestRichMenuSize()
-                {
-                    Height = 843
-                };
+                var richMenuSize = new TestRichMenuSize();
 
                 var size = RichMenuSize.Convert(richMenuSize);
 
                 Assert.AreNotSame(size, richMenuSize);
                 Assert.AreEqual(2500, size.Width);
-                Assert.AreEqual(843, size.Height);
+                Assert.AreEqual(1686, size.Height);
             }
         }
     }

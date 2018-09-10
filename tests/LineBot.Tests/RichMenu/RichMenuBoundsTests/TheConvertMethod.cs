@@ -64,13 +64,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldConvertCustomIRichMenuBoundsToRichMenuBounds()
             {
-                var richMenuBounds = new TestRichMenuBounds()
-                {
-                    X = 1,
-                    Y = 2,
-                    Width = 3,
-                    Height = 4
-                };
+                var richMenuBounds = new TestRichMenuBounds();
 
                 var bounds = RichMenuBounds.Convert(richMenuBounds);
 
