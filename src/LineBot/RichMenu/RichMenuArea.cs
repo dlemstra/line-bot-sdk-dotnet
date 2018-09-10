@@ -22,24 +22,8 @@ namespace Line
     /// </summary>
     public class RichMenuArea : IRichMenuArea
     {
-        private IRichMenuBounds _bounds;
         private ITemplateAction _action;
-
-        /// <summary>
-        /// Gets or sets the objects describing the boundaries of the area in pixels.
-        /// </summary>
-        [JsonProperty("bounds")]
-        public IRichMenuBounds Bounds
-        {
-            get => _bounds;
-            set
-            {
-                if (value == null)
-                    throw new InvalidOperationException("The bounds cannot be null.");
-
-                _bounds = value;
-            }
-        }
+        private IRichMenuBounds _bounds;
 
         /// <summary>
         /// Gets or sets the action performed when the area is tapped.
@@ -57,15 +41,37 @@ namespace Line
             }
         }
 
-        internal static RichMenuArea Convert(IRichMenuArea iRichMenuArea)
+        /// <summary>
+        /// Gets or sets the objects describing the boundaries of the area in pixels.
+        /// </summary>
+        [JsonProperty("bounds")]
+        public IRichMenuBounds Bounds
         {
-            if (iRichMenuArea is RichMenuArea richMenuArea)
-                return richMenuArea;
+            get => _bounds;
+            set
+            {
+                if (value == null)
+                    throw new InvalidOperationException("The bounds cannot be null.");
+
+                _bounds = value;
+            }
+        }
+
+        internal static RichMenuArea Convert(IRichMenuArea richMenuArea)
+        {
+            if (richMenuArea.Action == null)
+                throw new InvalidOperationException("The action cannot be null.");
+
+            if (richMenuArea.Bounds == null)
+                throw new InvalidOperationException("The bounds cannot be null.");
+
+            if (richMenuArea is RichMenuArea area)
+                return area;
 
             return new RichMenuArea()
             {
-                Action = iRichMenuArea.Action,
-                Bounds = iRichMenuArea.Bounds
+                Action = TemplateAction.Convert(richMenuArea.Action),
+                Bounds = RichMenuBounds.Convert(richMenuArea.Bounds)
             };
         }
     }
