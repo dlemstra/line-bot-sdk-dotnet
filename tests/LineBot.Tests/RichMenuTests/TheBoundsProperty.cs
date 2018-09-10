@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheBoundsProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenRichMenuBoundsIsNull()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenuArea = new RichMenuArea();
 
@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenRichMenuBoundsIsNotNull()
+            public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var richMenuBounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 };
 

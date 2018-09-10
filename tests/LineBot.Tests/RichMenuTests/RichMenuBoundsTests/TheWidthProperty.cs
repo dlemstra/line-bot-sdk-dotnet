@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheWidthProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenWidthIsBiggerThan2500()
+            public void ShouldThrowExceptionWhenValueIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -31,7 +31,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenWidthIs2500()
+            public void ShouldNotThrowExceptionWhenValueIs2500()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -42,7 +42,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenWidthIsLessThan1()
+            public void ShouldThrowExceptionWhenValueIsLessThan1()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -50,7 +50,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenWidthIs1()
+            public void ShouldNotThrowExceptionWhenValueIs1()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -61,19 +61,19 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenWidthPlusXIsBiggerThan2500()
+            public void ShouldThrowExceptionWhenValuePlusXIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
+                richMenuBounds.X = 200;
 
                 ExceptionAssert.Throws<InvalidOperationException>("The horizontal postion and width will exceed the rich menu's max width.", () =>
                 {
-                    richMenuBounds.X = 200;
                     richMenuBounds.Width = 2301;
                 });
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenWidthPlusXIs2500()
+            public void ShouldNotThrowExceptionWhenValuePlusXIs2500()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -83,18 +83,6 @@ namespace Line.Tests
 
                 Assert.AreEqual(200, richMenuBounds.X);
                 Assert.AreEqual(2300, richMenuBounds.Width);
-            }
-
-            [TestMethod]
-            public void ShouldThrowExceptionWhenHeightPlusYIsBiggerThan1686()
-            {
-                var richMenuBounds = new RichMenuBounds();
-
-                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the rich menu's max height.", () =>
-                {
-                    richMenuBounds.Height = 1486;
-                    richMenuBounds.Y = 201;
-                });
             }
         }
     }

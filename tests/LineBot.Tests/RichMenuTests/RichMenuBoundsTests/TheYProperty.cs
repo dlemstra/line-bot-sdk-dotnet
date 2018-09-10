@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheYProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenYIsBiggerThan1686()
+            public void ShouldThrowExceptionWhenValueIsBiggerThan1686()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -31,7 +31,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenYIs1686()
+            public void ShouldNotThrowExceptionWhenValueIs1686()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -42,7 +42,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenYIsLessThan0()
+            public void ShouldThrowExceptionWhenValueIsLessThan0()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -50,7 +50,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenYIs0()
+            public void ShouldNotThrowExceptionWhenValueIs0()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -58,6 +58,31 @@ namespace Line.Tests
                 };
 
                 Assert.AreEqual(0, richMenuBounds.Y);
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenHeightPlusValueIsBiggerThan1686()
+            {
+                var richMenuBounds = new RichMenuBounds();
+                richMenuBounds.Height = 1487;
+
+                ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the rich menu's max height.", () =>
+                {
+                    richMenuBounds.Y = 200;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNothrowExceptionWhenHeightPlusValueIs2500()
+            {
+                var richMenuBounds = new RichMenuBounds()
+                {
+                    Height = 1486,
+                    Y = 200
+                };
+
+                Assert.AreEqual(200, richMenuBounds.Y);
+                Assert.AreEqual(1486, richMenuBounds.Height);
             }
         }
     }

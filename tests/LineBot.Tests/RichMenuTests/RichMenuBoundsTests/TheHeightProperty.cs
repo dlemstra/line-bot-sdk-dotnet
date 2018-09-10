@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheHeightProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightIsBiggerThan1686()
+            public void ShouldThrowExceptionWhenValueIsBiggerThan1686()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -31,7 +31,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenheightIs1686()
+            public void ShouldNotThrowExceptionWhenValueIs1686()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -42,7 +42,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightIsLessThan1()
+            public void ShouldThrowExceptionWhenValueIsLessThan1()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -50,7 +50,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenheightIs1()
+            public void ShouldNotThrowExceptionWhenValueIs1()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -61,19 +61,19 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightPlusYIsBiggerThan1686()
+            public void ShouldThrowExceptionWhenValuePlusYIsBiggerThan1686()
             {
                 var richMenuBounds = new RichMenuBounds();
+                richMenuBounds.Y = 200;
 
                 ExceptionAssert.Throws<InvalidOperationException>("The vertical postion and height will exceed the rich menu's max height.", () =>
                 {
-                    richMenuBounds.Y = 200;
                     richMenuBounds.Height = 1487;
                 });
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenHeightPlusYIs1686()
+            public void ShouldNotThrowExceptionWhenValuePlusYIs1686()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {

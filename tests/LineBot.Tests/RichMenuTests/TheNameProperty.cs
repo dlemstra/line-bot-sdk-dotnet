@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheNameProperty
         {
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenNameIsNull()
+            public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
 
@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenNameIsWhitespace()
+            public void ShouldNotThrowExceptionWhenValueIsWhitespace()
             {
                 var richMenu = new RichMenu();
 
@@ -45,7 +45,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenNameIsMoreThan300Chars()
+            public void ShouldThrowExceptionWhenValueIsMoreThan300Chars()
             {
                 var richMenu = new RichMenu();
 
@@ -56,7 +56,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenNameIs300Chars()
+            public void ShouldNotThrowExceptionWhenValueIs300Chars()
             {
                 var value = new string('x', 300);
 

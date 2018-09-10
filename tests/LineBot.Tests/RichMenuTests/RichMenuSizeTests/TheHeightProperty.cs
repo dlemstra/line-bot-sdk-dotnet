@@ -23,7 +23,7 @@ namespace Line.Tests
         public partial class TheHeightProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightIsNot1686_843()
+            public void ShouldThrowExceptionWhenValueIsNot1686_843()
             {
                 var richMenuSize = new RichMenuSize();
 
@@ -31,7 +31,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenHeightIs1686()
+            public void ShouldNotThrowExceptionWhenValueIs1686()
             {
                 var richMenuSize = new RichMenuSize()
                 {
@@ -42,7 +42,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenHeightIs843()
+            public void ShouldNotThrowExceptionWhenValueIs843()
             {
                 var richMenuSize = new RichMenuSize()
                 {

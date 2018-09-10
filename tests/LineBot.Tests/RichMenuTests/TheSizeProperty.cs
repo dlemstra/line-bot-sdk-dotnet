@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheSizeProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightIsNot1686_843()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
 
@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenSizeIsNotNull()
+            public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var size = new RichMenuSize()
                 {

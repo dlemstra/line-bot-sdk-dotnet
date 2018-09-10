@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheXProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenXIsBiggerThan2500()
+            public void ShouldThrowExceptionWhenValueIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -31,7 +31,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenXIs2500()
+            public void ShouldNotThrowExceptionWhenValueIs2500()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -42,7 +42,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenXIsLessThan0()
+            public void ShouldThrowExceptionWhenValueIsLessThan0()
             {
                 var richMenuBounds = new RichMenuBounds();
 
@@ -50,7 +50,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenXIs0()
+            public void ShouldNotThrowExceptionWhenValueIs0()
             {
                 var richMenuBounds = new RichMenuBounds()
                 {
@@ -61,15 +61,24 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenWidthPlusXIsBiggerThan2500()
+            public void ShouldThrowExceptionWhenWidthPlusValueIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
+                richMenuBounds.Width = 2300;
 
                 ExceptionAssert.Throws<InvalidOperationException>("The horizontal postion and width will exceed the rich menu's max width.", () =>
                 {
-                    richMenuBounds.Width = 2300;
                     richMenuBounds.X = 201;
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNothrowExceptionWhenWidthPlusValueIs2500()
+            {
+                var richMenuBounds = new RichMenuBounds();
+
+                richMenuBounds.Width = 2300;
+                richMenuBounds.X = 200;
             }
         }
     }

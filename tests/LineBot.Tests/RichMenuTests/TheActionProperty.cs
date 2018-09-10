@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheActionProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenActionIsNull()
+            public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenuArea = new RichMenuArea();
 
@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenActionIsNotNull()
+            public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
 

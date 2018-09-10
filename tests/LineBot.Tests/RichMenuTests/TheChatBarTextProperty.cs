@@ -23,7 +23,7 @@ namespace Line.Tests
         public class TheChatBarTextProperty
         {
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenChatBarTextIsNull()
+            public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
 
@@ -34,7 +34,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenChatBarTextIsWhitespace()
+            public void ShouldNotThrowExceptionWhenValueIsWhitespace()
             {
                 var richMenu = new RichMenu();
 
@@ -45,7 +45,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenChatBarTextIsMoreThan14Chars()
+            public void ShouldThrowExceptionWhenValueIsMoreThan14Chars()
             {
                 var richMenu = new RichMenu();
 
@@ -56,7 +56,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenChatBarTextIs14Chars()
+            public void ShouldNotThrowExceptionWhenValueIs14Chars()
             {
                 var value = new string('x', 14);
 
