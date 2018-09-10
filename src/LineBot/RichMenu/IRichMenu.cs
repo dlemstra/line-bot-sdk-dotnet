@@ -20,21 +20,10 @@ namespace Line
     public interface IRichMenu
     {
         /// <summary>
-        /// Gets the object which contains the width and height of the rich menu displayed in the chat.
-        /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
+        /// Gets the array of area objects which define the coordinates and size of tappable areas
+        /// Max: 20 area objects.
         /// </summary>
-        IRichMenuSize Size { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the rich menu should be displayed by default.
-        /// </summary>
-        bool Selected { get; }
-
-        /// <summary>
-        /// Gets the name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
-        /// Max: 300 characters.
-        /// </summary>
-        string Name { get; }
+        IRichMenuArea[] Areas { get; }
 
         /// <summary>
         /// Gets the text displayed in the chat bar.
@@ -43,9 +32,20 @@ namespace Line
         string ChatBarText { get; }
 
         /// <summary>
-        /// Gets the array of area objects which define the coordinates and size of tappable areas
-        /// Max: 20 area objects.
+        /// Gets the name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
+        /// Max: 300 characters.
         /// </summary>
-        IRichMenuArea[] Areas { get; }
+        string Name { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether the rich menu should be displayed by default.
+        /// </summary>
+        bool Selected { get; }
+
+        /// <summary>
+        /// Gets the object which contains the width and height of the rich menu displayed in the chat.
+        /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
+        /// </summary>
+        IRichMenuSize Size { get; }
     }
 }

@@ -28,45 +28,22 @@ namespace Line
         private IRichMenuSize _size;
 
         /// <summary>
-        /// Gets or sets the object which contains the width and height of the rich menu displayed in the chat.
-        /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
+        /// Gets or sets the array of area objects which define the coordinates and size of tappable areas.
+        /// Max: 20 area objects.
         /// </summary>
-        [JsonProperty("size")]
-        public IRichMenuSize Size
+        [JsonProperty("areas")]
+        public IRichMenuArea[] Areas
         {
-            get => _size;
+            get => _areas;
             set
             {
                 if (value == null)
-                    throw new InvalidOperationException("The size cannot be null.");
+                    throw new InvalidOperationException("The areas cannot be null.");
 
-                _size = value;
-            }
-        }
+                if (value.Length > 20)
+                    throw new InvalidOperationException("The maximum number of areas is 20.");
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the rich menu should be displayed by default.
-        /// </summary>
-        [JsonProperty("selected")]
-        public bool Selected { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
-        /// Max: 300 characters.
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new InvalidOperationException("The name cannot be null or whitespace.");
-
-                if (value.Length > 300)
-                    throw new InvalidOperationException("The name cannot be longer than 300 characters.");
-
-                _name = value;
+                _areas = value;
             }
         }
 
@@ -91,31 +68,49 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the array of area objects which define the coordinates and size of tappable areas.
-        /// Max: 20 area objects.
+        /// Gets or sets the name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
+        /// Max: 300 characters.
         /// </summary>
-        [JsonProperty("areas")]
-        public IRichMenuArea[] Areas
+        [JsonProperty("name")]
+        public string Name
         {
-            get => _areas;
+            get => _name;
             set
             {
-                if (value == null)
-                    throw new InvalidOperationException("The areas cannot be null.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The name cannot be null or whitespace.");
 
-                if (value.Length > 20)
-                    throw new InvalidOperationException("The maximum number of areas is 20.");
+                if (value.Length > 300)
+                    throw new InvalidOperationException("The name cannot be longer than 300 characters.");
 
-                _areas = value;
+                _name = value;
             }
         }
 
         /// <summary>
-        /// Convert for richMenu.
+        /// Gets or sets a value indicating whether the rich menu should be displayed by default.
         /// </summary>
-        /// <param name="richMenu">RichMenu object.</param>
-        /// <returns>RichMenu's instance.</returns>
-        public static RichMenu Convert(IRichMenu richMenu)
+        [JsonProperty("selected")]
+        public bool Selected { get; set; }
+
+        /// <summary>
+        /// Gets or sets the object which contains the width and height of the rich menu displayed in the chat.
+        /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
+        /// </summary>
+        [JsonProperty("size")]
+        public IRichMenuSize Size
+        {
+            get => _size;
+            set
+            {
+                if (value == null)
+                    throw new InvalidOperationException("The size cannot be null.");
+
+                _size = value;
+            }
+        }
+
+        internal static RichMenu Convert(IRichMenu richMenu)
         {
             if (richMenu is RichMenu request)
             {
