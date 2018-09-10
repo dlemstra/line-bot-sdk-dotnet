@@ -32,7 +32,7 @@ namespace Line.Tests
 
                 var textMessage = TextMessage.Convert(message);
 
-                Assert.AreEqual(message, textMessage);
+                Assert.AreSame(message, textMessage);
             }
 
             [TestMethod]

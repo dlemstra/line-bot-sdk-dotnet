@@ -44,10 +44,10 @@ namespace Line.Tests
 
                 var carouselTemplate = ImageCarouselTemplate.Convert(template);
 
-                Assert.AreEqual(template, carouselTemplate);
+                Assert.AreSame(template, carouselTemplate);
 
                 var column = carouselTemplate.Columns.First();
-                Assert.AreEqual(column, carouselTemplate.Columns.First());
+                Assert.AreSame(column, carouselTemplate.Columns.First());
             }
 
             [TestMethod]

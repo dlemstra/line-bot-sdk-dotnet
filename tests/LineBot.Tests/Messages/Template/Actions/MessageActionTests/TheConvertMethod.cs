@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var messageAction = MessageAction.Convert(action);
 
-                Assert.AreEqual(action, messageAction);
+                Assert.AreSame(action, messageAction);
             }
 
             [TestMethod]

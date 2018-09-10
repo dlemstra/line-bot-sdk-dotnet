@@ -59,7 +59,7 @@ namespace Line.Tests
                 };
                 var convertedRichMenu = RichMenu.Convert(richMenu);
 
-                Assert.AreEqual(richMenu, convertedRichMenu);
+                Assert.AreSame(richMenu, convertedRichMenu);
             }
         }
     }

@@ -44,7 +44,7 @@ namespace Line.Tests
 
                 var buttonsTemplate = ButtonsTemplate.Convert(template);
 
-                Assert.AreEqual(template, buttonsTemplate);
+                Assert.AreSame(template, buttonsTemplate);
             }
 
             [TestMethod]

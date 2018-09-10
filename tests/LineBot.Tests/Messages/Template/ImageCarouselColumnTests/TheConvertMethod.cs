@@ -40,7 +40,7 @@ namespace Line.Tests
                 var columns = ImageCarouselColumn.Convert(new[] { column }).ToArray();
 
                 Assert.AreEqual(1, columns.Length);
-                Assert.AreEqual(column, columns[0]);
+                Assert.AreSame(column, columns[0]);
             }
 
             [TestMethod]

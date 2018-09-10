@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var audioMessage = AudioMessage.Convert(message);
 
-                Assert.AreEqual(message, audioMessage);
+                Assert.AreSame(message, audioMessage);
             }
 
             [TestMethod]

@@ -42,10 +42,10 @@ namespace Line.Tests
 
                 var confirmTemplate = ConfirmTemplate.Convert(template);
 
-                Assert.AreEqual(template, confirmTemplate);
+                Assert.AreSame(template, confirmTemplate);
 
-                Assert.AreEqual(confirmTemplate.OkAction, template.OkAction);
-                Assert.AreEqual(confirmTemplate.CancelAction, template.CancelAction);
+                Assert.AreSame(confirmTemplate.OkAction, template.OkAction);
+                Assert.AreSame(confirmTemplate.CancelAction, template.CancelAction);
             }
 
             [TestMethod]

@@ -34,7 +34,7 @@ namespace Line.Tests
 
                 var messageAction = PostbackAction.Convert(action);
 
-                Assert.AreEqual(action, messageAction);
+                Assert.AreSame(action, messageAction);
             }
 
             [TestMethod]

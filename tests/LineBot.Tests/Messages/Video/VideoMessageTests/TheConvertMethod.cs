@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var videoMessage = VideoMessage.Convert(message);
 
-                Assert.AreEqual(message, videoMessage);
+                Assert.AreSame(message, videoMessage);
             }
 
             [TestMethod]

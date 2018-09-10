@@ -29,7 +29,7 @@ namespace Line.Tests
 
                 var messageAction = ImagemapMessageAction.Convert(action);
 
-                Assert.AreEqual(action, messageAction);
+                Assert.AreSame(action, messageAction);
             }
 
             [TestMethod]

@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var locationMessage = LocationMessage.Convert(message);
 
-                Assert.AreEqual(message, locationMessage);
+                Assert.AreSame(message, locationMessage);
             }
 
             [TestMethod]

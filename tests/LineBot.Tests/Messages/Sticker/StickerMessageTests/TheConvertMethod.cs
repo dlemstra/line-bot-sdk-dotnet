@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var stickerMessage = StickerMessage.Convert(message);
 
-                Assert.AreEqual(message, stickerMessage);
+                Assert.AreSame(message, stickerMessage);
             }
 
             [TestMethod]

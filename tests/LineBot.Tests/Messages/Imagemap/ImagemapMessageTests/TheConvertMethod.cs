@@ -40,15 +40,15 @@ namespace Line.Tests
 
                 var imagemapMessage = ImagemapMessage.Convert(message);
 
-                Assert.AreEqual(message, imagemapMessage);
-                Assert.AreEqual(message.BaseSize, imagemapMessage.BaseSize);
+                Assert.AreSame(message, imagemapMessage);
+                Assert.AreSame(message.BaseSize, imagemapMessage.BaseSize);
 
                 var actions = imagemapMessage.Actions.ToArray();
-                Assert.AreEqual(message.Actions.First(), actions[0]);
+                Assert.AreSame(message.Actions.First(), actions[0]);
 
                 var action = message.Actions.Skip(1).First();
-                Assert.AreEqual(action, actions[1]);
-                Assert.AreEqual(action.Area, actions[1].Area);
+                Assert.AreSame(action, actions[1]);
+                Assert.AreSame(action.Area, actions[1].Area);
             }
 
             [TestMethod]

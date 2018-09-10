@@ -33,7 +33,7 @@ namespace Line.Tests
 
                 var imageMessage = ImageMessage.Convert(message);
 
-                Assert.AreEqual(message, imageMessage);
+                Assert.AreSame(message, imageMessage);
             }
 
             [TestMethod]

@@ -48,13 +48,13 @@ namespace Line.Tests
 
                 var templateMessage = TemplateMessage.Convert(message);
 
-                Assert.AreEqual(message, templateMessage);
+                Assert.AreSame(message, templateMessage);
 
                 var buttonsTemplate = templateMessage.Template as IButtonsTemplate;
-                Assert.AreEqual(message.Template, buttonsTemplate);
+                Assert.AreSame(message.Template, buttonsTemplate);
 
                 var action = buttonsTemplate.Actions.First();
-                Assert.AreEqual(action, ((ButtonsTemplate)message.Template).Actions.First());
+                Assert.AreSame(action, ((ButtonsTemplate)message.Template).Actions.First());
             }
 
             [TestMethod]
