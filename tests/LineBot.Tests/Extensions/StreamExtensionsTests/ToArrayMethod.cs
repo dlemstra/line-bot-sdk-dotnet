@@ -184,6 +184,11 @@ namespace Line.Tests
                 public override bool CanSeek => _canSeek;
 
                 public void DisableSeeking() => _canSeek = false;
+
+                protected override void Dispose(bool disposing)
+                {
+                    base.Dispose(disposing);
+                }
             }
         }
     }
