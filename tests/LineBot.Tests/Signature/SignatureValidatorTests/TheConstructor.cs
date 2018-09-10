@@ -18,6 +18,7 @@ namespace Line.Tests.Signature
 {
     public partial class SignatureValidatorTests
     {
+        [TestClass]
         public class TheConstructor
         {
             [TestMethod]
