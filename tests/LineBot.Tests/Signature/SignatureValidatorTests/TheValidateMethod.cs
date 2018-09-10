@@ -24,9 +24,10 @@ namespace Line.Tests.Signature
             [TestMethod]
             public void ShouldThrowExceptionWhenContentIsNull()
             {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
                 ExceptionAssert.ThrowsArgumentNullException("content", () =>
                 {
-                    SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                     validator.Validate(null, "test");
                 });
             }
@@ -34,9 +35,10 @@ namespace Line.Tests.Signature
             [TestMethod]
             public void ShouldThrowExceptionWhenContentIsEmpty()
             {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
                 ExceptionAssert.ThrowsArgumentEmptyException("content", () =>
                 {
-                    SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                     validator.Validate(new byte[] { }, "test");
                 });
             }
@@ -44,9 +46,10 @@ namespace Line.Tests.Signature
             [TestMethod]
             public void ShouldThrowExceptionWhenSignatureIsNull()
             {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
                 ExceptionAssert.ThrowsArgumentNullException("signature", () =>
                 {
-                    SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                     validator.Validate(new byte[] { 0 }, null);
                 });
             }
@@ -54,9 +57,10 @@ namespace Line.Tests.Signature
             [TestMethod]
             public void ShouldThrowExceptionWhenSignatureIsEmpty()
             {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
                 ExceptionAssert.ThrowsArgumentEmptyException("signature", () =>
                 {
-                    SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                     validator.Validate(new byte[] { 0 }, string.Empty);
                 });
             }
@@ -64,10 +68,22 @@ namespace Line.Tests.Signature
             [TestMethod]
             public void ShouldThrowExceptionWhenSignatureLengthIsInvalid()
             {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
                 ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
                 {
-                    SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
                     validator.Validate(new byte[] { 42 }, "NDI=");
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenSignatureIsInvalid()
+            {
+                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+
+                ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
+                {
+                    validator.Validate(new byte[] { 42 }, "============================================");
                 });
             }
 
