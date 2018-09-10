@@ -25,8 +25,8 @@ namespace Line
         int Width { get; }
 
         /// <summary>
-        /// Gets or sets the height of the rich menu. Possible values: 1686, 843.
+        /// Gets the height of the rich menu. Possible values: 1686, 843.
         /// </summary>
-        int Height { get; set; }
+        int Height { get; }
     }
 }
