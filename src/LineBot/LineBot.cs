@@ -75,7 +75,7 @@ namespace Line
         {
             Guard.NotNull(nameof(richMenu), richMenu);
 
-            StringContent content = CreateStringContent(richMenu);
+            StringContent content = CreateStringContent(RichMenu.Convert(richMenu));
 
             HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();

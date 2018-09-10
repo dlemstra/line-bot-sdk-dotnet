@@ -21,7 +21,7 @@ namespace Line.Tests
     public class TestRichMenu : IRichMenu
     {
         [JsonProperty("size")]
-        public IRichMenuSize Size => new RichMenuSize { Height = 1686 };
+        public IRichMenuSize Size => new TestRichMenuSize();
 
         [JsonProperty("selected")]
         public bool Selected => false;
@@ -35,10 +35,10 @@ namespace Line.Tests
         [JsonProperty("areas")]
         public IRichMenuArea[] Areas => new[]
         {
-            new RichMenuArea
+            new TestRichMenuArea()
             {
                 Action = new UriAction { Label = "testLabel", Url = new Uri("http://www.google.com") },
-                Bounds = new RichMenuBounds
+                Bounds = new TestRichMenuBounds
                 {
                     Width = 110,
                     Height = 120,
@@ -46,7 +46,7 @@ namespace Line.Tests
                     Y = 12
                 }
             },
-            new RichMenuArea
+            new TestRichMenuArea
             {
                 Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
                 Bounds = new RichMenuBounds

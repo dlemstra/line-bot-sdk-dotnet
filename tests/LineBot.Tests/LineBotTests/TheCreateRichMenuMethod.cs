@@ -32,7 +32,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public async Task ShouldNotThrowExceptionWhenRichMenuIsGood()
+            public async Task ShouldCreateRichMenu()
             {
                 var richMenu = new TestRichMenu();
 
@@ -45,7 +45,7 @@ namespace Line.Tests
                 Assert.AreEqual("/richmenu", httpClient.RequestPath);
 
                 string postedData =
-                    @"{""size"":{""width"":2500,""height"":1686},""selected"":false,""name"":""testName"",""chatBarText"":""testChatBarTxt"",""areas"":[{""bounds"":{""x"":11,""y"":12,""width"":110,""height"":120},""action"":{""type"":""uri"",""label"":""testLabel"",""uri"":""http://www.google.com""}},{""bounds"":{""x"":21,""y"":22,""width"":210,""height"":220},""action"":{""type"":""uri"",""label"":""testLabel2"",""uri"":""http://www.bing.com""}}]}";
+                    @"{""areas"":[{""action"":{""type"":""uri"",""label"":""testLabel"",""uri"":""http://www.google.com""},""bounds"":{""x"":11,""y"":12,""width"":110,""height"":120}},{""action"":{""type"":""uri"",""label"":""testLabel2"",""uri"":""http://www.bing.com""},""bounds"":{""x"":21,""y"":22,""width"":210,""height"":220}}],""chatBarText"":""testChatBarTxt"",""name"":""testName"",""selected"":false,""size"":{""width"":2500,""height"":1686}}";
                 Assert.AreEqual(postedData, httpClient.PostedData);
 
                 Assert.AreEqual(result, "richmenu-801b2cd26b2f13587329ed501d279d27");

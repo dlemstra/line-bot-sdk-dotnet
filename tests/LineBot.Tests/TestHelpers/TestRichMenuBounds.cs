@@ -17,12 +17,20 @@ namespace Line.Tests
     [ExcludeFromCodeCoverage]
     public class TestRichMenuBounds : IRichMenuBounds
     {
-        public int X => 1;
+        public TestRichMenuBounds()
+        {
+            X = 1;
+            Y = 2;
+            Width = 3;
+            Height = 4;
+        }
 
-        public int Y => 2;
+        public int X { get; set; }
 
-        public int Width => 3;
+        public int Y { get; set; }
 
-        public int Height => 4;
+        public int Width { get; set; }
+
+        public int Height { get; set; }
     }
 }

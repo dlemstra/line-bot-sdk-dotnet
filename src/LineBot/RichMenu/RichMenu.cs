@@ -113,14 +113,43 @@ namespace Line
             }
         }
 
-        internal static RichMenu Convert(IRichMenu richMenu)
+        internal static RichMenu Convert(IRichMenu menu)
         {
-            if (richMenu is RichMenu request)
+            if (menu.Areas == null)
+                throw new InvalidOperationException("The areas cannot be null.");
+
+            if (menu.ChatBarText == null)
+                throw new InvalidOperationException("The chat bar text cannot be null.");
+
+            if (menu.Name == null)
+                throw new InvalidOperationException("The name cannot be null.");
+
+            if (menu.Size == null)
+                throw new InvalidOperationException("The size cannot be null.");
+
+            if (menu is RichMenu richMenu)
             {
-                return request;
+                return richMenu;
             }
 
-            return new RichMenu();
+            return new RichMenu()
+            {
+                Areas = ConvertAreas(menu.Areas),
+                ChatBarText = menu.ChatBarText,
+                Name = menu.Name,
+                Size = RichMenuSize.Convert(menu.Size)
+            };
+        }
+
+        private static RichMenuArea[] ConvertAreas(IRichMenuArea[] areas)
+        {
+            var result = new RichMenuArea[areas.Length];
+            for (int i = 0; i < areas.Length; i++)
+            {
+                result[i] = RichMenuArea.Convert(areas[i]);
+            }
+
+            return result;
         }
     }
 }
