@@ -17,8 +17,8 @@ namespace Line.Tests
     [ExcludeFromCodeCoverage]
     public class TestRichMenuArea : IRichMenuArea
     {
-        public IRichMenuBounds Bounds => new TestRichMenuBounds();
+        public ITemplateAction Action { get; set; }
 
-        public ITemplateAction Action => new TestMessageAction();
+        public IRichMenuBounds Bounds { get; set; }
     }
 }

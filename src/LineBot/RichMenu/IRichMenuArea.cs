@@ -20,13 +20,13 @@ namespace Line
     public interface IRichMenuArea
     {
         /// <summary>
-        /// Gets the objects describing the boundaries of the area in pixels.
-        /// </summary>
-        IRichMenuBounds Bounds { get; }
-
-        /// <summary>
         /// Gets the action performed when the area is tapped.
         /// </summary>
         ITemplateAction Action { get; }
+
+        /// <summary>
+        /// Gets the objects describing the boundaries of the area in pixels.
+        /// </summary>
+        IRichMenuBounds Bounds { get; }
     }
 }
