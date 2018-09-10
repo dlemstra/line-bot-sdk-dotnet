@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class TheRichMenuBoundsTests
+    public partial class RichMenuBoundsTests
     {
         [TestClass]
         public class TheHeightProperty

@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using Line;
 using Newtonsoft.Json;
 
 namespace Line.Tests

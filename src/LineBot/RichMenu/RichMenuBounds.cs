@@ -114,5 +114,27 @@ namespace Line
                 _height = value;
             }
         }
+
+        internal static RichMenuBounds Convert(IRichMenuBounds richMenuBounds)
+        {
+            if (richMenuBounds.Width == 0)
+                throw new InvalidOperationException("The width is not set.");
+
+            if (richMenuBounds.Height == 0)
+                throw new InvalidOperationException("The height is not set.");
+
+            if (richMenuBounds is RichMenuBounds bounds)
+            {
+                return bounds;
+            }
+
+            return new RichMenuBounds()
+            {
+                X = richMenuBounds.X,
+                Y = richMenuBounds.Y,
+                Width = richMenuBounds.Width,
+                Height = richMenuBounds.Height,
+            };
+        }
     }
 }
