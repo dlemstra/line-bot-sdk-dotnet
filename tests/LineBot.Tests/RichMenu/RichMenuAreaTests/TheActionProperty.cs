@@ -17,33 +17,33 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class RichMenuTests
+    public partial class RichMenuAreaTests
     {
         [TestClass]
-        public class TheBoundsProperty
+        public class TheActionProperty
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenuArea = new RichMenuArea();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The bounds cannot be null.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The action cannot be null.", () =>
                 {
-                    richMenuArea.Bounds = null;
+                    richMenuArea.Action = null;
                 });
             }
 
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
-                var richMenuBounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 };
+                var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
 
                 var richMenuArea = new RichMenuArea
                 {
-                    Bounds = richMenuBounds
+                    Action = action
                 };
 
-                Assert.AreEqual(richMenuBounds, richMenuArea.Bounds);
+                Assert.AreEqual(action, richMenuArea.Action);
             }
         }
     }
