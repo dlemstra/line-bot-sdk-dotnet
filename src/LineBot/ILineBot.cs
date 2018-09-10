@@ -24,6 +24,13 @@ namespace Line
     public interface ILineBot
     {
         /// <summary>
+        /// Creates a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
+        /// <returns>.</returns>
+        Task<string> CreateRichMenu(IRichMenu richMenu);
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
