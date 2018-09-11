@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,13 @@ namespace Line
         /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
         Task<string> CreateRichMenu(IRichMenu richMenu);
+
+        /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">ID of an uploaded rich menu.</param>
+        /// <returns>.</returns>
+        Task<bool> DeleteRichMenu(string richMenuId);
 
         /// <summary>
         /// Returns the content of the specified message.
@@ -57,6 +65,13 @@ namespace Line
         /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
         Task<IUserProfile> GetProfile(string userId);
+
+        /// <summary>
+        /// Gets a rich menu via a rich menu ID.
+        /// </summary>
+        /// <param name="richMenuId">ID of an uploaded rich menu.</param>
+        /// <returns>.</returns>
+        Task<IRichMenuResponse> GetRichMenu(string richMenuId);
 
         /// <summary>
         /// Returns the profile of the specified user.

@@ -12,19 +12,16 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using Newtonsoft.Json;
-
 namespace Line
 {
     /// <summary>
-    /// Rich menu id response object. This object is returned when you created a rich menu or get a linked rich menu of a user.
+    /// Encapsulates a rich menu response.
     /// </summary>
-    internal sealed class RichMenuIdResponse
+    public interface IRichMenuResponse : IRichMenu
     {
         /// <summary>
-        /// Gets or sets the rich menu ID.
+        /// Gets the rich menu ID.
         /// </summary>
-        [JsonProperty("richMenuId")]
-        public string RichMenuId { get; set; }
+        string RichMenuId { get; }
     }
 }

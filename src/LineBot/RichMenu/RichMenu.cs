@@ -28,6 +28,26 @@ namespace Line
         private IRichMenuSize _size;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenu"/> class.
+        /// </summary>
+        public RichMenu()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenu"/> class.
+        /// This constructor is required for the JSON deserializer to be able
+        /// to identify concrete classes to use when deserializing the interface properties.
+        /// </summary>
+        /// <param name="areas">areas.</param>
+        /// <param name="richMenuSize">rich menu size.</param>
+        public RichMenu(IRichMenuArea[] areas, IRichMenuSize richMenuSize)
+        {
+            _areas = areas;
+            _size = richMenuSize;
+        }
+
+        /// <summary>
         /// Gets or sets the array of area objects which define the coordinates and size of tappable areas.
         /// Max: 20 area objects.
         /// </summary>
