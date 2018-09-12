@@ -88,6 +88,23 @@ namespace Line
         }
 
         /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">ID of an uploaded rich menu.</param>
+        /// <returns>.</returns>
+        public async Task<bool> DeleteRichMenu(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            HttpResponseMessage response = await _client.DeleteAsync($"richmenu/" + richMenuId);
+            await response.CheckResult();
+
+            var result = await response.Content.DeserializeObject<string>();
+
+            return string.IsNullOrEmpty(result);
+        }
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -172,6 +189,43 @@ namespace Line
             Guard.NotNull(nameof(user), user);
 
             return await GetProfile(user.Id);
+        }
+
+        /// <summary>
+        /// Gets a rich menu via a rich menu ID.
+        /// </summary>
+        /// <param name="richMenuId">ID of an uploaded rich menu.</param>
+        /// <returns>.</returns>
+        public async Task<IRichMenuResponse> GetRichMenu(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            HttpResponseMessage response = await _client.GetAsync($"richmenu/" + richMenuId);
+            await response.CheckResult();
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var result = RichMenuResponse.ConvertFromJson(responseString);
+
+            if (result == null)
+                throw new LineBotException("Can't find rich menu from rich menu id.");
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a list of all uploaded rich menus.
+        /// </summary>
+        /// <param name="richMenuId">ID of an uploaded rich menu.</param>
+        /// <returns>.</returns>
+        public async Task<List<RichMenuResponse>> GetRichMenuList(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            HttpResponseMessage response = await _client.GetAsync($"richmenu/list");
+            await response.CheckResult();
+
+            return await response.Content.DeserializeObject<List<RichMenuResponse>>();
         }
 
         /// <summary>

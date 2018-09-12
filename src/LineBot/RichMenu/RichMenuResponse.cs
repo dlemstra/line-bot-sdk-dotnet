@@ -12,19 +12,40 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Line
 {
     /// <summary>
-    /// Rich menu id response object. This object is returned when you created a rich menu or get a linked rich menu of a user.
+    /// Rich menu response object. This object is returned when you get rich menu or get a list of rich menus.
     /// </summary>
-    internal sealed class RichMenuIdResponse
+    public class RichMenuResponse : RichMenu, IRichMenuResponse
     {
         /// <summary>
         /// Gets or sets the rich menu ID.
         /// </summary>
         [JsonProperty("richMenuId")]
         public string RichMenuId { get; set; }
+
+        public static RichMenuResponse ConvertFromJson(string jsonString)
+        {
+            var richMenuIdJToken = JObject.Parse(jsonString)["richMenuId"];
+
+            if (richMenuIdJToken == null)
+                return null;
+
+            var richMenuId = richMenuIdJToken.ToObject<string>();
+
+            var result = new RichMenuResponse
+            {
+                RichMenuId = richMenuId
+            };
+
+            return result;
+        }
     }
 }
