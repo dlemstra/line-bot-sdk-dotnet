@@ -108,8 +108,9 @@ namespace Line.Tests
             {
                 return CheckException(exception);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var s = e.GetType();
                 throw;
             }
         }

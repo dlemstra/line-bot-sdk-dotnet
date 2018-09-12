@@ -13,7 +13,10 @@
 // under the License.
 
 using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Line
 {
@@ -22,65 +25,25 @@ namespace Line
     /// </summary>
     public class RichMenuResponse : RichMenu, IRichMenuResponse
     {
-        public RichMenuResponse()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RichMenuResponse"/> class.
-        /// This constructor is required for the JSON deserializer to be able
-        /// to identify concrete classes to use when deserializing the interface properties.
-        /// </summary>
-        /// <param name="areas">areas.</param>
-        /// <param name="richMenuSize">rich menu size.</param>
-        [JsonConstructor]
-        public RichMenuResponse(IRichMenuArea[] areas, IRichMenuSize richMenuSize)
-            : base(areas, richMenuSize)
-        {
-        }
-
         /// <summary>
         /// Gets or sets the rich menu ID.
         /// </summary>
         [JsonProperty("richMenuId")]
         public string RichMenuId { get; set; }
 
-        internal static RichMenuResponse Convert(IRichMenuResponse menu)
+        public static RichMenuResponse ConvertFromJson(string jsonString)
         {
-            if (menu.Areas == null)
-                throw new InvalidOperationException("The areas cannot be null.");
+            var richMenuIdJToken = JObject.Parse(jsonString)["richMenuId"];
 
-            if (menu.ChatBarText == null)
-                throw new InvalidOperationException("The chat bar text cannot be null.");
+            if (richMenuIdJToken == null)
+                return null;
 
-            if (menu.Name == null)
-                throw new InvalidOperationException("The name cannot be null.");
+            var richMenuId = richMenuIdJToken.ToObject<string>();
 
-            if (menu.Size == null)
-                throw new InvalidOperationException("The size cannot be null.");
-
-            if (menu is RichMenuResponse richMenuResponse)
+            var result = new RichMenuResponse
             {
-                return richMenuResponse;
-            }
-
-            return new RichMenuResponse()
-            {
-                RichMenuId = menu.RichMenuId,
-                Areas = ConvertAreas(menu.Areas),
-                ChatBarText = menu.ChatBarText,
-                Name = menu.Name,
-                Size = RichMenuSize.Convert(menu.Size)
+                RichMenuId = richMenuId
             };
-        }
-
-        private static RichMenuArea[] ConvertAreas(IRichMenuArea[] areas)
-        {
-            var result = new RichMenuArea[areas.Length];
-            for (int i = 0; i < areas.Length; i++)
-            {
-                result[i] = RichMenuArea.Convert(areas[i]);
-            }
 
             return result;
         }

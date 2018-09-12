@@ -203,7 +203,14 @@ namespace Line
             HttpResponseMessage response = await _client.GetAsync($"richmenu/" + richMenuId);
             await response.CheckResult();
 
-            return await response.Content.DeserializeObject<RichMenuResponse>();
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var result = RichMenuResponse.ConvertFromJson(responseString);
+
+            if (result == null)
+                throw new LineBotException("Can't find rich menu from rich menu id.");
+
+            return result;
         }
 
         /// <summary>

@@ -39,35 +39,31 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuIdIsNotExist()
+            public void ShouldThrowExceptionWhenRichMenuIdIsNotExist()
             {
                 string richMenuId = "richmenu-XXXX";
                 var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(@"{""message"":""Not found""}"));
-
                 var bot = TestConfiguration.CreateBot(httpClient);
 
-                var result = await bot.GetRichMenu(richMenuId);
-
-                Assert.AreEqual("/richmenu/" + richMenuId, httpClient.RequestPath);
-
-                // TODO : Check what happens if MenuId not exist.
+                ExceptionAssert.Throws<LineBotException>("Can't find the rich menu.", () =>
+                {
+                    bot.GetRichMenu(richMenuId);
+                });
             }
 
             [TestMethod]
             public async Task ShouldGetRichMenu()
             {
-                string richMenuId = "richmenu-801b2cd26b2f13587329ed501d279d27";
+                string richMenuId = "richmenu-e599a14ed7556ba78afd803d69fe15b5";
                 var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(@"{""richMenuId"":""richmenu-e599a14ed7556ba78afd803d69fe15b5"",""name"":""testName"",""size"":{""width"":2500,""height"":1686},""chatBarText"":""testChatBarTxt"",""selected"":false,""areas"":[{""bounds"":{""x"":1,""y"":2,""width"":110,""height"":120},""action"":{""label"":""testLabel"",""type"":""uri"",""uri"":""http://www.google.com""}},{""bounds"":{""x"":130,""y"":4,""width"":150,""height"":160},""action"":{""label"":""testLabel2"",""type"":""uri"",""uri"":""http://www.bing.com""}}]}"));
 
                 var bot = TestConfiguration.CreateBot(httpClient);
 
                 var result = await bot.GetRichMenu(richMenuId);
 
-                var result2 = RichMenuResponse.Convert(result);
-
                 Assert.AreEqual("/richmenu/" + richMenuId, httpClient.RequestPath);
 
-                Assert.AreEqual(result2.RichMenuId, richMenuId);
+                Assert.AreEqual(richMenuId, result.RichMenuId);
             }
         }
     }
