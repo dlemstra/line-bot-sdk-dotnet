@@ -1,5 +1,3 @@
-variables:
-  Configuration: 'Release'
 steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
@@ -10,10 +8,10 @@ steps:
   inputs:
     command: build
     projects: 'LineBot.sln'
-    arguments: '-c $(Configuration) /p:codecov=true'
+    arguments: '-c Release /p:codecov=true'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
     command: test
     projects: 'tests/LineBot.Tests/LineBot.Tests.csproj'
-    arguments: '--no-build -c $(Configuration)'
+    arguments: '--no-build -c Release'
