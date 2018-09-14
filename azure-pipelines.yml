@@ -1,4 +1,4 @@
-name: $(Build.DefinitionName)-$(Date:yyyyMMdd.HHmm)
+name: $(Date:yyyyMMdd.HHmm)
 
 jobs:
 - job: Windows
