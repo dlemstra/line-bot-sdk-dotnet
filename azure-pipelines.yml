@@ -13,10 +13,12 @@ phases:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
     inputs:
+      command: build
       projects: 'LineBot.sln'
       arguments: '-c $(Configuration) /p:codecov=true'
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test'
     inputs:
+      command: test
       projects: 'tests/LineBot.Tests/LineBot.Tests.csproj'
       arguments: '--no-build -c $(Configuration)'
