@@ -2,16 +2,19 @@ name: $(Date:yyyyMMdd.HHmm)
 
 jobs:
 - job: Windows
-  queue: 'Hosted VS2017'
+  pool:
+    vmImage: 'VS2017-Win2016'
   steps:
   - template: build/build.yml
 
 - job: Linux
-  queue: 'Hosted Linux Preview'
+  pool:
+    vmImage: 'Ubuntu 16.04'
   steps:
   - template: build/build.yml
 
 - job: macOS
-  queue: 'Hosted macOS Preview'
+  pool:
+    vmImage: 'macOS 10.13'
   steps:
   - template: build/build.yml
