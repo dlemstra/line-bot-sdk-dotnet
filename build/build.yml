@@ -1,0 +1,4 @@
+steps:
+  - script: dotnet restore
+  - script: dotnet build LineBot.sln -c Release /p:codecov=true
+  - script: dotnet test tests/LineBot.Tests/LineBot.Tests.csproj --no-build -c Release
