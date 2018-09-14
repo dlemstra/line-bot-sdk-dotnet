@@ -1,3 +1,5 @@
+name: $(Build.DefinitionName)-$(Date:yyyyMMdd.HHmm)
+
 jobs:
 - job: Windows
   pool:

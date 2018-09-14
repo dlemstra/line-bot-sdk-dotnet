@@ -1,4 +1,19 @@
+variables:
+  Configuration: 'Release'
 steps:
-  - script: dotnet restore
-  - script: dotnet build LineBot.sln -c Release /p:codecov=true
-  - script: dotnet test tests/LineBot.Tests/LineBot.Tests.csproj --no-build -c Release
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: build
+    projects: 'LineBot.sln'
+    arguments: '-c $(Configuration) /p:codecov=true'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    projects: 'tests/LineBot.Tests/LineBot.Tests.csproj'
+    arguments: '--no-build -c $(Configuration)'
