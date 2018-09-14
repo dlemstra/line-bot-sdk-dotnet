@@ -1,0 +1,22 @@
+variables:
+  Configuration: 'Release'
+phases:
+- phase: Windows
+  displayName: Build Windows
+  queue:
+    name: Hosted VS2017
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
+      command: restore
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      projects: 'LineBot.sln'
+      arguments: '-c $(Configuration) /p:codecov=true'
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      projects: 'tests/LineBot.Tests/LineBot.Tests.csproj'
+      arguments: '--no-build -c $(Configuration)'
