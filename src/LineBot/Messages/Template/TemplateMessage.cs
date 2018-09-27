@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template message.
     /// </summary>
-    public sealed class TemplateMessage : ITemplateMessage
+    public sealed class TemplateMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -28,7 +28,7 @@ namespace Line
         private readonly MessageType _type = MessageType.Template;
 #pragma warning restore 0414
 
-        private string _alternateText;
+        private string _alternativeText;
         private ITemplate _template;
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Line
         {
             get
             {
-                return _alternateText;
+                return _alternativeText;
             }
 
             set
@@ -58,7 +58,7 @@ namespace Line
                 if (value.Length > 400)
                     throw new InvalidOperationException("The alternative text cannot be longer than 400 characters.");
 
-                _alternateText = value;
+                _alternativeText = value;
             }
         }
 
@@ -85,26 +85,15 @@ namespace Line
             }
         }
 
-        internal static TemplateMessage Convert(ITemplateMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.AlternativeText == null)
+            if (_alternativeText == null)
                 throw new InvalidOperationException("The alternative text cannot be null.");
 
-            if (!(message is TemplateMessage templateMessage))
-            {
-                templateMessage = new TemplateMessage()
-                {
-                    AlternativeText = message.AlternativeText,
-                };
-            }
-
-            if (message.Template == null)
+            if (_template == null)
                 throw new InvalidOperationException("The template cannot be null.");
 
-            templateMessage.Template = message.Template;
-            templateMessage.Template.Validate();
-
-            return templateMessage;
+            _template.Validate();
         }
 
         private static bool IsInvalidTemplate(ITemplate value)

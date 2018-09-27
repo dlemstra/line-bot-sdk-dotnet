@@ -39,9 +39,6 @@ namespace Line
 
                 switch (messages[i])
                 {
-                    case ITemplateMessage templateMessage:
-                        result[i] = TemplateMessage.Convert(templateMessage);
-                        break;
                     case ISendMessage sendMessage:
                         sendMessage.Validate();
                         result[i] = sendMessage;
