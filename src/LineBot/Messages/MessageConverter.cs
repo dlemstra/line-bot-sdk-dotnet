@@ -48,9 +48,6 @@ namespace Line
                     case IVideoMessage videoMessage:
                         result[i] = VideoMessage.Convert(videoMessage);
                         break;
-                    case IAudioMessage audioMessage:
-                        result[i] = AudioMessage.Convert(audioMessage);
-                        break;
                     case ILocationMessage locationMessage:
                         result[i] = LocationMessage.Convert(locationMessage);
                         break;
@@ -62,6 +59,10 @@ namespace Line
                         break;
                     case ITemplateMessage templateMessage:
                         result[i] = TemplateMessage.Convert(templateMessage);
+                        break;
+                    case ISendMessage sendMessage:
+                        sendMessage.Validate();
+                        result[i] = sendMessage;
                         break;
                     default:
                         throw new NotSupportedException("Invalid message type.");

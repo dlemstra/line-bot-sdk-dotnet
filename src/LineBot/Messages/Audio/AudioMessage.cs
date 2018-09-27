@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an audio message.
     /// </summary>
-    public sealed class AudioMessage : IAudioMessage
+    public sealed class AudioMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -127,22 +127,13 @@ namespace Line
             }
         }
 
-        internal static AudioMessage Convert(IAudioMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.Url == null)
+            if (Url == null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (message.Duration == 0)
+            if (Duration == 0)
                 throw new InvalidOperationException("The duration should be at least 1 millisecond.");
-
-            if (message is AudioMessage audioMessage)
-                return audioMessage;
-
-            return new AudioMessage()
-            {
-                Url = message.Url,
-                Duration = message.Duration
-            };
         }
     }
 }

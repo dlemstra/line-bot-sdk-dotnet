@@ -65,21 +65,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIAudioMessageToAudioMessage()
-            {
-                var message = new TestAudioMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var audioMessage = messages[0] as AudioMessage;
-                Assert.AreEqual(new Uri("https://foo.url"), audioMessage.Url);
-                Assert.AreEqual(1000, audioMessage.Duration);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomIImageMessageToImageMessage()
             {
                 var message = new TestImageMessage();
