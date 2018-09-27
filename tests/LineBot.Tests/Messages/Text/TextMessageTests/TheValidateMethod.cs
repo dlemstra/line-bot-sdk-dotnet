@@ -20,41 +20,17 @@ namespace Line.Tests
     public partial class TextMessageTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsTextMessage()
-            {
-                var message = new TextMessage()
-                {
-                    Text = "Test"
-                };
-
-                var textMessage = TextMessage.Convert(message);
-
-                Assert.AreSame(message, textMessage);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var message = new TextMessage();
+                ISendMessage message = new TextMessage();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    TextMessage.Convert(message);
+                    message.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomITextMessageToTextMessage()
-            {
-                var message = new TestTextMessage();
-
-                var textMessage = TextMessage.Convert(message);
-
-                Assert.AreNotEqual(message, textMessage);
-                Assert.AreEqual("TestTextMessage", textMessage.Text);
             }
         }
     }

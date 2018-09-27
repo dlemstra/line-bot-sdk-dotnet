@@ -105,12 +105,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Multicast(new string[] { "id" }, messages);
 
-            string postedData = @"{""to"":[""id""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":[""id""],""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/multicast", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -181,7 +181,7 @@ namespace Line.Tests
         [TestMethod]
         public async Task Multicast_UserIsNullWithEnumerable_ThrowsException()
         {
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage(), 2);
 
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("to", async () =>
@@ -216,9 +216,9 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            await bot.Multicast(new TestUser[] { new TestUser() }, new TestTextMessage());
+            await bot.Multicast(new TestUser[] { new TestUser() }, new TextMessage("FooBar"));
 
-            string postedData = @"{""to"":[""testUser""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":[""testUser""],""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/multicast", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -229,12 +229,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Multicast(new TestUser[] { new TestUser() }, messages);
 
-            string postedData = @"{""to"":[""testUser""],""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":[""testUser""],""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/multicast", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);

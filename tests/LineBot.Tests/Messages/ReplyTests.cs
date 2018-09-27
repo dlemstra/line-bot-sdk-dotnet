@@ -126,12 +126,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply("token", messages);
 
-            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -153,9 +153,9 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            await bot.Reply(new TestMessage(), new TestTextMessage());
+            await bot.Reply(new TestMessage(), new TextMessage("FooBar"));
 
-            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -166,12 +166,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply(new TestMessage(), messages);
 
-            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/reply", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);

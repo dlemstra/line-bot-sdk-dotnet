@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a text message.
     /// </summary>
-    public sealed class TextMessage : ITextMessage
+    public sealed class TextMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -73,20 +73,10 @@ namespace Line
             }
         }
 
-        internal static TextMessage Convert(ITextMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.Text == null)
+            if (Text == null)
                 throw new InvalidOperationException("The text cannot be null.");
-
-            if (message is TextMessage textMessage)
-            {
-                return textMessage;
-            }
-
-            return new TextMessage()
-            {
-                Text = message.Text
-            };
         }
     }
 }

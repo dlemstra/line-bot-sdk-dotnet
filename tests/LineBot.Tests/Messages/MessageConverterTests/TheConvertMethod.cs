@@ -51,20 +51,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomITextMessageToTextMessage()
-            {
-                var message = new TestTextMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var textMessage = messages[0] as TextMessage;
-                Assert.AreEqual("TestTextMessage", textMessage.Text);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomIVideoMessageToImageMessage()
             {
                 var message = new TestVideoMessage();

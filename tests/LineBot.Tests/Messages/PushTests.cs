@@ -105,12 +105,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push("id", messages);
 
-            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""id"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -152,9 +152,9 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            await bot.Push(new TestGroup(), new TestTextMessage());
+            await bot.Push(new TestGroup(), new TextMessage("FooBar"));
 
-            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -165,12 +165,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestGroup(), messages);
 
-            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testGroup"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -212,9 +212,9 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            await bot.Push(new TestRoom(), new TestTextMessage());
+            await bot.Push(new TestRoom(), new TextMessage("FooBar"));
 
-            string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -225,12 +225,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestRoom(), messages);
 
-            string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testRoom"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -272,9 +272,9 @@ namespace Line.Tests
             TestHttpClient httpClient = TestHttpClient.Create();
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            await bot.Push(new TestUser(), new TestTextMessage());
+            await bot.Push(new TestUser(), new TextMessage("FooBar"));
 
-            string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);
@@ -285,12 +285,12 @@ namespace Line.Tests
         {
             TestHttpClient httpClient = TestHttpClient.Create();
 
-            IEnumerable<TestTextMessage> messages = Enumerable.Repeat(new TestTextMessage(), 2);
+            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             await bot.Push(new TestUser(), messages);
 
-            string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""TestTextMessage""},{""type"":""text"",""text"":""TestTextMessage""}]}";
+            string postedData = @"{""to"":""testUser"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
             Assert.AreEqual("/message/push", httpClient.RequestPath);
             Assert.AreEqual(postedData, httpClient.PostedData);

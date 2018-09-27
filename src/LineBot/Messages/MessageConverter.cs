@@ -39,9 +39,6 @@ namespace Line
 
                 switch (messages[i])
                 {
-                    case ITextMessage textMessage:
-                        result[i] = TextMessage.Convert(textMessage);
-                        break;
                     case IVideoMessage videoMessage:
                         result[i] = VideoMessage.Convert(videoMessage);
                         break;
