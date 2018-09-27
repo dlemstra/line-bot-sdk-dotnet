@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a location message.
     /// </summary>
-    public sealed class LocationMessage : ILocationMessage
+    public sealed class LocationMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -98,24 +98,13 @@ namespace Line
         [JsonProperty("longitude")]
         public decimal Longitude { get; set; }
 
-        internal static LocationMessage Convert(ILocationMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.Title == null)
+            if (Title == null)
                 throw new InvalidOperationException("The title cannot be null.");
 
-            if (message.Address == null)
+            if (Address == null)
                 throw new InvalidOperationException("The address cannot be null.");
-
-            if (message is LocationMessage locationMessage)
-                return locationMessage;
-
-            return new LocationMessage()
-            {
-                Title = message.Title,
-                Address = message.Address,
-                Latitude = message.Latitude,
-                Longitude = message.Longitude
-            };
         }
     }
 }

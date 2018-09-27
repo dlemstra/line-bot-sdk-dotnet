@@ -80,23 +80,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomILocationMessageToLocationMessage()
-            {
-                var message = new TestLocationMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var locationMessage = messages[0] as LocationMessage;
-                Assert.AreEqual("Title", locationMessage.Title);
-                Assert.AreEqual("Address", locationMessage.Address);
-                Assert.AreEqual(53.2014355m, locationMessage.Latitude);
-                Assert.AreEqual(5.7988737m, locationMessage.Longitude);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomIStickerMessageToStickerMessage()
             {
                 var message = new TestStickerMessage();

@@ -45,9 +45,6 @@ namespace Line
                     case IVideoMessage videoMessage:
                         result[i] = VideoMessage.Convert(videoMessage);
                         break;
-                    case ILocationMessage locationMessage:
-                        result[i] = LocationMessage.Convert(locationMessage);
-                        break;
                     case IStickerMessage stickerMessage:
                         result[i] = StickerMessage.Convert(stickerMessage);
                         break;

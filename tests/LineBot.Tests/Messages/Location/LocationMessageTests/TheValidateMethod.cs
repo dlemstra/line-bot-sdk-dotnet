@@ -20,63 +20,34 @@ namespace Line.Tests
     public partial class LocationMessageTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsLocationMessage()
-            {
-                var message = new LocationMessage()
-                {
-                    Title = "Title",
-                    Address = "Address"
-                };
-
-                var locationMessage = LocationMessage.Convert(message);
-
-                Assert.AreSame(message, locationMessage);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTitleIsNull()
             {
-                var message = new LocationMessage()
+                ISendMessage message = new LocationMessage()
                 {
                     Address = "Address"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The title cannot be null.", () =>
                 {
-                    LocationMessage.Convert(message);
+                    message.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenAddressIsNull()
             {
-                LocationMessage message = new LocationMessage()
+                ISendMessage message = new LocationMessage()
                 {
                     Title = "Title",
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null.", () =>
                 {
-                    LocationMessage.Convert(message);
+                    message.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomILocationMessageToLocationMessage()
-            {
-                var message = new TestLocationMessage();
-
-                var locationMessage = LocationMessage.Convert(message);
-
-                Assert.AreNotEqual(message, locationMessage);
-
-                Assert.AreEqual("Title", locationMessage.Title);
-                Assert.AreEqual("Address", locationMessage.Address);
-                Assert.AreEqual(53.2014355m, locationMessage.Latitude);
-                Assert.AreEqual(5.7988737m, locationMessage.Longitude);
             }
         }
     }
