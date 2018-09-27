@@ -39,9 +39,6 @@ namespace Line
 
                 switch (messages[i])
                 {
-                    case IImagemapMessage imagemapMessage:
-                        result[i] = ImagemapMessage.Convert(imagemapMessage);
-                        break;
                     case ITemplateMessage templateMessage:
                         result[i] = TemplateMessage.Convert(templateMessage);
                         break;

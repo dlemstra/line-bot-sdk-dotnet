@@ -22,7 +22,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap message.
     /// </summary>
-    public sealed class ImagemapMessage : IImagemapMessage
+    public sealed class ImagemapMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -31,7 +31,7 @@ namespace Line
 #pragma warning restore 0414
 
         private Uri _baseUrl;
-        private string _alternateText;
+        private string _alternativeText;
         private ImagemapSize _baseSize;
         private IEnumerable<ImagemapAction> _actions;
 
@@ -82,7 +82,7 @@ namespace Line
         {
             get
             {
-                return _alternateText;
+                return _alternativeText;
             }
 
             set
@@ -93,7 +93,7 @@ namespace Line
                 if (value.Length > 400)
                     throw new InvalidOperationException("The alternative text cannot be longer than 400 characters.");
 
-                _alternateText = value;
+                _alternativeText = value;
             }
         }
 
@@ -131,38 +131,22 @@ namespace Line
             }
         }
 
-        ImagemapSize IImagemapMessage.BaseSize => BaseSize;
-
-        internal static ImagemapMessage Convert(IImagemapMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.BaseUrl == null)
+            if (_baseUrl == null)
                 throw new InvalidOperationException("The base url cannot be null.");
 
-            if (message.AlternativeText == null)
+            if (_alternativeText == null)
                 throw new InvalidOperationException("The alternative text cannot be null.");
 
-            if (message.BaseSize == null)
+            if (_baseSize == null)
                 throw new InvalidOperationException("The base size cannot be null.");
 
-            if (message.Actions == null)
+            if (_actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            if (!(message is ImagemapMessage imagemapMessage))
-            {
-                imagemapMessage = new ImagemapMessage()
-                {
-                    BaseUrl = message.BaseUrl,
-                    AlternativeText = message.AlternativeText,
-                };
-            }
-
-            imagemapMessage.BaseSize = message.BaseSize;
-            imagemapMessage.BaseSize.Validate();
-
-            imagemapMessage.Actions = message.Actions;
-            imagemapMessage.Actions.Validate();
-
-            return imagemapMessage;
+            _baseSize.Validate();
+            _actions.Validate();
         }
     }
 }

@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -21,40 +20,12 @@ namespace Line.Tests
     public partial class ImagemapMessageTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsImagemapMessage()
-            {
-                var message = new ImagemapMessage()
-                {
-                    BaseUrl = new Uri("https://foo.bar"),
-                    BaseSize = new ImagemapSize(1040, 1040),
-                    AlternativeText = "Alternative",
-                    Actions = new ImagemapAction[]
-                    {
-                        new ImagemapMessageAction("Text", 1, 2, 3, 4),
-                        new ImagemapUriAction("https://url.foo", 1, 2, 3, 4),
-                    }
-                };
-
-                var imagemapMessage = ImagemapMessage.Convert(message);
-
-                Assert.AreSame(message, imagemapMessage);
-                Assert.AreSame(message.BaseSize, imagemapMessage.BaseSize);
-
-                var actions = imagemapMessage.Actions.ToArray();
-                Assert.AreSame(message.Actions.First(), actions[0]);
-
-                var action = message.Actions.Skip(1).First();
-                Assert.AreSame(action, actions[1]);
-                Assert.AreSame(action.Area, actions[1].Area);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenBaseUrlIsNull()
             {
-                var message = new ImagemapMessage()
+                ISendMessage message = new ImagemapMessage()
                 {
                     BaseSize = new ImagemapSize(1040, 1040),
                     AlternativeText = "Alternative",
@@ -66,14 +37,14 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The base url cannot be null.", () =>
                 {
-                    ImagemapMessage.Convert(message);
+                    message.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenBaseSizeIsNull()
             {
-                var message = new ImagemapMessage()
+                ISendMessage message = new ImagemapMessage()
                 {
                     BaseUrl = new Uri("https://foo.bar"),
                     AlternativeText = "Alternative",
@@ -85,33 +56,53 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The base size cannot be null.", () =>
                 {
-                    ImagemapMessage.Convert(message);
+                    message.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenAlternativeTextIsNull()
+            public void ShouldThrowExceptionWhenBaseSizeIsInvalid()
             {
-                var message = new ImagemapMessage()
+                ISendMessage message = new ImagemapMessage()
                 {
                     BaseUrl = new Uri("https://foo.bar"),
-                    BaseSize = new ImagemapSize(1040, 1040),
+                    BaseSize = new ImagemapSize(),
+                    AlternativeText = "Alternative",
                     Actions = new[]
                     {
                         new ImagemapMessageAction("Text", 1, 2, 3, 4),
                     }
                 };
 
+                ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
+                {
+                    message.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenAlternativeTextIsNull()
+            {
+                ISendMessage message = new ImagemapMessage()
+                {
+                    BaseUrl = new Uri("https://foo.bar"),
+                    BaseSize = new ImagemapSize(1040, 1040),
+                    Actions = new[]
+                    {
+                        new ImagemapMessageAction("Text", 1, 2, 3, 4)
+                    }
+                };
+
                 ExceptionAssert.Throws<InvalidOperationException>("The alternative text cannot be null.", () =>
                 {
-                    ImagemapMessage.Convert(message);
+                    message.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenActionsIsNull()
             {
-                var message = new ImagemapMessage()
+                ISendMessage message = new ImagemapMessage()
                 {
                     BaseUrl = new Uri("https://foo.bar"),
                     BaseSize = new ImagemapSize(1040, 1040),
@@ -120,7 +111,27 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
                 {
-                    ImagemapMessage.Convert(message);
+                    message.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenActionsAreInvalid()
+            {
+                ISendMessage message = new ImagemapMessage()
+                {
+                    BaseUrl = new Uri("https://foo.bar"),
+                    BaseSize = new ImagemapSize(1040, 1040),
+                    AlternativeText = "Alternative",
+                    Actions = new[]
+                    {
+                        new ImagemapMessageAction()
+                    }
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The area cannot be null.", () =>
+                {
+                    message.Validate();
                 });
             }
         }
