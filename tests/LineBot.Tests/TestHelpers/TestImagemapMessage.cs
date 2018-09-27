@@ -33,7 +33,7 @@ namespace Line.Tests
 
         public string AlternativeText => "Alternative";
 
-        public IImagemapSize BaseSize => new TestImageMapSize();
+        public ImagemapSize BaseSize => new ImagemapSize(1040, 520);
 
         public IEnumerable<IImagemapAction> Actions { get; set; }
     }

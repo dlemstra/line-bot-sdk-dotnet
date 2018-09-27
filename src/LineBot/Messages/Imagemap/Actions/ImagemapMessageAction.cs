@@ -103,7 +103,8 @@ namespace Line
                 };
             }
 
-            imagemapMessageAction.Area = ImagemapArea.Convert(action.Area);
+            imagemapMessageAction.Area = action.Area;
+            imagemapMessageAction.Area.Validate();
 
             return imagemapMessageAction;
         }

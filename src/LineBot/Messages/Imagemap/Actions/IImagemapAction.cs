@@ -22,6 +22,6 @@ namespace Line
         /// <summary>
         /// Gets the tappable area.
         /// </summary>
-        IImagemapArea Area { get; }
+        ImagemapArea Area { get; }
     }
 }

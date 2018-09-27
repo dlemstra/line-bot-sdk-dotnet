@@ -24,6 +24,6 @@ namespace Line.Tests
 
         public string Text { get; set; }
 
-        public IImagemapArea Area => new TestImagemapArea();
+        public ImagemapArea Area => new ImagemapArea(4, 3, 2, 1);
     }
 }

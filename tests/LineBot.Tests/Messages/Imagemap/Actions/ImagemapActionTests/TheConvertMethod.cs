@@ -36,7 +36,7 @@ namespace Line.Tests
             [ExcludeFromCodeCoverage]
             private class InvalidAction : IImagemapAction
             {
-                public IImagemapArea Area => throw new NotImplementedException();
+                public ImagemapArea Area => throw new NotImplementedException();
             }
         }
     }

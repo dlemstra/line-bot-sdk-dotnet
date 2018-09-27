@@ -133,7 +133,7 @@ namespace Line
 
         IEnumerable<IImagemapAction> IImagemapMessage.Actions => Actions;
 
-        IImagemapSize IImagemapMessage.BaseSize => BaseSize;
+        ImagemapSize IImagemapMessage.BaseSize => BaseSize;
 
         internal static ImagemapMessage Convert(IImagemapMessage message)
         {
@@ -158,7 +158,9 @@ namespace Line
                 };
             }
 
-            imagemapMessage.BaseSize = ImagemapSize.Convert(message.BaseSize);
+            imagemapMessage.BaseSize = message.BaseSize;
+            imagemapMessage.BaseSize.Validate();
+
             imagemapMessage.Actions = ConvertActions(message.Actions);
 
             return imagemapMessage;

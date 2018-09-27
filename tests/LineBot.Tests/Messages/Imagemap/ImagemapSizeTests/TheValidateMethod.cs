@@ -17,52 +17,36 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class ImagemapAreaTests
+    public partial class ImagemapSizeTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
             [TestMethod]
-            public void ShouldNotConvertInstanceToNewInstance()
+            public void ShouldThrowExceptionWhenWidthIsNotSet()
             {
-                var area = new ImagemapArea()
+                var size = new ImagemapSize()
                 {
-                    X = 1,
-                    Y = 2,
-                    Width = 100,
-                    Height = 200
-                };
-
-                var imagemapArea = ImagemapArea.Convert(area);
-
-                Assert.AreNotEqual(area, imagemapArea);
-            }
-
-            [TestMethod]
-            public void ShouldThrowExceptionWhenWidthIsZero()
-            {
-                var area = new ImagemapArea()
-                {
-                    Height = 200
+                    Height = 1
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The width should be at least 1.", () =>
                 {
-                    ImagemapArea.Convert(area);
+                    size.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenHeightIsZero()
+            public void ShouldThrowExceptionWhenHeightIsNotSet()
             {
-                var area = new ImagemapArea()
+                var size = new ImagemapSize()
                 {
-                    Width = 100
+                    Width = 1
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The height should be at least 1.", () =>
                 {
-                    ImagemapArea.Convert(area);
+                    size.Validate();
                 });
             }
         }

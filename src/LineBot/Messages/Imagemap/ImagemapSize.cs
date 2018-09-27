@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap size.
     /// </summary>
-    public class ImagemapSize : IImagemapSize
+    public class ImagemapSize
     {
         private int _width;
         private int _height;
@@ -83,13 +83,13 @@ namespace Line
             }
         }
 
-        internal static ImagemapSize Convert(IImagemapSize size)
+        internal virtual void Validate()
         {
-            return new ImagemapSize()
-            {
-                Width = size.Width,
-                Height = size.Height
-            };
+            if (_width == 0)
+                throw new InvalidOperationException("The width should be at least 1.");
+
+            if (_height == 0)
+                throw new InvalidOperationException("The height should be at least 1.");
         }
     }
 }

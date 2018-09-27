@@ -50,7 +50,7 @@ namespace Line
             }
         }
 
-        IImagemapArea IImagemapAction.Area => Area;
+        ImagemapArea IImagemapAction.Area => Area;
 
         internal static ImagemapAction Convert(IImagemapAction action)
         {

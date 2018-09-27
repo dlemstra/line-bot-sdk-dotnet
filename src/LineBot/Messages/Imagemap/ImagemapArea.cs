@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap area.
     /// </summary>
-    public class ImagemapArea : ImagemapSize, IImagemapArea
+    public class ImagemapArea : ImagemapSize
     {
         private int _x;
         private int _y;
@@ -85,17 +85,6 @@ namespace Line
 
                 _y = value;
             }
-        }
-
-        internal static ImagemapArea Convert(IImagemapArea area)
-        {
-            return new ImagemapArea()
-            {
-                X = area.X,
-                Y = area.Y,
-                Width = area.Width,
-                Height = area.Height
-            };
         }
     }
 }

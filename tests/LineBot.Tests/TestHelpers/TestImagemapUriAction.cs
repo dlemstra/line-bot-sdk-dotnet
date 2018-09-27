@@ -21,12 +21,12 @@ namespace Line.Tests
     {
         public TestImagemapUriAction()
         {
-            Area = new TestImagemapArea();
+            Area = new ImagemapArea(4, 3, 2, 1);
             Url = new Uri("https://foo.bar");
         }
 
         public Uri Url { get; set; }
 
-        public IImagemapArea Area { get; set; }
+        public ImagemapArea Area { get; set; }
     }
 }

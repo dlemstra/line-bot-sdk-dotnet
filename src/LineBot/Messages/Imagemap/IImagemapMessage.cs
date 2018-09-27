@@ -41,7 +41,7 @@ namespace Line
         /// <summary>
         /// Gets the size of the base image (Width must be 1040).
         /// </summary>
-        IImagemapSize BaseSize { get; }
+        ImagemapSize BaseSize { get; }
 
         /// <summary>
         /// Gets the actions.
