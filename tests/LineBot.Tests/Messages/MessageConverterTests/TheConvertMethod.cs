@@ -65,21 +65,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIImageMessageToImageMessage()
-            {
-                var message = new TestImageMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var imageMessage = messages[0] as ImageMessage;
-                Assert.AreEqual(new Uri("https://foo.url"), imageMessage.Url);
-                Assert.AreEqual(new Uri("https://foo.previewUrl"), imageMessage.PreviewUrl);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomIVideoMessageToImageMessage()
             {
                 var message = new TestVideoMessage();

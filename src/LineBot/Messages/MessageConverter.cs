@@ -42,9 +42,6 @@ namespace Line
                     case ITextMessage textMessage:
                         result[i] = TextMessage.Convert(textMessage);
                         break;
-                    case IImageMessage imageMessage:
-                        result[i] = ImageMessage.Convert(imageMessage);
-                        break;
                     case IVideoMessage videoMessage:
                         result[i] = VideoMessage.Convert(videoMessage);
                         break;
