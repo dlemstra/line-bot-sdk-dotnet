@@ -35,7 +35,7 @@ namespace Line
 
         public static void Validate(this IEnumerable<ITemplateAction> self)
         {
-            foreach (ITemplateAction action in self)
+            foreach (var action in self)
             {
                 action.Validate();
             }
