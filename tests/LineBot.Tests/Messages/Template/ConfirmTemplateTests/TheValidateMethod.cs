@@ -23,35 +23,9 @@ namespace Line.Tests
         public class TheConvertMethod
         {
             [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsCarouselTemplate()
-            {
-                var template = new ConfirmTemplate()
-                {
-                    Text = "ConfirmText",
-                    OkAction = new MessageAction()
-                    {
-                        Label = "PostbackLabel",
-                        Text = "PostbackText"
-                    },
-                    CancelAction = new UriAction()
-                    {
-                        Label = "PostbackLabel",
-                        Url = new Uri("http://foo.bar")
-                    }
-                };
-
-                var confirmTemplate = ConfirmTemplate.Convert(template);
-
-                Assert.AreSame(template, confirmTemplate);
-
-                Assert.AreSame(confirmTemplate.OkAction, template.OkAction);
-                Assert.AreSame(confirmTemplate.CancelAction, template.CancelAction);
-            }
-
-            [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var template = new ConfirmTemplate()
+                ITemplate template = new ConfirmTemplate()
                 {
                     OkAction = new MessageAction(),
                     CancelAction = new UriAction()
@@ -59,14 +33,14 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    ConfirmTemplate.Convert(template);
+                    template.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenOkActionIsNull()
             {
-                var template = new ConfirmTemplate()
+                ITemplate template = new ConfirmTemplate()
                 {
                     Text = "ConfirmText",
                     CancelAction = new UriAction()
@@ -74,14 +48,30 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The ok action cannot be null.", () =>
                 {
-                    ConfirmTemplate.Convert(template);
+                    template.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenOkActionIsInvalid()
+            {
+                ITemplate template = new ConfirmTemplate()
+                {
+                    Text = "ConfirmText",
+                    OkAction = new UriAction() { Label = "Foo" },
+                    CancelAction = new MessageAction()
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+                {
+                    template.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenCancelActionIsNull()
             {
-                var template = new ConfirmTemplate()
+                ITemplate template = new ConfirmTemplate()
                 {
                     Text = "ConfirmText",
                     OkAction = new MessageAction()
@@ -89,17 +79,24 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The cancel action cannot be null.", () =>
                 {
-                    ConfirmTemplate.Convert(template);
+                    template.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIConfirmTemplateToConfirmTemplate()
+            public void ShouldThrowExceptionWhenCancelActionIsInvalid()
             {
-                var template = new TestConfirmTemplate();
+                ITemplate template = new ConfirmTemplate()
+                {
+                    Text = "ConfirmText",
+                    OkAction = new MessageAction() { Label = "Foo", Text = "Bar" },
+                    CancelAction = new UriAction() { Label = "Foo" }
+                };
 
-                var confirmTemplate = ConfirmTemplate.Convert(template);
-                Assert.AreEqual("ConfirmText", template.Text);
+                ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+                {
+                    template.Validate();
+                });
             }
         }
     }

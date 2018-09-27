@@ -114,8 +114,6 @@ namespace Line
             {
                 case ITemplate template:
                     return template;
-                case IConfirmTemplate confirmTemplate:
-                    return ConfirmTemplate.Convert(confirmTemplate);
                 case IImageCarouselTemplate imageCarouselTemplate:
                     return ImageCarouselTemplate.Convert(imageCarouselTemplate);
                 default:
@@ -131,9 +129,11 @@ namespace Line
             if (value is CarouselTemplate)
                 return false;
 
+            if (value is ConfirmTemplate)
+                return false;
+
             var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
             return
-                !interfaces.Contains(typeof(IConfirmTemplate)) &&
                 !interfaces.Contains(typeof(IImageCarouselTemplate));
         }
     }

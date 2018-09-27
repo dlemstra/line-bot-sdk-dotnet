@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a confirm template.
     /// </summary>
-    public sealed class ConfirmTemplate : IConfirmTemplate
+    public sealed class ConfirmTemplate : ITemplate
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -103,32 +103,19 @@ namespace Line
         [JsonProperty("actions")]
         private ITemplateAction[] Actions => new ITemplateAction[] { _okAction, _cancelAction };
 
-        internal static ConfirmTemplate Convert(IConfirmTemplate template)
+        void ITemplate.Validate()
         {
-            if (template.Text == null)
+            if (_text == null)
                 throw new InvalidOperationException("The text cannot be null.");
 
-            if (!(template is ConfirmTemplate confirmTemplate))
-            {
-                confirmTemplate = new ConfirmTemplate()
-                {
-                    Text = template.Text
-                };
-            }
-
-            if (template.OkAction == null)
+            if (_okAction == null)
                 throw new InvalidOperationException("The ok action cannot be null.");
 
-            if (template.CancelAction == null)
+            if (_cancelAction == null)
                 throw new InvalidOperationException("The cancel action cannot be null.");
 
-            confirmTemplate.OkAction = template.OkAction;
-            confirmTemplate.OkAction.Validate();
-
-            confirmTemplate.CancelAction = template.CancelAction;
-            confirmTemplate.CancelAction.Validate();
-
-            return confirmTemplate;
+            _okAction.Validate();
+            _cancelAction.Validate();
         }
     }
 }
