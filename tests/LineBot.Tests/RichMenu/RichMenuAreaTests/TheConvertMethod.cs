@@ -60,21 +60,6 @@ namespace Line.Tests
                     RichMenuArea.Convert(richMenuArea);
                 });
             }
-
-            [TestMethod]
-            public void ShouldConvertCustomIRichMenuBoundsToRichMenuBounds()
-            {
-                var richMenuArea = new TestRichMenuArea()
-                {
-                    Action = new MessageAction() { Label = "ActionLabel", Text = "ActionText" },
-                    Bounds = new TestRichMenuBounds()
-                };
-
-                var area = RichMenuArea.Convert(richMenuArea);
-
-                Assert.AreNotSame(richMenuArea, area);
-                Assert.AreNotSame(richMenuArea.Bounds, area.Bounds);
-            }
         }
     }
 }

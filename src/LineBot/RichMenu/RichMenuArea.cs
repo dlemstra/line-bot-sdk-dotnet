@@ -23,7 +23,7 @@ namespace Line
     public class RichMenuArea : IRichMenuArea
     {
         private ITemplateAction _action;
-        private IRichMenuBounds _bounds;
+        private RichMenuBounds _bounds;
 
         /// <summary>
         /// Gets or sets the action performed when the area is tapped.
@@ -45,7 +45,7 @@ namespace Line
         /// Gets or sets the objects describing the boundaries of the area in pixels.
         /// </summary>
         [JsonProperty("bounds")]
-        public IRichMenuBounds Bounds
+        public RichMenuBounds Bounds
         {
             get => _bounds;
             set
@@ -69,11 +69,12 @@ namespace Line
                 return area;
 
             richMenuArea.Action.Validate();
+            richMenuArea.Bounds.Validate();
 
             return new RichMenuArea()
             {
                 Action = richMenuArea.Action,
-                Bounds = RichMenuBounds.Convert(richMenuArea.Bounds)
+                Bounds = richMenuArea.Bounds
             };
         }
     }

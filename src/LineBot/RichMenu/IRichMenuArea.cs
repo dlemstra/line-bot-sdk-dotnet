@@ -27,6 +27,6 @@ namespace Line
         /// <summary>
         /// Gets the objects describing the boundaries of the area in pixels.
         /// </summary>
-        IRichMenuBounds Bounds { get; }
+        RichMenuBounds Bounds { get; }
     }
 }

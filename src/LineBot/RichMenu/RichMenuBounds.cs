@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Object describing the boundaries of the area in pixels.
     /// </summary>
-    public class RichMenuBounds : IRichMenuBounds
+    public class RichMenuBounds
     {
         private int _x;
         private int _y;
@@ -115,26 +115,13 @@ namespace Line
             }
         }
 
-        internal static RichMenuBounds Convert(IRichMenuBounds richMenuBounds)
+        internal void Validate()
         {
-            if (richMenuBounds.Width == 0)
+            if (_width == 0)
                 throw new InvalidOperationException("The width is not set.");
 
-            if (richMenuBounds.Height == 0)
+            if (_height == 0)
                 throw new InvalidOperationException("The height is not set.");
-
-            if (richMenuBounds is RichMenuBounds bounds)
-            {
-                return bounds;
-            }
-
-            return new RichMenuBounds()
-            {
-                X = richMenuBounds.X,
-                Y = richMenuBounds.Y,
-                Width = richMenuBounds.Width,
-                Height = richMenuBounds.Height,
-            };
         }
     }
 }

@@ -19,6 +19,6 @@ namespace Line.Tests
     {
         public ITemplateAction Action { get; set; }
 
-        public IRichMenuBounds Bounds { get; set; }
+        public RichMenuBounds Bounds { get; set; }
     }
 }

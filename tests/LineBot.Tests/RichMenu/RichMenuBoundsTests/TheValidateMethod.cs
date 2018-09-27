@@ -20,22 +20,8 @@ namespace Line.Tests
     public partial class RichMenuBoundsTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsRichMenuBounds()
-            {
-                var richMenuBounds = new RichMenuBounds()
-                {
-                    Width = 1,
-                    Height = 1
-                };
-
-                var convertedRichMenuBounds = RichMenuBounds.Convert(richMenuBounds);
-
-                Assert.AreSame(richMenuBounds, convertedRichMenuBounds);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenWidthIsNotSet()
             {
@@ -43,7 +29,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The width is not set.", () =>
                 {
-                    RichMenuBounds.Convert(richMenuBounds);
+                    richMenuBounds.Validate();
                 });
             }
 
@@ -57,22 +43,8 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The height is not set.", () =>
                 {
-                    RichMenuBounds.Convert(richMenuBounds);
+                    richMenuBounds.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIRichMenuBoundsToRichMenuBounds()
-            {
-                var richMenuBounds = new TestRichMenuBounds();
-
-                var bounds = RichMenuBounds.Convert(richMenuBounds);
-
-                Assert.AreNotSame(bounds, richMenuBounds);
-                Assert.AreEqual(1, bounds.X);
-                Assert.AreEqual(2, bounds.Y);
-                Assert.AreEqual(3, bounds.Width);
-                Assert.AreEqual(4, bounds.Height);
             }
         }
     }
