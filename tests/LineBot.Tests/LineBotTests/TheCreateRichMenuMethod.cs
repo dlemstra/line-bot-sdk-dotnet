@@ -32,6 +32,15 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            public async Task ShouldThrowExceptionWhenRichMenuIsInvalid()
+            {
+                var richMenu = new RichMenu();
+
+                ILineBot bot = TestConfiguration.CreateBot();
+                await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The areas cannot be null.", async () => { await bot.CreateRichMenu(richMenu); });
+            }
+
+            [TestMethod]
             public async Task ShouldCreateRichMenu()
             {
                 var richMenu = new RichMenu()

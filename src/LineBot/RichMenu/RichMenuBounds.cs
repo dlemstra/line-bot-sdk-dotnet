@@ -28,6 +28,28 @@ namespace Line
         private int _height;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenuBounds"/> class.
+        /// </summary>
+        public RichMenuBounds()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenuBounds"/> class.
+        /// </summary>
+        /// <param name="x">The x position.</param>
+        /// <param name="y">The y position.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public RichMenuBounds(int x, int y, int width, int height)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+        }
+
+        /// <summary>
         /// Gets or sets the horizontal position relative to the top-left corner of the area.
         /// </summary>
         [JsonProperty("x")]

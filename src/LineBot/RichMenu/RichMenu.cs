@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Rich menu object.
     /// </summary>
-    public class RichMenu : IRichMenu
+    public class RichMenu
     {
         private RichMenuArea[] _areas;
         private string _chatBarText;
@@ -113,35 +113,22 @@ namespace Line
             }
         }
 
-        internal static RichMenu Convert(IRichMenu menu)
+        internal void Validate()
         {
-            if (menu.Areas == null)
+            if (_areas == null)
                 throw new InvalidOperationException("The areas cannot be null.");
 
-            if (menu.ChatBarText == null)
+            if (_chatBarText == null)
                 throw new InvalidOperationException("The chat bar text cannot be null.");
 
-            if (menu.Name == null)
+            if (_name == null)
                 throw new InvalidOperationException("The name cannot be null.");
 
-            if (menu.Size == null)
+            if (_size == null)
                 throw new InvalidOperationException("The size cannot be null.");
 
-            if (menu is RichMenu richMenu)
-            {
-                return richMenu;
-            }
-
-            menu.Areas.Validate();
-            menu.Size.Validate();
-
-            return new RichMenu()
-            {
-                Areas = menu.Areas,
-                ChatBarText = menu.ChatBarText,
-                Name = menu.Name,
-                Size = menu.Size
-            };
+            _areas.Validate();
+            _size.Validate();
         }
     }
 }

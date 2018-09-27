@@ -20,51 +20,8 @@ namespace Line.Tests
     public partial class RichMenuTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsRichMenu()
-            {
-                var richMenu = new RichMenu
-                {
-                    ChatBarText = "testChatBarTxt",
-                    Name = "testName",
-                    Areas = new[]
-                    {
-                        new RichMenuArea
-                        {
-                            Action = new UriAction { Label = "testLabel", Url = new Uri("http://www.google.com") },
-                            Bounds = new RichMenuBounds
-                            {
-                                Width = 110,
-                                Height = 120,
-                                X = 11,
-                                Y = 12
-                            }
-                        },
-                        new RichMenuArea
-                        {
-                            Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
-                            Bounds = new RichMenuBounds
-                            {
-                                Width = 210,
-                                Height = 220,
-                                X = 21,
-                                Y = 22
-                            }
-                        }
-                    },
-                    Size = new RichMenuSize { Height = 1686 },
-                    Selected = false
-                };
-
-                var convertedRichMenu = RichMenu.Convert(richMenu);
-
-                Assert.AreSame(richMenu, convertedRichMenu);
-                Assert.AreSame(richMenu.Areas, convertedRichMenu.Areas);
-                Assert.AreSame(richMenu.Size, convertedRichMenu.Size);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenAreasIsNull()
             {
@@ -72,7 +29,41 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The areas cannot be null.", () =>
                 {
-                    RichMenu.Convert(richMenu);
+                    richMenu.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenAreasHasNullValue()
+            {
+                var richMenu = new RichMenu()
+                {
+                    Areas = new RichMenuArea[1],
+                    ChatBarText = "foobar",
+                    Name = "barfoo",
+                    Size = new RichMenuSize()
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The rich menu area should not be null.", () =>
+                {
+                    richMenu.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenAreasIsInvalid()
+            {
+                var richMenu = new RichMenu()
+                {
+                    Areas = new[] { new RichMenuArea() },
+                    ChatBarText = "foobar",
+                    Name = "barfoo",
+                    Size = new RichMenuSize()
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The action cannot be null.", () =>
+                {
+                    richMenu.Validate();
                 });
             }
 
@@ -86,7 +77,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be null.", () =>
                 {
-                    RichMenu.Convert(richMenu);
+                    richMenu.Validate();
                 });
             }
 
@@ -101,7 +92,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The name cannot be null.", () =>
                 {
-                    RichMenu.Convert(richMenu);
+                    richMenu.Validate();
                 });
             }
 
@@ -117,7 +108,31 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The size cannot be null.", () =>
                 {
-                    RichMenu.Convert(richMenu);
+                    richMenu.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenSizeIsInvalid()
+            {
+                var richMenu = new RichMenu()
+                {
+                    Areas = new[]
+                    {
+                        new RichMenuArea()
+                        {
+                            Action = new MessageAction() { Label = "Foo", Text = "Bar" },
+                            Bounds = new RichMenuBounds(1, 2, 3, 4)
+                        }
+                    },
+                    ChatBarText = "foobar",
+                    Name = "barfoo",
+                    Size = new RichMenuSize()
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The height is not set.", () =>
+                {
+                    richMenu.Validate();
                 });
             }
         }

@@ -71,11 +71,13 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        public async Task<string> CreateRichMenu(IRichMenu richMenu)
+        public async Task<string> CreateRichMenu(RichMenu richMenu)
         {
             Guard.NotNull(nameof(richMenu), richMenu);
 
-            StringContent content = CreateStringContent(RichMenu.Convert(richMenu));
+            richMenu.Validate();
+
+            StringContent content = CreateStringContent(richMenu);
 
             HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();
