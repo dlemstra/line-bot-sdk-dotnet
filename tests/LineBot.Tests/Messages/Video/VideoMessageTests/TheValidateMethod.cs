@@ -20,60 +20,34 @@ namespace Line.Tests
     public partial class VideoMessageTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueImageMessage()
-            {
-                var message = new VideoMessage()
-                {
-                    Url = new Uri("https://foo.url"),
-                    PreviewUrl = new Uri("https://foo.previewUrl")
-                };
-
-                var videoMessage = VideoMessage.Convert(message);
-
-                Assert.AreSame(message, videoMessage);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenUrlIsNull()
             {
-                var message = new VideoMessage()
+                ISendMessage message = new VideoMessage()
                 {
                     PreviewUrl = new Uri("https://foo.previewUrl")
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
                 {
-                    VideoMessage.Convert(message);
+                    message.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenPreviewUrlIsNull()
             {
-                var message = new VideoMessage()
+                ISendMessage message = new VideoMessage()
                 {
                     Url = new Uri("https://foo.url")
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The preview url cannot be null.", () =>
                 {
-                    VideoMessage.Convert(message);
+                    message.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIAudioMessageToAudioMessage()
-            {
-                var message = new TestVideoMessage();
-
-                var videoMessage = VideoMessage.Convert(message);
-
-                Assert.AreNotEqual(message, videoMessage);
-                Assert.AreEqual(new Uri("https://foo.url"), videoMessage.Url);
-                Assert.AreEqual(new Uri("https://foo.previewUrl"), videoMessage.PreviewUrl);
             }
         }
     }

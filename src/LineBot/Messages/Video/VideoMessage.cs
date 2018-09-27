@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a video message.
     /// </summary>
-    public sealed class VideoMessage : IVideoMessage
+    public sealed class VideoMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -131,22 +131,13 @@ namespace Line
             }
         }
 
-        internal static VideoMessage Convert(IVideoMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.Url == null)
+            if (Url == null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (message.PreviewUrl == null)
+            if (PreviewUrl == null)
                 throw new InvalidOperationException("The preview url cannot be null.");
-
-            if (message is VideoMessage videoMessage)
-                return videoMessage;
-
-            return new VideoMessage()
-            {
-                Url = message.Url,
-                PreviewUrl = message.PreviewUrl
-            };
         }
 
         private Uri CheckUrl(Uri value)
