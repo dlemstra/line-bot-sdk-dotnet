@@ -18,7 +18,7 @@ namespace Line
 {
     internal sealed class ReplyMessage
     {
-        public ReplyMessage(string replyToken, ISendMessage[] messages)
+        public ReplyMessage(string replyToken, IOldSendMessage[] messages)
         {
             ReplyToken = replyToken;
             Messages = MessageConverter.Convert(messages);
@@ -28,6 +28,6 @@ namespace Line
         public string ReplyToken { get; }
 
         [JsonProperty("messages")]
-        public ISendMessage[] Messages { get; }
+        public IOldSendMessage[] Messages { get; }
     }
 }

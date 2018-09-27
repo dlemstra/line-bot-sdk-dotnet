@@ -69,7 +69,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Multicast(new string[] { "id" }, (IEnumerable<ISendMessage>)null);
+                await bot.Multicast(new string[] { "id" }, (IEnumerable<IOldSendMessage>)null);
             });
         }
 
@@ -206,7 +206,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Multicast(new TestUser[] { new TestUser() }, (IEnumerable<ISendMessage>)null);
+                await bot.Multicast(new TestUser[] { new TestUser() }, (IEnumerable<IOldSendMessage>)null);
             });
         }
 

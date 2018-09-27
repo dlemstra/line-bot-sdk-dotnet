@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a sticker message.
     /// </summary>
-    public interface IStickerMessage : ISendMessage
+    public interface IStickerMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the id of the package.

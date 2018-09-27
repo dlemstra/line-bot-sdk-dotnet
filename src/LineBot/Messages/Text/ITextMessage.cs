@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a text message.
     /// </summary>
-    public interface ITextMessage : ISendMessage
+    public interface ITextMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the text of the message.

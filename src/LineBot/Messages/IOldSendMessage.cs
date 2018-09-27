@@ -12,23 +12,12 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System.Collections.Generic;
-using Newtonsoft.Json;
-
 namespace Line
 {
-    internal sealed class MulticastMessage
+    /// <summary>
+    /// Encapsulates messages that can be send.
+    /// </summary>
+    public interface IOldSendMessage
     {
-        public MulticastMessage(IEnumerable<string> to, IEnumerable<IOldSendMessage> messages)
-        {
-            To = to;
-            Messages = MessageConverter.Convert(messages);
-        }
-
-        [JsonProperty("to")]
-        public IEnumerable<string> To { get; }
-
-        [JsonProperty("messages")]
-        public IOldSendMessage[] Messages { get; }
     }
 }

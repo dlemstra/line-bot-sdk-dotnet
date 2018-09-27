@@ -17,7 +17,11 @@ namespace Line
     /// <summary>
     /// Encapsulates messages that can be send.
     /// </summary>
-    public interface ISendMessage
+    public interface ISendMessage : IOldSendMessage
     {
+        /// <summary>
+        /// Validates the template action.
+        /// </summary>
+        void Validate();
     }
 }

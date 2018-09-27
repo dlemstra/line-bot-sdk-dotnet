@@ -19,7 +19,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a video message.
     /// </summary>
-    public interface IVideoMessage : ISendMessage
+    public interface IVideoMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the url of the video file.

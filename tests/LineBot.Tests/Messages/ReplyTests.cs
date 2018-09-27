@@ -69,7 +69,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Reply("token", (IEnumerable<ISendMessage>)null);
+                await bot.Reply("token", (IEnumerable<IOldSendMessage>)null);
             });
         }
 
@@ -103,7 +103,7 @@ namespace Line.Tests
 
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The maximum number of messages is 5.", async () =>
             {
-                await bot.Reply("id", new ISendMessage[6]);
+                await bot.Reply("id", new IOldSendMessage[6]);
             });
         }
 
@@ -143,7 +143,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Reply(new TestMessage(), (IEnumerable<ISendMessage>)null);
+                await bot.Reply(new TestMessage(), (IEnumerable<IOldSendMessage>)null);
             });
         }
 

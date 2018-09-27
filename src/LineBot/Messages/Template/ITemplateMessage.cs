@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template message.
     /// </summary>
-    public interface ITemplateMessage : ISendMessage
+    public interface ITemplateMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the alternative text for devices that do not support this type of message.

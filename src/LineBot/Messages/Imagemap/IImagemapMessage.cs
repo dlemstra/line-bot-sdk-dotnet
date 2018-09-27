@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap message.
     /// </summary>
-    public interface IImagemapMessage : ISendMessage
+    public interface IImagemapMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the base url of the image.

@@ -59,7 +59,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Push("id", (IEnumerable<ISendMessage>)null);
+                await bot.Push("id", (IEnumerable<IOldSendMessage>)null);
             });
         }
 
@@ -142,7 +142,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Push(new TestGroup(), (IEnumerable<ISendMessage>)null);
+                await bot.Push(new TestGroup(), (IEnumerable<IOldSendMessage>)null);
             });
         }
 
@@ -202,7 +202,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Push(new TestRoom(), (IEnumerable<ISendMessage>)null);
+                await bot.Push(new TestRoom(), (IEnumerable<IOldSendMessage>)null);
             });
         }
 
@@ -262,7 +262,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
-                await bot.Push(new TestUser(), (IEnumerable<ISendMessage>)null);
+                await bot.Push(new TestUser(), (IEnumerable<IOldSendMessage>)null);
             });
         }
 

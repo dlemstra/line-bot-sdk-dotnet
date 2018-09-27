@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a location message.
     /// </summary>
-    public interface ILocationMessage : ISendMessage
+    public interface ILocationMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the title.

@@ -19,7 +19,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an image message.
     /// </summary>
-    public interface IImageMessage : ISendMessage
+    public interface IImageMessage : IOldSendMessage
     {
         /// <summary>
         /// Gets the image url.

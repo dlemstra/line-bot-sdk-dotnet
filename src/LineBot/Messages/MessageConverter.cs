@@ -20,17 +20,17 @@ namespace Line
 {
     internal static class MessageConverter
     {
-        public static ISendMessage[] Convert(IEnumerable<ISendMessage> messages)
+        public static IOldSendMessage[] Convert(IEnumerable<IOldSendMessage> messages)
         {
             return Convert(messages.ToArray());
         }
 
-        public static ISendMessage[] Convert(ISendMessage[] messages)
+        public static IOldSendMessage[] Convert(IOldSendMessage[] messages)
         {
             if (messages.Length > 5)
                 throw new InvalidOperationException("The maximum number of messages is 5.");
 
-            ISendMessage[] result = new ISendMessage[messages.Length];
+            IOldSendMessage[] result = new IOldSendMessage[messages.Length];
 
             for (int i = 0; i < messages.Length; i++)
             {

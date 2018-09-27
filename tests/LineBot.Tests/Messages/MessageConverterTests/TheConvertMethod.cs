@@ -28,7 +28,7 @@ namespace Line.Tests
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
                 {
-                    MessageConverter.Convert(new ISendMessage[6]);
+                    MessageConverter.Convert(new IOldSendMessage[6]);
                 });
             }
 
@@ -37,7 +37,7 @@ namespace Line.Tests
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
                 {
-                    MessageConverter.Convert(new ISendMessage[1] { null });
+                    MessageConverter.Convert(new IOldSendMessage[1] { null });
                 });
             }
 
@@ -55,7 +55,7 @@ namespace Line.Tests
             {
                 var message = new TestTextMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -69,7 +69,7 @@ namespace Line.Tests
             {
                 var message = new TestAudioMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -84,7 +84,7 @@ namespace Line.Tests
             {
                 var message = new TestImageMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -99,7 +99,7 @@ namespace Line.Tests
             {
                 var message = new TestVideoMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -114,7 +114,7 @@ namespace Line.Tests
             {
                 var message = new TestLocationMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -131,7 +131,7 @@ namespace Line.Tests
             {
                 var message = new TestStickerMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -146,7 +146,7 @@ namespace Line.Tests
             {
                 var message = new TestImagemapMessage();
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -182,7 +182,7 @@ namespace Line.Tests
                     Template = new TestButtonsTemplate()
                 };
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -204,7 +204,7 @@ namespace Line.Tests
                     Template = new TestCarouselTemplate()
                 };
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -228,7 +228,7 @@ namespace Line.Tests
                     Template = new TestConfirmTemplate()
                 };
 
-                var messages = MessageConverter.Convert(new ISendMessage[] { message });
+                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
 
                 Assert.AreEqual(1, messages.Length);
                 Assert.AreNotEqual(message, messages[0]);
@@ -241,7 +241,7 @@ namespace Line.Tests
             }
 
             [ExcludeFromCodeCoverage]
-            private class InvalidMessage : ISendMessage
+            private class InvalidMessage : IOldSendMessage
             {
             }
         }
