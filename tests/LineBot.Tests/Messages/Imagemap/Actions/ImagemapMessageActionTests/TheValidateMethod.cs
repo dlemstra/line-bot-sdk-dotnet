@@ -20,18 +20,8 @@ namespace Line.Tests
     public partial class ImagemapMessageActionTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsImagemapMessageAction()
-            {
-                var action = new ImagemapMessageAction("Text", 1, 2, 3, 4);
-
-                var messageAction = ImagemapMessageAction.Convert(action);
-
-                Assert.AreSame(action, messageAction);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
@@ -42,7 +32,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    ImagemapMessageAction.Convert(action);
+                    action.Validate();
                 });
             }
 
@@ -56,24 +46,8 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The area cannot be null.", () =>
                 {
-                    ImagemapMessageAction.Convert(action);
+                    action.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIImagemapMessageActionToImagemapMessageAction()
-            {
-                var action = new TestImagemapMessageAction();
-
-                var messageAction = ImagemapMessageAction.Convert(action);
-
-                Assert.AreNotEqual(action, messageAction);
-                Assert.AreEqual("TestImagemapMessageAction", messageAction.Text);
-                Assert.IsNotNull(messageAction.Area);
-                Assert.AreEqual(4, messageAction.Area.X);
-                Assert.AreEqual(3, messageAction.Area.Y);
-                Assert.AreEqual(2, messageAction.Area.Width);
-                Assert.AreEqual(1, messageAction.Area.Height);
             }
         }
     }

@@ -51,23 +51,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIImagemapMessageToImagemapMessage()
-            {
-                var message = new TestImagemapMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var imagemapMessage = messages[0] as ImagemapMessage;
-                Assert.AreEqual(new Uri("https://foo.url"), imagemapMessage.BaseUrl);
-                Assert.AreEqual(1040, imagemapMessage.BaseSize.Width);
-                Assert.AreEqual(520, imagemapMessage.BaseSize.Height);
-                Assert.AreEqual("Alternative", imagemapMessage.AlternativeText);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomITemplateMessageToTemplateMessage()
             {
                 var message = new TestTemplateMessage()

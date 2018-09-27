@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap message action.
     /// </summary>
-    public sealed class ImagemapMessageAction : ImagemapAction, IImagemapMessageAction
+    public sealed class ImagemapMessageAction : ImagemapAction
     {
         private string _text;
 
@@ -87,26 +87,12 @@ namespace Line
             }
         }
 
-        internal static ImagemapMessageAction Convert(IImagemapMessageAction action)
+        internal override void Validate()
         {
-            if (action.Area == null)
-                throw new InvalidOperationException("The area cannot be null.");
+            base.Validate();
 
-            if (action.Text == null)
+            if (_text == null)
                 throw new InvalidOperationException("The text cannot be null.");
-
-            if (!(action is ImagemapMessageAction imagemapMessageAction))
-            {
-                imagemapMessageAction = new ImagemapMessageAction()
-                {
-                    Text = action.Text
-                };
-            }
-
-            imagemapMessageAction.Area = action.Area;
-            imagemapMessageAction.Area.Validate();
-
-            return imagemapMessageAction;
         }
     }
 }

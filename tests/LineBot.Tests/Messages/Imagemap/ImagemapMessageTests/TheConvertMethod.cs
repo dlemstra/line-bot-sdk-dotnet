@@ -123,21 +123,6 @@ namespace Line.Tests
                     ImagemapMessage.Convert(message);
                 });
             }
-
-            [TestMethod]
-            public void ShouldConvertCustomIImagemapMessageToImagemapMessage()
-            {
-                var message = new TestImagemapMessage();
-
-                var imagemapMessage = ImagemapMessage.Convert(message);
-
-                Assert.AreNotEqual(message, imagemapMessage);
-
-                Assert.AreEqual(new Uri("https://foo.url"), imagemapMessage.BaseUrl);
-                Assert.AreEqual(1040, imagemapMessage.BaseSize.Width);
-                Assert.AreEqual(520, imagemapMessage.BaseSize.Height);
-                Assert.AreEqual("Alternative", imagemapMessage.AlternativeText);
-            }
         }
     }
 }
