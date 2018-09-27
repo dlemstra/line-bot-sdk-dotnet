@@ -170,7 +170,8 @@ namespace Line
             if (column.Actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            carouselColumn.Actions = TemplateAction.Convert(column.Actions);
+            carouselColumn.Actions = column.Actions;
+            carouselColumn.Actions.Validate();
 
             return carouselColumn;
         }

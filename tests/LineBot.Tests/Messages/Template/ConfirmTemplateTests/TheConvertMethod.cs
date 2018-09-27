@@ -100,14 +100,6 @@ namespace Line.Tests
 
                 var confirmTemplate = ConfirmTemplate.Convert(template);
                 Assert.AreEqual("ConfirmText", template.Text);
-
-                var okAction = confirmTemplate.OkAction as MessageAction;
-                Assert.AreEqual("MessageLabel", okAction.Label);
-                Assert.AreEqual("MessageText", okAction.Text);
-
-                var cancelAction = confirmTemplate.CancelAction as UriAction;
-                Assert.AreEqual("UriLabel", cancelAction.Label);
-                Assert.AreEqual(new Uri("tel://uri"), cancelAction.Url);
             }
         }
     }

@@ -19,5 +19,9 @@ namespace Line
     /// </summary>
     public interface ITemplateAction
     {
+        /// <summary>
+        /// Validates the template action.
+        /// </summary>
+        void Validate();
     }
 }

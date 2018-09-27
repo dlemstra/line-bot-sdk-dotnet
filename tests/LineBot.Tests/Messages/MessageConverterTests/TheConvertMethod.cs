@@ -194,13 +194,6 @@ namespace Line.Tests
                 Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
                 Assert.AreEqual("ButtonsTitle", template.Title);
                 Assert.AreEqual("ButtonsText", template.Text);
-
-                var actions = template.Actions.ToArray();
-
-                var action = actions[0] as PostbackAction;
-                Assert.AreEqual("PostbackLabel", action.Label);
-                Assert.AreEqual("PostbackData", action.Data);
-                Assert.AreEqual("PostbackText", action.Text);
             }
 
             [TestMethod]
@@ -225,12 +218,6 @@ namespace Line.Tests
                 Assert.AreEqual(new Uri("https://carousel.url"), column.ThumbnailUrl);
                 Assert.AreEqual("CarouselTitle", column.Title);
                 Assert.AreEqual("CarouselText", column.Text);
-
-                var actions = column.Actions.ToArray();
-
-                var action = actions[0] as MessageAction;
-                Assert.AreEqual("MessageLabel", action.Label);
-                Assert.AreEqual("MessageText", action.Text);
             }
 
             [TestMethod]
@@ -251,14 +238,6 @@ namespace Line.Tests
 
                 var template = templateMessage.Template as ConfirmTemplate;
                 Assert.AreEqual("ConfirmText", template.Text);
-
-                var okAction = template.OkAction as MessageAction;
-                Assert.AreEqual("MessageLabel", okAction.Label);
-                Assert.AreEqual("MessageText", okAction.Text);
-
-                var cancelAction = template.CancelAction as UriAction;
-                Assert.AreEqual("UriLabel", cancelAction.Label);
-                Assert.AreEqual(new Uri("tel://uri"), cancelAction.Url);
             }
 
             [ExcludeFromCodeCoverage]

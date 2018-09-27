@@ -68,9 +68,11 @@ namespace Line
             if (richMenuArea is RichMenuArea area)
                 return area;
 
+            richMenuArea.Action.Validate();
+
             return new RichMenuArea()
             {
-                Action = TemplateAction.Convert(richMenuArea.Action),
+                Action = richMenuArea.Action,
                 Bounds = RichMenuBounds.Convert(richMenuArea.Bounds)
             };
         }

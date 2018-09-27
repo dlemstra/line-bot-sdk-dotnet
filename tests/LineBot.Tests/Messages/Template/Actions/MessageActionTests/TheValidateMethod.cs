@@ -20,61 +20,34 @@ namespace Line.Tests
     public partial class MessageActionTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsMessageAction()
-            {
-                var action = new MessageAction()
-                {
-                    Label = "Foo",
-                    Text = "Test"
-                };
-
-                var messageAction = MessageAction.Convert(action);
-
-                Assert.AreSame(action, messageAction);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                var action = new MessageAction()
+                ITemplateAction action = new MessageAction()
                 {
                     Text = "Foo"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
-                    MessageAction.Convert(action);
+                    action.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var action = new MessageAction()
+                ITemplateAction action = new MessageAction()
                 {
                     Label = "Test"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    MessageAction.Convert(action);
+                    action.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIActionMessageToActionMessage()
-            {
-                var action = new TestMessageAction();
-
-                var messageAction = MessageAction.Convert(action);
-
-                Assert.AreNotEqual(action, messageAction);
-
-                Assert.AreEqual("MessageLabel", messageAction.Label);
-                Assert.AreEqual("MessageText", messageAction.Text);
             }
         }
     }

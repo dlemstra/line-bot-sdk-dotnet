@@ -66,14 +66,13 @@ namespace Line.Tests
             {
                 var richMenuArea = new TestRichMenuArea()
                 {
-                    Action = new TestMessageAction(),
+                    Action = new MessageAction() { Label = "ActionLabel", Text = "ActionText" },
                     Bounds = new TestRichMenuBounds()
                 };
 
                 var area = RichMenuArea.Convert(richMenuArea);
 
                 Assert.AreNotSame(richMenuArea, area);
-                Assert.AreNotSame(richMenuArea.Action, area.Action);
                 Assert.AreNotSame(richMenuArea.Bounds, area.Bounds);
             }
         }

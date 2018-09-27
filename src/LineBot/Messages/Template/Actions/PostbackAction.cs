@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template postback action.
     /// </summary>
-    public sealed class PostbackAction : IPostbackAction
+    public sealed class PostbackAction : ITemplateAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -100,23 +100,13 @@ namespace Line
             }
         }
 
-        internal static PostbackAction Convert(IPostbackAction action)
+        void ITemplateAction.Validate()
         {
-            if (action.Label == null)
+            if (Label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (action.Data == null)
+            if (Data == null)
                 throw new InvalidOperationException("The data cannot be null.");
-
-            if (action is PostbackAction postbackAction)
-                return postbackAction;
-
-            return new PostbackAction()
-            {
-                Label = action.Label,
-                Data = action.Data,
-                Text = action.Text
-            };
         }
     }
 }

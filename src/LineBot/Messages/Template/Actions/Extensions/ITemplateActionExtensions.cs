@@ -15,17 +15,30 @@
 using System;
 using System.Collections.Generic;
 
-namespace Line.Tests
+namespace Line
 {
-    [ExcludeFromCodeCoverage]
-    public class TestButtonsTemplate : IButtonsTemplate
+    internal static class ITemplateActionExtensions
     {
-        public Uri ThumbnailUrl => new Uri("https://bar.foo");
+        public static void CheckActionType(this ITemplateAction self)
+        {
+            if (self is PostbackAction)
+                return;
 
-        public string Title => "ButtonsTitle";
+            if (self is MessageAction)
+                return;
 
-        public string Text => "ButtonsText";
+            if (self is UriAction)
+                return;
 
-        public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new PostbackAction() { Label = "ActionLabel", Data = "ActionData" } };
+            throw new NotSupportedException($"The template action type is invalid. Supported types are: {nameof(PostbackAction)}, {nameof(MessageAction)} and {nameof(UriAction)}.");
+        }
+
+        public static void Validate(this IEnumerable<ITemplateAction> self)
+        {
+            foreach (ITemplateAction action in self)
+            {
+                action.Validate();
+            }
+        }
     }
 }

@@ -209,7 +209,8 @@ namespace Line
             if (template.Actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            buttonsTemplate.Actions = TemplateAction.Convert(template.Actions);
+            buttonsTemplate.Actions = template.Actions;
+            buttonsTemplate.Actions.Validate();
 
             return buttonsTemplate;
         }

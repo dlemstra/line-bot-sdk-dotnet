@@ -104,7 +104,8 @@ namespace Line
             if (column.Action == null)
                 throw new InvalidOperationException("The action cannot be null.");
 
-            imageCarouselColumn.Action = TemplateAction.Convert(column.Action);
+            imageCarouselColumn.Action = column.Action;
+            imageCarouselColumn.Action.Validate();
 
             return imageCarouselColumn;
         }

@@ -12,6 +12,8 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
+
 namespace Line.Tests
 {
     [ExcludeFromCodeCoverage]
@@ -19,8 +21,8 @@ namespace Line.Tests
     {
         public string Text => "ConfirmText";
 
-        public ITemplateAction OkAction => new TestMessageAction();
+        public ITemplateAction OkAction => new MessageAction() { Label = "ActionLabel", Text = "ActionText" };
 
-        public ITemplateAction CancelAction => new TestUriAction();
+        public ITemplateAction CancelAction => new UriAction() { Label = "ActionLabel", Url = new Uri("https://foo.bar") };
     }
 }

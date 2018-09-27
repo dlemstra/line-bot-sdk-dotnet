@@ -20,63 +20,34 @@ namespace Line.Tests
     public partial class PostbackActionTest
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsPostbackAction()
-            {
-                var action = new PostbackAction()
-                {
-                    Label = "PostbackLabel",
-                    Data = "PostbackData",
-                    Text = "PostbackText",
-                };
-
-                var messageAction = PostbackAction.Convert(action);
-
-                Assert.AreSame(action, messageAction);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                var action = new PostbackAction()
+                ITemplateAction action = new PostbackAction()
                 {
                     Data = "PostbackData"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
-                    PostbackAction.Convert(action);
+                    action.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var action = new PostbackAction()
+                ITemplateAction action = new PostbackAction()
                 {
                     Label = "PostbackLabel"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null.", () =>
                 {
-                    PostbackAction.Convert(action);
+                    action.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIPostbackActionToPostbackAction()
-            {
-                var action = new TestPostbackAction();
-
-                var postbackAction = PostbackAction.Convert(action);
-
-                Assert.AreNotEqual(action, postbackAction);
-
-                Assert.AreEqual("PostbackLabel", postbackAction.Label);
-                Assert.AreEqual("PostbackData", postbackAction.Data);
-                Assert.AreEqual("PostbackText", postbackAction.Text);
             }
         }
     }

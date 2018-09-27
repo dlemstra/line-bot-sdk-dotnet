@@ -84,10 +84,6 @@ namespace Line.Tests
                 var carouselColumn = columns[0] as ImageCarouselColumn;
 
                 Assert.AreEqual(new Uri("https://carousel.url"), carouselColumn.ImageUrl);
-
-                var action = carouselColumn.Action as MessageAction;
-                Assert.AreEqual("MessageLabel", action.Label);
-                Assert.AreEqual("MessageText", action.Text);
             }
         }
     }

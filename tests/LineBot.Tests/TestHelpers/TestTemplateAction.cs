@@ -16,5 +16,8 @@ namespace Line.Tests
 {
     public class TestTemplateAction : ITemplateAction
     {
+        public void Validate()
+        {
+        }
     }
 }

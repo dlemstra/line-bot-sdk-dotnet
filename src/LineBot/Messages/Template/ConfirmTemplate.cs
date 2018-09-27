@@ -122,8 +122,11 @@ namespace Line
             if (template.CancelAction == null)
                 throw new InvalidOperationException("The cancel action cannot be null.");
 
-            confirmTemplate.OkAction = TemplateAction.Convert(template.OkAction);
-            confirmTemplate.CancelAction = TemplateAction.Convert(template.CancelAction);
+            confirmTemplate.OkAction = template.OkAction;
+            confirmTemplate.OkAction.Validate();
+
+            confirmTemplate.CancelAction = template.CancelAction;
+            confirmTemplate.CancelAction.Validate();
 
             return confirmTemplate;
         }

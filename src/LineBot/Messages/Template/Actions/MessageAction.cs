@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template message action.
     /// </summary>
-    public sealed class MessageAction : IMessageAction
+    public class MessageAction : ITemplateAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -78,22 +78,13 @@ namespace Line
             }
         }
 
-        internal static MessageAction Convert(IMessageAction action)
+        void ITemplateAction.Validate()
         {
-            if (action.Label == null)
+            if (Label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (action.Text == null)
+            if (Text == null)
                 throw new InvalidOperationException("The text cannot be null.");
-
-            if (action is MessageAction messageAction)
-                return messageAction;
-
-            return new MessageAction()
-            {
-                Label = action.Label,
-                Text = action.Text
-            };
         }
     }
 }

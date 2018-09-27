@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template uri action.
     /// </summary>
-    public sealed class UriAction : IUriAction
+    public sealed class UriAction : ITemplateAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -85,22 +85,13 @@ namespace Line
             }
         }
 
-        internal static UriAction Convert(IUriAction action)
+        void ITemplateAction.Validate()
         {
-            if (action.Label == null)
+            if (Label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (action.Url == null)
+            if (Url == null)
                 throw new InvalidOperationException("The url cannot be null.");
-
-            if (action is UriAction uriAction)
-                return uriAction;
-
-            return new UriAction()
-            {
-                Label = action.Label,
-                Url = action.Url
-            };
         }
     }
 }

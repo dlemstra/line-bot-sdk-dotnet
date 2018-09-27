@@ -21,6 +21,6 @@ namespace Line.Tests
     {
         public Uri ImageUrl => new Uri("https://carousel.url");
 
-        public ITemplateAction Action => new TestMessageAction();
+        public ITemplateAction Action => new MessageAction() { Label = "ActionLabel", Text = "ActionText" };
     }
 }

@@ -38,7 +38,7 @@ namespace Line.Tests
             {
                 var column = new ImageCarouselColumn();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: IPostbackAction, IMessageAction and IUriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
                 {
                     column.Action = new TestTemplateAction();
                 });

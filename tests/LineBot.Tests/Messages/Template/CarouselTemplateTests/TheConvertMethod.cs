@@ -79,12 +79,6 @@ namespace Line.Tests
                 Assert.AreEqual(new Uri("https://carousel.url"), column.ThumbnailUrl);
                 Assert.AreEqual("CarouselTitle", column.Title);
                 Assert.AreEqual("CarouselText", column.Text);
-
-                var actions = column.Actions.ToArray();
-
-                var action = actions[0] as MessageAction;
-                Assert.AreEqual("MessageLabel", action.Label);
-                Assert.AreEqual("MessageText", action.Text);
             }
         }
     }

@@ -117,13 +117,6 @@ namespace Line.Tests
                 Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
                 Assert.AreEqual("ButtonsTitle", template.Title);
                 Assert.AreEqual("ButtonsText", template.Text);
-
-                var actions = template.Actions.ToArray();
-
-                var action = actions[0] as PostbackAction;
-                Assert.AreEqual("PostbackLabel", action.Label);
-                Assert.AreEqual("PostbackData", action.Data);
-                Assert.AreEqual("PostbackText", action.Text);
             }
 
             [ExcludeFromCodeCoverage]

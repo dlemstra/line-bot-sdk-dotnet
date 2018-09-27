@@ -26,6 +26,6 @@ namespace Line.Tests
 
         public string Text => "CarouselText";
 
-        public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new TestMessageAction() };
+        public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new MessageAction() { Label = "ActionLabel", Text = "ActionText" } };
     }
 }
