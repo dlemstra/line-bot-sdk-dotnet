@@ -46,6 +46,6 @@ namespace Line
         /// <summary>
         /// Gets the actions.
         /// </summary>
-        IEnumerable<IImagemapAction> Actions { get; }
+        IEnumerable<ImagemapAction> Actions { get; }
     }
 }

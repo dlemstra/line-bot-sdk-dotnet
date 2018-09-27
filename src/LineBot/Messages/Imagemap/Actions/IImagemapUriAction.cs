@@ -19,8 +19,13 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap uri action.
     /// </summary>
-    public interface IImagemapUriAction : IImagemapAction
+    public interface IImagemapUriAction
     {
+        /// <summary>
+        /// Gets the tappable area.
+        /// </summary>
+        ImagemapArea Area { get; }
+
         /// <summary>
         /// Gets the webpage url.
         /// <para>Max url length: 1000 characters.</para>

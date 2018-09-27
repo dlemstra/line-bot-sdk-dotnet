@@ -12,16 +12,18 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections.Generic;
+
 namespace Line
 {
-    /// <summary>
-    /// Encapsulates an imagemap action.
-    /// </summary>
-    public interface IImagemapAction
+    internal static class ImagemapActionExtensions
     {
-        /// <summary>
-        /// Gets the tappable area.
-        /// </summary>
-        ImagemapArea Area { get; }
+        public static void Validate(this IEnumerable<ImagemapAction> self)
+        {
+            foreach (var imagemapAction in self)
+            {
+                imagemapAction.Validate();
+            }
+        }
     }
 }

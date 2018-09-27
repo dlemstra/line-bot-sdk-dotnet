@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a base class for imagemap actions.
     /// </summary>
-    public abstract class ImagemapAction : IImagemapAction
+    public abstract class ImagemapAction
     {
         private ImagemapArea _area;
 
@@ -46,23 +46,17 @@ namespace Line
 
             set
             {
-                _area = value ?? throw new InvalidOperationException("The area cannot be null.");
+                if (value == null)
+                    throw new InvalidOperationException("The area cannot be null.");
+
+                _area = value;
             }
         }
 
-        ImagemapArea IImagemapAction.Area => Area;
-
-        internal static ImagemapAction Convert(IImagemapAction action)
+        internal void Validate()
         {
-            switch (action)
-            {
-                case IImagemapUriAction uriAction:
-                    return ImagemapUriAction.Convert(uriAction);
-                case IImagemapMessageAction messageAction:
-                    return ImagemapMessageAction.Convert(messageAction);
-                default:
-                    throw new NotSupportedException("Invalid action type.");
-            }
+            if (_area == null)
+                throw new InvalidOperationException("The area cannot be null.");
         }
     }
 }

@@ -17,8 +17,13 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap message action.
     /// </summary>
-    public interface IImagemapMessageAction : IImagemapAction
+    public interface IImagemapMessageAction
     {
+        /// <summary>
+        /// Gets the tappable area.
+        /// </summary>
+        ImagemapArea Area { get; }
+
         /// <summary>
         /// Gets the text of the message.
         /// <para>Max: 400 characters.</para>

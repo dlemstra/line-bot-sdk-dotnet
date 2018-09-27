@@ -22,10 +22,12 @@ namespace Line.Tests
     {
         public TestImagemapMessage()
         {
-            Actions = new IImagemapAction[]
+            Actions = new ImagemapAction[]
             {
-                    new TestImagemapUriAction(),
-                    new TestImagemapMessageAction()
+                new ImagemapMessageAction()
+                {
+                    Area = new ImagemapArea()
+                }
             };
         }
 
@@ -35,6 +37,6 @@ namespace Line.Tests
 
         public ImagemapSize BaseSize => new ImagemapSize(1040, 520);
 
-        public IEnumerable<IImagemapAction> Actions { get; set; }
+        public IEnumerable<ImagemapAction> Actions { get; set; }
     }
 }

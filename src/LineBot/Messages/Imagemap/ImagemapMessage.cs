@@ -131,8 +131,6 @@ namespace Line
             }
         }
 
-        IEnumerable<IImagemapAction> IImagemapMessage.Actions => Actions;
-
         ImagemapSize IImagemapMessage.BaseSize => BaseSize;
 
         internal static ImagemapMessage Convert(IImagemapMessage message)
@@ -161,21 +159,10 @@ namespace Line
             imagemapMessage.BaseSize = message.BaseSize;
             imagemapMessage.BaseSize.Validate();
 
-            imagemapMessage.Actions = ConvertActions(message.Actions);
+            imagemapMessage.Actions = message.Actions;
+            imagemapMessage.Actions.Validate();
 
             return imagemapMessage;
-        }
-
-        private static IEnumerable<ImagemapAction> ConvertActions(IEnumerable<IImagemapAction> actions)
-        {
-            var imagemapActions = actions.ToArray();
-            var result = new ImagemapAction[imagemapActions.Length];
-            for (int i = 0; i < imagemapActions.Length; i++)
-            {
-                result[i] = ImagemapAction.Convert(imagemapActions[i]);
-            }
-
-            return result;
         }
     }
 }

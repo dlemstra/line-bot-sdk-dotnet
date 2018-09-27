@@ -20,23 +20,26 @@ namespace Line.Tests
     public partial class ImagemapActionTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenActionIsInvalid()
+            public void ShouldThrowExceptionWhenAreaIsNull()
             {
                 var action = new InvalidAction();
 
-                ExceptionAssert.Throws<NotSupportedException>("Invalid action type.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The area cannot be null.", () =>
                 {
-                    ImagemapAction.Convert(action);
+                    action.Validate();
                 });
             }
 
             [ExcludeFromCodeCoverage]
-            private class InvalidAction : IImagemapAction
+            private class InvalidAction : ImagemapAction
             {
-                public ImagemapArea Area => throw new NotImplementedException();
+                public InvalidAction()
+                    : base(ImagemapActionType.Message)
+                {
+                }
             }
         }
     }
