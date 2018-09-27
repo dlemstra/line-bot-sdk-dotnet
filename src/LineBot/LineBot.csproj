@@ -24,20 +24,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Messages\Template\ImageCarousel\Extensions\ImageCarouselColumnExtensions" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="Messages\Template\ImageCarousel\Extensions\ImageCarouselColumnExtensions" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />

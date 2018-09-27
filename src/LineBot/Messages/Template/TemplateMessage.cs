@@ -13,8 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Line
@@ -31,7 +29,7 @@ namespace Line
 #pragma warning restore 0414
 
         private string _alternateText;
-        private IOldTemplate _template;
+        private ITemplate _template;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateMessage"/> class.
@@ -68,7 +66,7 @@ namespace Line
         /// Gets or sets the template of the template message.
         /// </summary>
         [JsonProperty("template")]
-        public IOldTemplate Template
+        public ITemplate Template
         {
             get
             {
@@ -103,25 +101,13 @@ namespace Line
             if (message.Template == null)
                 throw new InvalidOperationException("The template cannot be null.");
 
-            templateMessage.Template = Convert(message.Template);
+            templateMessage.Template = message.Template;
+            templateMessage.Template.Validate();
 
             return templateMessage;
         }
 
-        private static IOldTemplate Convert(IOldTemplate oldTemplate)
-        {
-            switch (oldTemplate)
-            {
-                case ITemplate template:
-                    return template;
-                case IImageCarouselTemplate imageCarouselTemplate:
-                    return ImageCarouselTemplate.Convert(imageCarouselTemplate);
-                default:
-                    throw new NotSupportedException("Invalid template type.");
-            }
-        }
-
-        private static bool IsInvalidTemplate(IOldTemplate value)
+        private static bool IsInvalidTemplate(ITemplate value)
         {
             if (value is ButtonsTemplate)
                 return false;
@@ -132,9 +118,10 @@ namespace Line
             if (value is ConfirmTemplate)
                 return false;
 
-            var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
-            return
-                !interfaces.Contains(typeof(IImageCarouselTemplate));
+            if (value is ImageCarouselTemplate)
+                return false;
+
+            return true;
         }
     }
 }

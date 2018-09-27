@@ -22,7 +22,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a image carousel template.
     /// </summary>
-    public sealed class ImageCarouselTemplate : IImageCarouselTemplate
+    public sealed class ImageCarouselTemplate : ITemplate
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -61,20 +61,12 @@ namespace Line
             }
         }
 
-        internal static ImageCarouselTemplate Convert(IImageCarouselTemplate template)
+        void ITemplate.Validate()
         {
-            if (!(template is ImageCarouselTemplate imageCarouselTemplate))
-            {
-                imageCarouselTemplate = new ImageCarouselTemplate();
-            }
-
-            if (template.Columns == null)
+            if (_columns == null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
-            imageCarouselTemplate.Columns = template.Columns;
-            imageCarouselTemplate.Columns.Validate();
-
-            return imageCarouselTemplate;
+            _columns.Validate();
         }
     }
 }

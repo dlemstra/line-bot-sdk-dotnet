@@ -81,8 +81,11 @@ namespace Line.Tests
             }
 
             [ExcludeFromCodeCoverage]
-            private class TestTemplate : IOldTemplate
+            private class TestTemplate : ITemplate
             {
+                public void Validate()
+                {
+                }
             }
         }
     }

@@ -84,40 +84,6 @@ namespace Line.Tests
                     TemplateMessage.Convert(message);
                 });
             }
-
-            [TestMethod]
-            public void ShouldThrowExceptionWhenTemplateIsInvalid()
-            {
-                var message = new TestTemplateMessage()
-                {
-                    Template = new InvalidTemplate()
-                };
-
-                ExceptionAssert.Throws<NotSupportedException>("Invalid template type.", () =>
-                {
-                    TemplateMessage.Convert(message);
-                });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomITemplateMessageToTemplateMessage()
-            {
-                var message = new TestTemplateMessage()
-                {
-                    Template = new ButtonsTemplate()
-                };
-
-                var templateMessage = TemplateMessage.Convert(message);
-
-                Assert.AreNotEqual(message, templateMessage);
-
-                Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
-            }
-
-            [ExcludeFromCodeCoverage]
-            private class InvalidTemplate : IOldTemplate
-            {
-            }
         }
     }
 }

@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -26,11 +25,28 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenColumnsIsNull()
             {
-                var template = new ImageCarouselTemplate();
+                ITemplate template = new ImageCarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The columns cannot be null.", () =>
                 {
-                    ImageCarouselTemplate.Convert(template);
+                    template.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenColumnsIsInvalid()
+            {
+                ITemplate template = new ImageCarouselTemplate()
+                {
+                    Columns = new[]
+                    {
+                        new ImageCarouselColumn()
+                    }
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The image url cannot be null.", () =>
+                {
+                    template.Validate();
                 });
             }
         }

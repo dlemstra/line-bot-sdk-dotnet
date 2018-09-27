@@ -19,6 +19,6 @@ namespace Line.Tests
     {
         public string AlternativeText => "AlternativeText";
 
-        public IOldTemplate Template { get; set; }
+        public ITemplate Template { get; set; }
     }
 }
