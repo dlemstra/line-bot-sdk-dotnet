@@ -80,21 +80,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIStickerMessageToStickerMessage()
-            {
-                var message = new TestStickerMessage();
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var textMessage = messages[0] as StickerMessage;
-                Assert.AreEqual("PackageId", textMessage.PackageId);
-                Assert.AreEqual("StickerId", textMessage.StickerId);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomIImagemapMessageToImagemapMessage()
             {
                 var message = new TestImagemapMessage();

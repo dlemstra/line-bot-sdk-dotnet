@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a sticker message.
     /// </summary>
-    public sealed class StickerMessage : IStickerMessage
+    public sealed class StickerMessage : ISendMessage
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -89,22 +89,13 @@ namespace Line
             }
         }
 
-        internal static StickerMessage Convert(IStickerMessage message)
+        void ISendMessage.Validate()
         {
-            if (message.PackageId == null)
+            if (PackageId == null)
                 throw new InvalidOperationException("The package id cannot be null.");
 
-            if (message.StickerId == null)
+            if (StickerId == null)
                 throw new InvalidOperationException("The sticker id cannot be null.");
-
-            if (message is StickerMessage stickerMessage)
-                return stickerMessage;
-
-            return new StickerMessage()
-            {
-                PackageId = message.PackageId,
-                StickerId = message.StickerId
-            };
         }
     }
 }
