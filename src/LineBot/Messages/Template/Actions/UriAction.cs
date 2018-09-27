@@ -87,10 +87,10 @@ namespace Line
 
         void ITemplateAction.Validate()
         {
-            if (Label == null)
+            if (_label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (Url == null)
+            if (_url == null)
                 throw new InvalidOperationException("The url cannot be null.");
         }
     }

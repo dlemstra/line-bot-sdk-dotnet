@@ -119,10 +119,10 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (Url == null)
+            if (_url == null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (PreviewUrl == null)
+            if (_previewUrl == null)
                 throw new InvalidOperationException("The preview url cannot be null.");
         }
 

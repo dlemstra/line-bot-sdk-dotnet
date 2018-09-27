@@ -129,10 +129,10 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (Url == null)
+            if (_url == null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (Duration == 0)
+            if (_duration == 0)
                 throw new InvalidOperationException("The duration should be at least 1 millisecond.");
         }
     }

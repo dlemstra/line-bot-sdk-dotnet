@@ -102,10 +102,10 @@ namespace Line
 
         void ITemplateAction.Validate()
         {
-            if (Label == null)
+            if (_label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (Data == null)
+            if (_data == null)
                 throw new InvalidOperationException("The data cannot be null.");
         }
     }

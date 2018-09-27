@@ -100,10 +100,10 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (Title == null)
+            if (_title == null)
                 throw new InvalidOperationException("The title cannot be null.");
 
-            if (Address == null)
+            if (_address == null)
                 throw new InvalidOperationException("The address cannot be null.");
         }
     }

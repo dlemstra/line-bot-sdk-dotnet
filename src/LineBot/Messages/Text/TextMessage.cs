@@ -75,7 +75,7 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (Text == null)
+            if (_text == null)
                 throw new InvalidOperationException("The text cannot be null.");
         }
     }
