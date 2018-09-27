@@ -51,28 +51,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldConvertCustomITemplateMessageToTemplateMessage()
-            {
-                var message = new TestTemplateMessage()
-                {
-                    Template = new TestButtonsTemplate()
-                };
-
-                var messages = MessageConverter.Convert(new IOldSendMessage[] { message });
-
-                Assert.AreEqual(1, messages.Length);
-                Assert.AreNotEqual(message, messages[0]);
-
-                var templateMessage = messages[0] as TemplateMessage;
-                Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
-
-                var template = templateMessage.Template as ButtonsTemplate;
-                Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
-                Assert.AreEqual("ButtonsTitle", template.Title);
-                Assert.AreEqual("ButtonsText", template.Text);
-            }
-
-            [TestMethod]
             public void ShouldConvertCustomICarouselTemplateToCarouselTemplate()
             {
                 var message = new TestTemplateMessage()

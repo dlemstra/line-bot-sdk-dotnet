@@ -20,7 +20,7 @@ namespace Line.Tests
     public partial class TemplateMessageTests
     {
         [TestClass]
-        public class TheTemplateMethod
+        public class TheTemplateProperty
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNull()

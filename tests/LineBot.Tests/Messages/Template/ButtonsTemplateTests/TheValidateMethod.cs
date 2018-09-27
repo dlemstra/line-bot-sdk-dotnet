@@ -21,36 +21,12 @@ namespace Line.Tests
     public partial class ButtonsTemplateTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsButtonsTemplate()
-            {
-                var template = new ButtonsTemplate()
-                {
-                    ThumbnailUrl = new Uri("https://foo.bar"),
-                    Text = "ButtonsText",
-                    Title = "ButtonsTitle",
-                    Actions = new ITemplateAction[]
-                    {
-                        new PostbackAction()
-                        {
-                            Label = "PostbackLabel",
-                            Text = "PostbackText",
-                            Data = "PostbackData",
-                        }
-                    }
-                };
-
-                var buttonsTemplate = ButtonsTemplate.Convert(template);
-
-                Assert.AreSame(template, buttonsTemplate);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                var template = new ButtonsTemplate()
+                ITemplate template = new ButtonsTemplate()
                 {
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "ButtonsTitle",
@@ -62,14 +38,14 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    ButtonsTemplate.Convert(template);
+                    template.Validate();
                 });
             }
 
             [TestMethod]
             public void ShouldThrowExceptionWhenActionsIsNull()
             {
-                var template = new ButtonsTemplate()
+                ITemplate template = new ButtonsTemplate()
                 {
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "ButtonsTitle",
@@ -78,20 +54,28 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
                 {
-                    ButtonsTemplate.Convert(template);
+                    template.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIButtonsTemplateToButtonsTemplate()
+            public void ShouldThrowExceptionWhenActionsIsInvalid()
             {
-                var template = new TestButtonsTemplate();
+                ITemplate template = new ButtonsTemplate()
+                {
+                    ThumbnailUrl = new Uri("https://foo.bar"),
+                    Title = "ButtonsTitle",
+                    Text = "ButtonsText",
+                    Actions = new ITemplateAction[]
+                    {
+                        new PostbackAction()
+                    }
+                };
 
-                var buttonsTemplate = ButtonsTemplate.Convert(template);
-
-                Assert.AreEqual(new Uri("https://bar.foo"), buttonsTemplate.ThumbnailUrl);
-                Assert.AreEqual("ButtonsTitle", buttonsTemplate.Title);
-                Assert.AreEqual("ButtonsText", buttonsTemplate.Text);
+                ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
+                {
+                    template.Validate();
+                });
             }
         }
     }

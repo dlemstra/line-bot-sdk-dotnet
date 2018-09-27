@@ -17,7 +17,7 @@ namespace Line
     /// <summary>
     /// Encapsulates templates.
     /// </summary>
-    public interface ITemplate
+    public interface ITemplate : IOldTemplate
     {
         /// <summary>
         /// Validates the template.

@@ -22,7 +22,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a buttons template.
     /// </summary>
-    public sealed class ButtonsTemplate : IButtonsTemplate
+    public sealed class ButtonsTemplate : ITemplate
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -191,28 +191,15 @@ namespace Line
             }
         }
 
-        internal static ButtonsTemplate Convert(IButtonsTemplate template)
+        void ITemplate.Validate()
         {
-            if (template.Text == null)
+            if (_text == null)
                 throw new InvalidOperationException("The text cannot be null.");
 
-            if (!(template is ButtonsTemplate buttonsTemplate))
-            {
-                buttonsTemplate = new ButtonsTemplate()
-                {
-                    ThumbnailUrl = template.ThumbnailUrl,
-                    Title = template.Title,
-                    Text = template.Text,
-                };
-            }
-
-            if (template.Actions == null)
+            if (_actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            buttonsTemplate.Actions = template.Actions;
-            buttonsTemplate.Actions.Validate();
-
-            return buttonsTemplate;
+            _actions.Validate();
         }
 
         private static bool IsValidColor(string value)

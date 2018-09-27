@@ -50,7 +50,7 @@ namespace Line.Tests
 
                 Assert.AreSame(message, templateMessage);
 
-                var buttonsTemplate = templateMessage.Template as IButtonsTemplate;
+                var buttonsTemplate = templateMessage.Template as ButtonsTemplate;
                 Assert.AreSame(message.Template, buttonsTemplate);
 
                 var action = buttonsTemplate.Actions.First();
@@ -104,7 +104,7 @@ namespace Line.Tests
             {
                 var message = new TestTemplateMessage()
                 {
-                    Template = new TestButtonsTemplate()
+                    Template = new ButtonsTemplate()
                 };
 
                 var templateMessage = TemplateMessage.Convert(message);
@@ -112,11 +112,6 @@ namespace Line.Tests
                 Assert.AreNotEqual(message, templateMessage);
 
                 Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
-
-                var template = templateMessage.Template as ButtonsTemplate;
-                Assert.AreEqual(new Uri("https://bar.foo"), template.ThumbnailUrl);
-                Assert.AreEqual("ButtonsTitle", template.Title);
-                Assert.AreEqual("ButtonsText", template.Text);
             }
 
             [ExcludeFromCodeCoverage]

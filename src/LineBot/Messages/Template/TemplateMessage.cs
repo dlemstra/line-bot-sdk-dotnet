@@ -80,11 +80,7 @@ namespace Line
                 if (value == null)
                     throw new InvalidOperationException("The template cannot be null.");
 
-                var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
-                if (!interfaces.Contains(typeof(IButtonsTemplate)) &&
-                    !interfaces.Contains(typeof(IConfirmTemplate)) &&
-                    !interfaces.Contains(typeof(ICarouselTemplate)) &&
-                    !interfaces.Contains(typeof(IImageCarouselTemplate)))
+                if (IsInvalidTemplate(value))
                     throw new InvalidOperationException("The template type is invalid.");
 
                 _template = value;
@@ -112,12 +108,12 @@ namespace Line
             return templateMessage;
         }
 
-        private static IOldTemplate Convert(IOldTemplate template)
+        private static IOldTemplate Convert(IOldTemplate oldTemplate)
         {
-            switch (template)
+            switch (oldTemplate)
             {
-                case IButtonsTemplate buttonsTemplate:
-                    return ButtonsTemplate.Convert(buttonsTemplate);
+                case ITemplate template:
+                    return template;
                 case IConfirmTemplate confirmTemplate:
                     return ConfirmTemplate.Convert(confirmTemplate);
                 case ICarouselTemplate carouselTemplate:
@@ -127,6 +123,18 @@ namespace Line
                 default:
                     throw new NotSupportedException("Invalid template type.");
             }
+        }
+
+        private static bool IsInvalidTemplate(IOldTemplate value)
+        {
+            if (value is ButtonsTemplate)
+                return false;
+
+            var interfaces = value.GetType().GetTypeInfo().ImplementedInterfaces;
+            return
+                !interfaces.Contains(typeof(IConfirmTemplate)) &&
+                !interfaces.Contains(typeof(ICarouselTemplate)) &&
+                !interfaces.Contains(typeof(IImageCarouselTemplate));
         }
     }
 }
