@@ -18,16 +18,18 @@ namespace Line
 {
     internal sealed class ReplyMessage
     {
-        public ReplyMessage(string replyToken, IOldSendMessage[] messages)
+        public ReplyMessage(string replyToken, ISendMessage[] messages)
         {
+            messages.Validate();
+
             ReplyToken = replyToken;
-            Messages = MessageConverter.Convert(messages);
+            Messages = messages;
         }
 
         [JsonProperty("replyToken")]
         public string ReplyToken { get; }
 
         [JsonProperty("messages")]
-        public IOldSendMessage[] Messages { get; }
+        public ISendMessage[] Messages { get; }
     }
 }

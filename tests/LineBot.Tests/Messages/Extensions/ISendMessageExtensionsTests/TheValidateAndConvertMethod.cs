@@ -13,22 +13,21 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class MessageConverterTests
+    public partial class ISendMessageExtensionsTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateAndConvertMethod : ISendMessageExtensionsTests
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenCalledWithMoreThanFiveMessages()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
                 {
-                    MessageConverter.Convert(new IOldSendMessage[6]);
+                    ISendMessageExtensions.ValidateAndConvert(new ISendMessage[6]);
                 });
             }
 
@@ -37,7 +36,7 @@ namespace Line.Tests
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
                 {
-                    MessageConverter.Convert(new IOldSendMessage[1] { null });
+                    ISendMessageExtensions.ValidateAndConvert(new ISendMessage[1] { null });
                 });
             }
 
@@ -46,13 +45,17 @@ namespace Line.Tests
             {
                 ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
                 {
-                    MessageConverter.Convert(new InvalidMessage[1] { new InvalidMessage() });
+                    ISendMessageExtensions.ValidateAndConvert(new ISendMessage[1] { new InvalidMessage() });
                 });
             }
 
-            [ExcludeFromCodeCoverage]
-            private class InvalidMessage : IOldSendMessage
+            [TestMethod]
+            public void ShouldThrowExceptionWhenMessageIsInvalid()
             {
+                ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+                {
+                    ISendMessageExtensions.ValidateAndConvert(new ISendMessage[1] { new TextMessage() });
+                });
             }
         }
     }

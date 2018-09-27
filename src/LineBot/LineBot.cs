@@ -238,7 +238,7 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
         {
             await Multicast(to, messages?.ToArray());
 
@@ -251,7 +251,7 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(to), to);
 
@@ -267,7 +267,7 @@ namespace Line
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
         {
             await Multicast(to, messages?.ToArray());
 
@@ -281,14 +281,14 @@ namespace Line
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<string> to, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Multicast(IEnumerable<string> to, params ISendMessage[] messages)
         {
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
             foreach (IEnumerable<string> toSet in to.Split(150))
             {
-                foreach (IEnumerable<IOldSendMessage> messageSet in messages.Split(5))
+                foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
                 {
                     MulticastMessage multicast = new MulticastMessage(toSet, messageSet);
 
@@ -308,7 +308,7 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IGroup group, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages)
         {
             await Push(group, messages?.ToArray());
 
@@ -321,7 +321,7 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IGroup group, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Push(IGroup group, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(group), group);
 
@@ -336,7 +336,7 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IRoom room, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages)
         {
             await Push(room, messages?.ToArray());
 
@@ -349,7 +349,7 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IRoom room, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Push(IRoom room, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(room), room);
 
@@ -364,7 +364,7 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IUser user, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages)
         {
             await Push(user, messages?.ToArray());
 
@@ -377,7 +377,7 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IUser user, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Push(IUser user, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(user), user);
 
@@ -393,7 +393,7 @@ namespace Line
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(string to, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages)
         {
             await Push(to, messages?.ToArray());
 
@@ -407,12 +407,12 @@ namespace Line
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(string to, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Push(string to, params ISendMessage[] messages)
         {
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            foreach (IEnumerable<IOldSendMessage> messageSet in messages.Split(5))
+            foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
             {
                 PushMessage push = new PushMessage(to, messageSet);
 
@@ -431,7 +431,7 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(IReplyToken token, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
         {
             await Reply(token, messages?.ToArray());
 
@@ -444,7 +444,7 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(IReplyToken token, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Reply(IReplyToken token, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(token), token);
 
@@ -459,7 +459,7 @@ namespace Line
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(string replyToken, IEnumerable<IOldSendMessage> messages)
+        public async Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages)
         {
             await Reply(replyToken, messages?.ToArray());
 
@@ -472,7 +472,7 @@ namespace Line
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(string replyToken, params IOldSendMessage[] messages)
+        public async Task<ILineBot> Reply(string replyToken, params ISendMessage[] messages)
         {
             Guard.NotNullOrEmpty(nameof(replyToken), replyToken);
             Guard.NotNullOrEmpty(nameof(messages), messages);

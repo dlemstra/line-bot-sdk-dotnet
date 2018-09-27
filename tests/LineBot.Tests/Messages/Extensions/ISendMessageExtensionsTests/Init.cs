@@ -12,12 +12,16 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line
+namespace Line.Tests
 {
-    /// <summary>
-    /// Encapsulates messages that can be send.
-    /// </summary>
-    public interface IOldSendMessage
+    public partial class ISendMessageExtensionsTests
     {
+        [ExcludeFromCodeCoverage]
+        private class InvalidMessage : ISendMessage
+        {
+            public void Validate()
+            {
+            }
+        }
     }
 }

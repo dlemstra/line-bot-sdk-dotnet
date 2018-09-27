@@ -19,16 +19,16 @@ namespace Line
 {
     internal sealed class PushMessage
     {
-        public PushMessage(string to, IEnumerable<IOldSendMessage> messages)
+        public PushMessage(string to, IEnumerable<ISendMessage> messages)
         {
             To = to;
-            Messages = MessageConverter.Convert(messages);
+            Messages = messages.ValidateAndConvert();
         }
 
         [JsonProperty("to")]
         public string To { get; }
 
         [JsonProperty("messages")]
-        public IOldSendMessage[] Messages { get; }
+        public ISendMessage[] Messages { get; }
     }
 }
