@@ -20,18 +20,8 @@ namespace Line.Tests
     public partial class ImagemapUriActionTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsImagemapUriAction()
-            {
-                var action = new ImagemapUriAction("http://foo.bar", 1, 2, 3, 4);
-
-                var uriAction = ImagemapUriAction.Convert(action);
-
-                Assert.AreSame(action, uriAction);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenUrlIsNull()
             {
@@ -42,7 +32,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
                 {
-                    ImagemapUriAction.Convert(action);
+                    action.Validate();
                 });
             }
 
@@ -56,24 +46,8 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The area cannot be null.", () =>
                 {
-                    ImagemapUriAction.Convert(action);
+                    action.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIImagemapMessageActionToImagemapMessageAction()
-            {
-                var action = new TestImagemapUriAction();
-
-                var uriAction = ImagemapUriAction.Convert(action);
-
-                Assert.AreNotEqual(action, uriAction);
-                Assert.AreEqual("https://foo.bar/", uriAction.Url.ToString());
-                Assert.IsNotNull(uriAction.Area);
-                Assert.AreEqual(4, uriAction.Area.X);
-                Assert.AreEqual(3, uriAction.Area.Y);
-                Assert.AreEqual(2, uriAction.Area.Width);
-                Assert.AreEqual(1, uriAction.Area.Height);
             }
         }
     }

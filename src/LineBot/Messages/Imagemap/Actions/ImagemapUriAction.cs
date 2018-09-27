@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates an imagemap uri action.
     /// </summary>
-    public sealed class ImagemapUriAction : ImagemapAction, IImagemapUriAction
+    public sealed class ImagemapUriAction : ImagemapAction
     {
         private Uri _url;
 
@@ -116,26 +116,12 @@ namespace Line
             }
         }
 
-        internal static ImagemapUriAction Convert(IImagemapUriAction action)
+        internal override void Validate()
         {
-            if (action.Area == null)
-                throw new InvalidOperationException("The area cannot be null.");
+            base.Validate();
 
-            if (action.Url == null)
+            if (_url == null)
                 throw new InvalidOperationException("The url cannot be null.");
-
-            if (!(action is ImagemapUriAction imagemapUriAction))
-            {
-                imagemapUriAction = new ImagemapUriAction()
-                {
-                    Url = action.Url
-                };
-            }
-
-            imagemapUriAction.Area = action.Area;
-            imagemapUriAction.Area.Validate();
-
-            return imagemapUriAction;
         }
     }
 }
