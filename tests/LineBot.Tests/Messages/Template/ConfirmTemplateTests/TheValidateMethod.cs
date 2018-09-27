@@ -20,7 +20,7 @@ namespace Line.Tests
     public partial class ConfirmTemplateTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()

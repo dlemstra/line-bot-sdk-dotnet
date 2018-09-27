@@ -24,33 +24,6 @@ namespace Line.Tests
         public class TheConvertMethod
         {
             [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsCarouselTemplate()
-            {
-                var template = new ImageCarouselTemplate()
-                {
-                    Columns = new IImageCarouselColumn[]
-                    {
-                        new ImageCarouselColumn()
-                        {
-                            ImageUrl = new Uri("https://foo.bar"),
-                            Action = new MessageAction()
-                            {
-                                Label = "PostbackLabel",
-                                Text = "PostbackText"
-                            }
-                        }
-                    }
-                };
-
-                var carouselTemplate = ImageCarouselTemplate.Convert(template);
-
-                Assert.AreSame(template, carouselTemplate);
-
-                var column = carouselTemplate.Columns.First();
-                Assert.AreSame(column, carouselTemplate.Columns.First());
-            }
-
-            [TestMethod]
             public void ShouldThrowExceptionWhenColumnsIsNull()
             {
                 var template = new ImageCarouselTemplate();
@@ -59,19 +32,6 @@ namespace Line.Tests
                 {
                     ImageCarouselTemplate.Convert(template);
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomICarouselTemplateToCarouselTemplate()
-            {
-                var template = new TestImageCarouselTemplate();
-
-                var imageCarouselTemplate = ImageCarouselTemplate.Convert(template);
-
-                Assert.AreNotEqual(template, imageCarouselTemplate);
-
-                var column = imageCarouselTemplate.Columns.First() as ImageCarouselColumn;
-                Assert.AreEqual(new Uri("https://carousel.url"), column.ImageUrl);
             }
         }
     }

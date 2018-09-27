@@ -25,6 +25,6 @@ namespace Line
         /// Gets the columns.
         /// <para>Max: 10.</para>
         /// </summary>
-        IEnumerable<IImageCarouselColumn> Columns { get; }
+        IEnumerable<ImageCarouselColumn> Columns { get; }
     }
 }

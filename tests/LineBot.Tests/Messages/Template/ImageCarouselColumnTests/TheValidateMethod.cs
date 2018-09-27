@@ -21,28 +21,8 @@ namespace Line.Tests
     public partial class ImageCarouselColumnTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsImageCarouselColumn()
-            {
-                var column = new ImageCarouselColumn()
-                {
-                    ImageUrl = new Uri("https://foo.bar"),
-                    Action = new PostbackAction()
-                    {
-                        Label = "PostbackLabel",
-                        Text = "PostbackText",
-                        Data = "PostbackData",
-                    }
-                };
-
-                var columns = ImageCarouselColumn.Convert(new[] { column }).ToArray();
-
-                Assert.AreEqual(1, columns.Length);
-                Assert.AreSame(column, columns[0]);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenImageUrlIsNull()
             {
@@ -53,7 +33,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The image url cannot be null.", () =>
                 {
-                    ImageCarouselColumn.Convert(new[] { column }).ToArray();
+                    column.Validate();
                 });
             }
 
@@ -67,23 +47,23 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The action cannot be null.", () =>
                 {
-                    ImageCarouselColumn.Convert(new[] { column }).ToArray();
+                    column.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomIImageCarouselColumnToImageCarouselColumn()
+            public void ShouldThrowExceptionWhenActionIsInvalid()
             {
-                var column = new TestImageCarouselColumn();
+                var column = new ImageCarouselColumn()
+                {
+                    ImageUrl = new Uri("https://foo.bar"),
+                    Action = new PostbackAction()
+                };
 
-                var columns = ImageCarouselColumn.Convert(new[] { column }).ToArray();
-
-                Assert.AreEqual(1, columns.Length);
-                Assert.AreNotEqual(column, columns[0]);
-
-                var carouselColumn = columns[0] as ImageCarouselColumn;
-
-                Assert.AreEqual(new Uri("https://carousel.url"), carouselColumn.ImageUrl);
+                ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
+                {
+                    column.Validate();
+                });
             }
         }
     }

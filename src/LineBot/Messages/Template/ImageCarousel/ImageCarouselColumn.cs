@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Line
@@ -21,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a image carousel column.
     /// </summary>
-    public sealed class ImageCarouselColumn : IImageCarouselColumn
+    public sealed class ImageCarouselColumn
     {
         private Uri _imageUrl;
         private ITemplateAction _action;
@@ -80,34 +79,15 @@ namespace Line
             }
         }
 
-        internal static IEnumerable<ImageCarouselColumn> Convert(IEnumerable<IImageCarouselColumn> columns)
+        internal void Validate()
         {
-            foreach (IImageCarouselColumn column in columns)
-            {
-                yield return Convert(column);
-            }
-        }
-
-        private static ImageCarouselColumn Convert(IImageCarouselColumn column)
-        {
-            if (column.ImageUrl == null)
+            if (_imageUrl == null)
                 throw new InvalidOperationException("The image url cannot be null.");
 
-            if (!(column is ImageCarouselColumn imageCarouselColumn))
-            {
-                imageCarouselColumn = new ImageCarouselColumn()
-                {
-                    ImageUrl = column.ImageUrl,
-                };
-            }
-
-            if (column.Action == null)
+            if (_action == null)
                 throw new InvalidOperationException("The action cannot be null.");
 
-            imageCarouselColumn.Action = column.Action;
-            imageCarouselColumn.Action.Validate();
-
-            return imageCarouselColumn;
+            _action.Validate();
         }
     }
 }
