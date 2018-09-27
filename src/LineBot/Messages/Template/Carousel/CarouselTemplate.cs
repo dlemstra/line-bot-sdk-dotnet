@@ -77,10 +77,10 @@ namespace Line
 
         void ITemplate.Validate()
         {
-            if (Columns == null)
+            if (_columns == null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
-            Columns.Validate();
+            _columns.Validate();
         }
     }
 }

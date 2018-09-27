@@ -20,12 +20,12 @@ namespace Line.Tests
     public partial class ButtonsTemplateTests
     {
         [TestClass]
-        public class TheActionProperty
+        public class TheActionsProperty
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
                 {
@@ -36,7 +36,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of actions is 1.", () =>
                 {
@@ -47,7 +47,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueContainsMoreThan4Items()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of actions is 4.", () =>
                 {
@@ -65,7 +65,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValueContains4Items()
             {
-                ButtonsTemplate template = new ButtonsTemplate()
+                var template = new ButtonsTemplate()
                 {
                     Actions = new ITemplateAction[]
                     {
@@ -80,11 +80,22 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenTemplateActionTypeIsInvalid()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
                 {
                     template.Actions = new ITemplateAction[] { new TestTemplateAction() };
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenCollectionContainsNull()
+            {
+                var template = new ButtonsTemplate();
+
+                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                {
+                    template.Actions = new ITemplateAction[] { null };
                 });
             }
         }

@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -30,10 +29,7 @@ namespace Line.Tests
                 {
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[]
-                    {
-                        new PostbackAction()
-                    }
+                    Actions = new ITemplateAction[] { new PostbackAction() }
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
@@ -66,10 +62,7 @@ namespace Line.Tests
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Text = "CarouselColumnText",
                     Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[]
-                    {
-                        new PostbackAction()
-                    }
+                    Actions = new ITemplateAction[] { new PostbackAction() }
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>

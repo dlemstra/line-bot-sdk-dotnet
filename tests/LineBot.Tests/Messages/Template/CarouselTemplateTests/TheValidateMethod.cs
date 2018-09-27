@@ -38,13 +38,24 @@ namespace Line.Tests
             {
                 ITemplate template = new CarouselTemplate()
                 {
-                    Columns = new[]
-                    {
-                        new CarouselColumn()
-                    }
+                    Columns = new[] { new CarouselColumn() }
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+                {
+                    template.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenColumnsContainsNull()
+            {
+                ITemplate template = new CarouselTemplate()
+                {
+                    Columns = new CarouselColumn[] { null }
+                };
+
+                ExceptionAssert.Throws<InvalidOperationException>("The column should not be null.", () =>
                 {
                     template.Validate();
                 });

@@ -85,6 +85,17 @@ namespace Line.Tests
                     column.Actions = new ITemplateAction[] { new TestTemplateAction() };
                 });
             }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenCollectionContainsNull()
+            {
+                var column = new CarouselColumn();
+
+                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                {
+                    column.Actions = new ITemplateAction[] { null };
+                });
+            }
         }
     }
 }

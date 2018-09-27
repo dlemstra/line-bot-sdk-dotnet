@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using System.Collections.Generic;
 
 namespace Line
@@ -22,6 +23,9 @@ namespace Line
         {
             foreach (var column in self)
             {
+                if (column == null)
+                    throw new InvalidOperationException("The column should not be null.");
+
                 column.Validate();
             }
         }

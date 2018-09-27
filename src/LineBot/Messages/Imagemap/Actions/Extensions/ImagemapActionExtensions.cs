@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using System.Collections.Generic;
 
 namespace Line
@@ -22,6 +23,9 @@ namespace Line
         {
             foreach (var imagemapAction in self)
             {
+                if (imagemapAction == null)
+                    throw new InvalidOperationException("The imagemap action should not be null.");
+
                 imagemapAction.Validate();
             }
         }
