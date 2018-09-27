@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a buttons template.
     /// </summary>
-    public interface IButtonsTemplate : ITemplate
+    public interface IButtonsTemplate : IOldTemplate
     {
         /// <summary>
         /// Gets the image url for the thumbnail.

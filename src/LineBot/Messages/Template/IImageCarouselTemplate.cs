@@ -19,7 +19,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a carousel template.
     /// </summary>
-    public interface IImageCarouselTemplate : ITemplate
+    public interface IImageCarouselTemplate : IOldTemplate
     {
         /// <summary>
         /// Gets the columns.

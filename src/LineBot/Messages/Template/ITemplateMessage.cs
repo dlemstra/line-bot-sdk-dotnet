@@ -28,6 +28,6 @@ namespace Line
         /// <summary>
         /// Gets the template of the template message.
         /// </summary>
-        ITemplate Template { get; }
+        IOldTemplate Template { get; }
     }
 }

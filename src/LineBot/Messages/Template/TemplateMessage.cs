@@ -31,7 +31,7 @@ namespace Line
 #pragma warning restore 0414
 
         private string _alternateText;
-        private ITemplate _template;
+        private IOldTemplate _template;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateMessage"/> class.
@@ -68,7 +68,7 @@ namespace Line
         /// Gets or sets the template of the template message.
         /// </summary>
         [JsonProperty("template")]
-        public ITemplate Template
+        public IOldTemplate Template
         {
             get
             {
@@ -112,7 +112,7 @@ namespace Line
             return templateMessage;
         }
 
-        private static ITemplate Convert(ITemplate template)
+        private static IOldTemplate Convert(IOldTemplate template)
         {
             switch (template)
             {

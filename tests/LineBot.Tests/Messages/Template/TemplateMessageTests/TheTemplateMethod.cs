@@ -81,7 +81,7 @@ namespace Line.Tests
             }
 
             [ExcludeFromCodeCoverage]
-            private class TestTemplate : ITemplate
+            private class TestTemplate : IOldTemplate
             {
             }
         }

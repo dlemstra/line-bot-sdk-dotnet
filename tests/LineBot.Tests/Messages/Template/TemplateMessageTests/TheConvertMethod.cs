@@ -120,7 +120,7 @@ namespace Line.Tests
             }
 
             [ExcludeFromCodeCoverage]
-            private class InvalidTemplate : ITemplate
+            private class InvalidTemplate : IOldTemplate
             {
             }
         }

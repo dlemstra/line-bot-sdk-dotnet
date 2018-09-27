@@ -15,24 +15,9 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a confirm template.
+    /// Encapsulates templates.
     /// </summary>
-    public interface IConfirmTemplate : IOldTemplate
+    public interface IOldTemplate
     {
-        /// <summary>
-        /// Gets the message text.
-        /// <para>Max: 240 characters.</para>
-        /// </summary>
-        string Text { get; }
-
-        /// <summary>
-        /// Gets the action for the OK button.
-        /// </summary>
-        ITemplateAction OkAction { get; }
-
-        /// <summary>
-        /// Gets the action for the Cancel button.
-        /// </summary>
-        ITemplateAction CancelAction { get; }
     }
 }
