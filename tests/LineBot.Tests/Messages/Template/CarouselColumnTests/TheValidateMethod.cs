@@ -21,33 +21,8 @@ namespace Line.Tests
     public partial class CarouselColumnTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsCarouselColumn()
-            {
-                var column = new CarouselColumn()
-                {
-                    ThumbnailUrl = new Uri("https://foo.bar"),
-                    Text = "CarouselColumnText",
-                    Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[]
-                    {
-                        new PostbackAction()
-                        {
-                            Label = "PostbackLabel",
-                            Text = "PostbackText",
-                            Data = "PostbackData",
-                        }
-                    }
-                };
-
-                var columns = CarouselColumn.Convert(new[] { column }).ToArray();
-
-                Assert.AreEqual(1, columns.Length);
-                Assert.AreSame(column, columns[0]);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
@@ -63,7 +38,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
-                    CarouselColumn.Convert(new[] { column }).ToArray();
+                    column.Validate();
                 });
             }
 
@@ -79,25 +54,28 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The actions cannot be null.", () =>
                 {
-                    CarouselColumn.Convert(new[] { column }).ToArray();
+                    column.Validate();
                 });
             }
 
             [TestMethod]
-            public void ShouldConvertCustomICarouselColumnToCarouselColumn()
+            public void ShouldThrowExceptionWhenActionsIsInvalid()
             {
-                var column = new TestCarouselColumn();
+                var column = new CarouselColumn()
+                {
+                    ThumbnailUrl = new Uri("https://foo.bar"),
+                    Text = "CarouselColumnText",
+                    Title = "CarouselColumnTitle",
+                    Actions = new ITemplateAction[]
+                    {
+                        new PostbackAction()
+                    }
+                };
 
-                var columns = CarouselColumn.Convert(new[] { column }).ToArray();
-
-                Assert.AreEqual(1, columns.Length);
-                Assert.AreNotEqual(column, columns[0]);
-
-                var carouselColumn = columns[0] as CarouselColumn;
-
-                Assert.AreEqual(new Uri("https://carousel.url/"), carouselColumn.ThumbnailUrl);
-                Assert.AreEqual("CarouselTitle", carouselColumn.Title);
-                Assert.AreEqual("CarouselText", carouselColumn.Text);
+                ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
+                {
+                    column.Validate();
+                });
             }
         }
     }

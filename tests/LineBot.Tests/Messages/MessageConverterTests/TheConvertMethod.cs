@@ -67,11 +67,6 @@ namespace Line.Tests
                 Assert.AreEqual("AlternativeText", templateMessage.AlternativeText);
 
                 var template = templateMessage.Template as CarouselTemplate;
-
-                var column = template.Columns.First() as CarouselColumn;
-                Assert.AreEqual(new Uri("https://carousel.url"), column.ThumbnailUrl);
-                Assert.AreEqual("CarouselTitle", column.Title);
-                Assert.AreEqual("CarouselText", column.Text);
             }
 
             [TestMethod]

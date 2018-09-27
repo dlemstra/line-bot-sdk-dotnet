@@ -40,7 +40,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of columns is 1.", () =>
                 {
-                    template.Columns = new ICarouselColumn[] { };
+                    template.Columns = new CarouselColumn[] { };
                 });
             }
 
@@ -51,7 +51,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of columns is 10.", () =>
                 {
-                    template.Columns = new ICarouselColumn[]
+                    template.Columns = new CarouselColumn[]
                     {
                         new CarouselColumn(),
                         new CarouselColumn(),
@@ -73,7 +73,7 @@ namespace Line.Tests
             {
                 CarouselTemplate template = new CarouselTemplate()
                 {
-                    Columns = new ICarouselColumn[]
+                    Columns = new CarouselColumn[]
                     {
                         new CarouselColumn(),
                         new CarouselColumn(),

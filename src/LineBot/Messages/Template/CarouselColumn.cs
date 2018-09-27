@@ -22,7 +22,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a carousel column.
     /// </summary>
-    public sealed class CarouselColumn : ICarouselColumn
+    public sealed class CarouselColumn
     {
         private Uri _thumbnailUrl;
         private string _title;
@@ -144,36 +144,15 @@ namespace Line
             }
         }
 
-        internal static IEnumerable<CarouselColumn> Convert(IEnumerable<ICarouselColumn> columns)
+        internal void Validate()
         {
-            foreach (ICarouselColumn column in columns)
-            {
-                yield return Convert(column);
-            }
-        }
-
-        private static CarouselColumn Convert(ICarouselColumn column)
-        {
-            if (column.Text == null)
+            if (_text == null)
                 throw new InvalidOperationException("The text cannot be null.");
 
-            if (!(column is CarouselColumn carouselColumn))
-            {
-                carouselColumn = new CarouselColumn()
-                {
-                    ThumbnailUrl = column.ThumbnailUrl,
-                    Title = column.Title,
-                    Text = column.Text,
-                };
-            }
-
-            if (column.Actions == null)
+            if (_actions == null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
-            carouselColumn.Actions = column.Actions;
-            carouselColumn.Actions.Validate();
-
-            return carouselColumn;
+            _actions.Validate();
         }
     }
 }

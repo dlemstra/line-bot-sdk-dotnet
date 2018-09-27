@@ -12,20 +12,18 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
 using System.Collections.Generic;
 
-namespace Line.Tests
+namespace Line
 {
-    [ExcludeFromCodeCoverage]
-    public class TestCarouselColumn : ICarouselColumn
+    internal static class CarouselColumnExtensions
     {
-        public Uri ThumbnailUrl => new Uri("https://carousel.url");
-
-        public string Title => "CarouselTitle";
-
-        public string Text => "CarouselText";
-
-        public IEnumerable<ITemplateAction> Actions => new ITemplateAction[] { new MessageAction() { Label = "ActionLabel", Text = "ActionText" } };
+        public static void Validate(this IEnumerable<CarouselColumn> self)
+        {
+            foreach (var column in self)
+            {
+                column.Validate();
+            }
+        }
     }
 }

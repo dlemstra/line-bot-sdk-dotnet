@@ -28,7 +28,7 @@ namespace Line.Tests
             {
                 var template = new CarouselTemplate()
                 {
-                    Columns = new ICarouselColumn[]
+                    Columns = new[]
                     {
                         new CarouselColumn()
                         {
@@ -64,21 +64,6 @@ namespace Line.Tests
                 {
                     CarouselTemplate.Convert(template);
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomICarouselTemplateToCarouselTemplate()
-            {
-                var template = new TestCarouselTemplate();
-
-                var carouselTemplate = CarouselTemplate.Convert(template);
-
-                Assert.AreNotEqual(template, carouselTemplate);
-
-                var column = carouselTemplate.Columns.First() as CarouselColumn;
-                Assert.AreEqual(new Uri("https://carousel.url"), column.ThumbnailUrl);
-                Assert.AreEqual("CarouselTitle", column.Title);
-                Assert.AreEqual("CarouselText", column.Text);
             }
         }
     }

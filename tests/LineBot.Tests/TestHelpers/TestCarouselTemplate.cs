@@ -19,6 +19,6 @@ namespace Line.Tests
     [ExcludeFromCodeCoverage]
     public class TestCarouselTemplate : ICarouselTemplate
     {
-        public IEnumerable<ICarouselColumn> Columns => new ICarouselColumn[] { new TestCarouselColumn() };
+        public IEnumerable<CarouselColumn> Columns => new CarouselColumn[] { new CarouselColumn() };
     }
 }

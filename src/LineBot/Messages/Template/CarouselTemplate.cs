@@ -30,14 +30,14 @@ namespace Line
         private readonly TemplateType _type = TemplateType.Carousel;
 #pragma warning restore 0414
 
-        private IEnumerable<ICarouselColumn> _columns;
+        private IEnumerable<CarouselColumn> _columns;
 
         /// <summary>
         /// Gets or sets the columns.
         /// <para>Max: 10.</para>
         /// </summary>
         [JsonProperty("columns")]
-        public IEnumerable<ICarouselColumn> Columns
+        public IEnumerable<CarouselColumn> Columns
         {
             get
             {
@@ -85,7 +85,7 @@ namespace Line
             if (template.Columns == null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
-            carouselTemplate.Columns = CarouselColumn.Convert(template.Columns);
+            carouselTemplate.Columns = template.Columns;
 
             return carouselTemplate;
         }
