@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template message action.
     /// </summary>
-    public class MessageAction : ITemplateAction
+    public sealed class MessageAction : ITemplateAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
