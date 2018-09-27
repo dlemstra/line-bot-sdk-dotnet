@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Define the coordinates and size of tappable area.
     /// </summary>
-    public class RichMenuArea : IRichMenuArea
+    public class RichMenuArea
     {
         private ITemplateAction _action;
         private RichMenuBounds _bounds;
@@ -57,25 +57,16 @@ namespace Line
             }
         }
 
-        internal static RichMenuArea Convert(IRichMenuArea richMenuArea)
+        internal void Validate()
         {
-            if (richMenuArea.Action == null)
+            if (_action == null)
                 throw new InvalidOperationException("The action cannot be null.");
 
-            if (richMenuArea.Bounds == null)
+            if (_bounds == null)
                 throw new InvalidOperationException("The bounds cannot be null.");
 
-            if (richMenuArea is RichMenuArea area)
-                return area;
-
-            richMenuArea.Action.Validate();
-            richMenuArea.Bounds.Validate();
-
-            return new RichMenuArea()
-            {
-                Action = richMenuArea.Action,
-                Bounds = richMenuArea.Bounds
-            };
+            _action.Validate();
+            _bounds.Validate();
         }
     }
 }

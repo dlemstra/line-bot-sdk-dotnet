@@ -12,13 +12,18 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line.Tests
-{
-    [ExcludeFromCodeCoverage]
-    public class TestRichMenuArea : IRichMenuArea
-    {
-        public ITemplateAction Action { get; set; }
+using System.Collections.Generic;
 
-        public RichMenuBounds Bounds { get; set; }
+namespace Line
+{
+    internal static class RichMenuAreaExtensions
+    {
+        public static void Validate(this IEnumerable<RichMenuArea> self)
+        {
+            foreach (var richMenuArea in self)
+            {
+                richMenuArea.Validate();
+            }
+        }
     }
 }

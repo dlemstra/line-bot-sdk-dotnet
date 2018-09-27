@@ -22,7 +22,7 @@ namespace Line
     /// </summary>
     public class RichMenu : IRichMenu
     {
-        private IRichMenuArea[] _areas;
+        private RichMenuArea[] _areas;
         private string _chatBarText;
         private string _name;
         private RichMenuSize _size;
@@ -32,7 +32,7 @@ namespace Line
         /// Max: 20 area objects.
         /// </summary>
         [JsonProperty("areas")]
-        public IRichMenuArea[] Areas
+        public RichMenuArea[] Areas
         {
             get => _areas;
             set
@@ -132,26 +132,16 @@ namespace Line
                 return richMenu;
             }
 
+            menu.Areas.Validate();
             menu.Size.Validate();
 
             return new RichMenu()
             {
-                Areas = ConvertAreas(menu.Areas),
+                Areas = menu.Areas,
                 ChatBarText = menu.ChatBarText,
                 Name = menu.Name,
                 Size = menu.Size
             };
-        }
-
-        private static RichMenuArea[] ConvertAreas(IRichMenuArea[] areas)
-        {
-            var result = new RichMenuArea[areas.Length];
-            for (int i = 0; i < areas.Length; i++)
-            {
-                result[i] = RichMenuArea.Convert(areas[i]);
-            }
-
-            return result;
         }
     }
 }

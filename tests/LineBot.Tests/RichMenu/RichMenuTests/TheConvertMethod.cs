@@ -81,7 +81,7 @@ namespace Line.Tests
             {
                 var richMenu = new RichMenu()
                 {
-                    Areas = new IRichMenuArea[1]
+                    Areas = new RichMenuArea[1]
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be null.", () =>
@@ -95,7 +95,7 @@ namespace Line.Tests
             {
                 var richMenu = new RichMenu()
                 {
-                    Areas = new IRichMenuArea[1],
+                    Areas = new RichMenuArea[1],
                     ChatBarText = "foobar"
                 };
 
@@ -110,7 +110,7 @@ namespace Line.Tests
             {
                 var richMenu = new RichMenu()
                 {
-                    Areas = new IRichMenuArea[1],
+                    Areas = new RichMenuArea[1],
                     ChatBarText = "foobar",
                     Name = "barfoo"
                 };

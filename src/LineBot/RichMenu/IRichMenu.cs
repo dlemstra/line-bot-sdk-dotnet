@@ -23,7 +23,7 @@ namespace Line
         /// Gets the array of area objects which define the coordinates and size of tappable areas
         /// Max: 20 area objects.
         /// </summary>
-        IRichMenuArea[] Areas { get; }
+        RichMenuArea[] Areas { get; }
 
         /// <summary>
         /// Gets the text displayed in the chat bar.
