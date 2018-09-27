@@ -12,21 +12,22 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line
-{
-    /// <summary>
-    /// Encapsulates a rich menu size.
-    /// </summary>
-    public interface IRichMenuSize
-    {
-        /// <summary>
-        /// Gets the width of the rich menu. Must be 2500.
-        /// </summary>
-        int Width { get; }
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-        /// <summary>
-        /// Gets the height of the rich menu. Possible values: 1686, 843.
-        /// </summary>
-        int Height { get; }
+namespace Line.Tests
+{
+    public partial class TheRichMenuSizeTests
+    {
+        [TestClass]
+        public partial class TheWidthProperty
+        {
+            [TestMethod]
+            public void ShouldReturn2500()
+            {
+                var richMenuSize = new RichMenuSize();
+
+                Assert.AreEqual(2500, richMenuSize.Width);
+            }
+        }
     }
 }

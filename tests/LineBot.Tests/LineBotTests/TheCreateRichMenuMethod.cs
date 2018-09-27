@@ -34,7 +34,42 @@ namespace Line.Tests
             [TestMethod]
             public async Task ShouldCreateRichMenu()
             {
-                var richMenu = new TestRichMenu();
+                var richMenu = new RichMenu()
+                {
+                    Size = new RichMenuSize(1686),
+
+                    Selected = false,
+
+                    Name = "testName",
+
+                    ChatBarText = "testChatBarTxt",
+
+                    Areas = new[]
+                    {
+                        new RichMenuArea()
+                        {
+                            Action = new UriAction { Label = "testLabel", Url = new Uri("http://www.google.com") },
+                            Bounds = new RichMenuBounds
+                            {
+                                Width = 110,
+                                Height = 120,
+                                X = 11,
+                                Y = 12
+                            }
+                        },
+                        new RichMenuArea
+                        {
+                            Action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") },
+                            Bounds = new RichMenuBounds
+                            {
+                                Width = 210,
+                                Height = 220,
+                                X = 21,
+                                Y = 22
+                            }
+                        }
+                    }
+                };
 
                 var richMenuIdJson = @"{""richMenuId"": ""richmenu-801b2cd26b2f13587329ed501d279d27""}";
                 var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(richMenuIdJson));

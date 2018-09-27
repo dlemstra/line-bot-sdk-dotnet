@@ -25,7 +25,7 @@ namespace Line
         private IRichMenuArea[] _areas;
         private string _chatBarText;
         private string _name;
-        private IRichMenuSize _size;
+        private RichMenuSize _size;
 
         /// <summary>
         /// Gets or sets the array of area objects which define the coordinates and size of tappable areas.
@@ -101,7 +101,7 @@ namespace Line
         /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
         /// </summary>
         [JsonProperty("size")]
-        public IRichMenuSize Size
+        public RichMenuSize Size
         {
             get => _size;
             set
@@ -132,12 +132,14 @@ namespace Line
                 return richMenu;
             }
 
+            menu.Size.Validate();
+
             return new RichMenu()
             {
                 Areas = ConvertAreas(menu.Areas),
                 ChatBarText = menu.ChatBarText,
                 Name = menu.Name,
-                Size = RichMenuSize.Convert(menu.Size)
+                Size = menu.Size
             };
         }
 

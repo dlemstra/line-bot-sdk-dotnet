@@ -20,21 +20,8 @@ namespace Line.Tests
     public partial class RichMenuSizeTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
-            [TestMethod]
-            public void ShouldPreserveInstanceWhenValueIsRichMenuSize()
-            {
-                var richMenuSize = new RichMenuSize()
-                {
-                    Height = 843
-                };
-
-                var convertedRichMenuSize = RichMenuSize.Convert(richMenuSize);
-
-                Assert.AreSame(richMenuSize, convertedRichMenuSize);
-            }
-
             [TestMethod]
             public void ShouldThrowExceptionWhenHeightIsNotSet()
             {
@@ -42,20 +29,8 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The height is not set.", () =>
                 {
-                    RichMenuSize.Convert(richMenuSize);
+                    richMenuSize.Validate();
                 });
-            }
-
-            [TestMethod]
-            public void ShouldConvertCustomIRichMenuSizeToRichMenuSize()
-            {
-                var richMenuSize = new TestRichMenuSize();
-
-                var size = RichMenuSize.Convert(richMenuSize);
-
-                Assert.AreNotSame(size, richMenuSize);
-                Assert.AreEqual(2500, size.Width);
-                Assert.AreEqual(1686, size.Height);
             }
         }
     }

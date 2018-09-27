@@ -46,6 +46,6 @@ namespace Line
         /// Gets the object which contains the width and height of the rich menu displayed in the chat.
         /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
         /// </summary>
-        IRichMenuSize Size { get; }
+        RichMenuSize Size { get; }
     }
 }

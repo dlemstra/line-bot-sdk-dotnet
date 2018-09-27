@@ -21,9 +21,25 @@ namespace Line
     /// RichMenuSize object which contains the width and height of the rich menu displayed in the chat.
     /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
     /// </summary>
-    public class RichMenuSize : IRichMenuSize
+    public class RichMenuSize
     {
         private int _height;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenuSize"/> class.
+        /// </summary>
+        public RichMenuSize()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RichMenuSize"/> class.
+        /// </summary>
+        /// <param name="height">The height of the rich menu. Possible values: 1686, 843.</param>
+        public RichMenuSize(int height)
+        {
+            Height = height;
+        }
 
         /// <summary>
         /// Gets the width of the rich menu. Will always be 2500.
@@ -47,20 +63,10 @@ namespace Line
             }
         }
 
-        internal static RichMenuSize Convert(IRichMenuSize richMenuSize)
+        internal void Validate()
         {
-            if (richMenuSize.Height == 0)
+            if (_height == 0)
                 throw new InvalidOperationException("The height is not set.");
-
-            if (richMenuSize is RichMenuSize size)
-            {
-                return size;
-            }
-
-            return new RichMenuSize()
-            {
-                Height = richMenuSize.Height
-            };
         }
     }
 }

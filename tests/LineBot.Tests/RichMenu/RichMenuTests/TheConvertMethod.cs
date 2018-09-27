@@ -120,18 +120,6 @@ namespace Line.Tests
                     RichMenu.Convert(richMenu);
                 });
             }
-
-            [TestMethod]
-            public void ShouldConvertCustomIRichMenuBoundsToRichMenuBounds()
-            {
-                var richMenu = new TestRichMenu();
-
-                var convertedRichMenu = RichMenu.Convert(richMenu);
-
-                Assert.AreNotSame(richMenu, convertedRichMenu);
-                Assert.AreNotSame(richMenu.Areas, convertedRichMenu.Areas);
-                Assert.AreNotSame(richMenu.Size, convertedRichMenu.Size);
-            }
         }
     }
 }

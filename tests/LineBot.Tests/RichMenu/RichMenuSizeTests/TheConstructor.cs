@@ -12,13 +12,22 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
-    public class TestRichMenuSize : IRichMenuSize
+    public partial class RichMenuSizeTests
     {
-        public int Width => 2500;
+        [TestClass]
+        public class TheConstructor
+        {
+            [TestMethod]
+            public void ShouldSetTheProperties()
+            {
+                var size = new RichMenuSize(1686);
 
-        public int Height => 1686;
+                Assert.AreEqual(1686, size.Height);
+            }
+        }
     }
 }
