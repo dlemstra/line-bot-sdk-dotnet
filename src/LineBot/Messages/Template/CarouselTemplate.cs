@@ -22,7 +22,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a carousel template.
     /// </summary>
-    public sealed class CarouselTemplate : ICarouselTemplate
+    public sealed class CarouselTemplate : ITemplate
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -75,19 +75,12 @@ namespace Line
         [JsonConverter(typeof(EnumConverter<MessageType>))]
         public ImageSize ImageSize { get; set; } = ImageSize.Cover;
 
-        internal static CarouselTemplate Convert(ICarouselTemplate template)
+        void ITemplate.Validate()
         {
-            if (!(template is CarouselTemplate carouselTemplate))
-            {
-                carouselTemplate = new CarouselTemplate();
-            }
-
-            if (template.Columns == null)
+            if (Columns == null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
-            carouselTemplate.Columns = template.Columns;
-
-            return carouselTemplate;
+            Columns.Validate();
         }
     }
 }
