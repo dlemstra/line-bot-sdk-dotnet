@@ -32,6 +32,14 @@ namespace Line.Tests
                     message.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new TextMessage("test");
+
+                message.Validate();
+            }
         }
     }
 }

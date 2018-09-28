@@ -41,13 +41,25 @@ namespace Line.Tests
             {
                 ISendMessage message = new LocationMessage()
                 {
-                    Title = "Title",
+                    Title = "Title"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The address cannot be null.", () =>
                 {
                     message.Validate();
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new LocationMessage()
+                {
+                    Address = "Address",
+                    Title = "Title"
+                };
+
+                message.Validate();
             }
         }
     }

@@ -134,6 +134,27 @@ namespace Line.Tests
                     message.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new ImagemapMessage()
+                {
+                    BaseUrl = new Uri("https://foo.bar"),
+                    BaseSize = new ImagemapSize(1040, 1040),
+                    AlternativeText = "Alternative",
+                    Actions = new[]
+                    {
+                        new ImagemapMessageAction()
+                        {
+                            Area = new ImagemapArea(1, 2, 3, 4),
+                            Text = "Foo"
+                        }
+                    }
+                };
+
+                message.Validate();
+            }
         }
     }
 }

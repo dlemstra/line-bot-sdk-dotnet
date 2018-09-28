@@ -49,6 +49,18 @@ namespace Line.Tests
                     action.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplateAction action = new MessageAction()
+                {
+                    Text = "Foo",
+                    Label = "Test"
+                };
+
+                action.Validate();
+            }
         }
     }
 }

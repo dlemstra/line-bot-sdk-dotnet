@@ -49,6 +49,18 @@ namespace Line.Tests
                     message.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new StickerMessage()
+                {
+                    StickerId = "StickerId",
+                    PackageId = "PackageId"
+                };
+
+                message.Validate();
+            }
         }
     }
 }

@@ -76,6 +76,23 @@ namespace Line.Tests
                     template.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplate template = new ButtonsTemplate()
+                {
+                    ThumbnailUrl = new Uri("https://foo.bar"),
+                    Title = "ButtonsTitle",
+                    Text = "ButtonsText",
+                    Actions = new ITemplateAction[]
+                    {
+                        new PostbackAction() { Data = "Foo", Label = "Bar" }
+                    }
+                };
+
+                template.Validate();
+            }
         }
     }
 }

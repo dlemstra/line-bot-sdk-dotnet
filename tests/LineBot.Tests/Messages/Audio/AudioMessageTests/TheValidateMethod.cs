@@ -49,6 +49,18 @@ namespace Line.Tests
                     message.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new AudioMessage()
+                {
+                    Duration = 10000,
+                    Url = new Uri("https://foo.url")
+                };
+
+                message.Validate();
+            }
         }
     }
 }

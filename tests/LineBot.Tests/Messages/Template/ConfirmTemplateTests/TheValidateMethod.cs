@@ -98,6 +98,19 @@ namespace Line.Tests
                     template.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplate template = new ConfirmTemplate()
+                {
+                    Text = "ConfirmText",
+                    OkAction = new MessageAction() { Label = "Foo", Text = "Bar" },
+                    CancelAction = new MessageAction() { Label = "Foo", Text = "Bar" }
+                };
+
+                template.Validate();
+            }
         }
     }
 }

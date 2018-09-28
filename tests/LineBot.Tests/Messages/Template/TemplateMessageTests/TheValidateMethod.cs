@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -64,6 +63,22 @@ namespace Line.Tests
                 {
                     message.Validate();
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new TemplateMessage()
+                {
+                    AlternativeText = "AlternativeText",
+                    Template = new ButtonsTemplate()
+                    {
+                        Text = "Foo",
+                        Actions = new[] { new MessageAction() { Label = "Foo", Text = "Bar" } }
+                    }
+                };
+
+                message.Validate();
             }
         }
     }

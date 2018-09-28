@@ -70,6 +70,20 @@ namespace Line.Tests
                     column.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                var column = new CarouselColumn()
+                {
+                    ThumbnailUrl = new Uri("https://foo.bar"),
+                    Text = "CarouselColumnText",
+                    Title = "CarouselColumnTitle",
+                    Actions = new ITemplateAction[] { new PostbackAction() { Data = "Foo", Label = "Bar" } }
+                };
+
+                column.Validate();
+            }
         }
     }
 }

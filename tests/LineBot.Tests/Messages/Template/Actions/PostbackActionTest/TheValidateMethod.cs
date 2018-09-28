@@ -49,6 +49,18 @@ namespace Line.Tests
                     action.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplateAction action = new PostbackAction()
+                {
+                    Data = "PostbackData",
+                    Label = "PostbackLabel"
+                };
+
+                action.Validate();
+            }
         }
     }
 }

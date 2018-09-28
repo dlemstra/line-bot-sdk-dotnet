@@ -13,7 +13,6 @@
 // under the License.
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -64,6 +63,18 @@ namespace Line.Tests
                 {
                     column.Validate();
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                var column = new ImageCarouselColumn()
+                {
+                    ImageUrl = new Uri("https://foo.bar"),
+                    Action = new PostbackAction() { Data = "Foo", Label = "Bar" }
+                };
+
+                column.Validate();
             }
         }
     }

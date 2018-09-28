@@ -60,6 +60,24 @@ namespace Line.Tests
                     template.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplate template = new CarouselTemplate()
+                {
+                    Columns = new[]
+                    {
+                        new CarouselColumn()
+                        {
+                            Text = "Foo",
+                            Actions = new[] { new MessageAction() { Label = "Foo", Text = "Bar" } }
+                        }
+                    }
+                };
+
+                template.Validate();
+            }
         }
     }
 }

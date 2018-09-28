@@ -20,7 +20,7 @@ namespace Line.Tests
     public partial class UriActionTests
     {
         [TestClass]
-        public class TheConvertMethod
+        public class TheValidateMethod
         {
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
@@ -48,6 +48,18 @@ namespace Line.Tests
                 {
                     action.Validate();
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ITemplateAction action = new UriAction()
+                {
+                    Url = new Uri("https://foo.bar"),
+                    Label = "UriLabel"
+                };
+
+                action.Validate();
             }
         }
     }

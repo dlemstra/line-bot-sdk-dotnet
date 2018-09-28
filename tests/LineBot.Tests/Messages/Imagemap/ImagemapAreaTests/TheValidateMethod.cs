@@ -49,6 +49,18 @@ namespace Line.Tests
                     area.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                var area = new ImagemapArea()
+                {
+                    Height = 200,
+                    Width = 100
+                };
+
+                area.Validate();
+            }
         }
     }
 }

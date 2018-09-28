@@ -49,6 +49,18 @@ namespace Line.Tests
                     message.Validate();
                 });
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                ISendMessage message = new ImageMessage()
+                {
+                    Url = new Uri("https://foo.url"),
+                    PreviewUrl = new Uri("https://foo.previewUrl")
+                };
+
+                message.Validate();
+            }
         }
     }
 }

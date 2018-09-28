@@ -141,7 +141,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldNotThrowExceptionWhenMessageIsTemplageMessage()
+            public void ShouldNotThrowExceptionWhenMessageIsTemplateMessage()
             {
                 var message = new TemplateMessage()
                 {
