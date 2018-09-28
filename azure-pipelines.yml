@@ -10,7 +10,7 @@ jobs:
     displayName: 'Publish code coverage results'
     inputs:
       codeCoverageTool: Cobertura
-      summaryFileLocation: 'tests\LineBot.Tests\coverage.cobertura.xml'
+      summaryFileLocation: '$(Build.SourcesDirectory)\tests\LineBot.Tests\coverage.cobertura.xml'
 
 - job: Linux
   pool:
