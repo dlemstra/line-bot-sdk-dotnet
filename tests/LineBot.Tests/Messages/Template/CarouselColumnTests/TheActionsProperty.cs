@@ -40,7 +40,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of actions is 1.", () =>
                 {
-                    column.Actions = new ITemplateAction[] { };
+                    column.Actions = new IAction[] { };
                 });
             }
 
@@ -51,7 +51,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of actions is 3.", () =>
                 {
-                    column.Actions = new ITemplateAction[]
+                    column.Actions = new[]
                     {
                         new PostbackAction(),
                         new PostbackAction(),
@@ -66,7 +66,7 @@ namespace Line.Tests
             {
                 var column = new CarouselColumn()
                 {
-                    Actions = new ITemplateAction[]
+                    Actions = new IAction[]
                     {
                         new PostbackAction(),
                         new MessageAction(),
@@ -80,9 +80,9 @@ namespace Line.Tests
             {
                 var column = new CarouselColumn();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
                 {
-                    column.Actions = new ITemplateAction[] { new TestTemplateAction() };
+                    column.Actions = new[] { new TestAction() };
                 });
             }
 
@@ -91,9 +91,9 @@ namespace Line.Tests
             {
                 var column = new CarouselColumn();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
                 {
-                    column.Actions = new ITemplateAction[] { null };
+                    column.Actions = new IAction[] { null };
                 });
             }
         }

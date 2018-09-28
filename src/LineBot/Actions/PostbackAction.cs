@@ -18,18 +18,19 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a template uri action.
+    /// Encapsulates a template postback action.
     /// </summary>
-    public sealed class UriAction : ITemplateAction
+    public sealed class PostbackAction : IAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
-        private readonly TemplateActionType _type = TemplateActionType.Uri;
+        private readonly TemplateActionType _type = TemplateActionType.Postback;
 #pragma warning restore 0414
 
         private string _label;
-        private Uri _url;
+        private string _data;
+        private string _text;
 
         /// <summary>
         /// Gets or sets the label.
@@ -56,42 +57,56 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the url opened when the action is performed.
-        /// <para>Protocol: HTTP, HTTPS, TEL.</para>
-        /// <para>Max url length: 1000 characters.</para>
+        /// Gets or sets the string returned via webhook in the postback.data property of the <see cref="IPostback"/> event.
+        /// <para>Max: 300 characters.</para>
         /// </summary>
-        [JsonProperty("uri")]
-        public Uri Url
+        [JsonProperty("data")]
+        public string Data
         {
             get
             {
-                return _url;
+                return _data;
             }
 
             set
             {
-                if (value == null)
-                    throw new InvalidOperationException("The url cannot be null.");
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The data cannot be null or whitespace.");
 
-                if (!"http".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase) &&
-                    !"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase) &&
-                    !"tel".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidOperationException("The url should use the http, https or tel scheme.");
+                if (value.Length > 300)
+                    throw new InvalidOperationException("The data cannot be longer than 300 characters.");
 
-                if (value.ToString().Length > 1000)
-                    throw new InvalidOperationException("The url cannot be longer than 1000 characters.");
-
-                _url = value;
+                _data = value;
             }
         }
 
-        void ITemplateAction.Validate()
+        /// <summary>
+        /// Gets or sets the text sent when the action is performed.
+        /// </summary>
+        [JsonProperty("text")]
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+
+            set
+            {
+                if (value != null && value.Length > 300)
+                    throw new InvalidOperationException("The text cannot be longer than 300 characters.");
+
+                _text = value;
+            }
+        }
+
+        void IAction.Validate()
         {
             if (_label == null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (_url == null)
-                throw new InvalidOperationException("The url cannot be null.");
+            if (_data == null)
+                throw new InvalidOperationException("The data cannot be null.");
         }
     }
 }

@@ -38,9 +38,9 @@ namespace Line.Tests
             {
                 var template = new ConfirmTemplate();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
                 {
-                    template.OkAction = new TestTemplateAction();
+                    template.OkAction = new TestAction();
                 });
             }
         }

@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class UriActionTests
+    public partial class MessageActionTests
     {
         [TestClass]
         public class TheValidateMethod
@@ -25,9 +25,9 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                ITemplateAction action = new UriAction()
+                IAction action = new MessageAction()
                 {
-                    Url = new Uri("https://foo.bar")
+                    Text = "Foo"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
@@ -37,14 +37,14 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenUriIsNull()
+            public void ShouldThrowExceptionWhenTextIsNull()
             {
-                ITemplateAction action = new UriAction()
+                IAction action = new MessageAction()
                 {
-                    Label = "UriLabel"
+                    Label = "Test"
                 };
 
-                ExceptionAssert.Throws<InvalidOperationException>("The url cannot be null.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
                 {
                     action.Validate();
                 });
@@ -53,10 +53,10 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValid()
             {
-                ITemplateAction action = new UriAction()
+                IAction action = new MessageAction()
                 {
-                    Url = new Uri("https://foo.bar"),
-                    Label = "UriLabel"
+                    Text = "Foo",
+                    Label = "Test"
                 };
 
                 action.Validate();

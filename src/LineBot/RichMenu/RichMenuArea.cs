@@ -22,14 +22,14 @@ namespace Line
     /// </summary>
     public class RichMenuArea
     {
-        private ITemplateAction _action;
+        private IAction _action;
         private RichMenuBounds _bounds;
 
         /// <summary>
         /// Gets or sets the action performed when the area is tapped.
         /// </summary>
         [JsonProperty("action")]
-        public ITemplateAction Action
+        public IAction Action
         {
             get => _action;
             set

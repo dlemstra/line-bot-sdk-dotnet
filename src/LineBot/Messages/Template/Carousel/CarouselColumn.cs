@@ -27,7 +27,7 @@ namespace Line
         private Uri _thumbnailUrl;
         private string _title;
         private string _text;
-        private IEnumerable<ITemplateAction> _actions;
+        private IEnumerable<IAction> _actions;
 
         /// <summary>
         /// Gets or sets the image url for the thumbnail.
@@ -115,7 +115,7 @@ namespace Line
         /// <para>Max: 4.</para>
         /// </summary>
         [JsonProperty("actions")]
-        public IEnumerable<ITemplateAction> Actions
+        public IEnumerable<IAction> Actions
         {
             get
             {

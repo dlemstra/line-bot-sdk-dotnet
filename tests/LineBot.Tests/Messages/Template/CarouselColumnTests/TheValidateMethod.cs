@@ -29,7 +29,7 @@ namespace Line.Tests
                 {
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[] { new PostbackAction() }
+                    Actions = new[] { new PostbackAction() }
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
@@ -62,7 +62,7 @@ namespace Line.Tests
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Text = "CarouselColumnText",
                     Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[] { new PostbackAction() }
+                    Actions = new[] { new PostbackAction() }
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
@@ -79,7 +79,7 @@ namespace Line.Tests
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Text = "CarouselColumnText",
                     Title = "CarouselColumnTitle",
-                    Actions = new ITemplateAction[] { new PostbackAction() { Data = "Foo", Label = "Bar" } }
+                    Actions = new[] { new PostbackAction() { Data = "Foo", Label = "Bar" } }
                 };
 
                 column.Validate();

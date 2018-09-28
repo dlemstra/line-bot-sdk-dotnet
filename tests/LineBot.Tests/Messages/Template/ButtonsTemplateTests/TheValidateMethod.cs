@@ -29,7 +29,7 @@ namespace Line.Tests
                 {
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "ButtonsTitle",
-                    Actions = new ITemplateAction[]
+                    Actions = new[]
                     {
                         new PostbackAction()
                     }
@@ -65,7 +65,7 @@ namespace Line.Tests
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "ButtonsTitle",
                     Text = "ButtonsText",
-                    Actions = new ITemplateAction[]
+                    Actions = new[]
                     {
                         new PostbackAction()
                     }
@@ -85,7 +85,7 @@ namespace Line.Tests
                     ThumbnailUrl = new Uri("https://foo.bar"),
                     Title = "ButtonsTitle",
                     Text = "ButtonsText",
-                    Actions = new ITemplateAction[]
+                    Actions = new[]
                     {
                         new PostbackAction() { Data = "Foo", Label = "Bar" }
                     }

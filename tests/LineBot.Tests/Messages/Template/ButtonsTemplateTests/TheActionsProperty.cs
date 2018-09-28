@@ -40,7 +40,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of actions is 1.", () =>
                 {
-                    template.Actions = new ITemplateAction[] { };
+                    template.Actions = new IAction[] { };
                 });
             }
 
@@ -51,7 +51,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of actions is 4.", () =>
                 {
-                    template.Actions = new ITemplateAction[]
+                    template.Actions = new[]
                     {
                         new PostbackAction(),
                         new PostbackAction(),
@@ -67,7 +67,7 @@ namespace Line.Tests
             {
                 var template = new ButtonsTemplate()
                 {
-                    Actions = new ITemplateAction[]
+                    Actions = new IAction[]
                     {
                         new PostbackAction(),
                         new MessageAction(),
@@ -82,9 +82,9 @@ namespace Line.Tests
             {
                 var template = new ButtonsTemplate();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
                 {
-                    template.Actions = new ITemplateAction[] { new TestTemplateAction() };
+                    template.Actions = new[] { new TestAction() };
                 });
             }
 
@@ -93,9 +93,9 @@ namespace Line.Tests
             {
                 var template = new ButtonsTemplate();
 
-                ExceptionAssert.Throws<NotSupportedException>("The template action type is invalid. Supported types are: PostbackAction, MessageAction and UriAction.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
                 {
-                    template.Actions = new ITemplateAction[] { null };
+                    template.Actions = new IAction[] { null };
                 });
             }
         }

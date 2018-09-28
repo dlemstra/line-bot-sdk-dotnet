@@ -23,7 +23,7 @@ namespace Line
     public sealed class ImageCarouselColumn
     {
         private Uri _imageUrl;
-        private ITemplateAction _action;
+        private IAction _action;
 
         /// <summary>
         /// Gets or sets the image url for the image carousel.
@@ -61,7 +61,7 @@ namespace Line
         /// Gets or sets the action when image is tapped.
         /// </summary>
         [JsonProperty("action")]
-        public ITemplateAction Action
+        public IAction Action
         {
             get
             {

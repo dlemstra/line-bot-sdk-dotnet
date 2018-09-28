@@ -17,7 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    public partial class MessageActionTests
+    public partial class PostbackActionTest
     {
         [TestClass]
         public class TheValidateMethod
@@ -25,9 +25,9 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                ITemplateAction action = new MessageAction()
+                IAction action = new PostbackAction()
                 {
-                    Text = "Foo"
+                    Data = "PostbackData"
                 };
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
@@ -39,12 +39,12 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
-                ITemplateAction action = new MessageAction()
+                IAction action = new PostbackAction()
                 {
-                    Label = "Test"
+                    Label = "PostbackLabel"
                 };
 
-                ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null.", () =>
                 {
                     action.Validate();
                 });
@@ -53,10 +53,10 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValid()
             {
-                ITemplateAction action = new MessageAction()
+                IAction action = new PostbackAction()
                 {
-                    Text = "Foo",
-                    Label = "Test"
+                    Data = "PostbackData",
+                    Label = "PostbackLabel"
                 };
 
                 action.Validate();

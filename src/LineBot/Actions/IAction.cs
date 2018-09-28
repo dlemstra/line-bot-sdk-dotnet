@@ -15,12 +15,12 @@
 namespace Line
 {
     /// <summary>
-    /// Encapsulates template actions.
+    /// Encapsulates actions.
     /// </summary>
-    public interface ITemplateAction
+    public interface IAction
     {
         /// <summary>
-        /// Validates the template action.
+        /// Validates the action.
         /// </summary>
         void Validate();
     }

@@ -20,7 +20,7 @@ namespace Line
     /// <summary>
     /// Encapsulates a template message action.
     /// </summary>
-    public sealed class MessageAction : ITemplateAction
+    public sealed class MessageAction : IAction
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
@@ -78,7 +78,7 @@ namespace Line
             }
         }
 
-        void ITemplateAction.Validate()
+        void IAction.Validate()
         {
             if (_label == null)
                 throw new InvalidOperationException("The label cannot be null.");

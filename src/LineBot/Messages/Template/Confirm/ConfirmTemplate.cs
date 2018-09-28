@@ -29,8 +29,8 @@ namespace Line
 #pragma warning restore 0414
 
         private string _text;
-        private ITemplateAction _okAction;
-        private ITemplateAction _cancelAction;
+        private IAction _okAction;
+        private IAction _cancelAction;
 
         /// <summary>
         /// Gets or sets the message text.
@@ -60,7 +60,7 @@ namespace Line
         /// Gets or sets the action for the OK button.
         /// </summary>
         [JsonIgnore]
-        public ITemplateAction OkAction
+        public IAction OkAction
         {
             get
             {
@@ -82,7 +82,7 @@ namespace Line
         /// Gets or sets the action for the Cancel button.
         /// </summary>
         [JsonIgnore]
-        public ITemplateAction CancelAction
+        public IAction CancelAction
         {
             get
             {
@@ -101,7 +101,7 @@ namespace Line
         }
 
         [JsonProperty("actions")]
-        private ITemplateAction[] Actions => new ITemplateAction[] { _okAction, _cancelAction };
+        private IAction[] Actions => new IAction[] { _okAction, _cancelAction };
 
         void ITemplate.Validate()
         {

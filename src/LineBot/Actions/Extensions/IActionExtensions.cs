@@ -17,9 +17,9 @@ using System.Collections.Generic;
 
 namespace Line
 {
-    internal static class ITemplateActionExtensions
+    internal static class IActionExtensions
     {
-        public static void CheckActionType(this ITemplateAction self)
+        public static void CheckActionType(this IAction self)
         {
             if (self is PostbackAction)
                 return;
@@ -30,10 +30,10 @@ namespace Line
             if (self is UriAction)
                 return;
 
-            throw new NotSupportedException($"The template action type is invalid. Supported types are: {nameof(PostbackAction)}, {nameof(MessageAction)} and {nameof(UriAction)}.");
+            throw new NotSupportedException($"The action type is invalid.");
         }
 
-        public static void Validate(this IEnumerable<ITemplateAction> self)
+        public static void Validate(this IEnumerable<IAction> self)
         {
             foreach (var action in self)
             {
