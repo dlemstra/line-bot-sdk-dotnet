@@ -77,9 +77,9 @@ namespace Line
 
             richMenu.Validate();
 
-            StringContent content = CreateStringContent(richMenu);
+            var content = CreateStringContent(richMenu);
 
-            HttpResponseMessage response = await _client.PostAsync($"richmenu", content);
+            var response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();
 
             string stringResponseResult = await response.Content.ReadAsStringAsync();
@@ -110,7 +110,7 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(messageId), messageId);
 
-            HttpResponseMessage response = await _client.GetAsync($"message/{messageId}/content");
+            var response = await _client.GetAsync($"message/{messageId}/content");
             await response.CheckResult();
 
             if (response.Content == null)
@@ -128,20 +128,20 @@ namespace Line
         {
             Guard.NotNull(nameof(request), request);
 
-            byte[] content = await request.Body.ToArrayAsync();
+            var content = await request.Body.ToArrayAsync();
 
             if (content == null)
                 return Enumerable.Empty<ILineEvent>();
 
             await _logger.LogReceivedEvents(content);
 
-            string signature = request.Headers["X-Line-Signature"];
+            var signature = request.Headers["X-Line-Signature"];
 
             _signatureValidator.Validate(content, signature);
 
-            string jsonContent = Encoding.UTF8.GetString(content);
+            var jsonContent = Encoding.UTF8.GetString(content);
 
-            LineEventCollection eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
+            var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
             if (eventCollection == null || eventCollection.Events == null)
                 return Enumerable.Empty<ILineEvent>();
@@ -158,7 +158,7 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
-            HttpResponseMessage response = await _client.GetAsync($"profile/{userId}");
+            var response = await _client.GetAsync($"profile/{userId}");
             await response.CheckResult();
 
             return await response.Content.DeserializeObject<UserProfile>();
@@ -185,7 +185,7 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(groupId), groupId);
 
-            HttpResponseMessage response = await _client.PostAsync($"group/{groupId}/leave", null);
+            var response = await _client.PostAsync($"group/{groupId}/leave", null);
             await response.CheckResult();
 
             return this;
@@ -214,7 +214,7 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(roomId), roomId);
 
-            HttpResponseMessage response = await _client.PostAsync($"room/{roomId}/leave", null);
+            var response = await _client.PostAsync($"room/{roomId}/leave", null);
             await response.CheckResult();
 
             return this;
@@ -292,11 +292,11 @@ namespace Line
             {
                 foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
                 {
-                    MulticastMessage multicast = new MulticastMessage(toSet, messageSet);
+                    var multicast = new MulticastMessage(toSet, messageSet);
 
-                    StringContent content = CreateStringContent(multicast);
+                    var content = CreateStringContent(multicast);
 
-                    HttpResponseMessage response = await _client.PostAsync($"message/multicast", content);
+                    var response = await _client.PostAsync($"message/multicast", content);
                     await response.CheckResult();
                 }
             }
@@ -416,11 +416,11 @@ namespace Line
 
             foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
             {
-                PushMessage push = new PushMessage(to, messageSet);
+                var push = new PushMessage(to, messageSet);
 
-                StringContent content = CreateStringContent(push);
+                var content = CreateStringContent(push);
 
-                HttpResponseMessage response = await _client.PostAsync($"message/push", content);
+                var response = await _client.PostAsync($"message/push", content);
                 await response.CheckResult();
             }
 
@@ -479,11 +479,11 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(replyToken), replyToken);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            ReplyMessage reply = new ReplyMessage(replyToken, messages);
+            var reply = new ReplyMessage(replyToken, messages);
 
-            StringContent content = CreateStringContent(reply);
+            var content = CreateStringContent(reply);
 
-            HttpResponseMessage response = await _client.PostAsync($"message/reply", content);
+            var response = await _client.PostAsync($"message/reply", content);
             await response.CheckResult();
 
             return this;
@@ -491,7 +491,7 @@ namespace Line
 
         private static StringContent CreateStringContent<T>(T value)
         {
-            string content = JsonConvert.SerializeObject(value);
+            var content = JsonConvert.SerializeObject(value);
 
             return new StringContent(content, Encoding.UTF8, "application/json");
         }
