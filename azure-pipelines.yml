@@ -6,6 +6,11 @@ jobs:
     vmImage: 'VS2017-Win2016'
   steps:
   - template: build/build.yml
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage results'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: 'tests\LineBot.Tests\coverage.cobertura.xml'
 
 - job: Linux
   pool:
