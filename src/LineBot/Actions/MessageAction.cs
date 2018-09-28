@@ -24,8 +24,8 @@ namespace Line
     {
 #pragma warning disable 0414 // Suppress value is never used.
         [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<TemplateActionType>))]
-        private readonly TemplateActionType _type = TemplateActionType.Message;
+        [JsonConverter(typeof(EnumConverter<ActionType>))]
+        private readonly ActionType _type = ActionType.Message;
 #pragma warning restore 0414
 
         private string _label;

@@ -14,7 +14,7 @@
 
 namespace Line
 {
-    internal enum TemplateActionType
+    internal enum ActionType
     {
         Postback,
         Message,
