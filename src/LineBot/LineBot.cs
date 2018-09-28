@@ -82,7 +82,7 @@ namespace Line
             var response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();
 
-            string stringResponseResult = await response.Content.ReadAsStringAsync();
+            var stringResponseResult = await response.Content.ReadAsStringAsync();
 
             var objectResult = JsonConvert.DeserializeObject<RichMenuIdResponse>(stringResponseResult);
 
