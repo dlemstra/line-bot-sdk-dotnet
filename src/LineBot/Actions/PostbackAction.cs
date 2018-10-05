@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a template postback action.
+    /// Encapsulates a postback action.
     /// </summary>
     public sealed class PostbackAction : IAction
     {

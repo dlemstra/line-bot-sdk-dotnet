@@ -20,7 +20,7 @@ namespace Line
     public interface ISendMessage
     {
         /// <summary>
-        /// Validates the template action.
+        /// Validates the message.
         /// </summary>
         void Validate();
     }
