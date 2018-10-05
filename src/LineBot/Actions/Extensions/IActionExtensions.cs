@@ -30,6 +30,9 @@ namespace Line
             if (self is UriAction)
                 return;
 
+			if (self is CameraAction)
+				return;
+
             throw new NotSupportedException($"The action type is invalid.");
         }
 
