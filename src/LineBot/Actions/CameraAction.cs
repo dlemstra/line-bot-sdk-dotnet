@@ -34,6 +34,7 @@ namespace Line
         /// Gets or sets the label.
         /// <para>Max: 20 characters.</para>
         /// </summary>
+        [JsonProperty("label")]
         public string Label
         {
             get
