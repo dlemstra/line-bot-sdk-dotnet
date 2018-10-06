@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a template message action.
+    /// Encapsulates a message action.
     /// </summary>
     public sealed class MessageAction : IAction
     {

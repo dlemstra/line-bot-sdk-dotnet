@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates a template uri action.
+    /// Encapsulates a uri action.
     /// </summary>
     public sealed class UriAction : IAction
     {
