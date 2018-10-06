@@ -40,7 +40,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The name cannot be null or whitespace.", () =>
                 {
-                    richMenu.Name = " ";
+                    richMenu.Name = StringTools.Whitespace;
                 });
             }
 
