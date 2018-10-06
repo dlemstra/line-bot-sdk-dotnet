@@ -113,7 +113,7 @@ namespace Line
             }
         }
 
-        internal void Validate()
+        internal virtual void Validate()
         {
             if (_areas == null)
                 throw new InvalidOperationException("The areas cannot be null.");
