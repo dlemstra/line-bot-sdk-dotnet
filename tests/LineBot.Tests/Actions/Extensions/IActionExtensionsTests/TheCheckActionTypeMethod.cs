@@ -44,6 +44,14 @@ namespace Line.Tests
 
                 IActionExtensions.CheckActionType(action);
             }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenActionIsCameraAction()
+            {
+                var action = new CameraAction();
+
+                IActionExtensions.CheckActionType(action);
+            }
         }
     }
 }
