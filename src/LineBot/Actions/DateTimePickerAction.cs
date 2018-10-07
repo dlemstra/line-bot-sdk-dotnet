@@ -23,8 +23,19 @@ namespace Line
     /// </summary>
     public enum DateTimePickerMode
     {
+        /// <summary>
+        /// Picker Mode Date.
+        /// </summary>
         Date,
+
+        /// <summary>
+        /// Picker Mode Time.
+        /// </summary>
         Time,
+
+        /// <summary>
+        /// Picker Mode DateTime.
+        /// </summary>
         DateTime
     }
 
