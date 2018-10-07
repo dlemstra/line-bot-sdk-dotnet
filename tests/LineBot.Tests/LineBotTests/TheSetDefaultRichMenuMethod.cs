@@ -82,7 +82,7 @@ namespace Line.Tests
             {
                 ILineBot bot = TestConfiguration.CreateBot();
 
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
+                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
                 {
                     await bot.SetDefaultMenu(null);
                 });
