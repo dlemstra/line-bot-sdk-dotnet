@@ -120,6 +120,24 @@ namespace Line
         }
 
         /// <summary>
+        /// Returns the ID of the default rich menu set.
+        /// </summary>
+        /// <returns>The ID of the default rich menu set.</returns>
+        public async Task<string> GetDefaultRichMenu()
+        {
+            var response = await _client.GetAsync($"user/all/richmenu");
+            await response.CheckResult();
+
+            var jsonContent = await response.Content.ReadAsStringAsync();
+            var richMenuIdResponse = JsonConvert.DeserializeObject<RichMenuIdResponse>(jsonContent);
+
+            if (richMenuIdResponse == null)
+                return null;
+
+            return richMenuIdResponse.RichMenuId;
+        }
+
+        /// <summary>
         /// Returns the events from the specified request.
         /// </summary>
         /// <param name="request">The http request.</param>

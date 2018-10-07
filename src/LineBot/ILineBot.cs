@@ -45,6 +45,12 @@ namespace Line
         Task<byte[]> GetMessageContent(string messageId);
 
         /// <summary>
+        /// Returns the ID of the default rich menu set.
+        /// </summary>
+        /// <returns>The ID of the default rich menu set.</returns>
+        Task<string> GetDefaultRichMenu();
+
+        /// <summary>
         /// Returns the events from the specified request.
         /// </summary>
         /// <param name="request">The http request.</param>
