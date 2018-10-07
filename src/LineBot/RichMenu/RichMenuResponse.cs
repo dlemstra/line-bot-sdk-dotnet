@@ -20,29 +20,9 @@ namespace Line
     /// <summary>
     /// Rich menu response object.
     /// </summary>
-    internal class RichMenuResponse : RichMenu, IRichMenuResponse
+    internal sealed class RichMenuResponse : RichMenu, IRichMenuResponse
     {
-        private string _id;
-
         [JsonProperty("richMenuId")]
-        public string Id
-        {
-            get => _id;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new InvalidOperationException("The rich menu id cannot be null or whitespace.");
-
-                _id = value;
-            }
-        }
-
-        internal override void Validate()
-        {
-            base.Validate();
-
-            if (_id == null)
-                throw new InvalidOperationException("The rich menu id cannot be null.");
-        }
+        public string Id { get; set; }
     }
 }

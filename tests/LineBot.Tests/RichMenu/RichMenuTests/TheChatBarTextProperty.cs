@@ -40,7 +40,7 @@ namespace Line.Tests
 
                 ExceptionAssert.Throws<InvalidOperationException>("The chat bar text cannot be null or whitespace.", () =>
                 {
-                    richMenu.ChatBarText = StringTools.Whitespace;
+                    richMenu.ChatBarText = " ";
                 });
             }
 
