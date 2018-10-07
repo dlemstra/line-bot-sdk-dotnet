@@ -52,7 +52,7 @@ namespace Line.Tests
             [DeploymentItem(WhitespaceJson)]
             public async Task ReturnsNullIdWhenResponseContainsWhitespace()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(EmptyObjectJson);
+                TestHttpClient httpClient = TestHttpClient.Create(WhitespaceJson);
                 ILineBot bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
@@ -60,7 +60,6 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(WhitespaceJson)]
             public async Task ThrowsExceptionWhenResponseIsError()
             {
                 TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();

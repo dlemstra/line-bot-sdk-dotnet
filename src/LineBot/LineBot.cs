@@ -128,11 +128,11 @@ namespace Line
             var response = await _client.GetAsync($"user/all/richmenu");
             await response.CheckResult();
 
-            if (response.Content == null)
-                return null;
-
             var jsonContent = await response.Content.ReadAsStringAsync();
             var richMenuIdResponse = JsonConvert.DeserializeObject<RichMenuIdResponse>(jsonContent);
+
+            if (richMenuIdResponse == null)
+                return null;
 
             return richMenuIdResponse.RichMenuId;
         }
