@@ -489,6 +489,37 @@ namespace Line
             return this;
         }
 
+        /// <summary>
+        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> SetDefaultMenu(IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            await SetDefaultRichMenu(richMenu.Id);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> SetDefaultRichMenu(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var emptyObject = new object();
+            var content = CreateStringContent(emptyObject);
+            var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", content);
+            await response.CheckResult();
+
+            return this;
+        }
+
         private static StringContent CreateStringContent<T>(T value)
         {
             var content = JsonConvert.SerializeObject(value);
