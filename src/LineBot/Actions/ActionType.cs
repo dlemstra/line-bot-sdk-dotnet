@@ -19,6 +19,7 @@ namespace Line
         Postback,
         Message,
         Uri,
-        Camera
+        Camera,
+        DateTimePicker
     }
 }
