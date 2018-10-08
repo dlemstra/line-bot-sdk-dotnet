@@ -26,9 +26,9 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldCreateSerializeableObject()
             {
-                var initial = DateTime.Now;
-                var min = DateTime.Now.AddDays(-2);
-                var max = DateTime.Now.AddDays(2);
+                var initial = new DateTime(2018, 10, 8, 10, 30, 0);
+                var min = new DateTime(2018, 10, 8, 10, 00, 0);
+                var max = new DateTime(2018, 10, 8, 11, 00, 0);
 
                 var action = new DateTimePickerAction
                 {
@@ -39,9 +39,8 @@ namespace Line.Tests
                     Min = min,
                     Max = max
                 };
-
                 string serialized = JsonConvert.SerializeObject(action);
-                Assert.AreEqual($"{{\"type\":\"datetimepicker\",\"label\":\"Foo\",\"data\":\"Bar\",\"mode\":\"datetime\",\"initial\":{JsonConvert.SerializeObject(initial)},\"min\":{JsonConvert.SerializeObject(min)},\"max\":{JsonConvert.SerializeObject(max)}}}", serialized);
+                Assert.AreEqual(@"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""datetime"",""initial"":""2018-10-08T10:30:00"",""min"":""2018-10-08T10:00:00"",""max"":""2018-10-08T11:00:00""}", serialized);
             }
         }
     }

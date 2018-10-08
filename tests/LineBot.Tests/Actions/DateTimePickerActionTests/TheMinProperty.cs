@@ -26,11 +26,26 @@ namespace Line.Tests
             public void ShouldThrowExceptionWhenMinIsGreaterThanMax()
             {
                 var action = new DateTimePickerAction();
+                var min = new DateTime(2018, 10, 8);
+                var max = new DateTime(2018, 10, 7);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The min must be less than the max.", () =>
                 {
-                    action.Max = DateTime.Now;
-                    action.Min = DateTime.Now.AddDays(1);
+                    action.Max = max;
+                    action.Min = min;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenMinIsEqualToMax()
+            {
+                var action = new DateTimePickerAction();
+                var now = new DateTime(2018, 10, 8);
+
+                ExceptionAssert.Throws<InvalidOperationException>("The min must be less than the max.", () =>
+                {
+                    action.Max = now;
+                    action.Min = now;
                 });
             }
 
@@ -38,13 +53,14 @@ namespace Line.Tests
             public void ShouldNotThrowExceptionWhenMinIsLessThanMax()
             {
                 var action = new DateTimePickerAction();
-                var now = DateTime.Now;
+                var min = new DateTime(2018, 10, 7);
+                var max = new DateTime(2018, 10, 8);
 
-                action.Max = now;
-                action.Min = now.AddDays(-1);
+                action.Max = max;
+                action.Min = min;
 
-                Assert.AreEqual(action.Max, now);
-                Assert.AreEqual(action.Min, now.AddDays(-1));
+                Assert.AreEqual(action.Max, max);
+                Assert.AreEqual(action.Min, min);
             }
         }
     }

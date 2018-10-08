@@ -23,14 +23,29 @@ namespace Line.Tests
         public class TheMaxProperty
         {
             [TestMethod]
-            public void ShouldThrowExceptionWhenMaxIsLessThanMax()
+            public void ShouldThrowExceptionWhenMaxIsLessThanMin()
             {
                 var action = new DateTimePickerAction();
+                var min = new DateTime(2018, 10, 8);
+                var max = new DateTime(2018, 10, 7);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The max must be greater than the min.", () =>
                 {
-                    action.Min = DateTime.Now.AddDays(1);
-                    action.Max = DateTime.Now;
+                    action.Min = min;
+                    action.Max = max;
+                });
+            }
+
+            [TestMethod]
+            public void ShouldThrowExceptionWhenMaxIsEqualToMin()
+            {
+                var action = new DateTimePickerAction();
+                var dt = new DateTime(2018, 10, 8);
+
+                ExceptionAssert.Throws<InvalidOperationException>("The min must be less than the max.", () =>
+                {
+                    action.Max = dt;
+                    action.Min = dt;
                 });
             }
 
@@ -38,13 +53,14 @@ namespace Line.Tests
             public void ShouldNotThrowExceptionWhenMaxIsGreaterThanMin()
             {
                 var action = new DateTimePickerAction();
-                var now = DateTime.Now;
+                var min = new DateTime(2018, 10, 7);
+                var max = new DateTime(2018, 10, 8);
 
-                action.Min = now.AddDays(-1);
-                action.Max = now;
+                action.Min = min;
+                action.Max = max;
 
-                Assert.AreEqual(action.Min, now.AddDays(-1));
-                Assert.AreEqual(action.Max, now);
+                Assert.AreEqual(action.Min, min);
+                Assert.AreEqual(action.Max, max);
             }
         }
     }
