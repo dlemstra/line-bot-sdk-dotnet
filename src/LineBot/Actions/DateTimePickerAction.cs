@@ -19,22 +19,22 @@ using Newtonsoft.Json.Converters;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the datetimepicker mode property.
+    /// Encapsulates the datetimepicker mode.
     /// </summary>
     public enum DateTimePickerMode
     {
         /// <summary>
-        /// Picker Mode Date.
+        /// Pick date.
         /// </summary>
         Date,
 
         /// <summary>
-        /// Picker Mode Time.
+        /// Pick time.
         /// </summary>
         Time,
 
         /// <summary>
-        /// Picker Mode DateTime.
+        /// Pick date and time.
         /// </summary>
         DateTime
     }
@@ -136,7 +136,11 @@ namespace Line
 
             set
             {
-                _initial = value;
+                var adjustedValue = AdjustedDateTimeByMode(value);
+                if ((Min.HasValue && adjustedValue < Min.Value) || (Max.HasValue && adjustedValue > Max.Value))
+                    throw new InvalidOperationException("The initial must be between the min and the max.");
+
+                _initial = adjustedValue;
             }
         }
 
@@ -153,10 +157,11 @@ namespace Line
 
             set
             {
-                if (Max.HasValue && value > Max.Value)
+                var adjustedValue = AdjustedDateTimeByMode(value);
+                if (Max.HasValue && adjustedValue >= Max.Value)
                     throw new InvalidOperationException("The min must be less than the max.");
 
-                _min = value;
+                _min = adjustedValue;
             }
         }
 
@@ -173,10 +178,11 @@ namespace Line
 
             set
             {
-                if (Min.HasValue && value < Min.Value)
+                var adjustedValue = AdjustedDateTimeByMode(value);
+                if (Min.HasValue && adjustedValue <= Min.Value)
                     throw new InvalidOperationException("The max must be greater than the min.");
 
-                _max = value;
+                _max = adjustedValue;
             }
         }
 
@@ -187,9 +193,21 @@ namespace Line
 
             if (_data == null)
                 throw new InvalidOperationException("The data cannot be null.");
+        }
 
-            if (Min.HasValue && Max.HasValue && Min.Value > Max.Value)
-                throw new InvalidOperationException("The min must be less than the max");
+        private DateTime? AdjustedDateTimeByMode(DateTime? value)
+        {
+            if (value == null)
+                return null;
+
+            DateTime adjustedDateTime = value.Value;
+
+            if (_mode == DateTimePickerMode.Date)
+                adjustedDateTime = new DateTime(adjustedDateTime.Year, adjustedDateTime.Month, adjustedDateTime.Day, 0, 0, 0);
+            else if (_mode == DateTimePickerMode.Time)
+                adjustedDateTime = new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, adjustedDateTime.Hour, adjustedDateTime.Minute, adjustedDateTime.Second);
+
+            return adjustedDateTime;
         }
     }
 }
