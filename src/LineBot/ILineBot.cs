@@ -226,14 +226,14 @@ namespace Line
         Task<ILineBot> Reply(string replyToken, params ISendMessage[] messages);
 
         /// <summary>
-        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// Sets the default rich menu, which is displayed to all users who have added the bot as a friend and are not linked to any per-user rich menu.
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
         /// <returns>.</returns>
         Task<ILineBot> SetDefaultMenu(IRichMenuResponse richMenu);
 
         /// <summary>
-        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// Sets the default rich menu, which is displayed to all users who have added the bot as a friend and are not linked to any per-user rich menu.
         /// </summary>
         /// <param name="richMenuId">The rich menu id.</param>
         /// <returns>.</returns>

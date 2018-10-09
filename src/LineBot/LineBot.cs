@@ -490,7 +490,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// Sets the default rich menu, which is displayed to all users who have added the bot as a friend and are not linked to any per-user rich menu.
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
         /// <returns>.</returns>
@@ -504,7 +504,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Sets the default rich menu, which is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+        /// Sets the default rich menu, which is displayed to all users who have added the bot as a friend and are not linked to any per-user rich menu.
         /// </summary>
         /// <param name="richMenuId">The rich menu id.</param>
         /// <returns>.</returns>
@@ -512,9 +512,7 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var emptyObject = new object();
-            var content = CreateStringContent(emptyObject);
-            var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", content);
+            var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", null);
             await response.CheckResult();
 
             return this;
