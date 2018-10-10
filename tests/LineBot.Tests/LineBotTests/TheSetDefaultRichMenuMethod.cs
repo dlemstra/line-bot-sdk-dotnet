@@ -24,128 +24,136 @@ namespace Line.Tests
         [TestClass]
         public class TheSetDefaultRichMenuMethod
         {
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
+            [TestClass]
+            public class WithRichMenuId
             {
-                var bot = TestConfiguration.CreateBot();
-
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
-                    await bot.SetDefaultRichMenu(null);
-                });
-            }
+                    var bot = TestConfiguration.CreateBot();
 
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
-            {
-                var bot = TestConfiguration.CreateBot();
+                    await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
+                    {
+                        await bot.SetDefaultRichMenu(null);
+                    });
+                }
 
-                await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
-                    await bot.SetDefaultRichMenu(string.Empty);
-                });
-            }
+                    var bot = TestConfiguration.CreateBot();
 
-            [TestMethod]
-            public async Task ShouldSetDefaultRichMenuWhenCorrectInputCallsApi()
-            {
-                var input = new byte[0];
-                var sampleId = Guid.NewGuid().ToString();
+                    await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                    {
+                        await bot.SetDefaultRichMenu(string.Empty);
+                    });
+                }
 
-                var httpClient = TestHttpClient.ThatReturnsData(input);
-                var bot = TestConfiguration.CreateBot(httpClient);
-                await bot.SetDefaultRichMenu(sampleId);
-
-                Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                Assert.AreEqual($"/user/all/richmenu/{sampleId}", httpClient.RequestPath);
-            }
-
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenSetDefaultRichMenuUnsuccessfulApiCall()
-            {
-                var sampleId = Guid.NewGuid().ToString();
-
-                var httpClient = TestHttpClient.ThatReturnsAnError();
-                var bot = TestConfiguration.CreateBot(httpClient);
-
-                await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
+                [TestMethod]
+                public async Task ShouldSetDefaultRichMenuWhenCorrectInputCallsApi()
                 {
+                    var input = new byte[0];
+                    var sampleId = Guid.NewGuid().ToString();
+
+                    var httpClient = TestHttpClient.ThatReturnsData(input);
+                    var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetDefaultRichMenu(sampleId);
-                });
+
+                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.AreEqual($"/user/all/richmenu/{sampleId}", httpClient.RequestPath);
+                }
+
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
+                {
+                    var sampleId = Guid.NewGuid().ToString();
+
+                    var httpClient = TestHttpClient.ThatReturnsAnError();
+                    var bot = TestConfiguration.CreateBot(httpClient);
+
+                    await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
+                    {
+                        await bot.SetDefaultRichMenu(sampleId);
+                    });
+                }
             }
 
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuResponseIdIsNull()
+            [TestClass]
+            public class WithRichMenuResponse
             {
-                var bot = TestConfiguration.CreateBot();
-
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenRichMenuResponseIdIsNull()
                 {
-                    await bot.SetDefaultMenu(null);
-                });
-            }
+                    var bot = TestConfiguration.CreateBot();
 
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenusIdIsNull()
-            {
-                var bot = TestConfiguration.CreateBot();
+                    await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
+                    {
+                        await bot.SetDefaultMenu(null);
+                    });
+                }
 
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenRichMenusIdIsNull()
                 {
-                    await bot.SetDefaultMenu(new RichMenuResponse());
-                });
-            }
+                    var bot = TestConfiguration.CreateBot();
 
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenusIdIsEmpty()
-            {
-                var richMenuResponse = new RichMenuResponse()
+                    await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
+                    {
+                        await bot.SetDefaultMenu(new RichMenuResponse());
+                    });
+                }
+
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenRichMenusIdIsEmpty()
                 {
-                    Id = string.Empty
-                };
+                    var richMenuResponse = new RichMenuResponse()
+                    {
+                        Id = string.Empty
+                    };
 
-                var bot = TestConfiguration.CreateBot();
+                    var bot = TestConfiguration.CreateBot();
 
-                await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                    await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                    {
+                        await bot.SetDefaultMenu(richMenuResponse);
+                    });
+                }
+
+                [TestMethod]
+                public async Task ShouldSetDefaultMenuIdWhenCorrectInputCallsApi()
                 {
+                    var input = new byte[0];
+                    var sampleId = Guid.NewGuid().ToString();
+                    var richMenuResponse = new RichMenuResponse()
+                    {
+                        Id = sampleId
+                    };
+
+                    var httpClient = TestHttpClient.ThatReturnsData(input);
+                    var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetDefaultMenu(richMenuResponse);
-                });
-            }
 
-            [TestMethod]
-            public async Task ShouldSetDefaultMenuWhenCorrectInputCallsApi()
-            {
-                var input = new byte[0];
-                var sampleId = Guid.NewGuid().ToString();
-                var richMenuResponse = new RichMenuResponse()
+                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.AreEqual($"/user/all/richmenu/{sampleId}", httpClient.RequestPath);
+                }
+
+                [TestMethod]
+                public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
-                    Id = sampleId
-                };
+                    var sampleId = Guid.NewGuid().ToString();
+                    var richMenuResponse = new RichMenuResponse()
+                    {
+                        Id = sampleId
+                    };
 
-                var httpClient = TestHttpClient.ThatReturnsData(input);
-                var bot = TestConfiguration.CreateBot(httpClient);
-                await bot.SetDefaultMenu(richMenuResponse);
+                    var httpClient = TestHttpClient.ThatReturnsAnError();
+                    var bot = TestConfiguration.CreateBot(httpClient);
 
-                Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                Assert.AreEqual($"/user/all/richmenu/{sampleId}", httpClient.RequestPath);
-            }
-
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenSetDefaultMenuUnsuccessfulApiCall()
-            {
-                var sampleId = Guid.NewGuid().ToString();
-                var richMenuResponse = new RichMenuResponse()
-                {
-                    Id = sampleId
-                };
-
-                var httpClient = TestHttpClient.ThatReturnsAnError();
-                var bot = TestConfiguration.CreateBot(httpClient);
-
-                await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
-                {
-                    await bot.SetDefaultMenu(richMenuResponse);
-                });
+                    await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
+                    {
+                        await bot.SetDefaultMenu(richMenuResponse);
+                    });
+                }
             }
         }
     }
