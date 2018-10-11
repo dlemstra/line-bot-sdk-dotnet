@@ -43,7 +43,7 @@ namespace Line.Tests
                 {
                     var bot = TestConfiguration.CreateBot();
 
-                    await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                    await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
                         await bot.SetDefaultRichMenu(string.Empty);
                     });
@@ -113,7 +113,7 @@ namespace Line.Tests
 
                     var bot = TestConfiguration.CreateBot();
 
-                    await ExceptionAssert.ThrowsArgumentException("richMenuId", "Value cannot be empty.", async () =>
+                    await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
                         await bot.SetDefaultMenu(richMenuResponse);
                     });
