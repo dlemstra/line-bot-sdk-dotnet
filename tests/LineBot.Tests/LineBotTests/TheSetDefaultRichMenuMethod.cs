@@ -82,7 +82,7 @@ namespace Line.Tests
             public class WithRichMenuResponse
             {
                 [TestMethod]
-                public async Task ShouldThrowExceptionWhenRichMenuResponseIdIsNull()
+                public async Task ShouldThrowExceptionWhenRichMenuResponseIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
 
@@ -93,7 +93,7 @@ namespace Line.Tests
                 }
 
                 [TestMethod]
-                public async Task ShouldThrowExceptionWhenRichMenusIdIsNull()
+                public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
 
@@ -104,7 +104,7 @@ namespace Line.Tests
                 }
 
                 [TestMethod]
-                public async Task ShouldThrowExceptionWhenRichMenusIdIsEmpty()
+                public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var richMenuResponse = new RichMenuResponse()
                     {
@@ -120,7 +120,7 @@ namespace Line.Tests
                 }
 
                 [TestMethod]
-                public async Task ShouldSetDefaultMenuIdWhenCorrectInputCallsApi()
+                public async Task ShouldSetDefaultRichMenuIdWhenCorrectInputCallsApi()
                 {
                     var input = new byte[0];
                     var sampleId = Guid.NewGuid().ToString();
