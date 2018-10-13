@@ -133,9 +133,9 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the initial datetime for the datetimepicker.
+        /// Gets or sets the initial value of date or time for the Datetime picker.
         /// </summary>
-        [JsonProperty("initial")]
+        [JsonIgnore]
         public DateTime? Initial
         {
             get
@@ -154,9 +154,30 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the min datetime for the datetimepicker.
+        /// Gets or sets the largest date or time value that can be selected for the Datetime picker.
         /// </summary>
-        [JsonProperty("min")]
+        [JsonIgnore]
+        public DateTime? Max
+        {
+            get
+            {
+                return _max;
+            }
+
+            set
+            {
+                var adjustedValue = AdjustedDateTimeByMode(value);
+                if (Min.HasValue && adjustedValue <= Min.Value)
+                    throw new InvalidOperationException("The max must be greater than the min.");
+
+                _max = adjustedValue;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the smallest date or time value that can be selected for the Datetime picker.
+        /// </summary>
+        [JsonIgnore]
         public DateTime? Min
         {
             get
@@ -175,23 +196,62 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the max datetime for the datetimepicker.
+        /// Gets or sets the formatted initial value.
         /// </summary>
-        [JsonProperty("max")]
-        public DateTime? Max
+        [JsonProperty("initial")]
+        private string InitialFormatted
         {
             get
             {
-                return _max;
+                return GetFormattedDateTimeByMode(_initial.Value);
             }
 
             set
             {
-                var adjustedValue = AdjustedDateTimeByMode(value);
-                if (Min.HasValue && adjustedValue <= Min.Value)
-                    throw new InvalidOperationException("The max must be greater than the min.");
+                if (string.IsNullOrEmpty(value))
+                    Initial = null;
+                else
+                    Initial = DateTime.Parse(value);
+            }
+        }
 
-                _max = adjustedValue;
+        /// <summary>
+        /// Gets or sets the formatted max value.
+        /// </summary>
+        [JsonProperty("max")]
+        private string MaxFormatted
+        {
+            get
+            {
+                return GetFormattedDateTimeByMode(_max.Value);
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    Max = null;
+                else
+                    Max = DateTime.Parse(value);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the formatted min value.
+        /// </summary>
+        [JsonProperty("min")]
+        private string MinFormatted
+        {
+            get
+            {
+                return GetFormattedDateTimeByMode(_min.Value);
+            }
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    Min = null;
+                else
+                    Min = DateTime.Parse(value);
             }
         }
 
@@ -202,6 +262,18 @@ namespace Line
 
             if (_data == null)
                 throw new InvalidOperationException("The data cannot be null.");
+        }
+
+        private string GetFormattedDateTimeByMode(DateTime? dateTime)
+        {
+            if (dateTime == null)
+                return string.Empty;
+            if (_mode == DateTimePickerMode.Date)
+                return dateTime.Value.ToString("yyyy-MM-dd");
+            else if (_mode == DateTimePickerMode.Time)
+                return dateTime.Value.ToString("HH:mm");
+            else
+                return dateTime.Value.ToString("yyyy-MM-ddTHH:mm");
         }
 
         private DateTime? AdjustedDateTimeByMode(DateTime? value)

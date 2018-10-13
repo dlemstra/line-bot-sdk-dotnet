@@ -39,7 +39,7 @@ namespace Line.Tests
                     Max = max
                 };
                 string serialized = JsonConvert.SerializeObject(action);
-                Assert.AreEqual(@"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""datetime"",""initial"":""2018-10-08T10:30:00"",""min"":""2018-10-08T10:00:00"",""max"":""2018-10-08T11:00:00""}", serialized);
+                Assert.AreEqual(@"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""datetime"",""initial"":""2018-10-08T10:30"",""max"":""2018-10-08T11:00"",""min"":""2018-10-08T10:00""}", serialized);
             }
         }
     }
