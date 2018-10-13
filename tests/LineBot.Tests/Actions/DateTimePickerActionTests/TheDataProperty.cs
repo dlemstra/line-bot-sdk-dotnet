@@ -25,7 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null or whitespace.", () =>
                 {
@@ -36,7 +36,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The data cannot be null or whitespace.", () =>
                 {
@@ -47,7 +47,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsMoreThan300Chars()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The data cannot be longer than 300 characters.", () =>
                 {
@@ -60,7 +60,7 @@ namespace Line.Tests
             {
                 var value = new string('x', 300);
 
-                var action = new DateTimePickerAction()
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Data = value
                 };

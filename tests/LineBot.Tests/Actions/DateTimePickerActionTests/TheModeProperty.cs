@@ -25,10 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldSetDateAndTimeWhenDateTimePickerActionModeIsDateTime()
             {
-                var action = new DateTimePickerAction
-                {
-                    Mode = DateTimePickerMode.DateTime
-                };
+                var action = new DateTimePickerAction(DateTimePickerMode.DateTime);
 
                 var min = new DateTime(2018, 10, 08, 10, 30, 0);
                 action.Min = min;
@@ -39,10 +36,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldSetDateOnlyWhenDateTimePickerActionModeIsDate()
             {
-                var action = new DateTimePickerAction
-                {
-                    Mode = DateTimePickerMode.Date
-                };
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 var minDate = new DateTime(2018, 10, 08);
                 var minDateTime = new DateTime(2018, 10, 08, 10, 30, 0);
@@ -54,10 +48,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldSetTimeOnlyWhenDateTimePickerActionModeIsTime()
             {
-                var action = new DateTimePickerAction
-                {
-                    Mode = DateTimePickerMode.Time
-                };
+                var action = new DateTimePickerAction(DateTimePickerMode.Time);
 
                 var minTime = new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 10, 30, 0);
                 var maxTime = new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 11, 00, 0);
@@ -79,10 +70,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenMinAndMaxHaveDifferentTimesButModeIsDate()
             {
-                var action = new DateTimePickerAction
-                {
-                    Mode = DateTimePickerMode.Date
-                };
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 var min = new DateTime(2018, 10, 8, 10, 00, 0);
                 var max = new DateTime(2018, 10, 8, 11, 00, 0);
@@ -97,10 +85,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenMinAndMaxHaveDifferentDatesButModeIsTime()
             {
-                var action = new DateTimePickerAction
-                {
-                    Mode = DateTimePickerMode.Time
-                };
+                var action = new DateTimePickerAction(DateTimePickerMode.Time);
 
                 var min = new DateTime(2018, 10, 7, 11, 00, 0);
                 var max = new DateTime(2018, 10, 8, 11, 00, 0);

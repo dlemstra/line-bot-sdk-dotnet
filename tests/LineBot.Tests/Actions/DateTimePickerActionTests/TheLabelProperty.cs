@@ -25,7 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null or whitespace.", () =>
                 {
@@ -36,7 +36,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null or whitespace.", () =>
                 {
@@ -47,7 +47,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenValueIsMoreThan20Chars()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be longer than 20 characters.", () =>
                 {
@@ -60,7 +60,7 @@ namespace Line.Tests
             {
                 var value = new string('x', 20);
 
-                var action = new DateTimePickerAction()
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Label = value
                 };

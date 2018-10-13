@@ -25,7 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenInitialIsGreaterThanMax()
             {
-                var action = new DateTimePickerAction()
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Min = new DateTime(2018, 10, 8)
                 };
@@ -39,7 +39,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenInitialIsLessThanMin()
             {
-                var action = new DateTimePickerAction()
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Max = new DateTime(2018, 10, 8)
                 };
@@ -57,9 +57,8 @@ namespace Line.Tests
                 var initial = new DateTime(2018, 10, 8);
                 var max = new DateTime(2018, 10, 9);
 
-                var action = new DateTimePickerAction()
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
-                    Mode = DateTimePickerMode.Date,
                     Min = min,
                     Initial = initial,
                     Max = max

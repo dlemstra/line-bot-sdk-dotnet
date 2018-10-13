@@ -58,6 +58,15 @@ namespace Line
         private DateTime? _max;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimePickerAction"/> class.
+        /// </summary>
+        /// <param name="mode">The mode of the Datetime picker action.</param>
+        public DateTimePickerAction(DateTimePickerMode mode)
+        {
+            Mode = mode;
+        }
+
+        /// <summary>
         /// Gets or sets the label.
         /// <para>Max: 20 characters.</para>
         /// </summary>
@@ -106,7 +115,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the action mode for the datetimepicker.
+        /// Gets the action mode for the datetimepicker.
         /// </summary>
         [JsonProperty("mode")]
         [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
@@ -117,7 +126,7 @@ namespace Line
                 return _mode;
             }
 
-            set
+            private set
             {
                 _mode = value;
             }

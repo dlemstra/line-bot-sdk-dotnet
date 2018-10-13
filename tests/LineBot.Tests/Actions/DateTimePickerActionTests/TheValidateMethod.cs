@@ -25,7 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
-                IAction action = new DateTimePickerAction();
+                IAction action = new DateTimePickerAction(DateTimePickerMode.Date);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
                 {
@@ -36,7 +36,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenDataIsNull()
             {
-                IAction action = new DateTimePickerAction()
+                IAction action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Label = "PostbackLabel"
                 };
@@ -50,7 +50,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenValid()
             {
-                IAction action = new DateTimePickerAction()
+                IAction action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
                     Label = "Foo",
                     Data = "Bar"

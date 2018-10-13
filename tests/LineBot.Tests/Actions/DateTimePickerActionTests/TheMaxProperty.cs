@@ -25,7 +25,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenMaxIsLessThanMin()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
                 var min = new DateTime(2018, 10, 8);
                 var max = new DateTime(2018, 10, 7);
 
@@ -39,7 +39,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldThrowExceptionWhenMaxIsEqualToMin()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
                 var dt = new DateTime(2018, 10, 8);
 
                 ExceptionAssert.Throws<InvalidOperationException>("The min must be less than the max.", () =>
@@ -52,7 +52,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldNotThrowExceptionWhenMaxIsGreaterThanMin()
             {
-                var action = new DateTimePickerAction();
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
                 var min = new DateTime(2018, 10, 7);
                 var max = new DateTime(2018, 10, 8);
 

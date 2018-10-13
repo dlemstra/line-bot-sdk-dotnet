@@ -30,11 +30,10 @@ namespace Line.Tests
                 var min = new DateTime(2018, 10, 8, 10, 00, 0);
                 var max = new DateTime(2018, 10, 8, 11, 00, 0);
 
-                var action = new DateTimePickerAction
+                var action = new DateTimePickerAction(DateTimePickerMode.DateTime)
                 {
                     Label = "Foo",
                     Data = "Bar",
-                    Mode = DateTimePickerMode.DateTime,
                     Initial = initial,
                     Min = min,
                     Max = max
