@@ -71,7 +71,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldAdjustInitialWhenDeserializing()
+            public void ShouldBeAdjustedWhenDeserializing()
             {
                 var jsonData = @"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""time"",""initial"":""2018-10-08T10:30"",""max"":""2018-10-08T11:00"",""min"":""2018-10-08T10:00""}";
                 var action = JsonConvert.DeserializeObject<DateTimePickerAction>(jsonData);
@@ -80,7 +80,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldAdjustInitialWhenInitialIsSet()
+            public void ShouldBeAdjustedWhenSet()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date)
                 {
