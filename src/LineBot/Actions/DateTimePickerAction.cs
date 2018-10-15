@@ -14,31 +14,9 @@
 
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Line
 {
-    /// <summary>
-    /// Encapsulates the datetimepicker mode.
-    /// </summary>
-    public enum DateTimePickerMode
-    {
-        /// <summary>
-        /// Pick date.
-        /// </summary>
-        Date,
-
-        /// <summary>
-        /// Pick time.
-        /// </summary>
-        Time,
-
-        /// <summary>
-        /// Pick date and time.
-        /// </summary>
-        DateTime
-    }
-
     /// <summary>
     /// Encapsulates a datetimepicker action.
     /// </summary>
@@ -52,7 +30,6 @@ namespace Line
 
         private string _label;
         private string _data;
-        private DateTimePickerMode _mode;
         private DateTime? _initial;
         private DateTime? _min;
         private DateTime? _max;
@@ -119,18 +96,7 @@ namespace Line
         /// </summary>
         [JsonProperty("mode")]
         [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
-        public DateTimePickerMode Mode
-        {
-            get
-            {
-                return _mode;
-            }
-
-            private set
-            {
-                _mode = value;
-            }
-        }
+        public DateTimePickerMode Mode { get; }
 
         /// <summary>
         /// Gets or sets the initial value of date or time for the datetime picker.
@@ -268,9 +234,9 @@ namespace Line
         {
             if (dateTime == null)
                 return string.Empty;
-            if (_mode == DateTimePickerMode.Date)
+            if (Mode == DateTimePickerMode.Date)
                 return dateTime.Value.ToString("yyyy-MM-dd");
-            else if (_mode == DateTimePickerMode.Time)
+            else if (Mode == DateTimePickerMode.Time)
                 return dateTime.Value.ToString("HH:mm");
             else
                 return dateTime.Value.ToString("yyyy-MM-ddTHH:mm");
@@ -283,9 +249,9 @@ namespace Line
 
             DateTime adjustedDateTime = value.Value;
 
-            if (_mode == DateTimePickerMode.Date)
+            if (Mode == DateTimePickerMode.Date)
                 adjustedDateTime = new DateTime(adjustedDateTime.Year, adjustedDateTime.Month, adjustedDateTime.Day, 0, 0, 0);
-            else if (_mode == DateTimePickerMode.Time)
+            else if (Mode == DateTimePickerMode.Time)
                 adjustedDateTime = new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, adjustedDateTime.Hour, adjustedDateTime.Minute, adjustedDateTime.Second);
 
             return adjustedDateTime;
