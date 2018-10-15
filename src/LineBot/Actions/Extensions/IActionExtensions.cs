@@ -33,6 +33,9 @@ namespace Line
             if (self is CameraAction)
                 return;
 
+            if (self is DateTimePickerAction)
+                return;
+
             throw new NotSupportedException($"The action type is invalid.");
         }
 
