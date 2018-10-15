@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
@@ -21,6 +22,14 @@ namespace Line.Tests
         [TestClass]
         public class TheCheckActionTypeMethod
         {
+            [TestMethod]
+            public void ShouldThrowExceptionWhenActionIsInvalid()
+            {
+                var action = new TestAction();
+
+                ExceptionAssert.Throws<NotSupportedException>(() => IActionExtensions.CheckActionType(action));
+            }
+
             [TestMethod]
             public void ShouldNotThrowExceptionWhenActionIsPostbackAction()
             {
@@ -51,6 +60,21 @@ namespace Line.Tests
                 var action = new CameraAction();
 
                 IActionExtensions.CheckActionType(action);
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenActionIsDateTimePickerAction()
+            {
+                var action = new DateTimePickerAction(DateTimePickerMode.Date);
+
+                IActionExtensions.CheckActionType(action);
+            }
+
+            private class TestAction : IAction
+            {
+                public void Validate()
+                {
+                }
             }
         }
     }

@@ -36,7 +36,7 @@ namespace Line
             if (self is DateTimePickerAction)
                 return;
 
-            throw new NotSupportedException($"The action type is invalid.");
+            throw new NotSupportedException("The action type is invalid.");
         }
 
         public static void Validate(this IEnumerable<IAction> self)
