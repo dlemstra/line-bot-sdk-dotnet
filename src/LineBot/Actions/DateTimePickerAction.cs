@@ -115,7 +115,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets the action mode for the datetimepicker.
+        /// Gets the action mode for the datetime picker.
         /// </summary>
         [JsonProperty("mode")]
         [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
@@ -133,7 +133,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the initial value of date or time for the Datetime picker.
+        /// Gets or sets the initial value of date or time for the datetime picker.
         /// </summary>
         [JsonIgnore]
         public DateTime? Initial
@@ -154,7 +154,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the largest date or time value that can be selected for the Datetime picker.
+        /// Gets or sets the largest date or time value that can be selected for the datetime picker.
         /// </summary>
         [JsonIgnore]
         public DateTime? Max
@@ -175,7 +175,7 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the smallest date or time value that can be selected for the Datetime picker.
+        /// Gets or sets the smallest date or time value that can be selected for the datetime picker.
         /// </summary>
         [JsonIgnore]
         public DateTime? Min

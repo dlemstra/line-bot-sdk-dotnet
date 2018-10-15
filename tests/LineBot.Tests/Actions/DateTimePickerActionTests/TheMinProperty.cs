@@ -14,6 +14,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -61,6 +62,32 @@ namespace Line.Tests
 
                 Assert.AreEqual(action.Max, max);
                 Assert.AreEqual(action.Min, min);
+            }
+
+            [TestMethod]
+            public void ShouldAdjustMinWhenDeserializing()
+            {
+                var jsonData = @"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""time"",""initial"":""2018-10-08T10:30"",""max"":""2018-10-08T11:00"",""min"":""2018-10-08T10:00""}";
+                var action = JsonConvert.DeserializeObject<DateTimePickerAction>(jsonData);
+
+                Assert.AreEqual(action.Min, new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 10, 0, 0));
+            }
+
+            [TestMethod]
+            public void ShouldAdjustMinWhenMinIsSet()
+            {
+                var action = new DateTimePickerAction(DateTimePickerMode.Date)
+                {
+                    Data = "Foo",
+                    Label = "Bar",
+                    Min = new DateTime(2018, 10, 10),
+                    Initial = new DateTime(2018, 10, 11),
+                    Max = new DateTime(2018, 10, 13)
+                };
+
+                action.Min = new DateTime(2018, 10, 9, 10, 30, 0);
+
+                Assert.AreEqual(action.Min, new DateTime(2018, 10, 9));
             }
         }
     }
