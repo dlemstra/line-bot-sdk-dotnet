@@ -72,6 +72,13 @@ namespace Line
         Task<IUserProfile> GetProfile(IUser user);
 
         /// <summary>
+        /// Returns the richmenu with the specified id.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>The richmenu with the specified id.</returns>
+        Task<IRichMenuResponse> GetRichMenu(string richMenuId);
+
+        /// <summary>
         /// Leave the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
