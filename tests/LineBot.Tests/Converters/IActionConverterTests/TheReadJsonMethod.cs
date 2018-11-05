@@ -24,12 +24,6 @@ namespace Line.Tests
         [TestClass]
         public class TheReadJsonMethod
         {
-            private const string CameraActionJson = "Converters/IActionConverterTests/CameraAction.json";
-            private const string DateTimePickerActionJson = "Converters/IActionConverterTests/DateTimePickerAction.json";
-            private const string MessageActionJson = "Converters/IActionConverterTests/MessageAction.json";
-            private const string PostbackActionJson = "Converters/IActionConverterTests/PostbackAction.json";
-            private const string UriActionJson = "Converters/IActionConverterTests/UriAction.json";
-
             [TestMethod]
             public void ShouldThrowExceptionWhenTypeIsInvalid()
             {
@@ -64,12 +58,12 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(CameraActionJson)]
+            [DeploymentItem(JsonDocuments.Actions.Camera)]
             public void ShouldCreateCameraActionWhenTypeIsCamera()
             {
                 var converter = new IActionConverter();
 
-                var data = File.ReadAllText(CameraActionJson);
+                var data = File.ReadAllText(JsonDocuments.Actions.Camera);
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as CameraAction;
 
@@ -78,12 +72,12 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(DateTimePickerActionJson)]
+            [DeploymentItem(JsonDocuments.Actions.DateTimePicker)]
             public void ShouldCreateDateTimePickerActionWhenTypeIsDateTimePicker()
             {
                 var converter = new IActionConverter();
 
-                var data = File.ReadAllText(DateTimePickerActionJson);
+                var data = File.ReadAllText(JsonDocuments.Actions.DateTimePicker);
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as DateTimePickerAction;
 
@@ -97,12 +91,12 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(MessageActionJson)]
+            [DeploymentItem(JsonDocuments.Actions.Message)]
             public void ShouldCreateMessageActionWhenTypeIsMessage()
             {
                 var converter = new IActionConverter();
 
-                var data = File.ReadAllText(MessageActionJson);
+                var data = File.ReadAllText(JsonDocuments.Actions.Message);
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as MessageAction;
 
@@ -112,12 +106,12 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(PostbackActionJson)]
+            [DeploymentItem(JsonDocuments.Actions.Postback)]
             public void ShouldCreatePostbackActionWhenTypeIsPostback()
             {
                 var converter = new IActionConverter();
 
-                var data = File.ReadAllText(PostbackActionJson);
+                var data = File.ReadAllText(JsonDocuments.Actions.Postback);
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as PostbackAction;
 
@@ -128,12 +122,12 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(UriActionJson)]
+            [DeploymentItem(JsonDocuments.Actions.Uri)]
             public void ShouldCreateUriActionWhenTypeIsUri()
             {
                 var converter = new IActionConverter();
 
-                var data = File.ReadAllText(UriActionJson);
+                var data = File.ReadAllText(JsonDocuments.Actions.Uri);
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as UriAction;
 

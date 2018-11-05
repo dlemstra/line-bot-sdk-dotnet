@@ -12,29 +12,17 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace Line.Tests
 {
-    [TestClass]
-    public class ReplyTokenTests
+    public static partial class JsonDocuments
     {
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.Invalid)]
-        public async Task GetEvents_InvalidRequest_ReplyTokenReturnsNull()
+        public static class Actions
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Invalid);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.ReplyToken);
+            public const string Camera = "JsonDocuments/Actions/Camera.json";
+            public const string DateTimePicker = "JsonDocuments/Actions/DateTimePicker.json";
+            public const string Message = "JsonDocuments/Actions/Message.json";
+            public const string Postback = "JsonDocuments/Actions/Postback.json";
+            public const string Uri = "JsonDocuments/Actions/Uri.json";
         }
     }
 }

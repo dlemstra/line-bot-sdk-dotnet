@@ -22,16 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class LineEventTests
     {
-        private const string EmptyObjectJson = "EmptyObject.json";
-        private const string NoEventsJson = "Events/NoEvents.json";
-        private const string WhitespaceJson = "Whitespace.json";
-
         [TestMethod]
-        [DeploymentItem(EmptyObjectJson)]
+        [DeploymentItem(JsonDocuments.EmptyObject)]
         public async Task GetEvents_EmptyObject_ReturnsEmptyEnumerable()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(EmptyObjectJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.EmptyObject);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -39,11 +35,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(NoEventsJson)]
+        [DeploymentItem(JsonDocuments.Events.NoEvents)]
         public async Task GetEvents_NoEvents_ReturnsEmptyEnumerable()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(NoEventsJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -51,11 +47,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(NoEventsJson)]
+        [DeploymentItem(JsonDocuments.Whitespace)]
         public async Task GetEvents_Whitespace_ReturnsEmptyEnumerable()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(WhitespaceJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Whitespace);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -63,7 +59,6 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(NoEventsJson)]
         public async Task GetEvents_NoData_ReturnsEmptyEnumerable()
         {
             ILineBot bot = TestConfiguration.CreateBot();

@@ -22,14 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class UnfollowTests
     {
-        private const string UnfollowEventJson = "Events/Unfollow/UnfollowEvent.json";
-
         [TestMethod]
-        [DeploymentItem(UnfollowEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Unfollow)]
         public async Task GetEvents_ValidRequest_IsUnfollowEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(UnfollowEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Unfollow);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);

@@ -22,22 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class MessageTests
     {
-        private const string AudioJson = "Events/Messages/Audio.json";
-        private const string ImageJson = "Events/Messages/Image.json";
-        private const string InvalidJson = "Events/Invalid.json";
-        private const string InvalidMesssageJson = "Events/Messages/InvalidMessage.json";
-        private const string LocationJson = "Events/Messages/Location.json";
-        private const string MessageEventWithoutMessageJson = "Events/Messages/MessageEventWithoutMessage.json";
-        private const string StickerJson = "Events/Messages/Sticker.json";
-        private const string TextJson = "Events/Messages/Text.json";
-        private const string VideoJson = "Events/Messages/Video.json";
-
         [TestMethod]
-        [DeploymentItem(MessageEventWithoutMessageJson)]
+        [DeploymentItem(JsonDocuments.Events.WithoutMessage)]
         public async Task GetEvents_RequestWithoutMessage_MessageIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(MessageEventWithoutMessageJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.WithoutMessage);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -50,11 +40,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(InvalidMesssageJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Invalid)]
         public async Task GetEvents_InvalidMessageType_MessageTypeIsUnknown()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(InvalidMesssageJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Invalid);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -66,11 +56,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(InvalidJson)]
+        [DeploymentItem(JsonDocuments.Events.Invalid)]
         public async Task GetEvents_InvalidRequest_MessageIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Invalid);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -81,11 +71,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(AudioJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Audio)]
         public async Task Group_MessageTypeIsAudio_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(AudioJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Audio);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -109,11 +99,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(ImageJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Image)]
         public async Task Group_MessageTypeIsImage_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(ImageJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Image);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -137,11 +127,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(LocationJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Location)]
         public async Task Group_MessageTypeIsLocation_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(LocationJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Location);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -171,11 +161,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(StickerJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Sticker)]
         public async Task Group_MessageTypeIsSticker_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(StickerJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Sticker);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -203,11 +193,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(TextJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Text)]
         public async Task Group_MessageTypeIsText_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(TextJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Text);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -231,11 +221,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(VideoJson)]
+        [DeploymentItem(JsonDocuments.Events.Messages.Video)]
         public async Task Group_MessageTypeIsVideo_ReturnsMessage()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(VideoJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Messages.Video);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());

@@ -22,16 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class PostbackTests
     {
-        private const string InvalidJson = "Events/Invalid.json";
-        private const string PostbackEventJson = "Events/Postback/PostbackEvent.json";
-        private const string PostbackEventWithoutPostbackJson = "Events/Postback/PostbackEventWithoutPostback.json";
-
         [TestMethod]
-        [DeploymentItem(PostbackEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Postback)]
         public async Task GetEvents_ValidRequest_ReturnsPostbackEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(PostbackEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Postback);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -55,11 +51,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(PostbackEventWithoutPostbackJson)]
+        [DeploymentItem(JsonDocuments.Events.WithoutPostback)]
         public async Task GetEvents_RequestWithoutPostback_PostbackIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(PostbackEventWithoutPostbackJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.WithoutPostback);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -72,11 +68,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(InvalidJson)]
+        [DeploymentItem(JsonDocuments.Events.Invalid)]
         public async Task GetEvents_InvalidRequest_PostbackIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Invalid);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());

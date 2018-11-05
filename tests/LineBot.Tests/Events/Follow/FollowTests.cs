@@ -22,14 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class FollowTests
     {
-        private const string FollowEventJson = "Events/Follow/FollowEvent.json";
-
         [TestMethod]
-        [DeploymentItem(FollowEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Follow)]
         public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(FollowEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Follow);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);

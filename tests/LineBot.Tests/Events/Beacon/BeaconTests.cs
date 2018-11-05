@@ -22,17 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class BeaconTests
     {
-        private const string BeaconEventJson = "Events/Beacon/BeaconEvent.json";
-        private const string BeaconEventWithoutBeaconJson = "Events/Beacon/BeaconEventWithoutBeacon.json";
-        private const string InvalidBeaconJson = "Events/Beacon/InvalidBeacon.json";
-        private const string InvalidJson = "Events/Invalid.json";
-
         [TestMethod]
-        [DeploymentItem(BeaconEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Beacon)]
         public async Task GetEvents_ValidRequest_ReturnsBeaconEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(BeaconEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Beacon);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -57,11 +52,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(BeaconEventWithoutBeaconJson)]
+        [DeploymentItem(JsonDocuments.Events.WithoutBeacon)]
         public async Task GetEvents_RequestWithoutBeacon_BeaconIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(BeaconEventWithoutBeaconJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.WithoutBeacon);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
@@ -74,11 +69,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(InvalidBeaconJson)]
+        [DeploymentItem(JsonDocuments.Events.InvalidBeacon)]
         public async Task GetEvents_InvalidBeaconType_BeaconTypeIsUnknown()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(InvalidBeaconJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.InvalidBeacon);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());
@@ -90,11 +85,11 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(InvalidJson)]
+        [DeploymentItem(JsonDocuments.Events.Invalid)]
         public async Task GetEvents_InvalidRequest_BeaconIsNull()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(InvalidJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Invalid);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.AreEqual(1, events.Count());

@@ -12,29 +12,19 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace Line.Tests
 {
-    [TestClass]
-    public class ReplyTokenTests
+    public static partial class JsonDocuments
     {
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.Invalid)]
-        public async Task GetEvents_InvalidRequest_ReplyTokenReturnsNull()
+        public static partial class Events
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Invalid);
-
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.AreEqual(1, events.Count());
-
-            ILineEvent lineEvent = events.First();
-
-            Assert.IsNull(lineEvent.ReplyToken);
+            public static class Sources
+            {
+                public const string Group = "JsonDocuments/Events/Sources/Group.json";
+                public const string Invalid = "JsonDocuments/Events/Sources/Invalid.json";
+                public const string Room = "JsonDocuments/Events/Sources/Room.json";
+                public const string User = "JsonDocuments/Events/Sources/User.json";
+            }
         }
     }
 }

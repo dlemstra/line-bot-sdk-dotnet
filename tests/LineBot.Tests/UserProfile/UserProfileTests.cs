@@ -22,8 +22,6 @@ namespace Line.Tests
     [TestClass]
     public class UserProfileTests
     {
-        private const string UserProfileJson = "UserProfile/UserProfile.json";
-
         [TestMethod]
         public async Task GetProfile_UserIsNulll_ThrowsException()
         {
@@ -68,10 +66,10 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(UserProfileJson)]
+        [DeploymentItem(JsonDocuments.UserProfile)]
         public async Task GetProfile_CorrectResponse_ReturnsUserProfile()
         {
-            TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
+            TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             IUserProfile profile = await bot.GetProfile("test");
@@ -87,10 +85,10 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(UserProfileJson)]
+        [DeploymentItem(JsonDocuments.UserProfile)]
         public async Task GetProfile_WithUser_ReturnsUserProfile()
         {
-            TestHttpClient httpClient = TestHttpClient.Create(UserProfileJson);
+            TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
 
             ILineBot bot = TestConfiguration.CreateBot(httpClient);
             IUserProfile profile = await bot.GetProfile(new TestUser());

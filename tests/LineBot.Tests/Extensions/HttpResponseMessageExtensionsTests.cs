@@ -25,8 +25,6 @@ namespace Line.Tests
     [TestClass]
     public class HttpResponseMessageExtensionsTests
     {
-        private const string LineErrorJson = "Extensions/LineError.json";
-
         [TestMethod]
         public async Task CheckResult_IsSuccess_ThrowsNoException()
         {
@@ -87,13 +85,13 @@ namespace Line.Tests
         }
 
         [TestMethod]
-        [DeploymentItem(LineErrorJson)]
+        [DeploymentItem(JsonDocuments.Error)]
         public async Task CheckResult_ResponseIsError_ThrowsException()
         {
             HttpResponseMessage responseMessage = new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.BadRequest,
-                Content = new StringContent(File.ReadAllText(LineErrorJson))
+                Content = new StringContent(File.ReadAllText(JsonDocuments.Error))
             };
 
             LineBotException exception = await ExceptionAssert.ThrowsAsync<LineBotException>("The request body has 2 error(s)", async () =>

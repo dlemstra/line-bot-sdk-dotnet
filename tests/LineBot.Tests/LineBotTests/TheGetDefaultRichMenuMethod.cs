@@ -22,15 +22,11 @@ namespace Line.Tests
         [TestClass]
         public class TheGetDefaultRichMenuMethod
         {
-            private const string DefaultRichMenuIdJson = "LineBotTests/DefaultRichMenuId.json";
-            private const string EmptyObjectJson = "EmptyObject.json";
-            private const string WhitespaceJson = "Whitespace.json";
-
             [TestMethod]
-            [DeploymentItem(DefaultRichMenuIdJson)]
+            [DeploymentItem(JsonDocuments.DefaultRichMenuId)]
             public async Task ReturnsIdWhenResponseIsCorrect()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(DefaultRichMenuIdJson);
+                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.DefaultRichMenuId);
                 ILineBot bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
@@ -38,10 +34,10 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(EmptyObjectJson)]
+            [DeploymentItem(JsonDocuments.EmptyObject)]
             public async Task ReturnsNullIdWhenResponseContainsEmptyObject()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(EmptyObjectJson);
+                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.EmptyObject);
                 ILineBot bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
@@ -49,10 +45,10 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            [DeploymentItem(WhitespaceJson)]
+            [DeploymentItem(JsonDocuments.Whitespace)]
             public async Task ReturnsNullIdWhenResponseContainsWhitespace()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(WhitespaceJson);
+                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.Whitespace);
                 ILineBot bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 

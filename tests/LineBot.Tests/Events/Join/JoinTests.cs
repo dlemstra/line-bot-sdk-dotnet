@@ -22,14 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class JoinTests
     {
-        private const string JoinEventJson = "Events/Join/JoinEvent.json";
-
         [TestMethod]
-        [DeploymentItem(JoinEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Join)]
         public async Task GetEvents_ValidRequest_ReturnsFollowEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JoinEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Join);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);

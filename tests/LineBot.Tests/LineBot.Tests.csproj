@@ -54,106 +54,106 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Converters\IActionConverterTests\MessageAction.json">
+    <None Update="JsonDocuments\Actions\Message.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Converters\IActionConverterTests\DateTimePickerAction.json">
+    <None Update="JsonDocuments\Actions\DateTimePicker.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Converters\IActionConverterTests\CameraAction.json">
+    <None Update="JsonDocuments\Actions\Camera.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Converters\IActionConverterTests\UriAction.json">
+    <None Update="JsonDocuments\Actions\Uri.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Converters\IActionConverterTests\PostbackAction.json">
+    <None Update="JsonDocuments\Actions\Postback.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Beacon\InvalidBeacon.json">
+    <None Update="JsonDocuments\Events\InvalidBeacon.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Beacon\BeaconEventWithoutBeacon.json">
+    <None Update="JsonDocuments\Events\WithoutBeacon.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Beacon\BeaconEvent.json">
+    <None Update="JsonDocuments\Events\Beacon.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Follow\FollowEvent.json">
+    <None Update="JsonDocuments\Events\Follow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="EmptyObject.json">
+    <None Update="JsonDocuments\EmptyObject.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Join\JoinEvent.json">
+    <None Update="JsonDocuments\Events\Join.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Leave\LeaveEvent.json">
+    <None Update="JsonDocuments\Events\Leave.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Webhook.json">
+    <None Update="JsonDocuments\Events\Webhook.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Sticker.json">
+    <None Update="JsonDocuments\Events\Messages\Sticker.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Location.json">
+    <None Update="JsonDocuments\Events\Messages\Location.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Image.json">
+    <None Update="JsonDocuments\Events\Messages\Image.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Audio.json">
+    <None Update="JsonDocuments\Events\Messages\Audio.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Video.json">
+    <None Update="JsonDocuments\Events\Messages\Video.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\Text.json">
+    <None Update="JsonDocuments\Events\Messages\Text.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\InvalidMessage.json">
+    <None Update="JsonDocuments\Events\Messages\Invalid.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Messages\MessageEventWithoutMessage.json">
+    <None Update="JsonDocuments\Events\WithoutMessage.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Postback\PostbackEventWithoutPostback.json">
+    <None Update="JsonDocuments\Events\WithoutPostback.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Postback\PostbackEvent.json">
+    <None Update="JsonDocuments\Events\Postback.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Unfollow\UnfollowEvent.json">
+    <None Update="JsonDocuments\Events\Unfollow.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Whitespace.json">
+    <None Update="JsonDocuments\Whitespace.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\NoEvents.json">
+    <None Update="JsonDocuments\Events\NoEvents.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Invalid.json">
+    <None Update="JsonDocuments\Events\Invalid.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Sources\Group.json">
+    <None Update="JsonDocuments\Events\Sources\Group.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Sources\Invalid.json">
+    <None Update="JsonDocuments\Events\Sources\Invalid.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Sources\Room.json">
+    <None Update="JsonDocuments\Events\Sources\Room.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Sources\User.json">
+    <None Update="JsonDocuments\Events\Sources\User.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Extensions\LineError.json">
+    <None Update="JsonDocuments\Error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="LineBotTests\DefaultRichMenuId.json">
+    <None Update="JsonDocuments\DefaultRichMenuId.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="UserProfile\UserProfile.json">
+    <None Update="JsonDocuments\UserProfile.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

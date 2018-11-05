@@ -22,14 +22,12 @@ namespace Line.Tests
     [TestClass]
     public class LeaveTests
     {
-        private const string LeaveEventJson = "Events/Leave/LeaveEvent.json";
-
         [TestMethod]
-        [DeploymentItem(LeaveEventJson)]
+        [DeploymentItem(JsonDocuments.Events.Leave)]
         public async Task GetEvents_ValidRequest_IsLeaveEvent()
         {
             ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(LeaveEventJson);
+            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Leave);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
             Assert.IsNotNull(events);

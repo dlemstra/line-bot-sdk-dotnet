@@ -21,9 +21,8 @@ namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        private const string WebhookJson = "Events/Webhook.json";
-
         [TestClass]
+        [DeploymentItem(JsonDocuments.Events.Webhook)]
         public class TheGetEventsMethod
         {
             [TestMethod]
@@ -31,13 +30,13 @@ namespace Line.Tests
             {
                 var logger = new TestLogger();
                 var bot = TestConfiguration.CreateBot(logger);
-                var request = new TestHttpRequest(WebhookJson);
+                var request = new TestHttpRequest(JsonDocuments.Events.Webhook);
 
                 await bot.GetEvents(request);
 
                 var actual = Encoding.UTF8.GetString(logger.LogReceivedEventsEventsData);
 
-                var bytes = await File.ReadAllBytesAsync(WebhookJson);
+                var bytes = await File.ReadAllBytesAsync(JsonDocuments.Events.Webhook);
                 var expected = Encoding.UTF8.GetString(bytes).Substring(1); // Skip preamable.
 
                 Assert.AreEqual(expected, actual);

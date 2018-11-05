@@ -22,91 +22,71 @@ namespace Line.Tests
     [TestClass]
     public class EventSourceTests
     {
-        private const string GroupJson = "Events/Sources/Group.json";
-        private const string InvalidJson = "Events/Sources/Invalid.json";
-        private const string RoomJson = "Events/Sources/Room.json";
-        private const string UserJson = "Events/Sources/User.json";
-
         [TestMethod]
-        [DeploymentItem(InvalidJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.Invalid)]
         public void Deserialize_EventSourceTypeIsInvalid_SourceTypeIsUnknown()
         {
-            IEventSource source = CreateInvalid();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Invalid);
             Assert.AreEqual(EventSourceType.Unkown, source.SourceType);
         }
 
         [TestMethod]
-        [DeploymentItem(GroupJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.User)]
         public void Group_EventSourceTypeIsNotGroup_ReturnsNull()
         {
-            IEventSource source = CreateUser();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.User);
             Assert.IsNull(source.Group);
         }
 
         [TestMethod]
-        [DeploymentItem(GroupJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.Group)]
         public void Group_EventSourceTypeIsGroup_ReturnsGroup()
         {
-            IEventSource source = CreateGroup();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Group);
             Assert.AreEqual(EventSourceType.Group, source.SourceType);
 
             Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
         }
 
         [TestMethod]
-        [DeploymentItem(UserJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.User)]
         public void Room_EventSourceTypeIsNotRoom_ReturnsNull()
         {
-            IEventSource source = CreateUser();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.User);
             Assert.IsNull(source.Room);
         }
 
         [TestMethod]
-        [DeploymentItem(RoomJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.Room)]
         public void Room_EventSourceTypeIsRoom_ReturnsRoom()
         {
-            IEventSource source = CreateRoom();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Room);
             Assert.AreEqual(EventSourceType.Room, source.SourceType);
 
             Assert.AreEqual("cyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy", source.Room.Id);
         }
 
         [TestMethod]
-        [DeploymentItem(GroupJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.Room)]
         public void User_EventSourceTypeIsNotUser_ReturnsNull()
         {
-            IEventSource source = CreateRoom();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Room);
             Assert.IsNull(source.User);
         }
 
         [TestMethod]
-        [DeploymentItem(UserJson)]
+        [DeploymentItem(JsonDocuments.Events.Sources.User)]
         public void User_EventSourceTypeIsUser_ReturnsUser()
         {
-            IEventSource source = CreateUser();
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.User);
             Assert.AreEqual(EventSourceType.User, source.SourceType);
 
             Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
         }
 
-        private IEventSource CreateGroup()
+        private IEventSource CreateEventSource(string documentName)
         {
-            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(GroupJson));
-        }
-
-        private IEventSource CreateInvalid()
-        {
-            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(InvalidJson));
-        }
-
-        private IEventSource CreateRoom()
-        {
-            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(RoomJson));
-        }
-
-        private IEventSource CreateUser()
-        {
-            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(UserJson));
+            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(documentName));
         }
     }
 }
