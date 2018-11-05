@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 namespace Line
 {
     internal sealed class EnumConverter<TEnum> : JsonConverter
-        where TEnum : struct
+        where TEnum : struct, Enum
     {
         public override bool CanConvert(Type objectType)
         {
@@ -33,7 +33,7 @@ namespace Line
 
             if (!Enum.TryParse((string)reader.Value, true, out TEnum result))
             {
-                result = default(TEnum);
+                result = default;
             }
 
             return result;
