@@ -29,6 +29,7 @@ namespace Line
         /// Gets or sets the action performed when the area is tapped.
         /// </summary>
         [JsonProperty("action")]
+        [JsonConverter(typeof(IActionConverter))]
         public IAction Action
         {
             get => _action;
