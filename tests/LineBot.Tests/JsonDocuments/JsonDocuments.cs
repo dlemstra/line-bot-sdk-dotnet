@@ -19,6 +19,7 @@ namespace Line.Tests
         public const string DefaultRichMenuId = "JsonDocuments/DefaultRichMenuId.json";
         public const string EmptyObject = "JsonDocuments/EmptyObject.json";
         public const string Error = "JsonDocuments/Error.json";
+        public const string RichMenuResponse = "JsonDocuments/RichMenuResponse.json";
         public const string UserProfile = "JsonDocuments/UserProfile.json";
         public const string Whitespace = "JsonDocuments/Whitespace.json";
     }

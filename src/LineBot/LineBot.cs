@@ -195,6 +195,21 @@ namespace Line
         }
 
         /// <summary>
+        /// Returns the richmenu with the specified id.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>The richmenu with the specified id.</returns>
+        public async Task<IRichMenuResponse> GetRichMenu(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var response = await _client.GetAsync($"richmenu/{richMenuId}");
+            await response.CheckResult();
+
+            return await response.Content.DeserializeObject<RichMenuResponse>();
+        }
+
+        /// <summary>
         /// Leave the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
