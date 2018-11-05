@@ -54,6 +54,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Converters\IActionConverterTests\MessageAction.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Converters\IActionConverterTests\DateTimePickerAction.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Converters\IActionConverterTests\CameraAction.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Converters\IActionConverterTests\UriAction.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Converters\IActionConverterTests\PostbackAction.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Events\Beacon\InvalidBeacon.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

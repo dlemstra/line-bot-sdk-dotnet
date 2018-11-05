@@ -28,6 +28,10 @@ namespace Line
         private readonly ActionType _type = ActionType.DateTimePicker;
 #pragma warning restore 0414
 
+        [JsonProperty("mode")]
+        [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
+        private readonly DateTimePickerMode _mode;
+
         private string _label;
         private string _data;
         private DateTime? _initial;
@@ -40,7 +44,11 @@ namespace Line
         /// <param name="mode">The mode of the Datetime picker action.</param>
         public DateTimePickerAction(DateTimePickerMode mode)
         {
-            Mode = mode;
+            _mode = mode;
+        }
+
+        internal DateTimePickerAction()
+        {
         }
 
         /// <summary>
@@ -94,9 +102,8 @@ namespace Line
         /// <summary>
         /// Gets the action mode for the datetime picker.
         /// </summary>
-        [JsonProperty("mode")]
-        [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
-        public DateTimePickerMode Mode { get; }
+        [JsonIgnore]
+        public DateTimePickerMode Mode => _mode;
 
         /// <summary>
         /// Gets or sets the initial value of date or time for the datetime picker.
