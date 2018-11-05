@@ -66,7 +66,7 @@
     <None Update="Events\Follow\FollowEvent.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\EmptyObject.json">
+    <None Update="EmptyObject.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Events\Join\JoinEvent.json">
@@ -111,7 +111,7 @@
     <None Update="Events\Unfollow\UnfollowEvent.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Events\Whitespace.json">
+    <None Update="Whitespace.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Events\NoEvents.json">

@@ -23,8 +23,8 @@ namespace Line.Tests
         public class TheGetDefaultRichMenuMethod
         {
             private const string DefaultRichMenuIdJson = "LineBotTests/DefaultRichMenuId.json";
-            private const string EmptyObjectJson = "Events/EmptyObject.json";
-            private const string WhitespaceJson = "Events/Whitespace.json";
+            private const string EmptyObjectJson = "EmptyObject.json";
+            private const string WhitespaceJson = "Whitespace.json";
 
             [TestMethod]
             [DeploymentItem(DefaultRichMenuIdJson)]
