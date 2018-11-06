@@ -88,6 +88,18 @@ namespace Line
         }
 
         /// <summary>
+        /// Cancels the default rich menu set with the Messaging API.
+        /// </summary>
+        /// <returns>.</returns>
+        public async Task<ILineBot> DeleteDefaultRichMenu()
+        {
+            var response = await _client.DeleteAsync($"user/all/richmenu");
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
         /// Deletes a rich menu.
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>

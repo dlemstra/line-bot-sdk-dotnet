@@ -31,6 +31,12 @@ namespace Line
         Task<string> CreateRichMenu(RichMenu richMenu);
 
         /// <summary>
+        /// Cancels the default rich menu set with the Messaging API.
+        /// </summary>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteDefaultRichMenu();
+
+        /// <summary>
         /// Deletes a rich menu.
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
