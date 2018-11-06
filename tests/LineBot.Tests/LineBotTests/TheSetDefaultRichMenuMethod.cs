@@ -34,7 +34,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(null);
+                        await bot.SetDefaultRichMenu((string)null);
                     });
                 }
 
@@ -88,7 +88,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
                     {
-                        await bot.SetDefaultMenu(null);
+                        await bot.SetDefaultRichMenu((IRichMenuResponse)null);
                     });
                 }
 
@@ -99,7 +99,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultMenu(new RichMenuResponse());
+                        await bot.SetDefaultRichMenu(new RichMenuResponse());
                     });
                 }
 
@@ -115,7 +115,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultMenu(richMenuResponse);
+                        await bot.SetDefaultRichMenu(richMenuResponse);
                     });
                 }
 
@@ -131,7 +131,7 @@ namespace Line.Tests
 
                     var httpClient = TestHttpClient.ThatReturnsData(input);
                     var bot = TestConfiguration.CreateBot(httpClient);
-                    await bot.SetDefaultMenu(richMenuResponse);
+                    await bot.SetDefaultRichMenu(richMenuResponse);
 
                     Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
                     Assert.AreEqual($"/user/all/richmenu/{sampleId}", httpClient.RequestPath);
@@ -151,7 +151,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
                     {
-                        await bot.SetDefaultMenu(richMenuResponse);
+                        await bot.SetDefaultRichMenu(richMenuResponse);
                     });
                 }
             }

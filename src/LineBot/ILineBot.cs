@@ -249,7 +249,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
         /// <returns>.</returns>
-        Task<ILineBot> SetDefaultMenu(IRichMenuResponse richMenu);
+        Task<ILineBot> SetDefaultRichMenu(IRichMenuResponse richMenu);
 
         /// <summary>
         /// Sets the default rich menu, which is displayed to all users who have added the bot as a friend and are not linked to any per-user rich menu.

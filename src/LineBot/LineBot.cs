@@ -541,7 +541,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> SetDefaultMenu(IRichMenuResponse richMenu)
+        public async Task<ILineBot> SetDefaultRichMenu(IRichMenuResponse richMenu)
         {
             Guard.NotNull(nameof(richMenu), richMenu);
 
