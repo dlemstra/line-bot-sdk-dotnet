@@ -31,6 +31,20 @@ namespace Line
         Task<string> CreateRichMenu(RichMenu richMenu);
 
         /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteRichMenu(IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteRichMenu(string richMenuId);
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
