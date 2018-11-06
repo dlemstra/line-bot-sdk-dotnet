@@ -12,6 +12,7 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System;
 using System.Linq;
 using System.Net.Http;
 
@@ -26,8 +27,17 @@ namespace Line.Tests
 
         public static void SetPostedData(this HttpRequestMessage self)
         {
-            if (self.Content is StringContent content)
-                self.Headers.Add(nameof(HttpRequestMessageExtensions), content.ReadAsStringAsync().Result);
+            if (self.Content is StringContent stringContent)
+            {
+                var data = stringContent.ReadAsStringAsync().GetAwaiter().GetResult();
+                self.Headers.Add(nameof(HttpRequestMessageExtensions), data);
+            }
+
+            if (self.Content is ByteArrayContent byteArrayContent)
+            {
+                var data = byteArrayContent.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+                self.Headers.Add(nameof(HttpRequestMessageExtensions), BitConverter.ToString(data));
+            }
         }
     }
 }

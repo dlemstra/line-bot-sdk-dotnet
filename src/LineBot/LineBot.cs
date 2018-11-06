@@ -568,13 +568,11 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu response.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> SetDefaultRichMenu(IRichMenuResponse richMenu)
+        public Task<ILineBot> SetDefaultRichMenu(IRichMenuResponse richMenu)
         {
             Guard.NotNull(nameof(richMenu), richMenu);
 
-            await SetDefaultRichMenu(richMenu.Id);
-
-            return this;
+            return SetDefaultRichMenu(richMenu.Id);
         }
 
         /// <summary>
@@ -587,6 +585,38 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
             var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", null);
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Uploads and attaches an image to a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <param name="imageData">The data of the image.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetRichMenuImage(IRichMenuResponse richMenu, byte[] imageData)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return SetRichMenuImage(richMenu.Id, imageData);
+        }
+
+        /// <summary>
+        /// Uploads and attaches an image to a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <param name="imageData">The data of the image.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> SetRichMenuImage(string richMenuId, byte[] imageData)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+            Guard.NotNullOrEmpty(nameof(imageData), imageData);
+
+            var content = new ByteArrayContent(imageData);
+
+            var response = await _client.PostAsync($"richmenu/{richMenuId}/content", content);
             await response.CheckResult();
 
             return this;

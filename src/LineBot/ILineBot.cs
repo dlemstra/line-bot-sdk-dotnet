@@ -271,5 +271,21 @@ namespace Line
         /// <param name="richMenuId">The rich menu id.</param>
         /// <returns>.</returns>
         Task<ILineBot> SetDefaultRichMenu(string richMenuId);
+
+        /// <summary>
+        /// Uploads and attaches an image to a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <param name="imageData">The data of the image.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetRichMenuImage(IRichMenuResponse richMenuId, byte[] imageData);
+
+        /// <summary>
+        /// Uploads and attaches an image to a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <param name="imageData">The data of the image.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetRichMenuImage(string richMenuId, byte[] imageData);
     }
 }
