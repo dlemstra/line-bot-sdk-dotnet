@@ -22,7 +22,7 @@ namespace Line.Tests
     public partial class LineBotTests
     {
         [TestClass]
-        public class TheSetDefaultRichMenuMethod
+        public class TheGetRichMenuImageMethod
         {
             [TestClass]
             public class WithRichMenuId
@@ -34,7 +34,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu((string)null);
+                        await bot.GetRichMenuImage((string)null);
                     });
                 }
 
@@ -45,7 +45,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(string.Empty);
+                        await bot.GetRichMenuImage(string.Empty);
                     });
                 }
 
@@ -53,13 +53,15 @@ namespace Line.Tests
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var richMenuId = Guid.NewGuid().ToString();
+                    var data = new byte[] { 1, 2, 3, 4 };
 
-                    var httpClient = TestHttpClient.Create();
+                    var httpClient = TestHttpClient.ThatReturnsData(data);
                     var bot = TestConfiguration.CreateBot(httpClient);
-                    await bot.SetDefaultRichMenu(richMenuId);
+                    var result = await bot.GetRichMenuImage(richMenuId);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/all/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
+                    Assert.AreEqual($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
+                    CollectionAssert.AreEqual(data, result);
                 }
 
                 [TestMethod]
@@ -72,18 +74,8 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuId);
+                        await bot.GetRichMenuImage(richMenuId);
                     });
-                }
-
-                [TestMethod]
-                public async Task ShouldReturnTheInstance()
-                {
-                    var httpClient = TestHttpClient.Create();
-                    var bot = TestConfiguration.CreateBot(httpClient);
-
-                    var result = await bot.SetDefaultRichMenu("test");
-                    Assert.AreSame(bot, result);
                 }
             }
 
@@ -97,7 +89,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
                     {
-                        await bot.SetDefaultRichMenu((IRichMenuResponse)null);
+                        await bot.GetRichMenuImage((IRichMenuResponse)null);
                     });
                 }
 
@@ -108,7 +100,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(new RichMenuResponse());
+                        await bot.GetRichMenuImage(new RichMenuResponse());
                     });
                 }
 
@@ -124,7 +116,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuResponse);
+                        await bot.GetRichMenuImage(richMenuResponse);
                     });
                 }
 
@@ -136,13 +128,15 @@ namespace Line.Tests
                     {
                         Id = richMenuId
                     };
+                    var data = new byte[] { 1, 2, 3, 4 };
 
-                    var httpClient = TestHttpClient.Create();
+                    var httpClient = TestHttpClient.ThatReturnsData(data);
                     var bot = TestConfiguration.CreateBot(httpClient);
-                    await bot.SetDefaultRichMenu(richMenuResponse);
+                    var result = await bot.GetRichMenuImage(richMenuResponse);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/all/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
+                    Assert.AreEqual($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
+                    CollectionAssert.AreEqual(data, result);
                 }
 
                 [TestMethod]
@@ -158,23 +152,8 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuResponse);
+                        await bot.GetRichMenuImage(richMenuResponse);
                     });
-                }
-
-                [TestMethod]
-                public async Task ShouldReturnTheInstance()
-                {
-                    var richMenuResponse = new RichMenuResponse()
-                    {
-                        Id = Guid.NewGuid().ToString()
-                    };
-
-                    var httpClient = TestHttpClient.Create();
-                    var bot = TestConfiguration.CreateBot(httpClient);
-
-                    var result = await bot.SetDefaultRichMenu(richMenuResponse);
-                    Assert.AreSame(bot, result);
                 }
             }
         }

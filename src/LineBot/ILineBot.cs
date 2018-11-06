@@ -93,6 +93,20 @@ namespace Line
         Task<IRichMenuResponse> GetRichMenu(string richMenuId);
 
         /// <summary>
+        /// Downloads an image associated with a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<byte[]> GetRichMenuImage(IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Downloads an image associated with a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<byte[]> GetRichMenuImage(string richMenuId);
+
+        /// <summary>
         /// Gets a list of all uploaded rich menus.
         /// </summary>
         /// <returns>A list of all uploaded rich menus.</returns>
@@ -275,10 +289,10 @@ namespace Line
         /// <summary>
         /// Uploads and attaches an image to a rich menu.
         /// </summary>
-        /// <param name="richMenuId">The rich menu id.</param>
+        /// <param name="richMenu">The rich menu response.</param>
         /// <param name="imageData">The data of the image.</param>
         /// <returns>.</returns>
-        Task<ILineBot> SetRichMenuImage(IRichMenuResponse richMenuId, byte[] imageData);
+        Task<ILineBot> SetRichMenuImage(IRichMenuResponse richMenu, byte[] imageData);
 
         /// <summary>
         /// Uploads and attaches an image to a rich menu.

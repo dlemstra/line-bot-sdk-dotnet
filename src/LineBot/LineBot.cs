@@ -234,6 +234,33 @@ namespace Line
         }
 
         /// <summary>
+        /// Downloads an image associated with a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<byte[]> GetRichMenuImage(IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return GetRichMenuImage(richMenu.Id);
+        }
+
+        /// <summary>
+        /// Downloads an image associated with a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public async Task<byte[]> GetRichMenuImage(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var response = await _client.GetAsync($"richmenu/{richMenuId}/content");
+            await response.CheckResult();
+
+            return await response.Content.ReadAsByteArrayAsync();
+        }
+
+        /// <summary>
         /// Gets a list of all uploaded rich menus.
         /// </summary>
         /// <returns>A list of all uploaded rich menus.</returns>
