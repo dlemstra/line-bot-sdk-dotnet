@@ -16,9 +16,12 @@ namespace Line.Tests
 {
     public static partial class JsonDocuments
     {
-        public const string EmptyObject = "JsonDocuments/EmptyObject.json";
-        public const string Error = "JsonDocuments/Error.json";
-        public const string UserProfile = "JsonDocuments/UserProfile.json";
-        public const string Whitespace = "JsonDocuments/Whitespace.json";
+        public static partial class RichMenu
+        {
+            public const string DefaultRichMenuId = "JsonDocuments/RichMenu/DefaultRichMenuId.json";
+            public const string EmptyRichMenuResponseCollection = "JsonDocuments/RichMenu/EmptyRichMenuResponseCollection.json";
+            public const string RichMenuResponse = "JsonDocuments/RichMenu/RichMenuResponse.json";
+            public const string RichMenuResponseCollection = "JsonDocuments/RichMenu/RichMenuResponseCollection.json";
+        }
     }
 }

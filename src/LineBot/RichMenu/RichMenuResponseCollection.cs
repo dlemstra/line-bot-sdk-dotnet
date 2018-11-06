@@ -12,13 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line.Tests
+using Newtonsoft.Json;
+
+namespace Line
 {
-    public static partial class JsonDocuments
+    internal sealed class RichMenuResponseCollection
     {
-        public const string EmptyObject = "JsonDocuments/EmptyObject.json";
-        public const string Error = "JsonDocuments/Error.json";
-        public const string UserProfile = "JsonDocuments/UserProfile.json";
-        public const string Whitespace = "JsonDocuments/Whitespace.json";
+        [JsonProperty("richmenus")]
+        public RichMenuResponse[] RichMenus { get; set; }
     }
 }

@@ -22,30 +22,8 @@ namespace Line.Tests
     public partial class LineBotTests
     {
         [TestClass]
-        public class TheGetRichMenuMethod
+        public class TheGetRichMenusMethod
         {
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
-            {
-                var bot = TestConfiguration.CreateBot();
-
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
-                {
-                    await bot.GetRichMenu(null);
-                });
-            }
-
-            [TestMethod]
-            public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
-            {
-                var bot = TestConfiguration.CreateBot();
-
-                await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
-                {
-                    await bot.GetRichMenu(string.Empty);
-                });
-            }
-
             [TestMethod]
             public async Task ShouldThrowExceptionWhenResponseIsError()
             {
@@ -55,45 +33,56 @@ namespace Line.Tests
 
                 await ExceptionAssert.ThrowsUnknownError(async () =>
                 {
-                    await bot.GetRichMenu("test");
+                    await bot.GetRichMenus();
                 });
             }
 
             [TestMethod]
             [DeploymentItem(JsonDocuments.Whitespace)]
-            public async Task ShouldReturnNullWhenResponseContainsWhitespace()
+            public async Task ShouldReturnEmptyCollectionWhenResponseContainsWhitespace()
             {
                 var httpClient = TestHttpClient.Create(JsonDocuments.Whitespace);
                 var bot = TestConfiguration.CreateBot(httpClient);
-                var richMenu = await bot.GetRichMenu("test");
+                var richMenus = await bot.GetRichMenus();
 
-                Assert.IsNull(richMenu);
+                Assert.AreEqual(0, richMenus.Count());
+            }
+
+            [TestMethod]
+            [DeploymentItem(JsonDocuments.RichMenu.EmptyRichMenuResponseCollection)]
+            public async Task ShouldReturnEmptyCollectionWhenResponseContainsNoRichMenus()
+            {
+                var httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.EmptyRichMenuResponseCollection);
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var richMenus = await bot.GetRichMenus();
+
+                Assert.AreEqual(0, richMenus.Count());
             }
 
             [TestMethod]
             [DeploymentItem(JsonDocuments.EmptyObject)]
             public async Task ShouldCallTheCorrectApi()
             {
-                var richMenuId = "f22df647-b12f-427c-85c5-8238bee6bb45";
-
                 var httpClient = TestHttpClient.Create(JsonDocuments.EmptyObject);
                 var bot = TestConfiguration.CreateBot(httpClient);
-                var richMenu = await bot.GetRichMenu(richMenuId);
+                var richMenus = await bot.GetRichMenus();
 
                 Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                Assert.AreEqual($"/richmenu/{richMenuId}", httpClient.RequestPath);
+                Assert.AreEqual($"/richmenu/list", httpClient.RequestPath);
             }
 
             [TestMethod]
-            [DeploymentItem(JsonDocuments.RichMenu.RichMenuResponse)]
-            public async Task ShouldReturnRichMenuResponseWhenResponseIsCorrect()
+            [DeploymentItem(JsonDocuments.RichMenu.RichMenuResponseCollection)]
+            public async Task ShouldReturnRichMenuResponseCollectionWhenResponseIsCorrect()
             {
-                var richMenuId = "f22df647-b12f-427c-85c5-8238bee6bb45";
-
-                var httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.RichMenuResponse);
+                var httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.RichMenuResponseCollection);
                 var bot = TestConfiguration.CreateBot(httpClient);
-                var richMenu = await bot.GetRichMenu(richMenuId);
+                var richMenus = await bot.GetRichMenus();
 
+                Assert.IsNotNull(richMenus);
+                Assert.AreEqual(1, richMenus.Count());
+
+                var richMenu = richMenus.FirstOrDefault();
                 Assert.IsNotNull(richMenu);
                 Assert.AreEqual("f22df647-b12f-427c-85c5-8238bee6bb45", richMenu.Id);
                 Assert.IsFalse(richMenu.Selected);

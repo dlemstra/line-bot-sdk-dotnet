@@ -192,10 +192,10 @@ namespace Line
         }
 
         /// <summary>
-        /// Returns the richmenu with the specified id.
+        /// Gets a rich menu via a rich menu ID.
         /// </summary>
         /// <param name="richMenuId">The rich menu id.</param>
-        /// <returns>The richmenu with the specified id.</returns>
+        /// <returns>A rich menu via a rich menu ID.</returns>
         public async Task<IRichMenuResponse> GetRichMenu(string richMenuId)
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
@@ -204,6 +204,23 @@ namespace Line
             await response.CheckResult();
 
             return await response.Content.DeserializeObject<RichMenuResponse>();
+        }
+
+        /// <summary>
+        /// Gets a list of all uploaded rich menus.
+        /// </summary>
+        /// <returns>A list of all uploaded rich menus.</returns>
+        public async Task<IEnumerable<IRichMenuResponse>> GetRichMenus()
+        {
+            var response = await _client.GetAsync($"richmenu/list");
+            await response.CheckResult();
+
+            var richMenuResponseCollection = await response.Content.DeserializeObject<RichMenuResponseCollection>();
+
+            if (richMenuResponseCollection == null || richMenuResponseCollection.RichMenus == null)
+                return Enumerable.Empty<IRichMenuResponse>();
+
+            return richMenuResponseCollection.RichMenus;
         }
 
         /// <summary>
