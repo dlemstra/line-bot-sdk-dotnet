@@ -82,11 +82,9 @@ namespace Line
             var response = await _client.PostAsync($"richmenu", content);
             await response.CheckResult();
 
-            var stringResponseResult = await response.Content.ReadAsStringAsync();
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
-            var objectResult = JsonConvert.DeserializeObject<RichMenuIdResponse>(stringResponseResult);
-
-            return objectResult.RichMenuId;
+            return richMenuIdResponse.RichMenuId;
         }
 
         /// <summary>
@@ -128,8 +126,7 @@ namespace Line
             var response = await _client.GetAsync($"user/all/richmenu");
             await response.CheckResult();
 
-            var jsonContent = await response.Content.ReadAsStringAsync();
-            var richMenuIdResponse = JsonConvert.DeserializeObject<RichMenuIdResponse>(jsonContent);
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
             if (richMenuIdResponse == null)
                 return null;
