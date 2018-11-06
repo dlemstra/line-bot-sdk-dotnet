@@ -99,6 +99,16 @@ namespace Line.Tests
                         await bot.SetRichMenuImage(richMenuId, new byte[1] { 0 });
                     });
                 }
+
+                [TestMethod]
+                public async Task ShouldReturnTheInstance()
+                {
+                    var httpClient = TestHttpClient.Create();
+                    var bot = TestConfiguration.CreateBot(httpClient);
+
+                    var result = await bot.SetRichMenuImage("test", new byte[1] { 0 });
+                    Assert.AreSame(bot, result);
+                }
             }
 
             [TestClass]
@@ -208,6 +218,21 @@ namespace Line.Tests
                     {
                         await bot.SetRichMenuImage(richMenuResponse, new byte[1] { 0 });
                     });
+                }
+
+                [TestMethod]
+                public async Task ShouldReturnTheInstance()
+                {
+                    var richMenuResponse = new RichMenuResponse()
+                    {
+                        Id = Guid.NewGuid().ToString()
+                    };
+
+                    var httpClient = TestHttpClient.Create();
+                    var bot = TestConfiguration.CreateBot(httpClient);
+
+                    var result = await bot.SetRichMenuImage(richMenuResponse, new byte[1] { 0 });
+                    Assert.AreSame(bot, result);
                 }
             }
         }

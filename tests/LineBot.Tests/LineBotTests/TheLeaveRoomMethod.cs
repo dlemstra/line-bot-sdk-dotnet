@@ -88,6 +88,16 @@ namespace Line.Tests
 
                 Assert.AreEqual("/room/testRoom/leave", httpClient.RequestPath);
             }
+
+            [TestMethod]
+            public async Task ShouldReturnTheInstance()
+            {
+                var httpClient = TestHttpClient.Create();
+                var bot = TestConfiguration.CreateBot(httpClient);
+
+                var result = await bot.LeaveRoom("test");
+                Assert.AreSame(bot, result);
+            }
         }
     }
 }
