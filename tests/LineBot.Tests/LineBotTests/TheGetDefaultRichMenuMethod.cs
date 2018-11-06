@@ -23,10 +23,10 @@ namespace Line.Tests
         public class TheGetDefaultRichMenuMethod
         {
             [TestMethod]
-            [DeploymentItem(JsonDocuments.DefaultRichMenuId)]
+            [DeploymentItem(JsonDocuments.RichMenu.DefaultRichMenuId)]
             public async Task ReturnsIdWhenResponseIsCorrect()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.DefaultRichMenuId);
+                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.DefaultRichMenuId);
                 ILineBot bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 

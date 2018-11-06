@@ -1,0 +1,26 @@
+{
+  "richmenus": [
+    {
+      "richMenuId": "f22df647-b12f-427c-85c5-8238bee6bb45",
+      "size": {
+        "width": 2500,
+        "height": 1686
+      },
+      "selected": false,
+      "areas": [
+        {
+          "bounds": {
+            "x": 1,
+            "y": 2,
+            "width": 2499,
+            "height": 1684
+          },
+          "action": {
+            "type": "postback",
+            "data": "action=buy&itemid=123"
+          }
+        }
+      ]
+    }
+  ]
+}

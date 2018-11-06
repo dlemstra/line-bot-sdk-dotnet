@@ -69,7 +69,13 @@
     <None Update="JsonDocuments\Actions\Postback.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="JsonDocuments\RichMenuResponse.json">
+    <None Update="JsonDocuments\RichMenu\EmptyRichMenuResponseCollection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="JsonDocuments\RichMenu\RichMenuResponseCollection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="JsonDocuments\RichMenu\RichMenuResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="JsonDocuments\Events\InvalidBeacon.json">
@@ -153,7 +159,7 @@
     <None Update="JsonDocuments\Error.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="JsonDocuments\DefaultRichMenuId.json">
+    <None Update="JsonDocuments\RichMenu\DefaultRichMenuId.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="JsonDocuments\UserProfile.json">
