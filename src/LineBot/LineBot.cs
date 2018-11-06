@@ -88,6 +88,33 @@ namespace Line
         }
 
         /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> DeleteRichMenu(IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return DeleteRichMenu(richMenu.Id);
+        }
+
+        /// <summary>
+        /// Deletes a rich menu.
+        /// </summary>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> DeleteRichMenu(string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var response = await _client.DeleteAsync($"richmenu/{richMenuId}");
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>

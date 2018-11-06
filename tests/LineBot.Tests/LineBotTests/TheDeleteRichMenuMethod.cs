@@ -22,7 +22,7 @@ namespace Line.Tests
     public partial class LineBotTests
     {
         [TestClass]
-        public class TheSetDefaultRichMenuMethod
+        public class TheDeleteRichMenuMethod
         {
             [TestClass]
             public class WithRichMenuId
@@ -34,7 +34,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu((string)null);
+                        await bot.DeleteRichMenu((string)null);
                     });
                 }
 
@@ -45,22 +45,22 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(string.Empty);
+                        await bot.DeleteRichMenu(string.Empty);
                     });
                 }
 
                 [TestMethod]
-                public async Task ShouldSetDefaultRichMenuWhenCorrectInputCallsApi()
+                public async Task ShouldCallTheCorrectApi()
                 {
                     var input = new byte[0];
                     var richMenuId = Guid.NewGuid().ToString();
 
                     var httpClient = TestHttpClient.ThatReturnsData(input);
                     var bot = TestConfiguration.CreateBot(httpClient);
-                    await bot.SetDefaultRichMenu(richMenuId);
+                    await bot.DeleteRichMenu(richMenuId);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/all/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.AreEqual(HttpMethod.Delete, httpClient.RequestMethod);
+                    Assert.AreEqual($"/richmenu/{richMenuId}", httpClient.RequestPath);
                 }
 
                 [TestMethod]
@@ -73,7 +73,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuId);
+                        await bot.DeleteRichMenu(richMenuId);
                     });
                 }
             }
@@ -88,7 +88,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
                     {
-                        await bot.SetDefaultRichMenu((IRichMenuResponse)null);
+                        await bot.DeleteRichMenu((IRichMenuResponse)null);
                     });
                 }
 
@@ -99,7 +99,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(new RichMenuResponse());
+                        await bot.DeleteRichMenu(new RichMenuResponse());
                     });
                 }
 
@@ -115,7 +115,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("richMenuId", async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuResponse);
+                        await bot.DeleteRichMenu(richMenuResponse);
                     });
                 }
 
@@ -131,10 +131,10 @@ namespace Line.Tests
 
                     var httpClient = TestHttpClient.ThatReturnsData(input);
                     var bot = TestConfiguration.CreateBot(httpClient);
-                    await bot.SetDefaultRichMenu(richMenuResponse);
+                    await bot.DeleteRichMenu(richMenuResponse);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/all/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.AreEqual(HttpMethod.Delete, httpClient.RequestMethod);
+                    Assert.AreEqual($"/richmenu/{richMenuId}", httpClient.RequestPath);
                 }
 
                 [TestMethod]
@@ -150,7 +150,7 @@ namespace Line.Tests
 
                     await ExceptionAssert.ThrowsAsync<LineBotException>(async () =>
                     {
-                        await bot.SetDefaultRichMenu(richMenuResponse);
+                        await bot.DeleteRichMenu(richMenuResponse);
                     });
                 }
             }
