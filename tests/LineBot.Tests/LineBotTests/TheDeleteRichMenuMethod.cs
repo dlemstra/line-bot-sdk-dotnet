@@ -52,10 +52,9 @@ namespace Line.Tests
                 [TestMethod]
                 public async Task ShouldCallTheCorrectApi()
                 {
-                    var input = new byte[0];
                     var richMenuId = Guid.NewGuid().ToString();
 
-                    var httpClient = TestHttpClient.ThatReturnsData(input);
+                    var httpClient = TestHttpClient.Create();
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.DeleteRichMenu(richMenuId);
 
@@ -122,14 +121,13 @@ namespace Line.Tests
                 [TestMethod]
                 public async Task ShouldSetDefaultRichMenuIdWhenCorrectInputCallsApi()
                 {
-                    var input = new byte[0];
                     var richMenuId = Guid.NewGuid().ToString();
                     var richMenuResponse = new RichMenuResponse()
                     {
                         Id = richMenuId
                     };
 
-                    var httpClient = TestHttpClient.ThatReturnsData(input);
+                    var httpClient = TestHttpClient.Create();
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.DeleteRichMenu(richMenuResponse);
 
