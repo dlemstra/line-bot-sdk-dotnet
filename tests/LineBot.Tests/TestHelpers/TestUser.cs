@@ -16,6 +16,6 @@ namespace Line.Tests
 {
     public class TestUser : IUser
     {
-        public string Id => "testUser";
+        public string Id { get; set; } = "testUser";
     }
 }

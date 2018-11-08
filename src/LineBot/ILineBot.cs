@@ -307,5 +307,37 @@ namespace Line
         /// <param name="imageData">The data of the image.</param>
         /// <returns>.</returns>
         Task<ILineBot> SetRichMenuImage(string richMenuId, byte[] imageData);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(IUser user, IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(IUser user, string richMenuId);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(string userId, IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(string userId, string richMenuId);
     }
 }

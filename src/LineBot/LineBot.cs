@@ -661,6 +661,63 @@ namespace Line
             return this;
         }
 
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(IUser user, IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(user), user);
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return SetUserRichMenu(user.Id, richMenu.Id);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(IUser user, string richMenuId)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return SetUserRichMenu(user.Id, richMenuId);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(string userId, IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return SetUserRichMenu(userId, richMenu.Id);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> SetUserRichMenu(string userId, string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var response = await _client.PostAsync($"user/{userId}/richmenu/{richMenuId}", null);
+            await response.CheckResult();
+
+            return this;
+        }
+
         private static StringContent CreateStringContent<T>(T value)
         {
             var content = JsonConvert.SerializeObject(value);
