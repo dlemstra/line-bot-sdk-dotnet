@@ -119,6 +119,20 @@ namespace Line
         Task<IEnumerable<IRichMenuResponse>> GetRichMenus();
 
         /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        Task<string> GetUserRichMenu(IUser user);
+
+        /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        Task<string> GetUserRichMenu(string userId);
+
+        /// <summary>
         /// Leave the specified group.
         /// </summary>
         /// <param name="group">The group.</param>

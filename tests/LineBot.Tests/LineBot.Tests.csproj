@@ -72,6 +72,9 @@
     <None Update="JsonDocuments\RichMenu\EmptyRichMenuResponseCollection.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="JsonDocuments\RichMenu\UserRichMenuResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="JsonDocuments\RichMenu\RichMenuResponseCollection.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

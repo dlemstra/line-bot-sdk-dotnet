@@ -167,10 +167,7 @@ namespace Line
 
             var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
-            if (richMenuIdResponse == null)
-                return null;
-
-            return richMenuIdResponse.RichMenuId;
+            return richMenuIdResponse?.RichMenuId;
         }
 
         /// <summary>
@@ -287,6 +284,35 @@ namespace Line
                 return Enumerable.Empty<IRichMenuResponse>();
 
             return richMenuResponseCollection.RichMenus;
+        }
+
+        /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        public Task<string> GetUserRichMenu(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return GetUserRichMenu(user.Id);
+        }
+
+        /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        public async Task<string> GetUserRichMenu(string userId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+
+            var response = await _client.GetAsync($"user/{userId}/richmenu");
+            await response.CheckResult();
+
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
+
+            return richMenuIdResponse?.RichMenuId;
         }
 
         /// <summary>
