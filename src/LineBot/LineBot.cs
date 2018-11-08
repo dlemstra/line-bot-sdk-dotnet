@@ -127,6 +127,33 @@ namespace Line
         }
 
         /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> DeleteUserRichMenu(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return DeleteUserRichMenu(user.Id);
+        }
+
+        /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> DeleteUserRichMenu(string userId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+
+            var response = await _client.DeleteAsync($"user/{userId}/richmenu");
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>

@@ -51,6 +51,20 @@ namespace Line
         Task<ILineBot> DeleteRichMenu(string richMenuId);
 
         /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteUserRichMenu(IUser user);
+
+        /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteUserRichMenu(string userId);
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
