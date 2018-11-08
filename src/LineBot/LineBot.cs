@@ -84,7 +84,7 @@ namespace Line
 
             var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
-            return richMenuIdResponse.RichMenuId;
+            return richMenuIdResponse?.RichMenuId;
         }
 
         /// <summary>
