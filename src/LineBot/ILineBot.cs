@@ -80,16 +80,16 @@ namespace Line
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
-        /// <param name="userId">The id of the user.</param>
+        /// <param name="user">The user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(string userId);
+        Task<IUserProfile> GetProfile(IUser user);
 
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
-        /// <param name="user">The user.</param>
+        /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(IUser user);
+        Task<IUserProfile> GetProfile(string userId);
 
         /// <summary>
         /// Gets a rich menu via a rich menu ID.
@@ -121,23 +121,16 @@ namespace Line
         /// <summary>
         /// Leave the specified group.
         /// </summary>
-        /// <param name="groupId">The id of the group.</param>
-        /// <returns>.</returns>
-        Task<ILineBot> LeaveGroup(string groupId);
-
-        /// <summary>
-        /// Leave the specified group.
-        /// </summary>
         /// <param name="group">The group.</param>
         /// <returns>.</returns>
         Task<ILineBot> LeaveGroup(IGroup group);
 
         /// <summary>
-        /// Leave the specified room.
+        /// Leave the specified group.
         /// </summary>
-        /// <param name="roomId">The id of the room.</param>
+        /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
-        Task<ILineBot> LeaveRoom(string roomId);
+        Task<ILineBot> LeaveGroup(string groupId);
 
         /// <summary>
         /// Leave the specified room.
@@ -145,6 +138,13 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <returns>.</returns>
         Task<ILineBot> LeaveRoom(IRoom room);
+
+        /// <summary>
+        /// Leave the specified room.
+        /// </summary>
+        /// <param name="roomId">The id of the room.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> LeaveRoom(string roomId);
 
         /// <summary>
         /// Send messages to multiple users at any time.
