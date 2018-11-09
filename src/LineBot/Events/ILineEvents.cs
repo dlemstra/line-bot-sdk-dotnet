@@ -24,7 +24,7 @@ namespace Line
         /// <summary>
         /// Gets all the events.
         /// </summary>
-        List<ILineEvent> Events { get; }
+        List<LineEvent> Events { get; }
 
         /// <summary>
         /// Gets or Sets the user ID of a bot that should receive webhook events.

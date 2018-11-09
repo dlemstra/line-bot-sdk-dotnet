@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class LineEvent : ILineEvent, IBeacon, IMessage, IPostback
+    public sealed class LineEvent : ILineEvent, IBeacon, IMessage, IPostback
     {
         [JsonProperty("beacon")]
         private Beacon _beacon = null;

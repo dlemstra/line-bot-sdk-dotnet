@@ -26,14 +26,14 @@ namespace Line
         public string Destination { get; set; }
 
         [JsonProperty("events")]
-        public List<ILineEvent> Events { get; set; }
-
-        public IEnumerator<ILineEvent> GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        public List<LineEvent> Events { get; set; }
 
         IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Events.GetEnumerator();
+        }
+
+        IEnumerator<ILineEvent> IEnumerable<ILineEvent>.GetEnumerator()
         {
             return Events.GetEnumerator();
         }
@@ -42,7 +42,7 @@ namespace Line
         {
             return new LineEventCollection
             {
-                Events = new List<ILineEvent>()
+                Events = new List<LineEvent>()
             };
         }
     }
