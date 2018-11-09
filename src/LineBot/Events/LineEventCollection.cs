@@ -22,21 +22,11 @@ namespace Line
     [JsonObject]
     internal sealed class LineEventCollection : ILineEvents
     {
-        private readonly string _destination = null;
-
-        private ILineEvent[] _lineEvents = null;
-
-        public LineEventCollection(ILineEvent[] lineEvents = null, string destination = null)
-        {
-            _lineEvents = lineEvents;
-            _destination = null;
-        }
-
         [JsonProperty("destination")]
-        string ILineEvents.Destination => _destination;
+        string ILineEvents.Destination { get; set; }
 
         [JsonProperty("events")]
-        ILineEvent[] ILineEvents.Events => _lineEvents;
+        List<ILineEvent> ILineEvents.Events { get; set; }
 
         public IEnumerator<ILineEvent> GetEnumerator()
         {
@@ -45,12 +35,12 @@ namespace Line
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _lineEvents.ToList() as IEnumerator;
+            return (this as ILineEvents).GetEnumerator();
         }
 
         internal static ILineEvents Empty()
         {
-            return new LineEventCollection(new ILineEvent[0]);
+            return new LineEventCollection();
         }
     }
 }
