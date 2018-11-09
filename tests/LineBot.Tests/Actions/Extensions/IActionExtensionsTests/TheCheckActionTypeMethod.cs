@@ -63,6 +63,14 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            public void ShouldNotThrowExceptionWhenActionIsCameraRollAction()
+            {
+                var action = new CameraRollAction();
+
+                IActionExtensions.CheckActionType(action);
+            }
+
+            [TestMethod]
             public void ShouldNotThrowExceptionWhenActionIsDateTimePickerAction()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);

@@ -72,6 +72,20 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            [DeploymentItem(JsonDocuments.Actions.CameraRoll)]
+            public void ShouldCreateCameraActionWhenTypeIsCameraRoll()
+            {
+                var converter = new IActionConverter();
+
+                var data = File.ReadAllText(JsonDocuments.Actions.CameraRoll);
+
+                var action = JsonConvert.DeserializeObject<IAction>(data, converter) as CameraRollAction;
+
+                Assert.IsNotNull(action);
+                Assert.AreEqual("Camera Roll", action.Label);
+            }
+
+            [TestMethod]
             [DeploymentItem(JsonDocuments.Actions.DateTimePicker)]
             public void ShouldCreateDateTimePickerActionWhenTypeIsDateTimePicker()
             {

@@ -21,6 +21,18 @@ namespace Line
     internal sealed class EnumConverter<TEnum> : JsonConverter
         where TEnum : struct, Enum
     {
+        private readonly bool _lowercase;
+
+        public EnumConverter()
+            : this(true)
+        {
+        }
+
+        public EnumConverter(bool lowercase)
+        {
+            _lowercase = lowercase;
+        }
+
         public override bool CanConvert(Type objectType)
         {
             return objectType.GetTypeInfo().IsEnum;
@@ -43,7 +55,19 @@ namespace Line
         {
             Enum val = (Enum)value;
 
-            writer.WriteValue(val.ToString("G").ToLowerInvariant());
+            var strValue = val.ToString("G");
+            if (_lowercase)
+            {
+                strValue = strValue.ToLowerInvariant();
+            }
+            else
+            {
+                var characters = strValue.ToCharArray();
+                characters[0] = char.ToLowerInvariant(characters[0]);
+                strValue = new string(characters);
+            }
+
+            writer.WriteValue(strValue);
         }
     }
 }

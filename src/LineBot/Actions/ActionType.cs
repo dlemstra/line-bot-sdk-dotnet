@@ -16,10 +16,11 @@ namespace Line
 {
     internal enum ActionType
     {
-        Postback,
-        Message,
-        Uri,
         Camera,
-        DateTimePicker
+        CameraRoll,
+        DateTimePicker,
+        Message,
+        Postback,
+        Uri
     }
 }

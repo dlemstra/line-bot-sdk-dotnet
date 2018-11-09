@@ -13,39 +13,34 @@
 // under the License.
 
 using System;
-using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Line
+namespace Line.Tests
 {
-    internal static class IActionExtensions
+    public partial class CameraRollActionTests
     {
-        public static void CheckActionType(this IAction self)
+        [TestClass]
+        public class TheValidateMethod
         {
-            if (self is PostbackAction)
-                return;
-
-            if (self is MessageAction)
-                return;
-
-            if (self is UriAction)
-                return;
-
-            if (self is CameraAction)
-                return;
-
-            if (self is CameraRollAction)
-                return;
-
-            if (self is DateTimePickerAction)
-                return;
-
-            throw new NotSupportedException("The action type is invalid.");
-        }
-
-        public static void Validate(this IEnumerable<IAction> self)
-        {
-            foreach (var action in self)
+            [TestMethod]
+            public void ShouldThrowExceptionWhenLabelIsNull()
             {
+                IAction action = new CameraRollAction();
+
+                ExceptionAssert.Throws<InvalidOperationException>("The label cannot be null.", () =>
+                {
+                    action.Validate();
+                });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValid()
+            {
+                IAction action = new CameraRollAction()
+                {
+                    Label = "Test"
+                };
+
                 action.Validate();
             }
         }

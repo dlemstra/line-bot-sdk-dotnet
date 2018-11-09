@@ -12,18 +12,27 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+
 namespace Line.Tests
 {
-    public static partial class JsonDocuments
+    public partial class CameraRollActionTests
     {
-        public static class Actions
+        [TestClass]
+        public class TheConstructor
         {
-            public const string Camera = "JsonDocuments/Actions/Camera.json";
-            public const string CameraRoll = "JsonDocuments/Actions/CameraRoll.json";
-            public const string DateTimePicker = "JsonDocuments/Actions/DateTimePicker.json";
-            public const string Message = "JsonDocuments/Actions/Message.json";
-            public const string Postback = "JsonDocuments/Actions/Postback.json";
-            public const string Uri = "JsonDocuments/Actions/Uri.json";
+            [TestMethod]
+            public void ShouldCreateSerializeableObject()
+            {
+                var action = new CameraRollAction
+                {
+                    Label = "Test"
+                };
+
+                string serialized = JsonConvert.SerializeObject(action);
+                Assert.AreEqual(@"{""type"":""cameraRoll"",""label"":""Test""}", serialized);
+            }
         }
     }
 }
