@@ -17,7 +17,7 @@ using System.Collections.Generic;
 namespace Line
 {
     /// <summary>
-    /// Encapsulates the interfacce for a list if line events.
+    /// Encapsulates the interfacce for a list of line events.
     /// </summary>
     public interface ILineEvents : IEnumerable<ILineEvent>
     {
@@ -27,7 +27,7 @@ namespace Line
         ILineEvent[] Events { get; }
 
         /// <summary>
-        /// Gets the destination of all the events.
+        /// Gets the user ID of a bot that should receive webhook events.
         /// </summary>
         string Destination { get; }
     }

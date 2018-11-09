@@ -185,7 +185,7 @@ namespace Line
             var content = await request.Body.ToArrayAsync();
 
             if (content == null)
-                return LineEvents.Empty();
+                return LineEventCollection.Empty();
 
             await _logger.LogReceivedEvents(content);
 
@@ -197,10 +197,10 @@ namespace Line
 
             var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
-            if (eventCollection == null || eventCollection.Events == null)
-                return LineEvents.Empty();
+            if (eventCollection == null || (eventCollection as ILineEvents).Events == null)
+                return LineEventCollection.Empty();
 
-            return new LineEvents();
+            return eventCollection;
         }
 
         /// <summary>

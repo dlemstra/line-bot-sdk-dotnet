@@ -12,16 +12,45 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class LineEventCollection
+    [JsonObject]
+    internal sealed class LineEventCollection : ILineEvents
     {
-        [JsonProperty("events")]
-        public LineEvent[] Events { get; set; }
+        private readonly string _destination = null;
+
+        private ILineEvent[] _lineEvents = null;
+
+        public LineEventCollection(ILineEvent[] lineEvents = null, string destination = null)
+        {
+            _lineEvents = lineEvents;
+            _destination = null;
+        }
 
         [JsonProperty("destination")]
-        private string Destination { get; set; }
+        string ILineEvents.Destination => _destination;
+
+        [JsonProperty("events")]
+        ILineEvent[] ILineEvents.Events => _lineEvents;
+
+        public IEnumerator<ILineEvent> GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _lineEvents.ToList() as IEnumerator;
+        }
+
+        internal static ILineEvents Empty()
+        {
+            return new LineEventCollection(new ILineEvent[0]);
+        }
     }
 }
