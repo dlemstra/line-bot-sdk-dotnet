@@ -75,7 +75,7 @@ namespace Line
         /// </summary>
         /// <param name="request">The http request.</param>
         /// <returns>The events from the specified request.</returns>
-        Task<IEnumerable<ILineEvent>> GetEvents(HttpRequest request);
+        Task<ILineEvents> GetEvents(HttpRequest request);
 
         /// <summary>
         /// Returns the profile of the specified user.
