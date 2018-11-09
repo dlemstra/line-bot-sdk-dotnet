@@ -19,7 +19,6 @@ namespace Line
     /// <summary>
     /// Encapsulates the interfacce for a list if line events.
     /// </summary>
-    /// <seealso cref="System.Collections.Generic.IEnumerable{Line.ILineEvent}" />
     public interface ILineEvents : IEnumerable<ILineEvent>
     {
         /// <summary>
