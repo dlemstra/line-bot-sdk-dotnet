@@ -52,30 +52,6 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets or sets the label.
-        /// <para>Max: 20 characters.</para>
-        /// </summary>
-        [JsonProperty("label")]
-        public string Label
-        {
-            get
-            {
-                return _label;
-            }
-
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new InvalidOperationException("The label cannot be null or whitespace.");
-
-                if (value.Length > 20)
-                    throw new InvalidOperationException("The label cannot be longer than 20 characters.");
-
-                _label = value;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets the string returned via webhook in the postback.data property of the <see cref="IPostback"/> event.
         /// <para>Max: 300 characters.</para>
         /// </summary>
@@ -100,12 +76,6 @@ namespace Line
         }
 
         /// <summary>
-        /// Gets the action mode for the datetime picker.
-        /// </summary>
-        [JsonIgnore]
-        public DateTimePickerMode Mode => _mode;
-
-        /// <summary>
         /// Gets or sets the initial value of date or time for the datetime picker.
         /// </summary>
         [JsonIgnore]
@@ -123,6 +93,30 @@ namespace Line
                     throw new InvalidOperationException("The initial must be between the min and the max.");
 
                 _initial = adjustedValue;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the label.
+        /// <para>Max: 20 characters.</para>
+        /// </summary>
+        [JsonProperty("label")]
+        public string Label
+        {
+            get
+            {
+                return _label;
+            }
+
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("The label cannot be null or whitespace.");
+
+                if (value.Length > 20)
+                    throw new InvalidOperationException("The label cannot be longer than 20 characters.");
+
+                _label = value;
             }
         }
 
@@ -167,6 +161,12 @@ namespace Line
                 _min = adjustedValue;
             }
         }
+
+        /// <summary>
+        /// Gets the action mode for the datetime picker.
+        /// </summary>
+        [JsonIgnore]
+        public DateTimePickerMode Mode => _mode;
 
         /// <summary>
         /// Gets or sets the formatted initial value.
