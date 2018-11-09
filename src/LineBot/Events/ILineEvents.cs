@@ -22,9 +22,9 @@ namespace Line
     public interface ILineEvents : IEnumerable<ILineEvent>
     {
         /// <summary>
-        /// Gets or sets all the events.
+        /// Gets all the events.
         /// </summary>
-        List<ILineEvent> Events { get; set; }
+        List<ILineEvent> Events { get; }
 
         /// <summary>
         /// Gets or Sets the user ID of a bot that should receive webhook events.

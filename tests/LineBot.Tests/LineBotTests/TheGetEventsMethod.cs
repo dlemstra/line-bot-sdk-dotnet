@@ -43,18 +43,19 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public async void ShouldHaveDestination()
+            public async Task ShouldHaveDestination()
             {
                 var logger = new TestLogger();
-                var bot = TestConfiguration.CreateBot(logger);
+                var bot = TestConfiguration.CreateBot();
                 var request = new TestHttpRequest(JsonDocuments.Events.Webhook);
 
-                await bot.GetEvents(request);
+                var events = await bot.GetEvents(request);
 
-                var actual = Encoding.UTF8.GetString(logger.LogReceivedEventsEventsData);
-                Assert.Fail();
+                var actual = events.Destination;
 
-                // TODO: Implement this test.
+                var expected = "xxxxxxxxxx";
+
+                Assert.AreEqual(expected, actual);
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.EmptyObject);
 
-            ILineEvents events = await bot.GetEvents(request);
+            var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
             Assert.AreEqual(0, events.Events.Count());
         }
@@ -41,7 +41,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
 
-            ILineEvents events = await bot.GetEvents(request);
+            var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
             Assert.AreEqual(0, events.Events.Count());
         }
@@ -53,7 +53,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.Whitespace);
 
-            ILineEvents events = await bot.GetEvents(request);
+            var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
             Assert.AreEqual(0, events.Events.Count());
         }
@@ -64,7 +64,7 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest();
 
-            ILineEvents events = await bot.GetEvents(request);
+            var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
             Assert.AreEqual(0, events.Events.Count());
         }
