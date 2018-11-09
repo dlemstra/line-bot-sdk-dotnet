@@ -41,6 +41,21 @@ namespace Line.Tests
 
                 Assert.AreEqual(expected, actual);
             }
+
+            [TestMethod]
+            public async void ShouldHaveDestination()
+            {
+                var logger = new TestLogger();
+                var bot = TestConfiguration.CreateBot(logger);
+                var request = new TestHttpRequest(JsonDocuments.Events.Webhook);
+
+                await bot.GetEvents(request);
+
+                var actual = Encoding.UTF8.GetString(logger.LogReceivedEventsEventsData);
+                Assert.Fail();
+
+                // TODO: Implement this test.
+            }
         }
     }
 }

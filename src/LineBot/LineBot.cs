@@ -197,7 +197,7 @@ namespace Line
 
             var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
-            if (eventCollection == null || (eventCollection as ILineEvents).Events == null)
+            if (eventCollection == null || eventCollection.Events == null)
                 return LineEventCollection.Empty();
 
             return eventCollection;

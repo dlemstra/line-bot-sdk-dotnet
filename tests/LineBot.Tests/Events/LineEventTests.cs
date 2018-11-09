@@ -29,9 +29,9 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.EmptyObject);
 
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            ILineEvents events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.AreEqual(0, events.Events.Count());
         }
 
         [TestMethod]
@@ -41,9 +41,9 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
 
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            ILineEvents events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.AreEqual(0, events.Events.Count());
         }
 
         [TestMethod]
@@ -53,9 +53,9 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest(JsonDocuments.Whitespace);
 
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            ILineEvents events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.AreEqual(0, events.Events.Count());
         }
 
         [TestMethod]
@@ -64,9 +64,9 @@ namespace Line.Tests
             ILineBot bot = TestConfiguration.CreateBot();
             TestHttpRequest request = new TestHttpRequest();
 
-            IEnumerable<ILineEvent> events = await bot.GetEvents(request);
+            ILineEvents events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.AreEqual(0, events.Events.Count());
         }
     }
 }
