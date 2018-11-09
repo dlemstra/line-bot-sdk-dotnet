@@ -105,6 +105,20 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            [DeploymentItem(JsonDocuments.Actions.Location)]
+            public void ShouldCreateCameraActionWhenTypeIsLocation()
+            {
+                var converter = new IActionConverter();
+
+                var data = File.ReadAllText(JsonDocuments.Actions.Location);
+
+                var action = JsonConvert.DeserializeObject<IAction>(data, converter) as LocationAction;
+
+                Assert.IsNotNull(action);
+                Assert.AreEqual("Location", action.Label);
+            }
+
+            [TestMethod]
             [DeploymentItem(JsonDocuments.Actions.Message)]
             public void ShouldCreateMessageActionWhenTypeIsMessage()
             {

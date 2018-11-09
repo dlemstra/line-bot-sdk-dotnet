@@ -71,6 +71,14 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            public void ShouldNotThrowExceptionWhenActionIsLocationAction()
+            {
+                var action = new LocationAction();
+
+                IActionExtensions.CheckActionType(action);
+            }
+
+            [TestMethod]
             public void ShouldNotThrowExceptionWhenActionIsDateTimePickerAction()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);

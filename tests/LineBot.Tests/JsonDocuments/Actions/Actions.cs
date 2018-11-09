@@ -21,6 +21,7 @@ namespace Line.Tests
             public const string Camera = "JsonDocuments/Actions/Camera.json";
             public const string CameraRoll = "JsonDocuments/Actions/CameraRoll.json";
             public const string DateTimePicker = "JsonDocuments/Actions/DateTimePicker.json";
+            public const string Location = "JsonDocuments/Actions/Location.json";
             public const string Message = "JsonDocuments/Actions/Message.json";
             public const string Postback = "JsonDocuments/Actions/Postback.json";
             public const string Uri = "JsonDocuments/Actions/Uri.json";

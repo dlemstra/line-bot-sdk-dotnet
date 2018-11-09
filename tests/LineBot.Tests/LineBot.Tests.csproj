@@ -54,6 +54,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="JsonDocuments\Actions\Location.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="JsonDocuments\Actions\CameraRoll.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
