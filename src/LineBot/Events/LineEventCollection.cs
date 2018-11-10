@@ -26,7 +26,7 @@ namespace Line
         public string Destination { get; set; }
 
         [JsonProperty("events")]
-        public List<LineEvent> Events { get; set; }
+        public List<ILineEvent> Events { get; set; }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -42,7 +42,7 @@ namespace Line
         {
             return new LineEventCollection
             {
-                Events = new List<LineEvent>()
+                Events = new List<ILineEvent>()
             };
         }
     }

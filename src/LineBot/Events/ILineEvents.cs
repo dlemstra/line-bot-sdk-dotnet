@@ -24,11 +24,11 @@ namespace Line
         /// <summary>
         /// Gets all the events.
         /// </summary>
-        List<LineEvent> Events { get; }
+        List<ILineEvent> Events { get; }
 
         /// <summary>
-        /// Gets or Sets the user ID of a bot that should receive webhook events.
+        /// Gets the user ID of a bot that should receive webhook events.
         /// </summary>
-        string Destination { get; set; }
+        string Destination { get; }
     }
 }
