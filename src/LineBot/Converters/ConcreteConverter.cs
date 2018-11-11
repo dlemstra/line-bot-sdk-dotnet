@@ -12,37 +12,34 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Newtonsoft.Json;
 
 namespace Line
 {
-    [JsonObject]
-    internal sealed class LineEventCollection : ILineEvents
+    // Source: https://stackoverflow.com/questions/47939878/how-to-deserialize-collection-of-interfaces-when-concrete-classes-contains-other
+    internal sealed class ConcreteConverter<I, T> : JsonConverter
     {
-        [JsonProperty("destination")]
-        public string Destination { get; set; }
-
-        [JsonProperty("events", ItemConverterType = typeof(ConcreteConverter<ILineEvent, LineEvent>))]
-        public List<ILineEvent> Events { get; set; }
-
-        IEnumerator IEnumerable.GetEnumerator()
+        public override bool CanConvert(Type objectType)
         {
-            return Events.GetEnumerator();
+            return typeof(I) == objectType;
         }
 
-        IEnumerator<ILineEvent> IEnumerable<ILineEvent>.GetEnumerator()
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer)
         {
-            return Events.GetEnumerator();
+            return serializer.Deserialize<T>(reader);
         }
 
-        internal static ILineEvents Empty()
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer)
         {
-            return new LineEventCollection
-            {
-                Events = new List<ILineEvent>()
-            };
+            throw new NotImplementedException();
         }
     }
 }

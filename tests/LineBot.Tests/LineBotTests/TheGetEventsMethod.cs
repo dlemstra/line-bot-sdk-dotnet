@@ -45,7 +45,6 @@ namespace Line.Tests
             [TestMethod]
             public async Task ShouldHaveDestination()
             {
-                var logger = new TestLogger();
                 var bot = TestConfiguration.CreateBot();
                 var request = new TestHttpRequest(JsonDocuments.Events.Webhook);
 
