@@ -23,6 +23,7 @@ namespace Line
     public abstract class ImagemapAction
     {
         private ImagemapArea _area;
+        private string _label;
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<ImagemapActionType>))]
@@ -50,6 +51,27 @@ namespace Line
                     throw new InvalidOperationException("The area cannot be null.");
 
                 _area = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the label.
+        /// <para>Max: 50 characters.</para>
+        /// </summary>
+        [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
+        public string Label
+        {
+            get
+            {
+                return _label;
+            }
+
+            set
+            {
+                if (value?.Length > 50)
+                    throw new InvalidOperationException("The label cannot be longer than 50 characters.");
+
+                _label = value;
             }
         }
 

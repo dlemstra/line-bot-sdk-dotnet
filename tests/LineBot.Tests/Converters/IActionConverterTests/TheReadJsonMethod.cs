@@ -72,6 +72,20 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            [DeploymentItem(JsonDocuments.Actions.CameraRoll)]
+            public void ShouldCreateCameraActionWhenTypeIsCameraRoll()
+            {
+                var converter = new IActionConverter();
+
+                var data = File.ReadAllText(JsonDocuments.Actions.CameraRoll);
+
+                var action = JsonConvert.DeserializeObject<IAction>(data, converter) as CameraRollAction;
+
+                Assert.IsNotNull(action);
+                Assert.AreEqual("Camera Roll", action.Label);
+            }
+
+            [TestMethod]
             [DeploymentItem(JsonDocuments.Actions.DateTimePicker)]
             public void ShouldCreateDateTimePickerActionWhenTypeIsDateTimePicker()
             {
@@ -88,6 +102,20 @@ namespace Line.Tests
                 Assert.AreEqual(new DateTime(2017, 12, 25, 0, 0, 0), action.Initial);
                 Assert.AreEqual(new DateTime(2018, 1, 24, 23, 59, 0), action.Max);
                 Assert.AreEqual(new DateTime(2017, 12, 23, 0, 0, 0), action.Min);
+            }
+
+            [TestMethod]
+            [DeploymentItem(JsonDocuments.Actions.Location)]
+            public void ShouldCreateCameraActionWhenTypeIsLocation()
+            {
+                var converter = new IActionConverter();
+
+                var data = File.ReadAllText(JsonDocuments.Actions.Location);
+
+                var action = JsonConvert.DeserializeObject<IAction>(data, converter) as LocationAction;
+
+                Assert.IsNotNull(action);
+                Assert.AreEqual("Location", action.Label);
             }
 
             [TestMethod]

@@ -12,16 +12,27 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-namespace Line
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+
+namespace Line.Tests
 {
-    internal enum ActionType
+    public partial class LocationActionTests
     {
-        Camera,
-        CameraRoll,
-        DateTimePicker,
-        Location,
-        Message,
-        Postback,
-        Uri
+        [TestClass]
+        public class TheConstructor
+        {
+            [TestMethod]
+            public void ShouldCreateSerializeableObject()
+            {
+                var action = new CameraRollAction
+                {
+                    Label = "Test"
+                };
+
+                string serialized = JsonConvert.SerializeObject(action);
+                Assert.AreEqual(@"{""type"":""cameraRoll"",""label"":""Test""}", serialized);
+            }
+        }
     }
 }

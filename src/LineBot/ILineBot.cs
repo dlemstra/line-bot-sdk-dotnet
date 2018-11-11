@@ -51,6 +51,20 @@ namespace Line
         Task<ILineBot> DeleteRichMenu(string richMenuId);
 
         /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteUserRichMenu(IUser user);
+
+        /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> DeleteUserRichMenu(string userId);
+
+        /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -80,16 +94,16 @@ namespace Line
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
-        /// <param name="userId">The id of the user.</param>
+        /// <param name="user">The user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(string userId);
+        Task<IUserProfile> GetProfile(IUser user);
 
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
-        /// <param name="user">The user.</param>
+        /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(IUser user);
+        Task<IUserProfile> GetProfile(string userId);
 
         /// <summary>
         /// Gets a rich menu via a rich menu ID.
@@ -119,11 +133,18 @@ namespace Line
         Task<IEnumerable<IRichMenuResponse>> GetRichMenus();
 
         /// <summary>
-        /// Leave the specified group.
+        /// Gets the ID of the rich menu linked to a user.
         /// </summary>
-        /// <param name="groupId">The id of the group.</param>
+        /// <param name="user">The user.</param>
         /// <returns>.</returns>
-        Task<ILineBot> LeaveGroup(string groupId);
+        Task<string> GetUserRichMenu(IUser user);
+
+        /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        Task<string> GetUserRichMenu(string userId);
 
         /// <summary>
         /// Leave the specified group.
@@ -133,11 +154,11 @@ namespace Line
         Task<ILineBot> LeaveGroup(IGroup group);
 
         /// <summary>
-        /// Leave the specified room.
+        /// Leave the specified group.
         /// </summary>
-        /// <param name="roomId">The id of the room.</param>
+        /// <param name="groupId">The id of the group.</param>
         /// <returns>.</returns>
-        Task<ILineBot> LeaveRoom(string roomId);
+        Task<ILineBot> LeaveGroup(string groupId);
 
         /// <summary>
         /// Leave the specified room.
@@ -145,6 +166,13 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <returns>.</returns>
         Task<ILineBot> LeaveRoom(IRoom room);
+
+        /// <summary>
+        /// Leave the specified room.
+        /// </summary>
+        /// <param name="roomId">The id of the room.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> LeaveRoom(string roomId);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -307,5 +335,37 @@ namespace Line
         /// <param name="imageData">The data of the image.</param>
         /// <returns>.</returns>
         Task<ILineBot> SetRichMenuImage(string richMenuId, byte[] imageData);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(IUser user, IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(IUser user, string richMenuId);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(string userId, IRichMenuResponse richMenu);
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        Task<ILineBot> SetUserRichMenu(string userId, string richMenuId);
     }
 }

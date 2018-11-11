@@ -84,7 +84,7 @@ namespace Line
 
             var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
-            return richMenuIdResponse.RichMenuId;
+            return richMenuIdResponse?.RichMenuId;
         }
 
         /// <summary>
@@ -121,6 +121,33 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
             var response = await _client.DeleteAsync($"richmenu/{richMenuId}");
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> DeleteUserRichMenu(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return DeleteUserRichMenu(user.Id);
+        }
+
+        /// <summary>
+        /// Unlinks a rich menu from a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> DeleteUserRichMenu(string userId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+
+            var response = await _client.DeleteAsync($"user/{userId}/richmenu");
             await response.CheckResult();
 
             return this;
@@ -167,10 +194,7 @@ namespace Line
 
             var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
 
-            if (richMenuIdResponse == null)
-                return null;
-
-            return richMenuIdResponse.RichMenuId;
+            return richMenuIdResponse?.RichMenuId;
         }
 
         /// <summary>
@@ -206,6 +230,18 @@ namespace Line
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>The profile of the specified user.</returns>
+        public Task<IUserProfile> GetProfile(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return GetProfile(user.Id);
+        }
+
+        /// <summary>
+        /// Returns the profile of the specified user.
+        /// </summary>
         /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
         public async Task<IUserProfile> GetProfile(string userId)
@@ -216,18 +252,6 @@ namespace Line
             await response.CheckResult();
 
             return await response.Content.DeserializeObject<UserProfile>();
-        }
-
-        /// <summary>
-        /// Returns the profile of the specified user.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <returns>The profile of the specified user.</returns>
-        public async Task<IUserProfile> GetProfile(IUser user)
-        {
-            Guard.NotNull(nameof(user), user);
-
-            return await GetProfile(user.Id);
         }
 
         /// <summary>
@@ -290,6 +314,47 @@ namespace Line
         }
 
         /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>.</returns>
+        public Task<string> GetUserRichMenu(IUser user)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return GetUserRichMenu(user.Id);
+        }
+
+        /// <summary>
+        /// Gets the ID of the rich menu linked to a user.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <returns>.</returns>
+        public async Task<string> GetUserRichMenu(string userId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+
+            var response = await _client.GetAsync($"user/{userId}/richmenu");
+            await response.CheckResult();
+
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
+
+            return richMenuIdResponse?.RichMenuId;
+        }
+
+        /// <summary>
+        /// Leave the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> LeaveGroup(IGroup group)
+        {
+            Guard.NotNull(nameof(group), group);
+
+            return LeaveGroup(group.Id);
+        }
+
+        /// <summary>
         /// Leave the specified group.
         /// </summary>
         /// <param name="groupId">The id of the group.</param>
@@ -300,20 +365,6 @@ namespace Line
 
             var response = await _client.PostAsync($"group/{groupId}/leave", null);
             await response.CheckResult();
-
-            return this;
-        }
-
-        /// <summary>
-        /// Leave the specified group.
-        /// </summary>
-        /// <param name="group">The group.</param>
-        /// <returns>.</returns>
-        public async Task<ILineBot> LeaveGroup(IGroup group)
-        {
-            Guard.NotNull(nameof(group), group);
-
-            await LeaveGroup(group.Id);
 
             return this;
         }
@@ -338,13 +389,11 @@ namespace Line
         /// </summary>
         /// <param name="room">The room.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> LeaveRoom(IRoom room)
+        public Task<ILineBot> LeaveRoom(IRoom room)
         {
             Guard.NotNull(nameof(room), room);
 
-            await LeaveRoom(room.Id);
-
-            return this;
+            return LeaveRoom(room.Id);
         }
 
         /// <summary>
@@ -353,11 +402,9 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
         {
-            await Multicast(to, messages?.ToArray());
-
-            return this;
+            return Multicast(to, messages?.ToArray());
         }
 
         /// <summary>
@@ -366,13 +413,11 @@ namespace Line
         /// <param name="to">The users that should receive the messages.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<IUser> to, params ISendMessage[] messages)
+        public Task<ILineBot> Multicast(IEnumerable<IUser> to, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(to), to);
 
-            await Multicast(to.Select(g => g.Id), messages);
-
-            return this;
+            return Multicast(to.Select(g => g.Id), messages);
         }
 
         /// <summary>
@@ -382,11 +427,9 @@ namespace Line
         /// <param name="to">The IDs of the receivers.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
         {
-            await Multicast(to, messages?.ToArray());
-
-            return this;
+            return Multicast(to, messages?.ToArray());
         }
 
         /// <summary>
@@ -423,11 +466,9 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages)
         {
-            await Push(group, messages?.ToArray());
-
-            return this;
+            return Push(group, messages?.ToArray());
         }
 
         /// <summary>
@@ -436,13 +477,11 @@ namespace Line
         /// <param name="group">The group.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IGroup group, params ISendMessage[] messages)
+        public Task<ILineBot> Push(IGroup group, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(group), group);
 
-            await Push(group.Id, messages);
-
-            return this;
+            return Push(group.Id, messages);
         }
 
         /// <summary>
@@ -451,11 +490,9 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages)
         {
-            await Push(room, messages?.ToArray());
-
-            return this;
+            return Push(room, messages?.ToArray());
         }
 
         /// <summary>
@@ -464,13 +501,11 @@ namespace Line
         /// <param name="room">The room.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IRoom room, params ISendMessage[] messages)
+        public Task<ILineBot> Push(IRoom room, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(room), room);
 
-            await Push(room.Id, messages);
-
-            return this;
+            return Push(room.Id, messages);
         }
 
         /// <summary>
@@ -479,11 +514,9 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages)
         {
-            await Push(user, messages?.ToArray());
-
-            return this;
+            return Push(user, messages?.ToArray());
         }
 
         /// <summary>
@@ -492,13 +525,11 @@ namespace Line
         /// <param name="user">The user.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(IUser user, params ISendMessage[] messages)
+        public Task<ILineBot> Push(IUser user, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(user), user);
 
-            await Push(user.Id, messages);
-
-            return this;
+            return Push(user.Id, messages);
         }
 
         /// <summary>
@@ -508,11 +539,9 @@ namespace Line
         /// <param name="to">ID of the receiver.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages)
         {
-            await Push(to, messages?.ToArray());
-
-            return this;
+            return Push(to, messages?.ToArray());
         }
 
         /// <summary>
@@ -546,11 +575,9 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
         {
-            await Reply(token, messages?.ToArray());
-
-            return this;
+            return Reply(token, messages?.ToArray());
         }
 
         /// <summary>
@@ -559,13 +586,11 @@ namespace Line
         /// <param name="token">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(IReplyToken token, params ISendMessage[] messages)
+        public Task<ILineBot> Reply(IReplyToken token, params ISendMessage[] messages)
         {
             Guard.NotNull(nameof(token), token);
 
-            await Reply(token.ReplyToken, messages);
-
-            return this;
+            return Reply(token.ReplyToken, messages);
         }
 
         /// <summary>
@@ -574,11 +599,9 @@ namespace Line
         /// <param name="replyToken">The reply token.</param>
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
-        public async Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages)
+        public Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages)
         {
-            await Reply(replyToken, messages?.ToArray());
-
-            return this;
+            return Reply(replyToken, messages?.ToArray());
         }
 
         /// <summary>
@@ -656,6 +679,63 @@ namespace Line
             var content = new ByteArrayContent(imageData);
 
             var response = await _client.PostAsync($"richmenu/{richMenuId}/content", content);
+            await response.CheckResult();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(IUser user, IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(user), user);
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return SetUserRichMenu(user.Id, richMenu.Id);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(IUser user, string richMenuId)
+        {
+            Guard.NotNull(nameof(user), user);
+
+            return SetUserRichMenu(user.Id, richMenuId);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenu">The rich menu response.</param>
+        /// <returns>.</returns>
+        public Task<ILineBot> SetUserRichMenu(string userId, IRichMenuResponse richMenu)
+        {
+            Guard.NotNull(nameof(richMenu), richMenu);
+
+            return SetUserRichMenu(userId, richMenu.Id);
+        }
+
+        /// <summary>
+        /// Links a rich menu to a user. Only one rich menu can be linked to a user at one time.
+        /// </summary>
+        /// <param name="userId">The id of the user.</param>
+        /// <param name="richMenuId">The rich menu id.</param>
+        /// <returns>.</returns>
+        public async Task<ILineBot> SetUserRichMenu(string userId, string richMenuId)
+        {
+            Guard.NotNullOrEmpty(nameof(userId), userId);
+            Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
+
+            var response = await _client.PostAsync($"user/{userId}/richmenu/{richMenuId}", null);
             await response.CheckResult();
 
             return this;
