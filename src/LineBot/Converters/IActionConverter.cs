@@ -60,8 +60,12 @@ namespace Line
             {
                 case "camera":
                     return new CameraAction();
+                case "cameraRoll":
+                    return new CameraRollAction();
                 case "datetimepicker":
                     return new DateTimePickerAction();
+                case "location":
+                    return new LocationAction();
                 case "message":
                     return new MessageAction();
                 case "postback":

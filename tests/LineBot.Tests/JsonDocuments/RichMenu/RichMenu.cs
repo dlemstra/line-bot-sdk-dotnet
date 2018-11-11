@@ -22,6 +22,7 @@ namespace Line.Tests
             public const string EmptyRichMenuResponseCollection = "JsonDocuments/RichMenu/EmptyRichMenuResponseCollection.json";
             public const string RichMenuResponse = "JsonDocuments/RichMenu/RichMenuResponse.json";
             public const string RichMenuResponseCollection = "JsonDocuments/RichMenu/RichMenuResponseCollection.json";
+            public const string UserRichMenuResponse = "JsonDocuments/RichMenu/UserRichMenuResponse.json";
         }
     }
 }

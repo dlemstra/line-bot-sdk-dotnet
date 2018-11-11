@@ -21,19 +21,25 @@ namespace Line
     {
         public static void CheckActionType(this IAction self)
         {
-            if (self is PostbackAction)
+            if (self is CameraAction)
+                return;
+
+            if (self is CameraRollAction)
+                return;
+
+            if (self is DateTimePickerAction)
+                return;
+
+            if (self is LocationAction)
                 return;
 
             if (self is MessageAction)
                 return;
 
+            if (self is PostbackAction)
+                return;
+
             if (self is UriAction)
-                return;
-
-            if (self is CameraAction)
-                return;
-
-            if (self is DateTimePickerAction)
                 return;
 
             throw new NotSupportedException("The action type is invalid.");

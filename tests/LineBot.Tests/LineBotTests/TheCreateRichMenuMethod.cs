@@ -27,8 +27,12 @@ namespace Line.Tests
             [TestMethod]
             public async Task ShouldThrowExceptionWhenRichMenuIsNull()
             {
-                ILineBot bot = TestConfiguration.CreateBot();
-                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () => { await bot.CreateRichMenu(null); });
+                var bot = TestConfiguration.CreateBot();
+
+                await ExceptionAssert.ThrowsArgumentNullExceptionAsync("richMenu", async () =>
+                {
+                    await bot.CreateRichMenu(null);
+                });
             }
 
             [TestMethod]
@@ -36,14 +40,65 @@ namespace Line.Tests
             {
                 var richMenu = new RichMenu();
 
-                ILineBot bot = TestConfiguration.CreateBot();
-                await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The areas cannot be null.", async () => { await bot.CreateRichMenu(richMenu); });
+                var bot = TestConfiguration.CreateBot();
+
+                await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The areas cannot be null.", async () =>
+                {
+                    await bot.CreateRichMenu(richMenu);
+                });
+            }
+
+            [TestMethod]
+            public async Task ShouldThrowExceptionWhenResponseIsError()
+            {
+                var richMenu = CreateRichMenu();
+
+                var httpClient = TestHttpClient.ThatReturnsAnError();
+
+                var bot = TestConfiguration.CreateBot(httpClient);
+
+                await ExceptionAssert.ThrowsUnknownError(async () =>
+                {
+                    await bot.CreateRichMenu(richMenu);
+                });
+            }
+
+            [TestMethod]
+            [DeploymentItem(JsonDocuments.Whitespace)]
+            public async Task ShouldReturnNullWhenResponseContainsWhitespace()
+            {
+                var richMenu = CreateRichMenu();
+
+                var httpClient = TestHttpClient.Create(JsonDocuments.Whitespace);
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var richMenuId = await bot.CreateRichMenu(richMenu);
+
+                Assert.IsNull(richMenuId);
             }
 
             [TestMethod]
             public async Task ShouldCreateRichMenu()
             {
-                var richMenu = new RichMenu()
+                var richMenu = CreateRichMenu();
+
+                var richMenuIdJson = @"{""richMenuId"": ""richmenu-801b2cd26b2f13587329ed501d279d27""}";
+                var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(richMenuIdJson));
+
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var result = await bot.CreateRichMenu(richMenu);
+
+                Assert.AreEqual("/richmenu", httpClient.RequestPath);
+
+                string postedData =
+                    @"{""areas"":[{""action"":{""type"":""uri"",""label"":""testLabel"",""uri"":""http://www.google.com""},""bounds"":{""x"":11,""y"":12,""width"":110,""height"":120}},{""action"":{""type"":""uri"",""label"":""testLabel2"",""uri"":""http://www.bing.com""},""bounds"":{""x"":21,""y"":22,""width"":210,""height"":220}}],""chatBarText"":""testChatBarTxt"",""name"":""testName"",""selected"":false,""size"":{""width"":2500,""height"":1686}}";
+                Assert.AreEqual(postedData, httpClient.PostedData);
+
+                Assert.AreEqual(result, "richmenu-801b2cd26b2f13587329ed501d279d27");
+            }
+
+            private static RichMenu CreateRichMenu()
+            {
+                return new RichMenu()
                 {
                     Size = new RichMenuSize(1686),
 
@@ -79,20 +134,6 @@ namespace Line.Tests
                         }
                     }
                 };
-
-                var richMenuIdJson = @"{""richMenuId"": ""richmenu-801b2cd26b2f13587329ed501d279d27""}";
-                var httpClient = TestHttpClient.ThatReturnsData(Encoding.ASCII.GetBytes(richMenuIdJson));
-
-                var bot = TestConfiguration.CreateBot(httpClient);
-                var result = await bot.CreateRichMenu(richMenu);
-
-                Assert.AreEqual("/richmenu", httpClient.RequestPath);
-
-                string postedData =
-                    @"{""areas"":[{""action"":{""type"":""uri"",""label"":""testLabel"",""uri"":""http://www.google.com""},""bounds"":{""x"":11,""y"":12,""width"":110,""height"":120}},{""action"":{""type"":""uri"",""label"":""testLabel2"",""uri"":""http://www.bing.com""},""bounds"":{""x"":21,""y"":22,""width"":210,""height"":220}}],""chatBarText"":""testChatBarTxt"",""name"":""testName"",""selected"":false,""size"":{""width"":2500,""height"":1686}}";
-                Assert.AreEqual(postedData, httpClient.PostedData);
-
-                Assert.AreEqual(result, "richmenu-801b2cd26b2f13587329ed501d279d27");
             }
         }
     }
