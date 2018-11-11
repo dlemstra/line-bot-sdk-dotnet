@@ -11,7 +11,6 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 // License for the specific language governing permissions and limitations
 // under the License.
-// Source: https://stackoverflow.com/questions/47939878/how-to-deserialize-collection-of-interfaces-when-concrete-classes-contains-other
 
 using System;
 using Newtonsoft.Json;
@@ -26,6 +25,7 @@ namespace Line
     /// <seealso cref="Newtonsoft.Json.JsonConverter" />
     internal sealed class ConcreteConverter<TI, T> : JsonConverter
     {
+        // Source: https://stackoverflow.com/questions/47939878/how-to-deserialize-collection-of-interfaces-when-concrete-classes-contains-other
         public override bool CanConvert(Type objectType)
         {
             return typeof(TI) == objectType;
