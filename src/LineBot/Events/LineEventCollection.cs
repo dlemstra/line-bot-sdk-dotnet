@@ -28,7 +28,7 @@ namespace Line
         [JsonProperty("events")]
         public List<LineEvent> Events { get; set; }
 
-        List<ILineEvent> ILineEvents.Events { get => Events.ToList<ILineEvent>(); }
+        IEnumerable<ILineEvent> ILineEvents.Events { get => Events.AsEnumerable<ILineEvent>(); }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
