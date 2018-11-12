@@ -14,6 +14,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
@@ -24,8 +25,10 @@ namespace Line
         [JsonProperty("destination")]
         public string Destination { get; set; }
 
-        [JsonProperty("events", ItemConverterType = typeof(ConcreteConverter<ILineEvent, LineEvent>))]
-        public List<ILineEvent> Events { get; set; }
+        [JsonProperty("events")]
+        public List<LineEvent> Events { get; set; }
+
+        List<ILineEvent> ILineEvents.Events { get => Events.ToList<ILineEvent>(); }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -41,7 +44,7 @@ namespace Line
         {
             return new LineEventCollection
             {
-                Events = new List<ILineEvent>()
+                Events = new List<LineEvent>()
             };
         }
     }

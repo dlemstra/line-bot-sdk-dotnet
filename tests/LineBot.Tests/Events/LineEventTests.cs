@@ -31,7 +31,7 @@ namespace Line.Tests
 
             var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Events.Count());
+            Assert.AreEqual(0, events.Count());
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Line.Tests
 
             var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Events.Count());
+            Assert.AreEqual(0, events.Count());
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace Line.Tests
 
             var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Events.Count());
+            Assert.AreEqual(0, events.Count());
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Line.Tests
 
             var events = await bot.GetEvents(request);
             Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Events.Count());
+            Assert.AreEqual(0, events.Count());
         }
     }
 }
