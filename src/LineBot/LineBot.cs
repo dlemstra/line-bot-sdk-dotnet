@@ -221,8 +221,11 @@ namespace Line
 
             var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
-            if (eventCollection == null || eventCollection.Events == null)
+            if (eventCollection == null)
                 return LineEventCollection.Empty();
+
+            if (eventCollection.Events == null)
+                eventCollection.Events = new List<LineEvent>();
 
             return eventCollection;
         }
