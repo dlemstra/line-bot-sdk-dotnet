@@ -54,7 +54,7 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public async void ShouldHaveDestinationWhenEventsNull()
+            public async Task ShouldHaveDestinationWhenEventsNull()
             {
                 var bot = TestConfiguration.CreateBot();
                 var request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
