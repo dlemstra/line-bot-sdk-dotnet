@@ -41,6 +41,38 @@ namespace Line.Tests
 
                 Assert.AreEqual(expected, actual);
             }
+
+            [TestMethod]
+            public async Task ShouldHaveDestination()
+            {
+                var bot = TestConfiguration.CreateBot();
+                var request = new TestHttpRequest(JsonDocuments.Events.Webhook);
+
+                var events = await bot.GetEvents(request);
+
+                var actual = events.Destination;
+
+                var expected = "xxxxxxxxxx";
+
+                Assert.AreEqual(expected, actual);
+            }
+
+            [TestMethod]
+            public async void DestinationAvailableWhenEventsNull()
+            {
+                var bot = TestConfiguration.CreateBot();
+                var request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
+
+                var events = await bot.GetEvents(request);
+
+                Assert.IsNotNull(events.Destination);
+
+                var actual = events.Destination;
+
+                var expected = "xxxxxxxxxx";
+
+                Assert.AreEqual(expected, actual);
+            }
         }
     }
 }

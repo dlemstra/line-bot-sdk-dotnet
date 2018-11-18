@@ -202,14 +202,14 @@ namespace Line
         /// </summary>
         /// <param name="request">The http request.</param>
         /// <returns>The events from the specified request.</returns>
-        public async Task<IEnumerable<ILineEvent>> GetEvents(HttpRequest request)
+        public async Task<ILineEvents> GetEvents(HttpRequest request)
         {
             Guard.NotNull(nameof(request), request);
 
             var content = await request.Body.ToArrayAsync();
 
             if (content == null)
-                return Enumerable.Empty<ILineEvent>();
+                return LineEventCollection.Empty();
 
             await _logger.LogReceivedEvents(content);
 
@@ -221,10 +221,13 @@ namespace Line
 
             var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
-            if (eventCollection == null || eventCollection.Events == null)
-                return Enumerable.Empty<ILineEvent>();
+            if (eventCollection == null)
+                return LineEventCollection.Empty();
 
-            return eventCollection.Events;
+            if (eventCollection.Events == null)
+                eventCollection.Events = new List<LineEvent>();
+
+            return eventCollection;
         }
 
         /// <summary>
