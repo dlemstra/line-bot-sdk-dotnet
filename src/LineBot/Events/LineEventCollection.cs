@@ -14,7 +14,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
@@ -28,17 +27,11 @@ namespace Line
         [JsonProperty("events")]
         public List<LineEvent> Events { get; set; }
 
-        IEnumerable<ILineEvent> ILineEvents.Events { get => Events; }
+        IEnumerable<ILineEvent> ILineEvents.Events => Events;
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return Events.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Events.GetEnumerator();
 
-        IEnumerator<ILineEvent> IEnumerable<ILineEvent>.GetEnumerator()
-        {
-            return Events.GetEnumerator();
-        }
+        IEnumerator<ILineEvent> IEnumerable<ILineEvent>.GetEnumerator() => Events.GetEnumerator();
 
         internal static ILineEvents Empty()
         {

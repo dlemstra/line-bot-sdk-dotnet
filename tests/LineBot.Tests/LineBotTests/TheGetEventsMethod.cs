@@ -50,28 +50,19 @@ namespace Line.Tests
 
                 var events = await bot.GetEvents(request);
 
-                var actual = events.Destination;
-
-                var expected = "xxxxxxxxxx";
-
-                Assert.AreEqual(expected, actual);
+                Assert.AreEqual("xxxxxxxxxx", events.Destination);
             }
 
             [TestMethod]
-            public async void DestinationAvailableWhenEventsNull()
+            public async void ShouldHaveDestinationWhenEventsNull()
             {
                 var bot = TestConfiguration.CreateBot();
                 var request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
 
                 var events = await bot.GetEvents(request);
 
-                Assert.IsNotNull(events.Destination);
-
-                var actual = events.Destination;
-
-                var expected = "xxxxxxxxxx";
-
-                Assert.AreEqual(expected, actual);
+                Assert.IsNotNull(events.Events);
+                Assert.AreEqual("xxxxxxxxxx", events.Destination);
             }
         }
     }
