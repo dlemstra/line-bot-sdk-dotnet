@@ -34,11 +34,11 @@ namespace Line.Tests
             }
 
             [TestMethod]
-            public void ShouldThrowExceptionWhenValueIsNotHttpOrHttpsOrTel()
+            public void ShouldThrowExceptionWhenValueIsNotHttpOrHttpsOrLineOrTel()
             {
                 var action = new UriAction();
 
-                ExceptionAssert.Throws<InvalidOperationException>("The url should use the http, https or tel scheme.", () =>
+                ExceptionAssert.Throws<InvalidOperationException>("The url should use the http, https, line or tel scheme.", () =>
                 {
                     action.Url = new Uri("ftp://foo.bar");
                 });
@@ -59,6 +59,15 @@ namespace Line.Tests
                 var action = new UriAction
                 {
                     Url = new Uri("https://foo.bar")
+                };
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValueIsLine()
+            {
+                var action = new UriAction
+                {
+                    Url = new Uri("line://nv/camera/")
                 };
             }
 
