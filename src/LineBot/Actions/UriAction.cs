@@ -57,7 +57,7 @@ namespace Line
 
         /// <summary>
         /// Gets or sets the url opened when the action is performed.
-        /// <para>Protocol: HTTP, HTTPS, TEL.</para>
+        /// <para>Protocol: HTTP, HTTPS, LINE, TEL.</para>
         /// <para>Max url length: 1000 characters.</para>
         /// </summary>
         [JsonProperty("uri")]
@@ -75,8 +75,9 @@ namespace Line
 
                 if (!"http".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase) &&
                     !"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase) &&
+                    !"line".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase) &&
                     !"tel".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidOperationException("The url should use the http, https or tel scheme.");
+                    throw new InvalidOperationException("The url should use the http, https, line or tel scheme.");
 
                 if (value.ToString().Length > 1000)
                     throw new InvalidOperationException("The url cannot be longer than 1000 characters.");
