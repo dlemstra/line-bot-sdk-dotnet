@@ -27,6 +27,8 @@ namespace Line
         private Uri _thumbnailUrl;
         private string _title;
         private string _text;
+        private string _color = "#FFFFFF";
+        private IAction _defaultAction;
         private IEnumerable<IAction> _actions;
 
         /// <summary>
@@ -58,6 +60,32 @@ namespace Line
                 }
 
                 _thumbnailUrl = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets background color of image. Specify a RGB color value. The default value is #FFFFFF (white).
+        /// </summary>
+        [JsonProperty("imageBackgroundColor")]
+        public string ImageBackgroundColor
+        {
+            get
+            {
+                return _color;
+            }
+
+            set
+            {
+                if (value == null || value.Length != 7)
+                    throw new InvalidOperationException("The color should be 7 characters long.");
+
+                if (value[0] != '#')
+                    throw new InvalidOperationException("The color should start with #.");
+
+                if (!IsValidColor(value))
+                    throw new InvalidOperationException("The color contains invalid characters.");
+
+                _color = value.ToUpperInvariant();
             }
         }
 
@@ -111,6 +139,26 @@ namespace Line
         }
 
         /// <summary>
+        /// Gets or sets the action when image is tapped; set for the entire image, title, and text area.
+        /// </summary>
+        [JsonProperty("defaultAction")]
+        public IAction DefaultAction
+        {
+            get
+            {
+                return _defaultAction;
+            }
+
+            set
+            {
+                if (value != null)
+                    value.CheckActionType();
+
+                _defaultAction = value;
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the actions when tapped.
         /// <para>Max: 4.</para>
         /// </summary>
@@ -153,6 +201,30 @@ namespace Line
                 throw new InvalidOperationException("The actions cannot be null.");
 
             _actions.Validate();
+        }
+
+        private static bool IsValidColor(string value)
+        {
+            for (int i = 1; i < value.Length; i++)
+            {
+                char character = value[i];
+
+                // 0-9
+                if (character >= 48 && character <= 57)
+                    continue;
+
+                // A-F
+                if (character >= 65 && character <= 70)
+                    continue;
+
+                // a-f
+                if (character >= 97 && character <= 102)
+                    continue;
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
