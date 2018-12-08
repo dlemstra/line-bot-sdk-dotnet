@@ -34,7 +34,7 @@ namespace Line.Tests
                 };
 
                 var serialized = JsonConvert.SerializeObject(column);
-                Assert.AreEqual(@"{""thumbnailImageUrl"":""https://foo.bar"",""title"":""Foo"",""text"":""Test"",""actions"":null}", serialized);
+                Assert.AreEqual(@"{""thumbnailImageUrl"":""https://foo.bar"",""imageBackgroundColor"":""#FFFFFF"",""title"":""Foo"",""text"":""Test"",""defaultAction"":null,""actions"":null}", serialized);
             }
         }
     }
