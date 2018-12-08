@@ -34,6 +34,7 @@ namespace Line
         private string _color = "#FFFFFF";
         private string _title;
         private string _text;
+        private IAction _defaultAction;
         private IEnumerable<IAction> _actions;
 
         /// <summary>
@@ -154,6 +155,26 @@ namespace Line
                     throw new InvalidOperationException("The text cannot be longer than 60 characters when the thumbnail url or title are set.");
 
                 _text = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the action when image is tapped; set for the entire image, title, and text area.
+        /// </summary>
+        [JsonProperty("defaultAction")]
+        public IAction DefaultAction
+        {
+            get
+            {
+                return _defaultAction;
+            }
+
+            set
+            {
+                if (value != null)
+                    value.CheckActionType();
+
+                _defaultAction = value;
             }
         }
 
