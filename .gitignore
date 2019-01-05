@@ -6,6 +6,5 @@ obj
 
 LineBot.Coverage.xml
 
-build/*
 publish/*
 /TestResults
