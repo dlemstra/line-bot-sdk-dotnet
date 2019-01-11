@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D50535FB
 		build\build.cmd = build\build.cmd
 		build\build.yml = build\build.yml
 		build\codecoverage.yml = build\codecoverage.yml
-		build\packages.config = build\packages.config
-		build\test.cmd = build\test.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publish", "Publish", "{76B4276E-C515-41F5-A85D-9BD1CE2BB115}"
