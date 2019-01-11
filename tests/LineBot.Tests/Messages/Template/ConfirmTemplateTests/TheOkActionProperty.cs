@@ -34,6 +34,19 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            public void ShouldNotThrowExceptionWhenValueIsNotNull()
+            {
+                var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
+
+                var confirmTemplate = new ConfirmTemplate
+                {
+                    OkAction = action
+                };
+
+                Assert.AreEqual(action, confirmTemplate.OkAction);
+            }
+
+            [TestMethod]
             public void ShouldNotThrowExceptionWhenValueIsInvalidType()
             {
                 var template = new ConfirmTemplate();
