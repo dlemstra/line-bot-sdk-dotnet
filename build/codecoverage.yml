@@ -4,9 +4,3 @@ steps:
     chmod 755 codecov.sh
     ./codecov.sh -K -t $(Codecov.Token) -f '!*.yml'
   displayName: 'Execute https://codecov.io/bash'
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage results'
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/tests/LineBot.Tests/coverage.cobertura.xml'
