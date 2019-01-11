@@ -14,4 +14,4 @@ steps:
   inputs:
     command: test
     projects: 'tests/LineBot.Tests/LineBot.Tests.csproj'
-    arguments: '--no-build -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover'
+    arguments: '--no-build -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
