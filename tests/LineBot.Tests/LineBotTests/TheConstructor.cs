@@ -26,7 +26,7 @@ namespace Line.Tests
         public class TheConstructor
         {
             [TestMethod]
-            public void ThrowsExceptionWhenConfigurationIsNull_()
+            public void ThrowsExceptionWhenConfigurationIsNull()
             {
                 ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
                 {
@@ -35,9 +35,21 @@ namespace Line.Tests
             }
 
             [TestMethod]
+            public void ThrowsNotExceptionWhenLoggerIsNull()
+            {
+                var configuration = new LineConfiguration()
+                {
+                    ChannelAccessToken = "ChannelAccessToken",
+                    ChannelSecret = "ChannelSecret",
+                };
+
+                new LineBot(configuration, null);
+            }
+
+            [TestMethod]
             public void ThrowsExceptionWhenChannelAccessTokenIsNull()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = null,
                     ChannelSecret = "ChannelSecret",
@@ -52,7 +64,7 @@ namespace Line.Tests
             [TestMethod]
             public void ThrowsExceptionWhenChannelAccessTokenIsEmpty()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = string.Empty,
                     ChannelSecret = "ChannelSecret",
@@ -67,7 +79,7 @@ namespace Line.Tests
             [TestMethod]
             public void ThrowsExceptionWhenChannelAccessTokenIsWhitespace()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = "  ",
                     ChannelSecret = "ChannelSecret",
@@ -82,7 +94,7 @@ namespace Line.Tests
             [TestMethod]
             public void ThrowsExceptionWhenChannelSecretTokenIsNull()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = "ChannelAccessToken",
                     ChannelSecret = null,
@@ -97,7 +109,7 @@ namespace Line.Tests
             [TestMethod]
             public void ThrowsExceptionWhenChannelSecretTokenIsEmpty()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = "ChannelAccessToken",
                     ChannelSecret = string.Empty,
@@ -112,7 +124,7 @@ namespace Line.Tests
             [TestMethod]
             public void ThrowsExceptionWhenChannelSecretTokenIsWhitespace()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = "ChannelAccessToken",
                     ChannelSecret = "  ",
@@ -127,7 +139,7 @@ namespace Line.Tests
             [TestMethod]
             public void ShouldSetBaseAddressToApiWhenHttpFactoryIsUsed()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = "ChannelAccessToken",
                     ChannelSecret = "ChannelSecret",
@@ -135,8 +147,8 @@ namespace Line.Tests
 
                 ILineBot bot = new LineBot(configuration);
 
-                FieldInfo field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
-                HttpClient client = (HttpClient)field.GetValue(bot);
+                var field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
+                var client = (HttpClient)field.GetValue(bot);
 
                 Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
             }
