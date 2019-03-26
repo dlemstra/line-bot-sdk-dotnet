@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -38,7 +37,7 @@ namespace Line.Tests
                     Min = min,
                     Max = max
                 };
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
                 Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""datetime"",""data"":""Bar"",""label"":""Foo"",""initial"":""2018-10-08T10:30"",""max"":""2018-10-08T11:00"",""min"":""2018-10-08T10:00""}", serialized);
             }
         }

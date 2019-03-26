@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -46,7 +45,7 @@ namespace Line.Tests
                     }
                 };
 
-                var serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonSerializer.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""template"",""altText"":""Alternative"",""template"":{""type"":""confirm"",""text"":""Confirm"",""actions"":[{""type"":""uri"",""label"":""OkLabel"",""uri"":""https://foo.bar""},{""type"":""postback"",""label"":""CancelLabel"",""data"":""Postback"",""text"":""CancelText""}]}}", serialized);
             }
         }

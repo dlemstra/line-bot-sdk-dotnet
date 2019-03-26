@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -27,7 +26,7 @@ namespace Line.Tests
             {
                 var message = new StickerMessage("CorrectPackage", "CorrectSticker");
 
-                var serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonSerializer.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""sticker"",""packageId"":""CorrectPackage"",""stickerId"":""CorrectSticker""}", serialized);
             }
         }

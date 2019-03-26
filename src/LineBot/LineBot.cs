@@ -746,7 +746,13 @@ namespace Line
 
         private static StringContent CreateStringContent<T>(T value)
         {
-            var content = JsonConvert.SerializeObject(value);
+            var content = JsonConvert.SerializeObject(
+                value,
+                Formatting.None,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
 
             return new StringContent(content, Encoding.UTF8, "application/json");
         }

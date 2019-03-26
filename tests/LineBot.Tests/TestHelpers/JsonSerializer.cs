@@ -12,26 +12,23 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Line.Tests
 {
-    public partial class CameraActionTests
+    public static class JsonSerializer
     {
-        [TestClass]
-        public class TheConstructor
+        public static string SerializeObject(object value)
         {
-            [TestMethod]
-            public void ShouldCreateSerializeableObject()
-            {
-                var action = new CameraAction
+            string serialized = JsonConvert.SerializeObject(
+                value,
+                Formatting.None,
+                new JsonSerializerSettings
                 {
-                    Label = "Test"
-                };
+                    NullValueHandling = NullValueHandling.Ignore
+                });
 
-                string serialized = JsonSerializer.SerializeObject(action);
-                Assert.AreEqual(@"{""type"":""camera"",""label"":""Test""}", serialized);
-            }
+            return serialized;
         }
     }
 }

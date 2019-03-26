@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -30,7 +29,7 @@ namespace Line.Tests
                     Label = "Test"
                 };
 
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
                 Assert.AreEqual(@"{""type"":""cameraRoll"",""label"":""Test""}", serialized);
             }
         }

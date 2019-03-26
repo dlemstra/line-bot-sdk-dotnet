@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -33,7 +32,7 @@ namespace Line.Tests
                     Longitude = 144.7562962m
                 };
 
-                var serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonSerializer.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""location"",""title"":""Correct"",""address"":""Somewhere"",""latitude"":13.4484625,""longitude"":144.7562962}", serialized);
             }
         }

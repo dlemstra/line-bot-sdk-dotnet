@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -32,7 +31,7 @@ namespace Line.Tests
                     Area = new ImagemapArea(0, 10, 20, 30)
                 };
 
-                var serialized = JsonConvert.SerializeObject(action);
+                var serialized = JsonSerializer.SerializeObject(action);
                 Assert.AreEqual(@"{""type"":""uri"",""linkUri"":""https://foo.bar"",""area"":{""x"":0,""y"":10,""width"":20,""height"":30}}", serialized);
             }
 

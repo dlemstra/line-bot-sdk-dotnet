@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -40,7 +39,7 @@ namespace Line.Tests
                     }
                 };
 
-                var serialized = JsonConvert.SerializeObject(template);
+                var serialized = JsonSerializer.SerializeObject(template);
                 Assert.AreEqual(@"{""type"":""confirm"",""text"":""Test"",""actions"":[{""type"":""message"",""label"":""OkLabel"",""text"":""OkText""},{""type"":""message"",""label"":""CancelLabel"",""text"":""CancelText""}]}", serialized);
             }
         }
