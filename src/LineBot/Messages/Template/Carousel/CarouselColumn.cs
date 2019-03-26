@@ -76,14 +76,7 @@ namespace Line
 
             set
             {
-                if (value == null || value.Length != 7)
-                    throw new InvalidOperationException("The color should be 7 characters long.");
-
-                if (value[0] != '#')
-                    throw new InvalidOperationException("The color should start with #.");
-
-                if (!IsValidColor(value))
-                    throw new InvalidOperationException("The color contains invalid characters.");
+                value.ColorValidate();
 
                 _color = value.ToUpperInvariant();
             }
@@ -201,30 +194,6 @@ namespace Line
                 throw new InvalidOperationException("The actions cannot be null.");
 
             _actions.Validate();
-        }
-
-        private static bool IsValidColor(string value)
-        {
-            for (int i = 1; i < value.Length; i++)
-            {
-                char character = value[i];
-
-                // 0-9
-                if (character >= 48 && character <= 57)
-                    continue;
-
-                // A-F
-                if (character >= 65 && character <= 70)
-                    continue;
-
-                // a-f
-                if (character >= 97 && character <= 102)
-                    continue;
-
-                return false;
-            }
-
-            return true;
         }
     }
 }
