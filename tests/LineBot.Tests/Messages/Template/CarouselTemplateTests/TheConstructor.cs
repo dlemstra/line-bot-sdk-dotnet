@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -27,8 +26,8 @@ namespace Line.Tests
             {
                 var template = new CarouselTemplate();
 
-                string serialized = JsonConvert.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""carousel"",""columns"":null,""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
+                string serialized = JsonSerializer.SerializeObject(template);
+                Assert.AreEqual(@"{""type"":""carousel"",""imageAspectRatio"":""rectangle"",""imageSize"":""cover""}", serialized);
             }
         }
     }

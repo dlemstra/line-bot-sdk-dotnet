@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -32,7 +31,7 @@ namespace Line.Tests
                     Url = new Uri("http://foo.bar")
                 };
 
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
                 Assert.AreEqual(@"{""type"":""uri"",""label"":""Foo"",""uri"":""http://foo.bar""}", serialized);
             }
         }

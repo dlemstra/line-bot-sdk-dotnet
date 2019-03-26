@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -32,7 +31,7 @@ namespace Line.Tests
                     Duration = 10000
                 };
 
-                var serialized = JsonConvert.SerializeObject(message);
+                var serialized = JsonSerializer.SerializeObject(message);
                 Assert.AreEqual(@"{""type"":""audio"",""originalContentUrl"":""https://foo.url"",""duration"":10000}", serialized);
             }
 

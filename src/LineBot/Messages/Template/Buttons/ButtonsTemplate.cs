@@ -31,7 +31,7 @@ namespace Line
 #pragma warning restore 0414
 
         private Uri _thumbnailUrl;
-        private string _color = "#FFFFFF";
+        private string _color;
         private string _title;
         private string _text;
         private IAction _defaultAction;

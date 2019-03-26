@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -110,7 +109,7 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 0, 0, 0)
                 };
 
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
 
                 Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""datetime"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25T00:00"",""max"":""2018-01-24T23:59"",""min"":""2017-12-25T00:00""}", serialized);
             }
@@ -127,7 +126,7 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 0, 0, 0)
                 };
 
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
 
                 Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""date"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25"",""max"":""2018-01-24"",""min"":""2017-12-25""}", serialized);
             }
@@ -144,7 +143,7 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 13, 0, 0)
                 };
 
-                string serialized = JsonConvert.SerializeObject(action);
+                string serialized = JsonSerializer.SerializeObject(action);
 
                 Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""time"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""14:00"",""max"":""16:00"",""min"":""13:00""}", serialized);
             }

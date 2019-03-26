@@ -27,7 +27,7 @@ namespace Line
         private Uri _thumbnailUrl;
         private string _title;
         private string _text;
-        private string _color = "#FFFFFF";
+        private string _color;
         private IAction _defaultAction;
         private IEnumerable<IAction> _actions;
 

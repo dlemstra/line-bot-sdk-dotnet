@@ -14,7 +14,6 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -32,8 +31,8 @@ namespace Line.Tests
                     Action = new UriAction()
                 };
 
-                var serialized = JsonConvert.SerializeObject(column);
-                Assert.AreEqual(@"{""imageUrl"":""https://foo.bar"",""action"":{""type"":""uri"",""label"":null,""uri"":null}}", serialized);
+                var serialized = JsonSerializer.SerializeObject(column);
+                Assert.AreEqual(@"{""imageUrl"":""https://foo.bar"",""action"":{""type"":""uri""}}", serialized);
             }
         }
     }

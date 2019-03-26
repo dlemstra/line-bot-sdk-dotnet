@@ -13,7 +13,6 @@
 // under the License.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 
 namespace Line.Tests
 {
@@ -33,7 +32,7 @@ namespace Line.Tests
                     Height = 40
                 };
 
-                var serialized = JsonConvert.SerializeObject(area);
+                var serialized = JsonSerializer.SerializeObject(area);
                 Assert.AreEqual(@"{""x"":10,""y"":20,""width"":30,""height"":40}", serialized);
             }
 
