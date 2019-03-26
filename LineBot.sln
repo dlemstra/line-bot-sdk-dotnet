@@ -10,12 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D50535FB-E16E-406A-B609-9CA748FBAAC7}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
-		appveyor.yml = appveyor.yml
 		azure-pipelines.yml = azure-pipelines.yml
-		build\build.cmd = build\build.cmd
 		build\build.yml = build\build.yml
-		build\packages.config = build\packages.config
-		build\test.cmd = build\test.cmd
+		build\codecoverage.yml = build\codecoverage.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publish", "Publish", "{76B4276E-C515-41F5-A85D-9BD1CE2BB115}"

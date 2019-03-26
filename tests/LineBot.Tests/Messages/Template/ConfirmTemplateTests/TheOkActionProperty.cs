@@ -1,4 +1,4 @@
-﻿// Copyright 2017-2018 Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet)
+﻿// Copyright 2017-2019 Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet)
 //
 // Dirk Lemstra licenses this file to you under the Apache License,
 // version 2.0 (the "License"); you may not use this file except in compliance
@@ -31,6 +31,19 @@ namespace Line.Tests
                 {
                     template.OkAction = null;
                 });
+            }
+
+            [TestMethod]
+            public void ShouldNotThrowExceptionWhenValueIsNotNull()
+            {
+                var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
+
+                var confirmTemplate = new ConfirmTemplate
+                {
+                    OkAction = action
+                };
+
+                Assert.AreEqual(action, confirmTemplate.OkAction);
             }
 
             [TestMethod]

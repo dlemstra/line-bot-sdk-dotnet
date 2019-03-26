@@ -1,0 +1,6 @@
+steps:
+- script: |
+    cd $(Build.SourcesDirectory)/build
+    chmod 755 codecov.sh
+    ./codecov.sh -K -t $(Codecov.Token) -f '!*.yml'
+  displayName: 'Execute https://codecov.io/bash'
