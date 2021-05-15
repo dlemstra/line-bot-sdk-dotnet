@@ -13,15 +13,12 @@
 // under the License.
 
 using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Line
 {
-    internal static class StringExtensions
+    internal static class ColorHelper
     {
-        public static void ColorValidate(this string value)
+        public static void Validate(string value)
         {
             if (value == null || value.Length != 7)
                 throw new InvalidOperationException("The color should be 7 characters long.");

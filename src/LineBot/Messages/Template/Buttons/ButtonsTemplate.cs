@@ -96,7 +96,7 @@ namespace Line
 
             set
             {
-                value.ColorValidate();
+                ColorHelper.Validate(value);
 
                 _color = value.ToUpperInvariant();
             }
