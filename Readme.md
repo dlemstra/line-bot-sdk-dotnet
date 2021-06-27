@@ -1,8 +1,7 @@
 # line-bot-sdk-dotnet
 
-
+[![Build Status](https://github.com/dlemstra/Magick.NET/workflows/main/badge.svg)](https://github.com/dlemstra/Magick.NET/actions)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-brightgreen.svg)](https://raw.githubusercontent.com/dlemstra/line-bot-sdk-dotnet/master/License.txt)
-[![Build Status](https://dev.azure.com/dlemstra/line-bot-sdk-dotnet/_apis/build/status/line-bot-sdk-dotnet?branchName=master)](https://dev.azure.com/dlemstra/line-bot-sdk-dotnet/_build/latest?definitionId=8?branchName=master)
 [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/fold_left.svg?style=social&label=Follow%20%40MagickNET)](https://twitter.com/MagickNET)
 
 SDK for the LINE Messaging API for .NET standard.
