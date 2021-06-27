@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <AdditionalFiles Include="../../stylecop.json" />
-    <None Include="../../logo/Line.Bot.SDK.png" Pack="true" PackagePath=""/>
+    <None Include="../../logo/Line.Bot.SDK.png" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -35,7 +35,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.113" PrivateAssets="All" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" PrivateAssets="All" />
   </ItemGroup>
 
   <PropertyGroup>
