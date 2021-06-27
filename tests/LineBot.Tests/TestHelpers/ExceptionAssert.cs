@@ -18,7 +18,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     internal static class ExceptionAssert
     {
         public static TException Throws<TException>(string message, Action action)

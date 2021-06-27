@@ -14,7 +14,6 @@
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public class TestAction : IAction
     {
         public void Validate()

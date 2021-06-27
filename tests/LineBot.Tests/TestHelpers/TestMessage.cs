@@ -14,7 +14,6 @@
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public class TestMessage : IMessage
     {
         public TestMessage()

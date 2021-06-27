@@ -33,7 +33,6 @@ namespace Line.Tests
                 });
             }
 
-            [ExcludeFromCodeCoverage]
             private class InvalidAction : ImagemapAction
             {
                 public InvalidAction()

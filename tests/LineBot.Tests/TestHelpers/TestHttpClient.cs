@@ -20,7 +20,6 @@ using System.Net.Http;
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public sealed class TestHttpClient : HttpClient
     {
         private static readonly Uri TestBaseAddress = new Uri("http://line.dotnet/");

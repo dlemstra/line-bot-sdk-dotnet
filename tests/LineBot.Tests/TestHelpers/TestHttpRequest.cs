@@ -23,7 +23,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public sealed class TestHttpRequest : HttpRequest, IDisposable
     {
         public TestHttpRequest()

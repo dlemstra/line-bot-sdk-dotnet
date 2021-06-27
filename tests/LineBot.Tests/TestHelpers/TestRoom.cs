@@ -14,7 +14,6 @@
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public class TestRoom : IRoom
     {
         public string Id => "testRoom";

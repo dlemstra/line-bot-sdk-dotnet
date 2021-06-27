@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public class TestHttpMessageHandler : HttpMessageHandler
     {
         private readonly HttpResponseMessage _response;

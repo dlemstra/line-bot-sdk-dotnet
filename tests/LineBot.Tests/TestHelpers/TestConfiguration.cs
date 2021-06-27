@@ -14,7 +14,6 @@
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public sealed class TestConfiguration : ILineConfiguration
     {
         private TestConfiguration()

@@ -18,7 +18,6 @@ using System.Threading.Tasks;
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public sealed class TestLogger : ILineBotLogger
     {
         public byte[] LogReceivedEventsEventsData { get; private set; }

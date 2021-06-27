@@ -16,7 +16,6 @@ namespace Line.Tests
 {
     public partial class ISendMessageExtensionsTests
     {
-        [ExcludeFromCodeCoverage]
         private class InvalidMessage : ISendMessage
         {
             public void Validate()

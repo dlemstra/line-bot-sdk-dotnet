@@ -14,7 +14,6 @@
 
 namespace Line.Tests
 {
-    [ExcludeFromCodeCoverage]
     public class TestGroup : IGroup
     {
         public string Id => "testGroup";
