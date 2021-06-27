@@ -15,7 +15,7 @@ English: [https://devdocs.line.me/en/](https://devdocs.line.me/en/)<br>
 Japanese: [https://devdocs.line.me/ja/](https://devdocs.line.me/ja/)
 
 ### Supported Platforms
-- .NET Standard 1.3 and higher
+- .NET Standard 2.0 and higher
 
 ### Installation
 
