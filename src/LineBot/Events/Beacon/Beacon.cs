@@ -23,6 +23,6 @@ namespace Line
         public BeaconType BeaconType { get; set; }
 
         [JsonProperty("hwid")]
-        public string Hwid { get; set; }
+        public string? Hwid { get; set; }
     }
 }

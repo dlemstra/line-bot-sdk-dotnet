@@ -32,7 +32,7 @@ namespace Line
             return objectType.GetTypeInfo().ImplementedInterfaces.Any(type => type == typeof(IAction));
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             var obj = JObject.Load(reader);
 
@@ -43,7 +43,7 @@ namespace Line
             return action;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }

@@ -22,17 +22,17 @@ namespace Line
     /// </summary>
     public class RichMenu
     {
-        private RichMenuArea[] _areas;
-        private string _chatBarText;
-        private string _name;
-        private RichMenuSize _size;
+        private RichMenuArea[]? _areas;
+        private string? _chatBarText;
+        private string? _name;
+        private RichMenuSize? _size;
 
         /// <summary>
         /// Gets or sets the array of area objects which define the coordinates and size of tappable areas.
         /// Max: 20 area objects.
         /// </summary>
         [JsonProperty("areas")]
-        public RichMenuArea[] Areas
+        public RichMenuArea[]? Areas
         {
             get => _areas;
             set
@@ -55,12 +55,12 @@ namespace Line
         /// Max: 14 characters.
         /// </summary>
         [JsonProperty("chatBarText")]
-        public string ChatBarText
+        public string? ChatBarText
         {
             get => _chatBarText;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The chat bar text cannot be null or whitespace.");
 
                 if (value.Length > 14)
@@ -75,12 +75,12 @@ namespace Line
         /// Max: 300 characters.
         /// </summary>
         [JsonProperty("name")]
-        public string Name
+        public string? Name
         {
             get => _name;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The name cannot be null or whitespace.");
 
                 if (value.Length > 300)
@@ -101,7 +101,7 @@ namespace Line
         /// Rich menu images must be one of the following sizes: 2500x1686px or 2500x843px.
         /// </summary>
         [JsonProperty("size")]
-        public RichMenuSize Size
+        public RichMenuSize? Size
         {
             get => _size;
             set

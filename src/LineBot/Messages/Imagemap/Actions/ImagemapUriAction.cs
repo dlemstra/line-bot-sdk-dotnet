@@ -22,7 +22,7 @@ namespace Line
     /// </summary>
     public sealed class ImagemapUriAction : ImagemapAction
     {
-        private Uri _url;
+        private Uri? _url;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapUriAction"/> class.
@@ -97,7 +97,7 @@ namespace Line
         /// <para>Max url length: 1000 characters.</para>
         /// </summary>
         [JsonProperty("linkUri")]
-        public Uri Url
+        public Uri? Url
         {
             get
             {

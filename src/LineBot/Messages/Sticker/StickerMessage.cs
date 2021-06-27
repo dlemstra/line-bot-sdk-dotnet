@@ -22,14 +22,8 @@ namespace Line
     /// </summary>
     public sealed class StickerMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Sticker;
-#pragma warning restore 0414
-
-        private string _packageId;
-        private string _stickerId;
+        private string? _packageId;
+        private string? _stickerId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StickerMessage"/> class.
@@ -49,11 +43,17 @@ namespace Line
             StickerId = stickerId;
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+
+        MessageType ISendMessage.Type
+            => MessageType.Sticker;
+
         /// <summary>
         /// Gets or sets the id of the package.
         /// </summary>
         [JsonProperty("packageId")]
-        public string PackageId
+        public string? PackageId
         {
             get
             {
@@ -73,7 +73,7 @@ namespace Line
         /// Gets or sets the id of the sticker.
         /// </summary>
         [JsonProperty("stickerId")]
-        public string StickerId
+        public string? StickerId
         {
             get
             {

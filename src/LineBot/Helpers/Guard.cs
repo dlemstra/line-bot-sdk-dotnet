@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -22,14 +23,14 @@ namespace Line
     internal sealed class Guard
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNull(string paramName, object value)
+        public static void NotNull(string paramName, [NotNull] object? value)
         {
-            if (ReferenceEquals(value, null))
+            if (value is null)
                 throw new ArgumentNullException(paramName);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNullOrEmpty(string paramName, string value)
+        public static void NotNullOrEmpty(string paramName, [NotNull] string? value)
         {
             NotNull(paramName, value);
 
@@ -38,7 +39,7 @@ namespace Line
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNullOrEmpty<T>(string paramName, T[] value)
+        public static void NotNullOrEmpty<T>(string paramName, [NotNull] T[]? value)
         {
             NotNull(paramName, value);
 
@@ -47,7 +48,7 @@ namespace Line
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void NotNullOrEmpty<T>(string paramName, IEnumerable<T> value)
+        public static void NotNullOrEmpty<T>(string paramName, [NotNull] IEnumerable<T> value)
         {
             NotNull(paramName, value);
 

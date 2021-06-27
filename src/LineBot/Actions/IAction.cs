@@ -19,6 +19,8 @@ namespace Line
     /// </summary>
     public interface IAction
     {
+        internal ActionType Type { get; }
+
         /// <summary>
         /// Validates the action.
         /// </summary>

@@ -22,13 +22,7 @@ namespace Line
     /// </summary>
     public sealed class TextMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Text;
-#pragma warning restore 0414
-
-        private string _text;
+        private string? _text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextMessage"/> class.
@@ -49,12 +43,17 @@ namespace Line
             Text = text;
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Text;
+
         /// <summary>
         /// Gets or sets the text of the message.
         /// <para>Max: 2000 characters.</para>
         /// </summary>
         [JsonProperty("text")]
-        public string Text
+        public string? Text
         {
             get
             {
@@ -63,7 +62,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 2000)

@@ -22,7 +22,7 @@ namespace Line
     /// </summary>
     public sealed class ImagemapMessageAction : ImagemapAction
     {
-        private string _text;
+        private string? _text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapMessageAction"/> class.
@@ -68,7 +68,7 @@ namespace Line
         /// <para>Max: 400 characters.</para>
         /// </summary>
         [JsonProperty("text")]
-        public string Text
+        public string? Text
         {
             get
             {
@@ -77,7 +77,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 400)

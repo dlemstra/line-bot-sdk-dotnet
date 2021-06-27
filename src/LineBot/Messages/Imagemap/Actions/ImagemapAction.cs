@@ -22,8 +22,8 @@ namespace Line
     /// </summary>
     public abstract class ImagemapAction
     {
-        private ImagemapArea _area;
-        private string _label;
+        private ImagemapArea? _area;
+        private string? _label;
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<ImagemapActionType>))]
@@ -38,7 +38,7 @@ namespace Line
         /// Gets or sets the tappable area.
         /// </summary>
         [JsonProperty("area")]
-        public ImagemapArea Area
+        public ImagemapArea? Area
         {
             get
             {
@@ -59,7 +59,7 @@ namespace Line
         /// <para>Max: 50 characters.</para>
         /// </summary>
         [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
-        public string Label
+        public string? Label
         {
             get
             {

@@ -51,7 +51,7 @@ namespace Line
         {
         }
 
-        internal LineBot(ILineConfiguration configuration, HttpClient client, ILineBotLogger logger)
+        internal LineBot(ILineConfiguration configuration, HttpClient? client, ILineBotLogger? logger)
         {
             Guard.NotNull(nameof(configuration), configuration);
 
@@ -71,7 +71,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        public async Task<string> CreateRichMenu(RichMenu richMenu)
+        public async Task<string?> CreateRichMenu(RichMenu richMenu)
         {
             Guard.NotNull(nameof(richMenu), richMenu);
 
@@ -158,11 +158,11 @@ namespace Line
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns>The content of the specified message.</returns>
-        public async Task<byte[]> GetMessageContent(IMessage message)
+        public Task<byte[]?> GetMessageContent(IMessage message)
         {
             Guard.NotNull(nameof(message), message);
 
-            return await GetMessageContent(message.Id);
+            return GetMessageContent(message.Id);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Line
         /// </summary>
         /// <param name="messageId">The id of the message.</param>
         /// <returns>The content of the specified message.</returns>
-        public async Task<byte[]> GetMessageContent(string messageId)
+        public async Task<byte[]?> GetMessageContent(string messageId)
         {
             Guard.NotNullOrEmpty(nameof(messageId), messageId);
 
@@ -187,7 +187,7 @@ namespace Line
         /// Returns the ID of the default rich menu set.
         /// </summary>
         /// <returns>The ID of the default rich menu set.</returns>
-        public async Task<string> GetDefaultRichMenu()
+        public async Task<string?> GetDefaultRichMenu()
         {
             var response = await _client.GetAsync($"user/all/richmenu");
             await response.CheckResult();
@@ -235,7 +235,7 @@ namespace Line
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>The profile of the specified user.</returns>
-        public Task<IUserProfile> GetProfile(IUser user)
+        public Task<IUserProfile?> GetProfile(IUser user)
         {
             Guard.NotNull(nameof(user), user);
 
@@ -247,7 +247,7 @@ namespace Line
         /// </summary>
         /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
-        public async Task<IUserProfile> GetProfile(string userId)
+        public async Task<IUserProfile?> GetProfile(string userId)
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
@@ -262,7 +262,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenuId">The rich menu id.</param>
         /// <returns>A rich menu via a rich menu ID.</returns>
-        public async Task<IRichMenuResponse> GetRichMenu(string richMenuId)
+        public async Task<IRichMenuResponse?> GetRichMenu(string richMenuId)
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
@@ -321,7 +321,7 @@ namespace Line
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>.</returns>
-        public Task<string> GetUserRichMenu(IUser user)
+        public Task<string?> GetUserRichMenu(IUser user)
         {
             Guard.NotNull(nameof(user), user);
 
@@ -333,7 +333,7 @@ namespace Line
         /// </summary>
         /// <param name="userId">The id of the user.</param>
         /// <returns>.</returns>
-        public async Task<string> GetUserRichMenu(string userId)
+        public async Task<string?> GetUserRichMenu(string userId)
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
@@ -407,7 +407,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
         {
-            return Multicast(to, messages?.ToArray());
+            return Multicast(to, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -432,7 +432,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
         {
-            return Multicast(to, messages?.ToArray());
+            return Multicast(to, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -471,7 +471,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages)
         {
-            return Push(group, messages?.ToArray());
+            return Push(group, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -495,7 +495,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages)
         {
-            return Push(room, messages?.ToArray());
+            return Push(room, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -519,7 +519,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages)
         {
-            return Push(user, messages?.ToArray());
+            return Push(user, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -544,7 +544,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages)
         {
-            return Push(to, messages?.ToArray());
+            return Push(to, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -580,7 +580,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
         {
-            return Reply(token, messages?.ToArray());
+            return Reply(token, messages?.ToArray()!);
         }
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace Line
         {
             Guard.NotNull(nameof(token), token);
 
-            return Reply(token.ReplyToken, messages);
+            return Reply(token.ReplyToken!, messages);
         }
 
         /// <summary>
@@ -604,7 +604,7 @@ namespace Line
         /// <returns>.</returns>
         public Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages)
         {
-            return Reply(replyToken, messages?.ToArray());
+            return Reply(replyToken, messages?.ToArray()!);
         }
 
         /// <summary>

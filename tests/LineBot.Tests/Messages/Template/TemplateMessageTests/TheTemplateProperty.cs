@@ -82,6 +82,9 @@ namespace Line.Tests
 
             private class TestTemplate : ITemplate
             {
+                TemplateType ITemplate.Type
+                    => (TemplateType)42;
+
                 public void Validate()
                 {
                 }

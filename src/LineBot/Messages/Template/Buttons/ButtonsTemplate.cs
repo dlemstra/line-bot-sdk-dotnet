@@ -24,18 +24,17 @@ namespace Line
     /// </summary>
     public sealed class ButtonsTemplate : ITemplate
     {
-#pragma warning disable 0414 // Suppress value is never used.
+        private Uri? _thumbnailUrl;
+        private string? _color;
+        private string? _title;
+        private string? _text;
+        private IAction? _defaultAction;
+        private IEnumerable<IAction>? _actions;
+
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private readonly TemplateType _type = TemplateType.Buttons;
-#pragma warning restore 0414
-
-        private Uri _thumbnailUrl;
-        private string _color;
-        private string _title;
-        private string _text;
-        private IAction _defaultAction;
-        private IEnumerable<IAction> _actions;
+        TemplateType ITemplate.Type
+            => TemplateType.Buttons;
 
         /// <summary>
         /// Gets or sets the image url for the thumbnail.
@@ -47,7 +46,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("thumbnailImageUrl")]
-        public Uri ThumbnailUrl
+        public Uri? ThumbnailUrl
         {
             get
             {
@@ -87,7 +86,7 @@ namespace Line
         /// Gets or sets the background color of the image.
         /// </summary>
         [JsonProperty("imageBackgroundColor")]
-        public string ImageBackgroundColor
+        public string? ImageBackgroundColor
         {
             get
             {
@@ -107,7 +106,7 @@ namespace Line
         /// <para>Max: 400 characters.</para>
         /// </summary>
         [JsonProperty("title")]
-        public string Title
+        public string? Title
         {
             get
             {
@@ -129,7 +128,7 @@ namespace Line
         /// <para>Max: 60 characters (message with an image or title).</para>
         /// </summary>
         [JsonProperty("text")]
-        public string Text
+        public string? Text
         {
             get
             {
@@ -138,7 +137,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 160)
@@ -155,7 +154,7 @@ namespace Line
         /// Gets or sets the action when image is tapped; set for the entire image, title, and text area.
         /// </summary>
         [JsonProperty("defaultAction")]
-        public IAction DefaultAction
+        public IAction? DefaultAction
         {
             get
             {
@@ -176,7 +175,7 @@ namespace Line
         /// <para>Max: 4.</para>
         /// </summary>
         [JsonProperty("actions")]
-        public IEnumerable<IAction> Actions
+        public IEnumerable<IAction>? Actions
         {
             get
             {

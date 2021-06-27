@@ -111,7 +111,7 @@ namespace Line.Tests
 
                 string serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""datetime"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25T00:00"",""max"":""2018-01-24T23:59"",""min"":""2017-12-25T00:00""}", serialized);
+                Assert.AreEqual(@"{""mode"":""datetime"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25T00:00"",""max"":""2018-01-24T23:59"",""min"":""2017-12-25T00:00""}", serialized);
             }
 
             [TestMethod]
@@ -128,7 +128,7 @@ namespace Line.Tests
 
                 string serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""date"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25"",""max"":""2018-01-24"",""min"":""2017-12-25""}", serialized);
+                Assert.AreEqual(@"{""mode"":""date"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25"",""max"":""2018-01-24"",""min"":""2017-12-25""}", serialized);
             }
 
             [TestMethod]
@@ -145,7 +145,7 @@ namespace Line.Tests
 
                 string serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""type"":""datetimepicker"",""mode"":""time"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""14:00"",""max"":""16:00"",""min"":""13:00""}", serialized);
+                Assert.AreEqual(@"{""mode"":""time"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""14:00"",""max"":""16:00"",""min"":""13:00""}", serialized);
             }
         }
     }

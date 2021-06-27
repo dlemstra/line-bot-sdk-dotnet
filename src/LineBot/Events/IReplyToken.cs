@@ -22,6 +22,6 @@ namespace Line
         /// <summary>
         /// Gets the reply token.
         /// </summary>
-        string ReplyToken { get; }
+        string? ReplyToken { get; }
     }
 }

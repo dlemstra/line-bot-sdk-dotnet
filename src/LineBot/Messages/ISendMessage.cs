@@ -19,6 +19,8 @@ namespace Line
     /// </summary>
     public interface ISendMessage
     {
+        internal MessageType Type { get; }
+
         /// <summary>
         /// Validates the message.
         /// </summary>

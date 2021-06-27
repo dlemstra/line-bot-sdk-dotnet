@@ -24,20 +24,19 @@ namespace Line
     /// </summary>
     public sealed class ImageCarouselTemplate : ITemplate
     {
-#pragma warning disable 0414 // Suppress value is never used.
+        private IEnumerable<ImageCarouselColumn>? _columns = null;
+
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<TemplateType>))]
-        private readonly TemplateType _type = TemplateType.Image_Carousel;
-#pragma warning restore 0414
-
-        private IEnumerable<ImageCarouselColumn> _columns;
+        TemplateType ITemplate.Type
+            => TemplateType.Image_Carousel;
 
         /// <summary>
         /// Gets or sets the columns.
         /// <para>Max: 10.</para>
         /// </summary>
         [JsonProperty("columns")]
-        public IEnumerable<ImageCarouselColumn> Columns
+        public IEnumerable<ImageCarouselColumn>? Columns
         {
             get
             {

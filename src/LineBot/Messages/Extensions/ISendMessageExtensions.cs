@@ -46,30 +46,33 @@ namespace Line
             }
         }
 
-        private static bool IsInvalidMessageType(ISendMessage message)
+        private static bool IsInvalidMessageType(ISendMessage? message)
         {
-            if (message is TextMessage)
+            if (message is null)
                 return false;
 
-            if (message is ImageMessage)
+            if (message.Type == MessageType.Text)
                 return false;
 
-            if (message is VideoMessage)
+            if (message.Type == MessageType.Image)
                 return false;
 
-            if (message is AudioMessage)
+            if (message.Type == MessageType.Video)
                 return false;
 
-            if (message is LocationMessage)
+            if (message.Type == MessageType.Audio)
                 return false;
 
-            if (message is StickerMessage)
+            if (message.Type == MessageType.Location)
                 return false;
 
-            if (message is ImagemapMessage)
+            if (message.Type == MessageType.Sticker)
                 return false;
 
-            if (message is TemplateMessage)
+            if (message.Type == MessageType.Imagemap)
+                return false;
+
+            if (message.Type == MessageType.Template)
                 return false;
 
             return true;

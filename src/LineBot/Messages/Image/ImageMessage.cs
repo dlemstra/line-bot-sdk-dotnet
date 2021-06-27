@@ -22,14 +22,8 @@ namespace Line
     /// </summary>
     public sealed class ImageMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Image;
-#pragma warning restore 0414
-
-        private Uri _url;
-        private Uri _previewUrl;
+        private Uri? _url;
+        private Uri? _previewUrl;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageMessage"/> class.
@@ -73,6 +67,11 @@ namespace Line
             PreviewUrl = previewUrl;
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Image;
+
         /// <summary>
         /// Gets or sets the image url.
         /// <para>Protocol: HTTPS.</para>
@@ -82,7 +81,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("originalContentUrl")]
-        public Uri Url
+        public Uri? Url
         {
             get
             {
@@ -104,7 +103,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("previewImageUrl")]
-        public Uri PreviewUrl
+        public Uri? PreviewUrl
         {
             get
             {
@@ -126,7 +125,7 @@ namespace Line
                 throw new InvalidOperationException("The preview url cannot be null.");
         }
 
-        private Uri CheckUrl(Uri value)
+        private Uri CheckUrl(Uri? value)
         {
             if (value == null)
                 throw new InvalidOperationException("The url cannot be null.");

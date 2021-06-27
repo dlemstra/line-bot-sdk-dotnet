@@ -22,13 +22,7 @@ namespace Line
     /// </summary>
     public sealed class AudioMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Audio;
-#pragma warning restore 0414
-
-        private Uri _url;
+        private Uri? _url;
         private int _duration;
 
         /// <summary>
@@ -73,6 +67,11 @@ namespace Line
             Duration = duration;
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Audio;
+
         /// <summary>
         /// Gets or sets the url of the audio file.
         /// <para>Protocol: HTTPS.</para>
@@ -82,7 +81,7 @@ namespace Line
         /// <para>Max size: 10 MB.</para>
         /// </summary>
         [JsonProperty("originalContentUrl")]
-        public Uri Url
+        public Uri? Url
         {
             get
             {

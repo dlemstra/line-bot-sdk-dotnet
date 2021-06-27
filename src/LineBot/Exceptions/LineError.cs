@@ -13,6 +13,7 @@
 // under the License.
 
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
@@ -20,9 +21,9 @@ namespace Line
     internal sealed class LineError
     {
         [JsonProperty("message")]
-        public string Message { get; set; }
+        public string Message { get; set; } = default!;
 
         [JsonProperty("details")]
-        public IEnumerable<LineErrorDetails> Details { get; set; }
+        public IEnumerable<LineErrorDetails> Details { get; set; } = Enumerable.Empty<LineErrorDetails>();
     }
 }

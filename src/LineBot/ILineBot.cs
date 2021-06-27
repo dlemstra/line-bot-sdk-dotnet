@@ -28,7 +28,7 @@ namespace Line
         /// </summary>
         /// <param name="richMenu">The rich menu represented as a rich menu object.</param>
         /// <returns>.</returns>
-        Task<string> CreateRichMenu(RichMenu richMenu);
+        Task<string?> CreateRichMenu(RichMenu richMenu);
 
         /// <summary>
         /// Cancels the default rich menu set with the Messaging API.
@@ -69,20 +69,20 @@ namespace Line
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns>The content of the specified message.</returns>
-        Task<byte[]> GetMessageContent(IMessage message);
+        Task<byte[]?> GetMessageContent(IMessage message);
 
         /// <summary>
         /// Returns the content of the specified message.
         /// </summary>
         /// <param name="messageId">The id of the message.</param>
         /// <returns>The content of the specified message.</returns>
-        Task<byte[]> GetMessageContent(string messageId);
+        Task<byte[]?> GetMessageContent(string messageId);
 
         /// <summary>
         /// Returns the ID of the default rich menu set.
         /// </summary>
         /// <returns>The ID of the default rich menu set.</returns>
-        Task<string> GetDefaultRichMenu();
+        Task<string?> GetDefaultRichMenu();
 
         /// <summary>
         /// Returns the events from the specified request.
@@ -96,21 +96,21 @@ namespace Line
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(IUser user);
+        Task<IUserProfile?> GetProfile(IUser user);
 
         /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
         /// <param name="userId">The id of the user.</param>
         /// <returns>The profile of the specified user.</returns>
-        Task<IUserProfile> GetProfile(string userId);
+        Task<IUserProfile?> GetProfile(string userId);
 
         /// <summary>
         /// Gets a rich menu via a rich menu ID.
         /// </summary>
         /// <param name="richMenuId">The rich menu id.</param>
         /// <returns>A rich menu via a rich menu ID.</returns>
-        Task<IRichMenuResponse> GetRichMenu(string richMenuId);
+        Task<IRichMenuResponse?> GetRichMenu(string richMenuId);
 
         /// <summary>
         /// Downloads an image associated with a rich menu.
@@ -137,14 +137,14 @@ namespace Line
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>.</returns>
-        Task<string> GetUserRichMenu(IUser user);
+        Task<string?> GetUserRichMenu(IUser user);
 
         /// <summary>
         /// Gets the ID of the rich menu linked to a user.
         /// </summary>
         /// <param name="userId">The id of the user.</param>
         /// <returns>.</returns>
-        Task<string> GetUserRichMenu(string userId);
+        Task<string?> GetUserRichMenu(string userId);
 
         /// <summary>
         /// Leave the specified group.

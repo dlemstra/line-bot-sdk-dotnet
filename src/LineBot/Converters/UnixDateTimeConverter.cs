@@ -26,19 +26,22 @@ namespace Line
             return objectType == typeof(DateTime);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.Integer)
                 throw new InvalidOperationException("Only integer is supported.");
 
-            long milliseconds = (long)reader.Value;
+            if (reader.Value is null)
+                return default(DateTimeOffset);
 
-            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
+            var milliseconds = (long)reader.Value;
+
+            var dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
 
             return dateTimeOffset.UtcDateTime;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotSupportedException();
         }

@@ -22,10 +22,10 @@ namespace Line
     internal sealed class LineEventCollection : ILineEvents
     {
         [JsonProperty("destination")]
-        public string Destination { get; set; }
+        public string Destination { get; set; } = default!;
 
         [JsonProperty("events")]
-        public List<LineEvent> Events { get; set; }
+        public List<LineEvent> Events { get; set; } = default!;
 
         IEnumerable<ILineEvent> ILineEvents.Events => Events;
 

@@ -20,7 +20,7 @@ namespace Line
 {
     internal static class HttpContentExtensions
     {
-        public static async Task<T> DeserializeObject<T>(this HttpContent self)
+        public static async Task<T?> DeserializeObject<T>(this HttpContent self)
         {
             string body = await self.ReadAsStringAsync();
 

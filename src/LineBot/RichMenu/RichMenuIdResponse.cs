@@ -25,6 +25,6 @@ namespace Line
         /// Gets or sets the rich menu ID.
         /// </summary>
         [JsonProperty("richMenuId")]
-        public string RichMenuId { get; set; }
+        public string? RichMenuId { get; set; }
     }
 }

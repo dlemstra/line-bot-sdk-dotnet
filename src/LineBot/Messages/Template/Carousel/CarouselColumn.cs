@@ -24,12 +24,12 @@ namespace Line
     /// </summary>
     public sealed class CarouselColumn
     {
-        private Uri _thumbnailUrl;
-        private string _title;
-        private string _text;
-        private string _color;
-        private IAction _defaultAction;
-        private IEnumerable<IAction> _actions;
+        private Uri? _thumbnailUrl;
+        private string? _title;
+        private string? _text;
+        private string? _color;
+        private IAction? _defaultAction;
+        private IEnumerable<IAction>? _actions;
 
         /// <summary>
         /// Gets or sets the image url for the thumbnail.
@@ -41,7 +41,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("thumbnailImageUrl")]
-        public Uri ThumbnailUrl
+        public Uri? ThumbnailUrl
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Line
         /// Gets or sets background color of image. Specify a RGB color value. The default value is #FFFFFF (white).
         /// </summary>
         [JsonProperty("imageBackgroundColor")]
-        public string ImageBackgroundColor
+        public string? ImageBackgroundColor
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Line
         /// <para>Max: 40 characters.</para>
         /// </summary>
         [JsonProperty("title")]
-        public string Title
+        public string? Title
         {
             get
             {
@@ -109,7 +109,7 @@ namespace Line
         /// <para>Max: 60 characters (message with an image or title).</para>
         /// </summary>
         [JsonProperty("text")]
-        public string Text
+        public string? Text
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 120)
@@ -135,7 +135,7 @@ namespace Line
         /// Gets or sets the action when image is tapped; set for the entire image, title, and text area.
         /// </summary>
         [JsonProperty("defaultAction")]
-        public IAction DefaultAction
+        public IAction? DefaultAction
         {
             get
             {
@@ -156,7 +156,7 @@ namespace Line
         /// <para>Max: 4.</para>
         /// </summary>
         [JsonProperty("actions")]
-        public IEnumerable<IAction> Actions
+        public IEnumerable<IAction>? Actions
         {
             get
             {

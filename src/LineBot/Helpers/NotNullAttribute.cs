@@ -12,23 +12,13 @@
 // License for the specific language governing permissions and limitations
 // under the License.
 
-using System;
-
-namespace Line
+namespace System.Diagnostics.CodeAnalysis
 {
-    /// <summary>
-    /// Encapsulates the configuration of the <see cref="ILineBot"/>.
-    /// </summary>
-    public sealed class LineConfiguration : ILineConfiguration
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+    internal sealed class NotNullAttribute : Attribute
     {
-        /// <summary>
-        /// Gets or sets the channel access token.
-        /// </summary>
-        public string ChannelAccessToken { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Gets or sets the channel secret.
-        /// </summary>
-        public string ChannelSecret { get; set; } = string.Empty;
+        public NotNullAttribute()
+        {
+        }
     }
 }

@@ -85,13 +85,6 @@ namespace Line.Tests
 
                 IActionExtensions.CheckActionType(action);
             }
-
-            private class TestAction : IAction
-            {
-                public void Validate()
-                {
-                }
-            }
         }
     }
 }

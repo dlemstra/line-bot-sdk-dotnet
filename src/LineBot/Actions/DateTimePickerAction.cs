@@ -22,18 +22,12 @@ namespace Line
     /// </summary>
     public sealed class DateTimePickerAction : IAction
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<ActionType>))]
-        private readonly ActionType _type = ActionType.DateTimePicker;
-#pragma warning restore 0414
-
         [JsonProperty("mode")]
         [JsonConverter(typeof(EnumConverter<DateTimePickerMode>))]
         private readonly DateTimePickerMode _mode;
 
-        private string _label;
-        private string _data;
+        private string? _label;
+        private string? _data;
         private DateTime? _initial;
         private DateTime? _min;
         private DateTime? _max;
@@ -51,12 +45,17 @@ namespace Line
         {
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<ActionType>))]
+        ActionType IAction.Type
+            => ActionType.DateTimePicker;
+
         /// <summary>
         /// Gets or sets the string returned via webhook in the postback.data property of the <see cref="IPostback"/> event.
         /// <para>Max: 300 characters.</para>
         /// </summary>
         [JsonProperty("data")]
-        public string Data
+        public string? Data
         {
             get
             {
@@ -65,7 +64,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The data cannot be null or whitespace.");
 
                 if (value.Length > 300)
@@ -101,7 +100,7 @@ namespace Line
         /// <para>Max: 20 characters.</para>
         /// </summary>
         [JsonProperty("label")]
-        public string Label
+        public string? Label
         {
             get
             {
@@ -110,7 +109,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The label cannot be null or whitespace.");
 
                 if (value.Length > 20)
@@ -176,7 +175,7 @@ namespace Line
         {
             get
             {
-                return GetFormattedDateTimeByMode(_initial.Value);
+                return GetFormattedDateTimeByMode(_initial);
             }
 
             set
@@ -196,7 +195,7 @@ namespace Line
         {
             get
             {
-                return GetFormattedDateTimeByMode(_max.Value);
+                return GetFormattedDateTimeByMode(_max);
             }
 
             set
@@ -216,7 +215,7 @@ namespace Line
         {
             get
             {
-                return GetFormattedDateTimeByMode(_min.Value);
+                return GetFormattedDateTimeByMode(_min);
             }
 
             set

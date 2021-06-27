@@ -19,6 +19,6 @@ namespace Line
     internal sealed class Postback
     {
         [JsonProperty("data")]
-        public string Data { get; set; }
+        public string Data { get; set; } = default!;
     }
 }

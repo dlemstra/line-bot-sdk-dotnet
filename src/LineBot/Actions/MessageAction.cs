@@ -22,21 +22,20 @@ namespace Line
     /// </summary>
     public sealed class MessageAction : IAction
     {
-#pragma warning disable 0414 // Suppress value is never used.
+        private string? _label;
+        private string? _text;
+
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<ActionType>))]
-        private readonly ActionType _type = ActionType.Message;
-#pragma warning restore 0414
-
-        private string _label;
-        private string _text;
+        ActionType IAction.Type
+            => ActionType.Message;
 
         /// <summary>
         /// Gets or sets the label.
         /// <para>Max: 20 characters.</para>
         /// </summary>
         [JsonProperty("label")]
-        public string Label
+        public string? Label
         {
             get
             {
@@ -45,7 +44,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The label cannot be null or whitespace.");
 
                 if (value.Length > 20)
@@ -59,7 +58,7 @@ namespace Line
         /// Gets or sets the text sent when the action is performed.
         /// </summary>
         [JsonProperty("text")]
-        public string Text
+        public string? Text
         {
             get
             {
@@ -68,7 +67,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The text cannot be null or whitespace.");
 
                 if (value.Length > 300)
@@ -80,10 +79,10 @@ namespace Line
 
         void IAction.Validate()
         {
-            if (_label == null)
+            if (_label is null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (_text == null)
+            if (_text is null)
                 throw new InvalidOperationException("The text cannot be null.");
         }
     }

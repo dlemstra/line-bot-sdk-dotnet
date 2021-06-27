@@ -19,27 +19,30 @@ namespace Line
 {
     internal static class IActionExtensions
     {
-        public static void CheckActionType(this IAction self)
+        public static void CheckActionType(this IAction? self)
         {
-            if (self is CameraAction)
+            if (self is null)
+                throw new NotSupportedException("The action cannot be null.");
+
+            if (self.Type == ActionType.Camera)
                 return;
 
-            if (self is CameraRollAction)
+            if (self.Type == ActionType.CameraRoll)
                 return;
 
-            if (self is DateTimePickerAction)
+            if (self.Type == ActionType.DateTimePicker)
                 return;
 
-            if (self is LocationAction)
+            if (self.Type == ActionType.Location)
                 return;
 
-            if (self is MessageAction)
+            if (self.Type == ActionType.Message)
                 return;
 
-            if (self is PostbackAction)
+            if (self.Type == ActionType.Postback)
                 return;
 
-            if (self is UriAction)
+            if (self.Type == ActionType.Uri)
                 return;
 
             throw new NotSupportedException("The action type is invalid.");

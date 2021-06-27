@@ -19,15 +19,15 @@ namespace Line
     internal sealed class Message : ILocation, ISticker
     {
         [JsonProperty("address")]
-        public string Address { get; set; }
+        public string Address { get; set; } = default!;
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = default!;
 
         [JsonProperty("latitude")]
         public decimal Latitude { get; set; }
 
-        public ILocation Location
+        public ILocation? Location
         {
             get
             {
@@ -46,9 +46,9 @@ namespace Line
         public MessageType MessageType { get; set; }
 
         [JsonProperty("packageid")]
-        public string PackageId { get; set; }
+        public string PackageId { get; set; } = string.Empty;
 
-        public ISticker Sticker
+        public ISticker? Sticker
         {
             get
             {
@@ -60,12 +60,12 @@ namespace Line
         }
 
         [JsonProperty("stickerId")]
-        public string StickerId { get; set; }
+        public string StickerId { get; set; } = default!;
 
         [JsonProperty("text")]
-        public string Text { get; set; }
+        public string Text { get; set; } = default!;
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; set; } = default!;
     }
 }

@@ -38,22 +38,26 @@ namespace Line
             return objectType.GetTypeInfo().IsEnum;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.String)
                 throw new InvalidOperationException("Only string is supported.");
 
+            if (reader.Value is null)
+                return default(TEnum);
+
             if (!Enum.TryParse((string)reader.Value, true, out TEnum result))
-            {
                 result = default;
-            }
 
             return result;
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            Enum val = (Enum)value;
+            if (value is null)
+                throw new InvalidOperationException("Value cannot be null");
+
+            var val = (Enum)value;
 
             var strValue = val.ToString("G");
             if (_lowercase)

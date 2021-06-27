@@ -22,15 +22,15 @@ namespace Line
     /// </summary>
     public class RichMenuArea
     {
-        private IAction _action;
-        private RichMenuBounds _bounds;
+        private IAction? _action;
+        private RichMenuBounds? _bounds;
 
         /// <summary>
         /// Gets or sets the action performed when the area is tapped.
         /// </summary>
         [JsonProperty("action")]
         [JsonConverter(typeof(IActionConverter))]
-        public IAction Action
+        public IAction? Action
         {
             get => _action;
             set
@@ -46,7 +46,7 @@ namespace Line
         /// Gets or sets the objects describing the boundaries of the area in pixels.
         /// </summary>
         [JsonProperty("bounds")]
-        public RichMenuBounds Bounds
+        public RichMenuBounds? Bounds
         {
             get => _bounds;
             set

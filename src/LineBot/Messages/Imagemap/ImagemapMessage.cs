@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Line
@@ -24,16 +23,10 @@ namespace Line
     /// </summary>
     public sealed class ImagemapMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Imagemap;
-#pragma warning restore 0414
-
-        private Uri _baseUrl;
-        private string _alternativeText;
-        private ImagemapSize _baseSize;
-        private IEnumerable<ImagemapAction> _actions;
+        private Uri? _baseUrl;
+        private string? _alternativeText;
+        private ImagemapSize? _baseSize;
+        private IEnumerable<ImagemapAction>? _actions = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImagemapMessage"/> class.
@@ -41,6 +34,11 @@ namespace Line
         public ImagemapMessage()
         {
         }
+
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Imagemap;
 
         /// <summary>
         /// Gets or sets the base url of the image.
@@ -51,7 +49,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("baseUrl")]
-        public Uri BaseUrl
+        public Uri? BaseUrl
         {
             get
             {
@@ -78,7 +76,7 @@ namespace Line
         /// <para>Max: 400 characters.</para>
         /// </summary>
         [JsonProperty("altText")]
-        public string AlternativeText
+        public string? AlternativeText
         {
             get
             {
@@ -87,7 +85,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The alternative text cannot be null or whitespace.");
 
                 if (value.Length > 400)
@@ -101,7 +99,7 @@ namespace Line
         /// Gets or sets the size of the base image (Width must be 1040).
         /// </summary>
         [JsonProperty("baseSize")]
-        public ImagemapSize BaseSize
+        public ImagemapSize? BaseSize
         {
             get
             {
@@ -118,7 +116,7 @@ namespace Line
         /// Gets or sets the actions.
         /// </summary>
         [JsonProperty("actions")]
-        public IEnumerable<ImagemapAction> Actions
+        public IEnumerable<ImagemapAction>? Actions
         {
             get
             {

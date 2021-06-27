@@ -19,6 +19,8 @@ namespace Line
     /// </summary>
     public interface ITemplate
     {
+        internal TemplateType Type { get; }
+
         /// <summary>
         /// Validates the template.
         /// </summary>

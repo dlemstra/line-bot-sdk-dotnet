@@ -16,12 +16,9 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    /// <summary>
-    /// Rich menu response object.
-    /// </summary>
     internal sealed class RichMenuResponse : RichMenu, IRichMenuResponse
     {
         [JsonProperty("richMenuId")]
-        public string Id { get; set; }
+        public string Id { get; set; } = default!;
     }
 }

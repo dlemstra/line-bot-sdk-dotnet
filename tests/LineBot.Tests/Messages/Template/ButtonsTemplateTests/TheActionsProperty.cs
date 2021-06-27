@@ -93,7 +93,7 @@ namespace Line.Tests
             {
                 var template = new ButtonsTemplate();
 
-                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action cannot be null.", () =>
                 {
                     template.Actions = new IAction[] { null };
                 });

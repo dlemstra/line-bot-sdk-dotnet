@@ -22,20 +22,19 @@ namespace Line
     /// </summary>
     public sealed class CameraAction : IAction
     {
-#pragma warning disable 0414 // Suppress value is never used.
+        private string? _label;
+
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<ActionType>))]
-        private readonly ActionType _type = ActionType.Camera;
-#pragma warning restore 0414
-
-        private string _label;
+        ActionType IAction.Type
+            => ActionType.Camera;
 
         /// <summary>
         /// Gets or sets the label.
         /// <para>Max: 20 characters.</para>
         /// </summary>
         [JsonProperty("label")]
-        public string Label
+        public string? Label
         {
             get
             {
@@ -44,7 +43,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The label cannot be null or whitespace.");
 
                 if (value.Length > 20)
@@ -56,7 +55,7 @@ namespace Line
 
         void IAction.Validate()
         {
-            if (_label == null)
+            if (_label is null)
                 throw new InvalidOperationException("The label cannot be null.");
         }
     }

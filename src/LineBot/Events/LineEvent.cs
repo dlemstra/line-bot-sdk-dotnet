@@ -20,21 +20,21 @@ namespace Line
     internal sealed class LineEvent : ILineEvent, IBeacon, IMessage, IPostback
     {
         [JsonProperty("beacon")]
-        private Beacon _beacon = null;
+        private Beacon? _beacon = null;
 
         [JsonProperty("message")]
-        private Message _message = null;
+        private Message? _message = null;
 
         [JsonProperty("postback")]
-        private Postback _postback = null;
+        private Postback? _postback = null;
 
         [JsonProperty("replyToken")]
-        private string _replyToken = null;
+        private string? _replyToken = null;
 
         [JsonProperty("source")]
-        private EventSource _source = null;
+        private EventSource? _source = null;
 
-        public IBeacon Beacon
+        public IBeacon? Beacon
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Line
         [JsonConverter(typeof(EnumConverter<LineEventType>))]
         public LineEventType EventType { get; set; }
 
-        public IMessage Message
+        public IMessage? Message
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Line
             }
         }
 
-        public IPostback Postback
+        public IPostback? Postback
         {
             get
             {
@@ -75,25 +75,25 @@ namespace Line
         [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime Timestamp { get; set; }
 
-        BeaconType IBeacon.BeaconType => _beacon.BeaconType;
+        BeaconType IBeacon.BeaconType => _beacon!.BeaconType!;
 
-        string IBeacon.Hwid => _beacon.Hwid;
+        string IBeacon.Hwid => _beacon!.Hwid!;
 
-        IEventSource ILineEvent.Source => _source;
+        IEventSource ILineEvent.Source => _source!;
 
-        string IMessage.Id => _message.Id;
+        string IMessage.Id => _message!.Id;
 
-        ILocation IMessage.Location => _message.Location;
+        ILocation IMessage.Location => _message!.Location!;
 
-        MessageType IMessage.MessageType => _message.MessageType;
+        MessageType IMessage.MessageType => _message!.MessageType;
 
-        ISticker IMessage.Sticker => _message.Sticker;
+        ISticker IMessage.Sticker => _message!.Sticker!;
 
-        string IMessage.Text => _message.Text;
+        string IMessage.Text => _message!.Text;
 
-        string IPostback.Data => _postback.Data;
+        string IPostback.Data => _postback!.Data;
 
-        string IReplyToken.ReplyToken
+        string? IReplyToken.ReplyToken
         {
             get
             {

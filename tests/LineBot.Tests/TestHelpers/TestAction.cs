@@ -16,6 +16,9 @@ namespace Line.Tests
 {
     public class TestAction : IAction
     {
+        ActionType IAction.Type
+            => (ActionType)42;
+
         public void Validate()
         {
         }

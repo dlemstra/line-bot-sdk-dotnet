@@ -29,22 +29,22 @@ namespace Line
         /// <summary>
         /// Gets the beacon information.
         /// </summary>
-        IBeacon Beacon { get; }
+        IBeacon? Beacon { get; }
 
         /// <summary>
         /// Gets the message.
         /// </summary>
-        IMessage Message { get; }
+        IMessage? Message { get; }
 
         /// <summary>
         /// Gets the postback information.
         /// </summary>
-        IPostback Postback { get; }
+        IPostback? Postback { get; }
 
         /// <summary>
         /// Gets the source of the event.
         /// </summary>
-        IEventSource Source { get; }
+        IEventSource? Source { get; }
 
         /// <summary>
         /// Gets the time of the event.

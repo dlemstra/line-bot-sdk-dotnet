@@ -24,7 +24,7 @@ namespace Line
         private const int BufferSize = 8192;
         private static readonly byte[] Utf8Preamable = Encoding.UTF8.GetPreamble();
 
-        public static Task<byte[]> ToArrayAsync(this Stream self)
+        public static Task<byte[]?> ToArrayAsync(this Stream self)
         {
             if (self.CanSeek)
                 return ToArrayWithSeekableStream(self);
@@ -32,7 +32,7 @@ namespace Line
                 return ToArrayWithNonSeekableStream(self);
         }
 
-        private static async Task<byte[]> ToArrayWithSeekableStream(Stream self)
+        private static async Task<byte[]?> ToArrayWithSeekableStream(Stream self)
         {
             if (self.Length == 0)
                 return null;
@@ -68,7 +68,7 @@ namespace Line
             return buffer;
         }
 
-        private static async Task<byte[]> ToArrayWithNonSeekableStream(Stream self)
+        private static async Task<byte[]?> ToArrayWithNonSeekableStream(Stream self)
         {
             var buffer = new byte[BufferSize];
             using (var memStream = new MemoryStream())

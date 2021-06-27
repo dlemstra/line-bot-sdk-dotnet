@@ -22,14 +22,8 @@ namespace Line
     /// </summary>
     public sealed class TemplateMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Template;
-#pragma warning restore 0414
-
-        private string _alternativeText;
-        private ITemplate _template;
+        private string? _alternativeText;
+        private ITemplate? _template;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TemplateMessage"/> class.
@@ -38,12 +32,17 @@ namespace Line
         {
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Template;
+
         /// <summary>
         /// Gets or sets the alternative text for devices that do not support this type of message.
         /// <para>Max: 400 characters.</para>
         /// </summary>
         [JsonProperty("altText")]
-        public string AlternativeText
+        public string? AlternativeText
         {
             get
             {
@@ -52,7 +51,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The alternative text cannot be null or whitespace.");
 
                 if (value.Length > 400)
@@ -66,7 +65,7 @@ namespace Line
         /// Gets or sets the template of the template message.
         /// </summary>
         [JsonProperty("template")]
-        public ITemplate Template
+        public ITemplate? Template
         {
             get
             {

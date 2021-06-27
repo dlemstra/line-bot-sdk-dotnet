@@ -22,8 +22,8 @@ namespace Line
     /// </summary>
     public sealed class ImageCarouselColumn
     {
-        private Uri _imageUrl;
-        private IAction _action;
+        private Uri? _imageUrl;
+        private IAction? _action;
 
         /// <summary>
         /// Gets or sets the image url for the image carousel.
@@ -35,7 +35,7 @@ namespace Line
         /// <para>Max size: 1 MB.</para>
         /// </summary>
         [JsonProperty("imageUrl")]
-        public Uri ImageUrl
+        public Uri? ImageUrl
         {
             get
             {
@@ -61,7 +61,7 @@ namespace Line
         /// Gets or sets the action when image is tapped.
         /// </summary>
         [JsonProperty("action")]
-        public IAction Action
+        public IAction? Action
         {
             get
             {

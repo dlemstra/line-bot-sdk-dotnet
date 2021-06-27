@@ -26,14 +26,14 @@ namespace Line
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when the <see cref="SourceType"/> is not <see cref="EventSourceType.Group"/>.</exception>
         /// <returns>The group.</returns>
-        IGroup Group { get; }
+        IGroup? Group { get; }
 
         /// <summary>
         /// Gets the room.
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when the <see cref="SourceType"/> is not <see cref="EventSourceType.Room"/>.</exception>
         /// <returns>The room.</returns>
-        IRoom Room { get; }
+        IRoom? Room { get; }
 
         /// <summary>
         /// Gets the type of the source.
@@ -45,6 +45,6 @@ namespace Line
         /// </summary>
         /// <exception cref="InvalidOperationException">Thrown when the <see cref="SourceType"/> is not <see cref="EventSourceType.User"/>.</exception>
         /// <returns>The user.</returns>
-        IUser User { get; }
+        IUser? User { get; }
     }
 }

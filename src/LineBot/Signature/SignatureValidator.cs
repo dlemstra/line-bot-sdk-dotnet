@@ -58,9 +58,9 @@ namespace Line
                 return false;
             }
 
-            using (HMACSHA256 hmac = new HMACSHA256(_key))
+            using (var hmac = new HMACSHA256(_key))
             {
-                byte[] hash = hmac.ComputeHash(content);
+                var hash = hmac.ComputeHash(content);
 
                 int result = 0;
 

@@ -19,6 +19,6 @@ namespace Line
     internal sealed class RichMenuResponseCollection
     {
         [JsonProperty("richmenus")]
-        public RichMenuResponse[] RichMenus { get; set; }
+        public RichMenuResponse[] RichMenus { get; set; } = new RichMenuResponse[] { };
     }
 }

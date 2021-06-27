@@ -20,15 +20,15 @@ namespace Line
     internal sealed class UserProfile : IUserProfile
     {
         [JsonProperty("displayName")]
-        public string DisplayName { get; set; }
+        public string DisplayName { get; set; } = default!;
 
         [JsonProperty("pictureUrl")]
-        public Uri PictureUrl { get; set; }
+        public Uri PictureUrl { get; set; } = default!;
 
         [JsonProperty("statusMessage")]
-        public string StatusMessage { get; set; }
+        public string StatusMessage { get; set; } = default!;
 
         [JsonProperty("userId")]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = default!;
     }
 }

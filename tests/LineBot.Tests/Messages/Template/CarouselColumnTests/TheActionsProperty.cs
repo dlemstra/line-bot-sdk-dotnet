@@ -91,7 +91,7 @@ namespace Line.Tests
             {
                 var column = new CarouselColumn();
 
-                ExceptionAssert.Throws<NotSupportedException>("The action type is invalid.", () =>
+                ExceptionAssert.Throws<NotSupportedException>("The action cannot be null.", () =>
                 {
                     column.Actions = new IAction[] { null };
                 });

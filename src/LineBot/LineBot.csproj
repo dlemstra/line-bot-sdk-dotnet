@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/dlemstra/line-bot-sdk-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">

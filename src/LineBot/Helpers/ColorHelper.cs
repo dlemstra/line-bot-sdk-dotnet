@@ -13,12 +13,13 @@
 // under the License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Line
 {
     internal static class ColorHelper
     {
-        public static void Validate(string value)
+        public static void Validate([NotNull] string? value)
         {
             if (value == null || value.Length != 7)
                 throw new InvalidOperationException("The color should be 7 characters long.");

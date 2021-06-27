@@ -22,14 +22,8 @@ namespace Line
     /// </summary>
     public sealed class LocationMessage : ISendMessage
     {
-#pragma warning disable 0414 // Suppress value is never used.
-        [JsonProperty("type")]
-        [JsonConverter(typeof(EnumConverter<MessageType>))]
-        private readonly MessageType _type = MessageType.Location;
-#pragma warning restore 0414
-
-        private string _title;
-        private string _address;
+        private string? _title;
+        private string? _address;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocationMessage"/> class.
@@ -38,12 +32,17 @@ namespace Line
         {
         }
 
+        [JsonProperty("type")]
+        [JsonConverter(typeof(EnumConverter<MessageType>))]
+        MessageType ISendMessage.Type
+            => MessageType.Location;
+
         /// <summary>
         /// Gets or sets the title.
         /// <para>Max: 100 characters.</para>
         /// </summary>
         [JsonProperty("title")]
-        public string Title
+        public string? Title
         {
             get
             {
@@ -52,7 +51,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The title cannot be null or whitespace.");
 
                 if (value.Length > 100)
@@ -67,7 +66,7 @@ namespace Line
         /// <para>Max: 100 characters.</para>
         /// </summary>
         [JsonProperty("address")]
-        public string Address
+        public string? Address
         {
             get
             {
@@ -76,7 +75,7 @@ namespace Line
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (value is null || string.IsNullOrWhiteSpace(value))
                     throw new InvalidOperationException("The address cannot be null or whitespace.");
 
                 if (value.Length > 100)
