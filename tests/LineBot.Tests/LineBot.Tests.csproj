@@ -11,11 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
+    <AdditionalFiles Include="../../stylecop.json" />
   </ItemGroup>
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../LineBot.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Line.Tests</RootNamespace>
   </PropertyGroup>
 
@@ -35,12 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LineBot\LineBot.csproj" />
+    <ProjectReference Include="../../src/LineBot/LineBot.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\LineBot.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>../../LineBot.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
