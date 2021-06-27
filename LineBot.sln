@@ -9,7 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot.Tests", "tests\Line
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publish", "Publish", "{76B4276E-C515-41F5-A85D-9BD1CE2BB115}"
 	ProjectSection(SolutionItems) = preProject
-		publish\publish.cmd = publish\publish.cmd
 		publish\push.cmd = publish\push.cmd
 	EndProjectSection
 EndProject
