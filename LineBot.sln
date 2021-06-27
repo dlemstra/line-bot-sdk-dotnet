@@ -1,19 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot", "src\LineBot\LineBot.csproj", "{0CFDBD19-D680-43BF-8006-9A750ED4FC97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineBot.Tests", "tests\LineBot.Tests\LineBot.Tests.csproj", "{A4912707-DF3E-47A1-B4DF-BE727571124A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D50535FB-E16E-406A-B609-9CA748FBAAC7}"
-	ProjectSection(SolutionItems) = preProject
-		.travis.yml = .travis.yml
-		azure-pipelines.yml = azure-pipelines.yml
-		build\build.yml = build\build.yml
-		build\codecoverage.yml = build\codecoverage.yml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publish", "Publish", "{76B4276E-C515-41F5-A85D-9BD1CE2BB115}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,6 +21,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{DA9A03E4-5093-47DC-9880-C75D1B53858A}"
 	ProjectSection(SolutionItems) = preProject
 		.github\FUNDING.yml = .github\FUNDING.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C86041A0-2DFC-4299-AC68-941A2EA91756}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main.yml = .github\workflows\main.yml
 	EndProjectSection
 EndProject
 Global
@@ -48,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C86041A0-2DFC-4299-AC68-941A2EA91756} = {DA9A03E4-5093-47DC-9880-C75D1B53858A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {429A347C-449C-4547-89D5-D76D1972002B}
