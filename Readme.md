@@ -19,10 +19,12 @@ Japanese: [https://devdocs.line.me/ja/](https://devdocs.line.me/ja/)
 
 ### Installation
 
-The package for this library is available on [NuGet](https://www.nuget.org/packages/Line.Bot.SDK).
+The package for this library is available on NuGet:
 
-![NuGet](https://img.shields.io/nuget/v/Line.Bot.SDK.svg)
-![NuGet](https://img.shields.io/nuget/dt/Line.Bot.SDK.svg)
+| Package | Version | Downloads
+|-|-|-|
+| [Line.Bot.SDK](https://www.nuget.org/packages/Line.Bot.SDK) | [![NuGet](https://img.shields.io/nuget/v/Line.Bot.SDK.svg)](https://www.nuget.org/packages/Line.Bot.SDK) | [![NuGet](https://img.shields.io/nuget/dt/Line.Bot.SDK.svg)](https://www.nuget.org/packages/Line.Bot.SDK)
+
 
 ### Example
 
