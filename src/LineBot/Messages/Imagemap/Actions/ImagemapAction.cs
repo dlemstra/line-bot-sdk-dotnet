@@ -19,9 +19,7 @@ namespace Line
         private ImagemapActionType _type;
 
         internal ImagemapAction(ImagemapActionType type)
-        {
-            _type = type;
-        }
+            => _type = type;
 
         /// <summary>
         /// Gets or sets the tappable area.
@@ -29,11 +27,7 @@ namespace Line
         [JsonProperty("area")]
         public ImagemapArea? Area
         {
-            get
-            {
-                return _area;
-            }
-
+            get => _area;
             set
             {
                 if (value is null)
@@ -50,11 +44,7 @@ namespace Line
         [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-
+            get => _label;
             set
             {
                 if (value?.Length > 50)

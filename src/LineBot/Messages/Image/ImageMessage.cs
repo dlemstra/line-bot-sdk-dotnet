@@ -72,15 +72,8 @@ namespace Line
         [JsonProperty("originalContentUrl")]
         public Uri? Url
         {
-            get
-            {
-                return _url;
-            }
-
-            set
-            {
-                _url = CheckUrl(value);
-            }
+            get => _url;
+            set => _url = CheckUrl(value);
         }
 
         /// <summary>
@@ -94,15 +87,8 @@ namespace Line
         [JsonProperty("previewImageUrl")]
         public Uri? PreviewUrl
         {
-            get
-            {
-                return _previewUrl;
-            }
-
-            set
-            {
-                _previewUrl = CheckUrl(value);
-            }
+            get => _previewUrl;
+            set => _previewUrl = CheckUrl(value);
         }
 
         void ISendMessage.Validate()

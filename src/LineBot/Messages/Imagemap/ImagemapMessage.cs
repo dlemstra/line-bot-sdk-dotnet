@@ -40,11 +40,7 @@ namespace Line
         [JsonProperty("baseUrl")]
         public Uri? BaseUrl
         {
-            get
-            {
-                return _baseUrl;
-            }
-
+            get => _baseUrl;
             set
             {
                 if (value is null)
@@ -67,11 +63,7 @@ namespace Line
         [JsonProperty("altText")]
         public string? AlternativeText
         {
-            get
-            {
-                return _alternativeText;
-            }
-
+            get => _alternativeText;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -90,15 +82,8 @@ namespace Line
         [JsonProperty("baseSize")]
         public ImagemapSize? BaseSize
         {
-            get
-            {
-                return _baseSize;
-            }
-
-            set
-            {
-                _baseSize = value ?? throw new InvalidOperationException("The base size cannot be null.");
-            }
+            get => _baseSize;
+            set => _baseSize = value ?? throw new InvalidOperationException("The base size cannot be null.");
         }
 
         /// <summary>
@@ -107,15 +92,8 @@ namespace Line
         [JsonProperty("actions")]
         public IEnumerable<ImagemapAction>? Actions
         {
-            get
-            {
-                return _actions;
-            }
-
-            set
-            {
-                _actions = value ?? throw new InvalidOperationException("The actions cannot be null.");
-            }
+            get => _actions;
+            set => _actions = value ?? throw new InvalidOperationException("The actions cannot be null.");
         }
 
         void ISendMessage.Validate()

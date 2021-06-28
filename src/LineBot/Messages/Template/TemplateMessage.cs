@@ -33,11 +33,7 @@ namespace Line
         [JsonProperty("altText")]
         public string? AlternativeText
         {
-            get
-            {
-                return _alternativeText;
-            }
-
+            get => _alternativeText;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -56,11 +52,7 @@ namespace Line
         [JsonProperty("template")]
         public ITemplate? Template
         {
-            get
-            {
-                return _template;
-            }
-
+            get => _template;
             set
             {
                 if (value is null)

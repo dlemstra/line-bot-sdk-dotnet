@@ -26,15 +26,14 @@ namespace Line
         /// </summary>
         /// <param name="height">The height of the rich menu. Possible values: 1686, 843.</param>
         public RichMenuSize(int height)
-        {
-            Height = height;
-        }
+            => Height = height;
 
         /// <summary>
         /// Gets the width of the rich menu. Will always be 2500.
         /// </summary>
         [JsonProperty("width")]
-        public int Width => 2500;
+        public int Width
+            => 2500;
 
         /// <summary>
         /// Gets or sets the height of the rich menu. Possible values: 1686, 843.

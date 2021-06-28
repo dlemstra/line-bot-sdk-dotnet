@@ -88,11 +88,7 @@ namespace Line
         [JsonProperty("linkUri")]
         public Uri? Url
         {
-            get
-            {
-                return _url;
-            }
-
+            get => _url;
             set
             {
                 if (value is null)

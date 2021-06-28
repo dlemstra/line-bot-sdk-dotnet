@@ -25,11 +25,7 @@ namespace Line
         [JsonProperty("label")]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-
+            get => _label;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))

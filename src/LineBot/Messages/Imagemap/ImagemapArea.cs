@@ -42,11 +42,7 @@ namespace Line
         [JsonProperty("x")]
         public int X
         {
-            get
-            {
-                return _x;
-            }
-
+            get => _x;
             set
             {
                 if (value < 0)
@@ -62,11 +58,7 @@ namespace Line
         [JsonProperty("y")]
         public int Y
         {
-            get
-            {
-                return _y;
-            }
-
+            get => _y;
             set
             {
                 if (value < 0)

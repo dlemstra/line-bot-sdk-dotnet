@@ -26,9 +26,7 @@ namespace Line
         /// </summary>
         /// <param name="mode">The mode of the Datetime picker action.</param>
         public DateTimePickerAction(DateTimePickerMode mode)
-        {
-            _mode = mode;
-        }
+            => _mode = mode;
 
         internal DateTimePickerAction()
         {
@@ -46,11 +44,7 @@ namespace Line
         [JsonProperty("data")]
         public string? Data
         {
-            get
-            {
-                return _data;
-            }
-
+            get => _data;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -69,11 +63,7 @@ namespace Line
         [JsonIgnore]
         public DateTime? Initial
         {
-            get
-            {
-                return _initial;
-            }
-
+            get => _initial;
             set
             {
                 var adjustedValue = AdjustedDateTimeByMode(value);
@@ -91,11 +81,7 @@ namespace Line
         [JsonProperty("label")]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-
+            get => _label;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -114,11 +100,7 @@ namespace Line
         [JsonIgnore]
         public DateTime? Max
         {
-            get
-            {
-                return _max;
-            }
-
+            get => _max;
             set
             {
                 var adjustedValue = AdjustedDateTimeByMode(value);
@@ -135,11 +117,7 @@ namespace Line
         [JsonIgnore]
         public DateTime? Min
         {
-            get
-            {
-                return _min;
-            }
-
+            get => _min;
             set
             {
                 var adjustedValue = AdjustedDateTimeByMode(value);
@@ -154,7 +132,8 @@ namespace Line
         /// Gets the action mode for the datetime picker.
         /// </summary>
         [JsonIgnore]
-        public DateTimePickerMode Mode => _mode;
+        public DateTimePickerMode Mode
+            => _mode;
 
         /// <summary>
         /// Gets or sets the formatted initial value.
@@ -162,11 +141,7 @@ namespace Line
         [JsonProperty("initial")]
         private string InitialFormatted
         {
-            get
-            {
-                return GetFormattedDateTimeByMode(_initial);
-            }
-
+            get => GetFormattedDateTimeByMode(_initial);
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -182,11 +157,7 @@ namespace Line
         [JsonProperty("max")]
         private string MaxFormatted
         {
-            get
-            {
-                return GetFormattedDateTimeByMode(_max);
-            }
-
+            get => GetFormattedDateTimeByMode(_max);
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -202,11 +173,7 @@ namespace Line
         [JsonProperty("min")]
         private string MinFormatted
         {
-            get
-            {
-                return GetFormattedDateTimeByMode(_min);
-            }
-
+            get => GetFormattedDateTimeByMode(_min);
             set
             {
                 if (string.IsNullOrEmpty(value))

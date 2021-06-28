@@ -38,11 +38,7 @@ namespace Line
         [JsonProperty("width")]
         public int Width
         {
-            get
-            {
-                return _width;
-            }
-
+            get => _width;
             set
             {
                 if (value < 1)
@@ -58,11 +54,7 @@ namespace Line
         [JsonProperty("height")]
         public int Height
         {
-            get
-            {
-                return _height;
-            }
-
+            get => _height;
             set
             {
                 if (value < 1)

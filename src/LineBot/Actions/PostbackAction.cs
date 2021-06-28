@@ -27,11 +27,7 @@ namespace Line
         [JsonProperty("label")]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-
+            get => _label;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -51,11 +47,7 @@ namespace Line
         [JsonProperty("data")]
         public string? Data
         {
-            get
-            {
-                return _data;
-            }
-
+            get => _data;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -74,11 +66,7 @@ namespace Line
         [JsonProperty("text")]
         public string? Text
         {
-            get
-            {
-                return _text;
-            }
-
+            get => _text;
             set
             {
                 if (value is not null && value.Length > 300)

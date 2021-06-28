@@ -395,9 +395,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Multicast(IEnumerable<IUser> to, IEnumerable<ISendMessage> messages)
-        {
-            return Multicast(to, messages?.ToArray()!);
-        }
+            => Multicast(to, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -420,9 +418,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Multicast(IEnumerable<string> to, IEnumerable<ISendMessage> messages)
-        {
-            return Multicast(to, messages?.ToArray()!);
-        }
+            => Multicast(to, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to multiple users at any time.
@@ -459,9 +455,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Push(IGroup group, IEnumerable<ISendMessage> messages)
-        {
-            return Push(group, messages?.ToArray()!);
-        }
+            => Push(group, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to a group at any time.
@@ -483,9 +477,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Push(IRoom room, IEnumerable<ISendMessage> messages)
-        {
-            return Push(room, messages?.ToArray()!);
-        }
+            => Push(room, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to a room at any time.
@@ -507,9 +499,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Push(IUser user, IEnumerable<ISendMessage> messages)
-        {
-            return Push(user, messages?.ToArray()!);
-        }
+            => Push(user, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to a user at any time.
@@ -532,9 +522,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Push(string to, IEnumerable<ISendMessage> messages)
-        {
-            return Push(to, messages?.ToArray()!);
-        }
+            => Push(to, messages?.ToArray()!);
 
         /// <summary>
         /// Send messages to a user, group, or room at any time.
@@ -568,9 +556,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Reply(IReplyToken token, IEnumerable<ISendMessage> messages)
-        {
-            return Reply(token, messages?.ToArray()!);
-        }
+            => Reply(token, messages?.ToArray()!);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.
@@ -592,9 +578,7 @@ namespace Line
         /// <param name="messages">The messages to send.</param>
         /// <returns>.</returns>
         public Task<ILineBot> Reply(string replyToken, IEnumerable<ISendMessage> messages)
-        {
-            return Reply(replyToken, messages?.ToArray()!);
-        }
+            => Reply(replyToken, messages?.ToArray()!);
 
         /// <summary>
         /// Respond to events from users, groups, and rooms.

@@ -18,14 +18,10 @@ namespace Line
         }
 
         public EnumConverter(bool lowercase)
-        {
-            _lowercase = lowercase;
-        }
+            => _lowercase = lowercase;
 
         public override bool CanConvert(Type objectType)
-        {
-            return objectType.GetTypeInfo().IsEnum;
-        }
+            => objectType.GetTypeInfo().IsEnum;
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {

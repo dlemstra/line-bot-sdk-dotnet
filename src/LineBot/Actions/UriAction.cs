@@ -26,11 +26,7 @@ namespace Line
         [JsonProperty("label")]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-
+            get => _label;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -51,11 +47,7 @@ namespace Line
         [JsonProperty("uri")]
         public Uri? Url
         {
-            get
-            {
-                return _url;
-            }
-
+            get => _url;
             set
             {
                 if (value is null)

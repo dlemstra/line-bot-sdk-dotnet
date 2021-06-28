@@ -72,11 +72,7 @@ namespace Line
         [JsonProperty("originalContentUrl")]
         public Uri? Url
         {
-            get
-            {
-                return _url;
-            }
-
+            get => _url;
             set
             {
                 if (value is null)
@@ -98,11 +94,7 @@ namespace Line
         [JsonProperty("duration")]
         public int Duration
         {
-            get
-            {
-                return _duration;
-            }
-
+            get => _duration;
             set
             {
                 if (value < 1)

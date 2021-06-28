@@ -59,11 +59,7 @@ namespace Line
         [JsonProperty("text")]
         public string? Text
         {
-            get
-            {
-                return _text;
-            }
-
+            get => _text;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))

@@ -43,9 +43,7 @@ namespace Line
 
             // It is no secret which hashing method is used to validate the signature so we can do a quick exit here.
             if (expectedHash.Length != SignatureLength)
-            {
                 return false;
-            }
 
             using (var hmac = new HMACSHA256(_key))
             {

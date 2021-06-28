@@ -27,11 +27,7 @@ namespace Line
         [JsonProperty("text")]
         public string? Text
         {
-            get
-            {
-                return _text;
-            }
-
+            get => _text;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -50,11 +46,7 @@ namespace Line
         [JsonIgnore]
         public IAction? OkAction
         {
-            get
-            {
-                return _okAction;
-            }
-
+            get => _okAction;
             set
             {
                 if (value is null)
@@ -72,11 +64,7 @@ namespace Line
         [JsonIgnore]
         public IAction? CancelAction
         {
-            get
-            {
-                return _cancelAction;
-            }
-
+            get => _cancelAction;
             set
             {
                 if (value is null)

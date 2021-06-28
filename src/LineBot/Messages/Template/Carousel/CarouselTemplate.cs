@@ -27,11 +27,7 @@ namespace Line
         [JsonProperty("columns")]
         public IEnumerable<CarouselColumn>? Columns
         {
-            get
-            {
-                return _columns;
-            }
-
+            get => _columns;
             set
             {
                 if (value is null)

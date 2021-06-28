@@ -44,11 +44,7 @@ namespace Line
         [JsonProperty("packageId")]
         public string? PackageId
         {
-            get
-            {
-                return _packageId;
-            }
-
+            get => _packageId;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -64,11 +60,7 @@ namespace Line
         [JsonProperty("stickerId")]
         public string? StickerId
         {
-            get
-            {
-                return _stickerId;
-            }
-
+            get => _stickerId;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))

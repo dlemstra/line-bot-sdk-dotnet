@@ -10,13 +10,9 @@ namespace Line
     internal sealed class EmptyLineBotLogger : ILineBotLogger
     {
         public Task LogReceivedEvents(byte[] eventsData)
-        {
-            return Task.CompletedTask;
-        }
+            => Task.CompletedTask;
 
         public Task LogApiCall(Uri uri, HttpContent httpContent)
-        {
-            return Task.CompletedTask;
-        }
+            => Task.CompletedTask;
     }
 }

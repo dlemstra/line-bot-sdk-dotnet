@@ -8,12 +8,11 @@ namespace Line
 {
     internal sealed class UnixDateTimeConverter : JsonConverter
     {
-        public override bool CanWrite => false;
+        public override bool CanWrite
+            => false;
 
         public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(DateTime);
-        }
+        => objectType == typeof(DateTime);
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
@@ -31,8 +30,6 @@ namespace Line
         }
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-        {
-            throw new NotSupportedException();
-        }
+            => throw new NotSupportedException();
     }
 }

@@ -33,11 +33,7 @@ namespace Line
         [JsonProperty("title")]
         public string? Title
         {
-            get
-            {
-                return _title;
-            }
-
+            get => _title;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -57,11 +53,7 @@ namespace Line
         [JsonProperty("address")]
         public string? Address
         {
-            get
-            {
-                return _address;
-            }
-
+            get => _address;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))

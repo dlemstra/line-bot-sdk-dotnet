@@ -32,11 +32,7 @@ namespace Line
         [JsonProperty("thumbnailImageUrl")]
         public Uri? ThumbnailUrl
         {
-            get
-            {
-                return _thumbnailUrl;
-            }
-
+            get => _thumbnailUrl;
             set
             {
                 if (value is not null)
@@ -58,11 +54,7 @@ namespace Line
         [JsonProperty("imageBackgroundColor")]
         public string? ImageBackgroundColor
         {
-            get
-            {
-                return _color;
-            }
-
+            get => _color;
             set
             {
                 ColorHelper.Validate(value);
@@ -78,11 +70,7 @@ namespace Line
         [JsonProperty("title")]
         public string? Title
         {
-            get
-            {
-                return _title;
-            }
-
+            get => _title;
             set
             {
                 if (value is not null && value.Length > 40)
@@ -100,11 +88,7 @@ namespace Line
         [JsonProperty("text")]
         public string? Text
         {
-            get
-            {
-                return _text;
-            }
-
+            get => _text;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))
@@ -126,11 +110,7 @@ namespace Line
         [JsonProperty("defaultAction")]
         public IAction? DefaultAction
         {
-            get
-            {
-                return _defaultAction;
-            }
-
+            get => _defaultAction;
             set
             {
                 if (value is not null)
@@ -147,11 +127,7 @@ namespace Line
         [JsonProperty("actions")]
         public IEnumerable<IAction>? Actions
         {
-            get
-            {
-                return _actions;
-            }
-
+            get => _actions;
             set
             {
                 if (value is null)

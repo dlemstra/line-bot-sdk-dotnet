@@ -26,11 +26,7 @@ namespace Line
         [JsonProperty("imageUrl")]
         public Uri? ImageUrl
         {
-            get
-            {
-                return _imageUrl;
-            }
-
+            get => _imageUrl;
             set
             {
                 if (value is not null)
@@ -52,11 +48,7 @@ namespace Line
         [JsonProperty("action")]
         public IAction? Action
         {
-            get
-            {
-                return _action;
-            }
-
+            get => _action;
             set
             {
                 if (value is null)

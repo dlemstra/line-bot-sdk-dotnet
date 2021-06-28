@@ -18,9 +18,7 @@ namespace Line
 
         internal LoggingDelegatingHandler(ILineBotLogger logger, HttpMessageHandler innerHandler)
             : base(innerHandler)
-        {
-            _logger = logger;
-        }
+            => _logger = logger;
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {

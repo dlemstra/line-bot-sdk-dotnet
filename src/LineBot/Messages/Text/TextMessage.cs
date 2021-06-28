@@ -28,9 +28,7 @@ namespace Line
         /// <para>Max: 2000 characters.</para>
         /// </param>
         public TextMessage(string text)
-        {
-            Text = text;
-        }
+            => Text = text;
 
         [JsonProperty("type")]
         [JsonConverter(typeof(EnumConverter<MessageType>))]
@@ -44,11 +42,7 @@ namespace Line
         [JsonProperty("text")]
         public string? Text
         {
-            get
-            {
-                return _text;
-            }
-
+            get => _text;
             set
             {
                 if (value is null || string.IsNullOrWhiteSpace(value))

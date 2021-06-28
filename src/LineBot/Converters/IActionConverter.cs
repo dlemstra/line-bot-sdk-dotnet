@@ -11,7 +11,8 @@ namespace Line
 {
     internal sealed class IActionConverter : JsonConverter
     {
-        public override bool CanWrite => false;
+        public override bool CanWrite
+            => false;
 
         public override bool CanConvert(Type objectType)
         {
@@ -33,9 +34,7 @@ namespace Line
         }
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotImplementedException();
 
         private IAction CreateAction(JObject obj)
         {
