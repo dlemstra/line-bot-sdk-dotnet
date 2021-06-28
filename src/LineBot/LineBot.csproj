@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>4.0.1</Version>
+    <Version>5.0.0</Version>
     <Authors>Dirk Lemstra</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\LineBot.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../LineBot.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
