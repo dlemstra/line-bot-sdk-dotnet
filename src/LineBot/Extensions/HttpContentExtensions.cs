@@ -22,7 +22,7 @@ namespace Line
     {
         public static async Task<T?> DeserializeObject<T>(this HttpContent self)
         {
-            string body = await self.ReadAsStringAsync();
+            var body = await self.ReadAsStringAsync().ConfigureAwait(false);
 
             return JsonConvert.DeserializeObject<T>(body);
         }

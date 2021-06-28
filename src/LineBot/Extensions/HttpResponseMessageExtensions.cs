@@ -27,7 +27,7 @@ namespace Line
             if (self.Content is null)
                 throw new LineBotException(self.StatusCode);
 
-            LineError? error = await self.Content.DeserializeObject<LineError>();
+            var error = await self.Content.DeserializeObject<LineError>().ConfigureAwait(false);
 
             if (error is null || string.IsNullOrWhiteSpace(error.Message))
                 throw new LineBotException(self.StatusCode);

@@ -41,14 +41,14 @@ namespace Line
 
             if (buffer.Length < Utf8Preamable.Length)
             {
-                await self.ReadAsync(buffer, 0, buffer.Length);
+                await self.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false);
                 return buffer;
             }
 
             int offset = 0;
             int remaining = buffer.Length;
 
-            int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length);
+            int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
             remaining -= length;
 
             /* Ignore the UTF8 Preamable */
@@ -59,7 +59,7 @@ namespace Line
 
             while (remaining > 0)
             {
-                length = await self.ReadAsync(buffer, offset, Math.Min(remaining, 8192));
+                length = await self.ReadAsync(buffer, offset, Math.Min(remaining, 8192)).ConfigureAwait(false);
 
                 remaining -= length;
                 offset += length;
@@ -73,15 +73,15 @@ namespace Line
             var buffer = new byte[BufferSize];
             using (var memStream = new MemoryStream())
             {
-                int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length);
+                int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
                 if (length == 0)
                     return null;
 
                 /* Ignore the UTF8 Preamable */
                 if (!IsUtf8Preamable(buffer))
-                    await memStream.WriteAsync(buffer, 0, length);
+                    await memStream.WriteAsync(buffer, 0, length).ConfigureAwait(false);
 
-                while ((length = await self.ReadAsync(buffer, 0, BufferSize)) != 0)
+                while ((length = await self.ReadAsync(buffer, 0, BufferSize).ConfigureAwait(false)) != 0)
                 {
                     memStream.Write(buffer, 0, length);
                 }

@@ -37,11 +37,11 @@ namespace Line
         {
             try
             {
-                return await base.SendAsync(request, cancellationToken);
+                return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
             }
             finally
             {
-                await _logger.LogApiCall(request.RequestUri, request.Content);
+                await _logger.LogApiCall(request.RequestUri, request.Content).ConfigureAwait(false);
             }
         }
     }

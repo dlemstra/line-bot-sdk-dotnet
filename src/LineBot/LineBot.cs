@@ -79,10 +79,10 @@ namespace Line
 
             var content = CreateStringContent(richMenu);
 
-            var response = await _client.PostAsync($"richmenu", content);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"richmenu", content).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>().ConfigureAwait(false);
 
             return richMenuIdResponse?.RichMenuId;
         }
@@ -93,8 +93,8 @@ namespace Line
         /// <returns>.</returns>
         public async Task<ILineBot> DeleteDefaultRichMenu()
         {
-            var response = await _client.DeleteAsync($"user/all/richmenu");
-            await response.CheckResult();
+            var response = await _client.DeleteAsync($"user/all/richmenu").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -120,8 +120,8 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var response = await _client.DeleteAsync($"richmenu/{richMenuId}");
-            await response.CheckResult();
+            var response = await _client.DeleteAsync($"richmenu/{richMenuId}").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -147,8 +147,8 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
-            var response = await _client.DeleteAsync($"user/{userId}/richmenu");
-            await response.CheckResult();
+            var response = await _client.DeleteAsync($"user/{userId}/richmenu").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -174,13 +174,13 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(messageId), messageId);
 
-            var response = await _client.GetAsync($"message/{messageId}/content");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"message/{messageId}/content").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             if (response.Content is null)
                 return null;
 
-            return await response.Content.ReadAsByteArrayAsync();
+            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -189,10 +189,10 @@ namespace Line
         /// <returns>The ID of the default rich menu set.</returns>
         public async Task<string?> GetDefaultRichMenu()
         {
-            var response = await _client.GetAsync($"user/all/richmenu");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"user/all/richmenu").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>().ConfigureAwait(false);
 
             return richMenuIdResponse?.RichMenuId;
         }
@@ -206,12 +206,12 @@ namespace Line
         {
             Guard.NotNull(nameof(request), request);
 
-            var content = await request.Body.ToArrayAsync();
+            var content = await request.Body.ToArrayAsync().ConfigureAwait(false);
 
             if (content is null)
                 return LineEventCollection.Empty();
 
-            await _logger.LogReceivedEvents(content);
+            await _logger.LogReceivedEvents(content).ConfigureAwait(false);
 
             var signature = request.Headers["X-Line-Signature"];
 
@@ -251,10 +251,10 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
-            var response = await _client.GetAsync($"profile/{userId}");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"profile/{userId}").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            return await response.Content.DeserializeObject<UserProfile>();
+            return await response.Content.DeserializeObject<UserProfile>().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -266,10 +266,10 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var response = await _client.GetAsync($"richmenu/{richMenuId}");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"richmenu/{richMenuId}").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            return await response.Content.DeserializeObject<RichMenuResponse>();
+            return await response.Content.DeserializeObject<RichMenuResponse>().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -293,10 +293,10 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var response = await _client.GetAsync($"richmenu/{richMenuId}/content");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"richmenu/{richMenuId}/content").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            return await response.Content.ReadAsByteArrayAsync();
+            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -305,10 +305,10 @@ namespace Line
         /// <returns>A list of all uploaded rich menus.</returns>
         public async Task<IEnumerable<IRichMenuResponse>> GetRichMenus()
         {
-            var response = await _client.GetAsync($"richmenu/list");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"richmenu/list").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            var richMenuResponseCollection = await response.Content.DeserializeObject<RichMenuResponseCollection>();
+            var richMenuResponseCollection = await response.Content.DeserializeObject<RichMenuResponseCollection>().ConfigureAwait(false);
 
             if (richMenuResponseCollection is null || richMenuResponseCollection.RichMenus is null)
                 return Enumerable.Empty<IRichMenuResponse>();
@@ -337,10 +337,10 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(userId), userId);
 
-            var response = await _client.GetAsync($"user/{userId}/richmenu");
-            await response.CheckResult();
+            var response = await _client.GetAsync($"user/{userId}/richmenu").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
-            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>();
+            var richMenuIdResponse = await response.Content.DeserializeObject<RichMenuIdResponse>().ConfigureAwait(false);
 
             return richMenuIdResponse?.RichMenuId;
         }
@@ -366,8 +366,8 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(groupId), groupId);
 
-            var response = await _client.PostAsync($"group/{groupId}/leave", null);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"group/{groupId}/leave", null).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -381,8 +381,8 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(roomId), roomId);
 
-            var response = await _client.PostAsync($"room/{roomId}/leave", null);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"room/{roomId}/leave", null).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -455,8 +455,8 @@ namespace Line
 
                     var content = CreateStringContent(multicast);
 
-                    var response = await _client.PostAsync($"message/multicast", content);
-                    await response.CheckResult();
+                    var response = await _client.PostAsync($"message/multicast", content).ConfigureAwait(false);
+                    await response.CheckResult().ConfigureAwait(false);
                 }
             }
 
@@ -565,8 +565,8 @@ namespace Line
 
                 var content = CreateStringContent(push);
 
-                var response = await _client.PostAsync($"message/push", content);
-                await response.CheckResult();
+                var response = await _client.PostAsync($"message/push", content).ConfigureAwait(false);
+                await response.CheckResult().ConfigureAwait(false);
             }
 
             return this;
@@ -622,8 +622,8 @@ namespace Line
 
             var content = CreateStringContent(reply);
 
-            var response = await _client.PostAsync($"message/reply", content);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"message/reply", content).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -649,8 +649,8 @@ namespace Line
         {
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", null);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"user/all/richmenu/{richMenuId}", null).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -681,8 +681,8 @@ namespace Line
 
             var content = new ByteArrayContent(imageData);
 
-            var response = await _client.PostAsync($"richmenu/{richMenuId}/content", content);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"richmenu/{richMenuId}/content", content).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
@@ -738,8 +738,8 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(userId), userId);
             Guard.NotNullOrEmpty(nameof(richMenuId), richMenuId);
 
-            var response = await _client.PostAsync($"user/{userId}/richmenu/{richMenuId}", null);
-            await response.CheckResult();
+            var response = await _client.PostAsync($"user/{userId}/richmenu/{richMenuId}", null).ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
 
             return this;
         }
