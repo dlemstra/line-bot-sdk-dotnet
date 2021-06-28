@@ -17,14 +17,9 @@ namespace Line.Tests
         {
             IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Invalid);
             Assert.AreEqual(EventSourceType.Unkown, source.SourceType);
-        }
-
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.Sources.User)]
-        public void Group_EventSourceTypeIsNotGroup_ReturnsNull()
-        {
-            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.User);
             Assert.IsNull(source.Group);
+            Assert.IsNull(source.Room);
+            Assert.IsNull(source.User);
         }
 
         [TestMethod]
@@ -35,13 +30,19 @@ namespace Line.Tests
             Assert.AreEqual(EventSourceType.Group, source.SourceType);
 
             Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
+            Assert.IsNull(source.Room);
+            Assert.IsNull(source.User);
         }
 
         [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.Sources.User)]
-        public void Room_EventSourceTypeIsNotRoom_ReturnsNull()
+        [DeploymentItem(JsonDocuments.Events.Sources.Group)]
+        public void Group_EventSourceTypeIsGroupAndUserIdIsSet_ReturnsGroupAndUser()
         {
-            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.User);
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.GroupWithUser);
+            Assert.AreEqual(EventSourceType.Group, source.SourceType);
+
+            Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
             Assert.IsNull(source.Room);
         }
 
@@ -53,14 +54,20 @@ namespace Line.Tests
             Assert.AreEqual(EventSourceType.Room, source.SourceType);
 
             Assert.AreEqual("cyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy", source.Room.Id);
+            Assert.IsNull(source.Group);
+            Assert.IsNull(source.User);
         }
 
         [TestMethod]
         [DeploymentItem(JsonDocuments.Events.Sources.Room)]
-        public void User_EventSourceTypeIsNotUser_ReturnsNull()
+        public void Room_EventSourceTypeIsRoomAndUserIdIsSet_ReturnsRoomAndUser()
         {
-            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.Room);
-            Assert.IsNull(source.User);
+            IEventSource source = CreateEventSource(JsonDocuments.Events.Sources.RoomWithUser);
+            Assert.AreEqual(EventSourceType.Room, source.SourceType);
+
+            Assert.AreEqual("cyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy", source.Room.Id);
+            Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+            Assert.IsNull(source.Group);
         }
 
         [TestMethod]
@@ -71,11 +78,11 @@ namespace Line.Tests
             Assert.AreEqual(EventSourceType.User, source.SourceType);
 
             Assert.AreEqual("U206d25c2ea6bd87c17655609a1c37cb8", source.User.Id);
+            Assert.IsNull(source.Group);
+            Assert.IsNull(source.Room);
         }
 
         private IEventSource CreateEventSource(string documentName)
-        {
-            return JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(documentName));
-        }
+            => JsonConvert.DeserializeObject<EventSource>(File.ReadAllText(documentName));
     }
 }

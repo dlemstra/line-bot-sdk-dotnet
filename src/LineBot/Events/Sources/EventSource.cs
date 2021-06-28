@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Line
 {
-    internal sealed class EventSource : IEventSource, IGroup, IRoom, IUser
+    internal sealed class EventSource : IEventSource
     {
         [JsonProperty("groupId")]
         private string? _groupId = null;
@@ -20,42 +20,36 @@ namespace Line
         [JsonConverter(typeof(EnumConverter<EventSourceType>))]
         public EventSourceType SourceType { get; set; }
 
-        string IGroup.Id => _groupId!;
-
         public IGroup? Group
         {
             get
             {
-                if (SourceType != EventSourceType.Group)
+                if (_groupId is null)
                     return null;
 
-                return this;
+                return new Source(_groupId);
             }
         }
-
-        string IRoom.Id => _roomId!;
 
         public IRoom? Room
         {
             get
             {
-                if (SourceType != EventSourceType.Room)
+                if (_roomId is null)
                     return null;
 
-                return this;
+                return new Source(_roomId);
             }
         }
-
-        string IUser.Id => _userId!;
 
         public IUser? User
         {
             get
             {
-                if (SourceType != EventSourceType.User)
+                if (_userId is null)
                     return null;
 
-                return this;
+                return new Source(_userId);
             }
         }
     }
