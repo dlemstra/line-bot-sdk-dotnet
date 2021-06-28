@@ -3,14 +3,14 @@
 echo Are you sure?
 pause
 
-set /p ApiKey=<ApiKey.txt
+set /p ApiKey=<api.key.txt
 if not "%ApiKey%"=="" goto push
 
-echo Unable to find ApiKey.txt
+echo Unable to find api.key.txt
 goto done
 
 :push
-for /r %%i in (*.nupkg) do nuget.exe push %%i %ApiKey% -Source https://www.nuget.org/api/v2/package
+for /r %%i in (*.nupkg) do nuget.exe push %%i %ApiKey% -Source nuget.org
 
 :done
 pause
