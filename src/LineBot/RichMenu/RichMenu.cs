@@ -37,7 +37,7 @@ namespace Line
             get => _areas;
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The areas cannot be null.");
 
                 if (value.Length < 1)
@@ -106,7 +106,7 @@ namespace Line
             get => _size;
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The size cannot be null.");
 
                 _size = value;
@@ -115,16 +115,16 @@ namespace Line
 
         internal void Validate()
         {
-            if (_areas == null)
+            if (_areas is null)
                 throw new InvalidOperationException("The areas cannot be null.");
 
-            if (_chatBarText == null)
+            if (_chatBarText is null)
                 throw new InvalidOperationException("The chat bar text cannot be null.");
 
-            if (_name == null)
+            if (_name is null)
                 throw new InvalidOperationException("The name cannot be null.");
 
-            if (_size == null)
+            if (_size is null)
                 throw new InvalidOperationException("The size cannot be null.");
 
             _areas.Validate();

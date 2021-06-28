@@ -90,7 +90,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The url cannot be null.");
 
                 if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
@@ -128,7 +128,7 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (_url == null)
+            if (_url is null)
                 throw new InvalidOperationException("The url cannot be null.");
 
             if (_duration == 0)

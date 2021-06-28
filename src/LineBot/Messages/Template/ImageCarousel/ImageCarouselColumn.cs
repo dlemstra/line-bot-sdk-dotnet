@@ -44,7 +44,7 @@ namespace Line
 
             set
             {
-                if (value != null)
+                if (value is not null)
                 {
                     if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
                         throw new InvalidOperationException("The image url should use the https scheme.");
@@ -70,7 +70,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The action cannot be null.");
 
                 value.CheckActionType();
@@ -81,10 +81,10 @@ namespace Line
 
         internal void Validate()
         {
-            if (_imageUrl == null)
+            if (_imageUrl is null)
                 throw new InvalidOperationException("The image url cannot be null.");
 
-            if (_action == null)
+            if (_action is null)
                 throw new InvalidOperationException("The action cannot be null.");
 
             _action.Validate();

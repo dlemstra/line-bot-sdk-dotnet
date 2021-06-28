@@ -21,7 +21,7 @@ namespace Line
     {
         public static void Validate([NotNull] string? value)
         {
-            if (value == null || value.Length != 7)
+            if (value is null || value.Length != 7)
                 throw new InvalidOperationException("The color should be 7 characters long.");
 
             if (value[0] != '#')

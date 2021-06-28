@@ -68,7 +68,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The ok action cannot be null.");
 
                 value.CheckActionType();
@@ -90,7 +90,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The cancel action cannot be null.");
 
                 value.CheckActionType();
@@ -105,13 +105,13 @@ namespace Line
 
         void ITemplate.Validate()
         {
-            if (_text == null)
+            if (_text is null)
                 throw new InvalidOperationException("The text cannot be null.");
 
-            if (_okAction == null)
+            if (_okAction is null)
                 throw new InvalidOperationException("The ok action cannot be null.");
 
-            if (_cancelAction == null)
+            if (_cancelAction is null)
                 throw new InvalidOperationException("The cancel action cannot be null.");
 
             _okAction.Validate();

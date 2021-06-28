@@ -35,7 +35,7 @@ namespace Line
             get => _action;
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The action cannot be null.");
 
                 _action = value;
@@ -51,7 +51,7 @@ namespace Line
             get => _bounds;
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The bounds cannot be null.");
 
                 _bounds = value;
@@ -60,10 +60,10 @@ namespace Line
 
         internal void Validate()
         {
-            if (_action == null)
+            if (_action is null)
                 throw new InvalidOperationException("The action cannot be null.");
 
-            if (_bounds == null)
+            if (_bounds is null)
                 throw new InvalidOperationException("The bounds cannot be null.");
 
             _action.Validate();

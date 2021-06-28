@@ -58,7 +58,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The base url cannot be null.");
 
                 if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
@@ -131,16 +131,16 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (_baseUrl == null)
+            if (_baseUrl is null)
                 throw new InvalidOperationException("The base url cannot be null.");
 
-            if (_alternativeText == null)
+            if (_alternativeText is null)
                 throw new InvalidOperationException("The alternative text cannot be null.");
 
-            if (_baseSize == null)
+            if (_baseSize is null)
                 throw new InvalidOperationException("The base size cannot be null.");
 
-            if (_actions == null)
+            if (_actions is null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
             _baseSize.Validate();

@@ -50,7 +50,7 @@ namespace Line
 
             set
             {
-                if (value != null)
+                if (value is not null)
                 {
                     if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))
                         throw new InvalidOperationException("The thumbnail url should use the https scheme.");
@@ -96,7 +96,7 @@ namespace Line
 
             set
             {
-                if (value != null && value.Length > 40)
+                if (value is not null && value.Length > 40)
                     throw new InvalidOperationException("The title cannot be longer than 40 characters.");
 
                 _title = value;
@@ -124,7 +124,7 @@ namespace Line
                 if (value.Length > 120)
                     throw new InvalidOperationException("The text cannot be longer than 120 characters.");
 
-                if ((ThumbnailUrl != null || Title != null) && value.Length > 60)
+                if ((ThumbnailUrl is not null || Title is not null) && value.Length > 60)
                     throw new InvalidOperationException("The text cannot be longer than 60 characters when the thumbnail url or title are set.");
 
                 _text = value;
@@ -144,7 +144,7 @@ namespace Line
 
             set
             {
-                if (value != null)
+                if (value is not null)
                     value.CheckActionType();
 
                 _defaultAction = value;
@@ -165,7 +165,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The actions cannot be null.");
 
                 int count = value.Count();
@@ -187,10 +187,10 @@ namespace Line
 
         internal void Validate()
         {
-            if (_text == null)
+            if (_text is null)
                 throw new InvalidOperationException("The text cannot be null.");
 
-            if (_actions == null)
+            if (_actions is null)
                 throw new InvalidOperationException("The actions cannot be null.");
 
             _actions.Validate();

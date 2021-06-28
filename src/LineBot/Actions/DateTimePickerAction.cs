@@ -229,16 +229,16 @@ namespace Line
 
         void IAction.Validate()
         {
-            if (_label == null)
+            if (_label is null)
                 throw new InvalidOperationException("The label cannot be null.");
 
-            if (_data == null)
+            if (_data is null)
                 throw new InvalidOperationException("The data cannot be null.");
         }
 
         private string GetFormattedDateTimeByMode(DateTime? dateTime)
         {
-            if (dateTime == null)
+            if (dateTime is null)
                 return string.Empty;
             if (Mode == DateTimePickerMode.Date)
                 return dateTime.Value.ToString("yyyy-MM-dd");
@@ -250,7 +250,7 @@ namespace Line
 
         private DateTime? AdjustedDateTimeByMode(DateTime? value)
         {
-            if (value == null)
+            if (value is null)
                 return null;
 
             DateTime adjustedDateTime = value.Value;

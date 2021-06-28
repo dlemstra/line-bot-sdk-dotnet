@@ -36,7 +36,7 @@ namespace Line
 
             foreach (var message in messages)
             {
-                if (message == null)
+                if (message is null)
                     throw new InvalidOperationException("The message should not be null.");
 
                 if (IsInvalidMessageType(message))

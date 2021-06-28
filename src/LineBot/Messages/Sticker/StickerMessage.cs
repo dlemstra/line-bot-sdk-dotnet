@@ -91,10 +91,10 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (_packageId == null)
+            if (_packageId is null)
                 throw new InvalidOperationException("The package id cannot be null.");
 
-            if (_stickerId == null)
+            if (_stickerId is null)
                 throw new InvalidOperationException("The sticker id cannot be null.");
         }
     }

@@ -177,7 +177,7 @@ namespace Line
             var response = await _client.GetAsync($"message/{messageId}/content");
             await response.CheckResult();
 
-            if (response.Content == null)
+            if (response.Content is null)
                 return null;
 
             return await response.Content.ReadAsByteArrayAsync();
@@ -208,7 +208,7 @@ namespace Line
 
             var content = await request.Body.ToArrayAsync();
 
-            if (content == null)
+            if (content is null)
                 return LineEventCollection.Empty();
 
             await _logger.LogReceivedEvents(content);
@@ -221,10 +221,10 @@ namespace Line
 
             var eventCollection = JsonConvert.DeserializeObject<LineEventCollection>(jsonContent);
 
-            if (eventCollection == null)
+            if (eventCollection is null)
                 return LineEventCollection.Empty();
 
-            if (eventCollection.Events == null)
+            if (eventCollection.Events is null)
                 eventCollection.Events = new List<LineEvent>();
 
             return eventCollection;
@@ -310,7 +310,7 @@ namespace Line
 
             var richMenuResponseCollection = await response.Content.DeserializeObject<RichMenuResponseCollection>();
 
-            if (richMenuResponseCollection == null || richMenuResponseCollection.RichMenus == null)
+            if (richMenuResponseCollection is null || richMenuResponseCollection.RichMenus is null)
                 return Enumerable.Empty<IRichMenuResponse>();
 
             return richMenuResponseCollection.RichMenus;

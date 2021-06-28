@@ -24,12 +24,12 @@ namespace Line
             if (self.IsSuccessStatusCode)
                 return;
 
-            if (self.Content == null)
+            if (self.Content is null)
                 throw new LineBotException(self.StatusCode);
 
             LineError? error = await self.Content.DeserializeObject<LineError>();
 
-            if (error == null || string.IsNullOrWhiteSpace(error.Message))
+            if (error is null || string.IsNullOrWhiteSpace(error.Message))
                 throw new LineBotException(self.StatusCode);
 
             throw new LineBotException(self.StatusCode, error);

@@ -23,7 +23,7 @@ namespace Line
         {
             foreach (var richMenuArea in self)
             {
-                if (richMenuArea == null)
+                if (richMenuArea is null)
                     throw new InvalidOperationException("The rich menu area should not be null.");
 
                 richMenuArea.Validate();

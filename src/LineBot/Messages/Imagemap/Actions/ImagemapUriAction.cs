@@ -106,7 +106,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The url cannot be null.");
 
                 if (value.ToString().Length > 1000)
@@ -120,7 +120,7 @@ namespace Line
         {
             base.Validate();
 
-            if (_url == null)
+            if (_url is null)
                 throw new InvalidOperationException("The url cannot be null.");
         }
     }

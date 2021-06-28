@@ -23,7 +23,7 @@ namespace Line
         {
             foreach (var column in self)
             {
-                if (column == null)
+                if (column is null)
                     throw new InvalidOperationException("The column should not be null.");
 
                 column.Validate();

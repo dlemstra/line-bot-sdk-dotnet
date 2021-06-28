@@ -74,7 +74,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The template cannot be null.");
 
                 if (IsInvalidTemplate(value))
@@ -86,10 +86,10 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (_alternativeText == null)
+            if (_alternativeText is null)
                 throw new InvalidOperationException("The alternative text cannot be null.");
 
-            if (_template == null)
+            if (_template is null)
                 throw new InvalidOperationException("The template cannot be null.");
 
             _template.Validate();

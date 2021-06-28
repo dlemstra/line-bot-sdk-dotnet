@@ -45,7 +45,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The columns cannot be null.");
 
                 int count = value.Count();
@@ -76,7 +76,7 @@ namespace Line
 
         void ITemplate.Validate()
         {
-            if (_columns == null)
+            if (_columns is null)
                 throw new InvalidOperationException("The columns cannot be null.");
 
             _columns.Validate();

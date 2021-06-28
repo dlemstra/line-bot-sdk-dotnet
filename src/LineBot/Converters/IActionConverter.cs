@@ -51,7 +51,7 @@ namespace Line
         private IAction CreateAction(JObject obj)
         {
             var type = obj.GetValue("type");
-            if (type == null)
+            if (type is null)
                 throw new InvalidOperationException("The type property is missing.");
 
             var typeName = type.Value<string>();

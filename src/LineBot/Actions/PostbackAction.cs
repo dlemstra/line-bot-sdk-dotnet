@@ -92,7 +92,7 @@ namespace Line
 
             set
             {
-                if (value != null && value.Length > 300)
+                if (value is not null && value.Length > 300)
                     throw new InvalidOperationException("The text cannot be longer than 300 characters.");
 
                 _text = value;

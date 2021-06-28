@@ -132,16 +132,16 @@ namespace Line
 
         void ISendMessage.Validate()
         {
-            if (_url == null)
+            if (_url is null)
                 throw new InvalidOperationException("The url cannot be null.");
 
-            if (_previewUrl == null)
+            if (_previewUrl is null)
                 throw new InvalidOperationException("The preview url cannot be null.");
         }
 
         private Uri CheckUrl(Uri? value)
         {
-            if (value == null)
+            if (value is null)
                 throw new InvalidOperationException("The url cannot be null.");
 
             if (!"https".Equals(value.Scheme, StringComparison.OrdinalIgnoreCase))

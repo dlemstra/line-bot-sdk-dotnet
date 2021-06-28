@@ -47,7 +47,7 @@ namespace Line
 
             set
             {
-                if (value == null)
+                if (value is null)
                     throw new InvalidOperationException("The area cannot be null.");
 
                 _area = value;
@@ -77,7 +77,7 @@ namespace Line
 
         internal virtual void Validate()
         {
-            if (_area == null)
+            if (_area is null)
                 throw new InvalidOperationException("The area cannot be null.");
         }
     }

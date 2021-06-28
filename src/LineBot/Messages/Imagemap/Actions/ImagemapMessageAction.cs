@@ -91,7 +91,7 @@ namespace Line
         {
             base.Validate();
 
-            if (_text == null)
+            if (_text is null)
                 throw new InvalidOperationException("The text cannot be null.");
         }
     }

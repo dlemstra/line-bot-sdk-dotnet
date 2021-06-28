@@ -38,7 +38,7 @@ namespace Line
         {
             get
             {
-                if (EventType != LineEventType.Beacon || _beacon == null)
+                if (EventType != LineEventType.Beacon || _beacon is null)
                     return null;
 
                 return this;
@@ -53,7 +53,7 @@ namespace Line
         {
             get
             {
-                if (EventType != LineEventType.Message || _message == null)
+                if (EventType != LineEventType.Message || _message is null)
                     return null;
 
                 return this;
@@ -64,7 +64,7 @@ namespace Line
         {
             get
             {
-                if (EventType != LineEventType.Postback || _postback == null)
+                if (EventType != LineEventType.Postback || _postback is null)
                     return null;
 
                 return this;

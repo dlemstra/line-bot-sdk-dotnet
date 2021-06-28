@@ -23,7 +23,7 @@ namespace Line
         {
             foreach (var imagemapAction in self)
             {
-                if (imagemapAction == null)
+                if (imagemapAction is null)
                     throw new InvalidOperationException("The imagemap action should not be null.");
 
                 imagemapAction.Validate();
