@@ -220,6 +220,33 @@ namespace Line
         }
 
         /// <summary>
+        /// Returns the summary of the specified group.
+        /// </summary>
+        /// <param name="groupId">The id of the group.</param>
+        /// <returns>The summary of the specified group.</returns>
+        public async Task<IGroupSummary?> GetGroupSummmary(string groupId)
+        {
+            Guard.NotNullOrEmpty(nameof(groupId), groupId);
+
+            var response = await _client.GetAsync($"group/{groupId}/summary").ConfigureAwait(false);
+            await response.CheckResult().ConfigureAwait(false);
+
+            return await response.Content.DeserializeObject<GroupSummary>().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns the summary of the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <returns>The summary of the specified group.</returns>
+        public async Task<IGroupSummary?> GetGroupSummmary(IGroup group)
+        {
+            Guard.NotNull(nameof(group), group);
+
+            return await GetGroupSummmary(group.Id);
+        }
+
+        /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
         /// <param name="user">The user.</param>
