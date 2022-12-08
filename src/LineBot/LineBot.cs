@@ -169,7 +169,8 @@ namespace Line
             if (response.Content is null)
                 return null;
 
-            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            var data = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            return data.Length == 0 ? null : data;
         }
 
         /// <summary>
