@@ -9,5 +9,6 @@ namespace Line.Tests
         public const string Error = "JsonDocuments/Error.json";
         public const string UserProfile = "JsonDocuments/UserProfile.json";
         public const string Whitespace = "JsonDocuments/Whitespace.json";
+        public const string GroupSummary = "JsonDocuments/GroupSummary.json";
     }
 }

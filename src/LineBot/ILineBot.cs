@@ -81,6 +81,20 @@ namespace Line
         Task<ILineEvents> GetEvents(HttpRequest request);
 
         /// <summary>
+        /// Returns the summary of the specified group.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <returns>The summary of the specified group.</returns>
+        Task<IGroupSummary?> GetGroupSummmary(IGroup group);
+
+        /// <summary>
+        /// Returns the summary of the specified group.
+        /// </summary>
+        /// <param name="groupId">The id of the group.</param>
+        /// <returns>The summary of the specified group.</returns>
+        Task<IGroupSummary?> GetGroupSummmary(string groupId);
+
+        /// <summary>
         /// Returns the profile of the specified user.
         /// </summary>
         /// <param name="user">The user.</param>
