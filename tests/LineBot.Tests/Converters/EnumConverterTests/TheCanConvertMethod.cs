@@ -1,29 +1,28 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class EnumConverterTests
     {
-        [TestClass]
         public class TheCanConvertMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeIsEnum()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
-                Assert.IsTrue(converter.CanConvert(typeof(TestEnum)));
+                Assert.True(converter.CanConvert(typeof(TestEnum)));
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeIsNullableEnum()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
-                Assert.IsFalse(converter.CanConvert(typeof(TestEnum?)));
+                Assert.False(converter.CanConvert(typeof(TestEnum?)));
             }
         }
     }

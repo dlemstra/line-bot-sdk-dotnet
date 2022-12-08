@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var template = new ButtonsTemplate
@@ -21,8 +20,8 @@ namespace Line.Tests
                     Text = "Test"
                 };
 
-                string serialized = JsonSerializer.SerializeObject(template);
-                Assert.AreEqual(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""imageAspectRatio"":""rectangle"",""imageSize"":""cover"",""title"":""Foo"",""text"":""Test""}", serialized);
+                var serialized = JsonSerializer.SerializeObject(template);
+                Assert.Equal(@"{""type"":""buttons"",""thumbnailImageUrl"":""https://foo.bar"",""imageAspectRatio"":""rectangle"",""imageSize"":""cover"",""title"":""Foo"",""text"":""Test""}", serialized);
             }
         }
     }

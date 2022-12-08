@@ -1,29 +1,28 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class IActionConverterTests
     {
-        [TestClass]
         public class TheCanConvertMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeIsIAction()
             {
                 var converter = new IActionConverter();
 
-                Assert.IsTrue(converter.CanConvert(typeof(IAction)));
+                Assert.True(converter.CanConvert(typeof(IAction)));
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeImplementsIAction()
             {
                 var converter = new IActionConverter();
 
-                Assert.IsTrue(converter.CanConvert(typeof(TestAction)));
+                Assert.True(converter.CanConvert(typeof(TestAction)));
             }
         }
     }

@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class CarouselColumnTests
     {
-        [TestClass]
         public class TheActionsProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var column = new CarouselColumn();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var column = new CarouselColumn();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueContainsMoreThan4Items()
             {
                 var column = new CarouselColumn();
@@ -50,7 +49,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueContains4Items()
             {
                 var column = new CarouselColumn()
@@ -64,7 +63,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTemplateActionTypeIsInvalid()
             {
                 var column = new CarouselColumn();
@@ -75,7 +74,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenCollectionContainsNull()
             {
                 var column = new CarouselColumn();

@@ -1,16 +1,15 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LocationActionTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var action = new CameraRollAction
@@ -18,8 +17,8 @@ namespace Line.Tests
                     Label = "Test"
                 };
 
-                string serialized = JsonSerializer.SerializeObject(action);
-                Assert.AreEqual(@"{""type"":""cameraRoll"",""label"":""Test""}", serialized);
+                var serialized = JsonSerializer.SerializeObject(action);
+                Assert.Equal(@"{""type"":""cameraRoll"",""label"":""Test""}", serialized);
             }
         }
     }

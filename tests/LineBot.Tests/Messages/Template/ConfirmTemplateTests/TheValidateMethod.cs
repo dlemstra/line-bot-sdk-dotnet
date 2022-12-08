@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ConfirmTemplateTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
                 ITemplate template = new ConfirmTemplate()
@@ -26,7 +25,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenOkActionIsNull()
             {
                 ITemplate template = new ConfirmTemplate()
@@ -41,7 +40,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenOkActionIsInvalid()
             {
                 ITemplate template = new ConfirmTemplate()
@@ -57,7 +56,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenCancelActionIsNull()
             {
                 ITemplate template = new ConfirmTemplate()
@@ -72,7 +71,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenCancelActionIsInvalid()
             {
                 ITemplate template = new ConfirmTemplate()
@@ -88,7 +87,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValid()
             {
                 ITemplate template = new ConfirmTemplate()

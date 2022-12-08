@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuBoundsTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenWidthIsNotSet()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenHeightIsNotSet()
             {
                 var richMenuBounds = new RichMenuBounds()

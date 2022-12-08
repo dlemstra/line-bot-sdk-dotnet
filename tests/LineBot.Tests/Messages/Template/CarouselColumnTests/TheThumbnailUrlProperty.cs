@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TheThumbnailUrlProperty
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var column = new CarouselColumn
@@ -20,7 +19,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNotHttps()
             {
                 var column = new CarouselColumn();
@@ -31,7 +30,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan1000Chars()
             {
                 var column = new CarouselColumn();
@@ -42,7 +41,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1000Chars()
             {
                 var value = new Uri("https://foo.bar/" + new string('x', 984));
@@ -52,7 +51,7 @@ namespace Line.Tests
                     ThumbnailUrl = value
                 };
 
-                Assert.AreEqual(value, column.ThumbnailUrl);
+                Assert.Equal(value, column.ThumbnailUrl);
             }
         }
     }

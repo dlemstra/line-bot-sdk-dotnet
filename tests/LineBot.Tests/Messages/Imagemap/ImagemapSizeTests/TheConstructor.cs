@@ -1,16 +1,15 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapSizeTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var size = new ImagemapSize()
@@ -20,16 +19,16 @@ namespace Line.Tests
                 };
 
                 var serialized = JsonSerializer.SerializeObject(size);
-                Assert.AreEqual(@"{""width"":10,""height"":20}", serialized);
+                Assert.Equal(@"{""width"":10,""height"":20}", serialized);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetTheProperties()
             {
                 var message = new ImagemapSize(100, 200);
 
-                Assert.AreEqual(100, message.Width);
-                Assert.AreEqual(200, message.Height);
+                Assert.Equal(100, message.Width);
+                Assert.Equal(200, message.Height);
             }
         }
     }

@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImageCarouselColumnTests
     {
-        [TestClass]
         public class TheTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var column = new ImageCarouselColumn
@@ -20,7 +19,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNotHttps()
             {
                 var column = new ImageCarouselColumn();
@@ -31,7 +30,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan1000Chars()
             {
                 var column = new ImageCarouselColumn();
@@ -42,7 +41,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1000Chars()
             {
                 var value = new Uri("https://foo.bar/" + new string('x', 984));
@@ -52,10 +51,10 @@ namespace Line.Tests
                     ImageUrl = value
                 };
 
-                Assert.AreEqual(value, column.ImageUrl);
+                Assert.Equal(value, column.ImageUrl);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenThumbnailUrlSetAndValueIsMoreThan60Chars()
             {
                 var column = new CarouselColumn();
@@ -67,7 +66,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenThumbnailUrlSetAndValueIs60Chars()
             {
                 var column = new CarouselColumn()
@@ -77,7 +76,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTitleSetAndValueIsMoreThan60Chars()
             {
                 var column = new CarouselColumn();
@@ -89,7 +88,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenTitleSetAndValueIs60Chars()
             {
                 var template = new CarouselColumn()

@@ -3,51 +3,50 @@
 
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheGetMessageContentMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ThrowsExceptionWhenMessageIsNull()
             {
-                ILineBot bot = TestConfiguration.CreateBot();
+                var bot = TestConfiguration.CreateBot();
                 await ExceptionAssert.ThrowsArgumentNullExceptionAsync("message", async () =>
                 {
                     await bot.GetMessageContent((IMessage)null);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ThrowsExceptionWhenMessageIdIsNull()
             {
-                ILineBot bot = TestConfiguration.CreateBot();
+                var bot = TestConfiguration.CreateBot();
                 await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messageId", async () =>
                 {
                     await bot.GetMessageContent((string)null);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ThrowsExceptionWhenMessageIsEmpty()
             {
-                ILineBot bot = TestConfiguration.CreateBot();
+                var bot = TestConfiguration.CreateBot();
                 await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messageId", async () =>
                 {
                     await bot.GetMessageContent(string.Empty);
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ThrowsExceptionWhenResponseIsError()
             {
-                TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+                var httpClient = TestHttpClient.ThatReturnsAnError();
 
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
+                var bot = TestConfiguration.CreateBot(httpClient);
 
                 await ExceptionAssert.ThrowsUnknownError(async () =>
                 {
@@ -55,52 +54,52 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsNullWhenResponseIsEmpty()
             {
-                TestHttpClient httpClient = TestHttpClient.Create();
+                var httpClient = TestHttpClient.Create();
 
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
-                byte[] data = await bot.GetMessageContent("test");
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var data = await bot.GetMessageContent("test");
 
-                Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                Assert.AreEqual("/message/test/content", httpClient.RequestPath);
+                Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+                Assert.Equal("/message/test/content", httpClient.RequestPath);
 
-                Assert.IsNull(data);
+                Assert.Null(data);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsDataWhenWithCorrectMessageId()
             {
-                byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
+                var input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
 
-                TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
+                var httpClient = TestHttpClient.ThatReturnsData(input);
 
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
-                byte[] data = await bot.GetMessageContent("test");
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var data = await bot.GetMessageContent("test");
 
-                Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                Assert.AreEqual("/message/test/content", httpClient.RequestPath);
+                Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+                Assert.Equal("/message/test/content", httpClient.RequestPath);
 
-                Assert.IsNotNull(data);
-                CollectionAssert.AreEqual(data, input);
+                Assert.NotNull(data);
+                Assert.Equal(data, input);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ReturnsDataWithCorrectMessage()
             {
-                byte[] input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
+                var input = new byte[12] { 68, 105, 114, 107, 32, 76, 101, 109, 115, 116, 114, 97 };
 
-                TestHttpClient httpClient = TestHttpClient.ThatReturnsData(input);
+                var httpClient = TestHttpClient.ThatReturnsData(input);
 
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
-                byte[] data = await bot.GetMessageContent(new TestMessage(MessageType.Image));
+                var bot = TestConfiguration.CreateBot(httpClient);
+                var data = await bot.GetMessageContent(new TestMessage(MessageType.Image));
 
-                Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                Assert.AreEqual("/message/testMessage/content", httpClient.RequestPath);
+                Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+                Assert.Equal("/message/testMessage/content", httpClient.RequestPath);
 
-                Assert.IsNotNull(data);
-                CollectionAssert.AreEqual(data, input);
+                Assert.NotNull(data);
+                Assert.Equal(data, input);
             }
         }
     }

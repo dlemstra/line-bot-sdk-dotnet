@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImageCarouselColumnTests
     {
-        [TestClass]
         public class TheActionProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var column = new ImageCarouselColumn();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTemplateActionTypeIsInvalid()
             {
                 var column = new ImageCarouselColumn();

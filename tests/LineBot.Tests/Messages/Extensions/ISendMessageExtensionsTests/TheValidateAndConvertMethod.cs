@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ISendMessageExtensionsTests
     {
-        [TestClass]
         public class TheValidateAndConvertMethod : ISendMessageExtensionsTests
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenCalledWithMoreThanFiveMessages()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
@@ -20,7 +19,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenArrarHasNullValue()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
@@ -29,7 +28,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMessageTypeIsInvalid()
             {
                 ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
@@ -38,7 +37,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMessageIsInvalid()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>

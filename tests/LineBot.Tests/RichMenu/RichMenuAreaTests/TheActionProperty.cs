@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuAreaTests
     {
-        [TestClass]
         public class TheActionProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenuArea = new RichMenuArea();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
@@ -32,7 +31,7 @@ namespace Line.Tests
                     Action = action
                 };
 
-                Assert.AreEqual(action, richMenuArea.Action);
+                Assert.Equal(action, richMenuArea.Action);
             }
         }
     }

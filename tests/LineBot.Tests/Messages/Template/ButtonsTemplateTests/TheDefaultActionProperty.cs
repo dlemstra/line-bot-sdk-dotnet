@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
-        [TestClass]
         public class TheDefaultActionProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var template = new ButtonsTemplate
@@ -20,7 +19,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsInvalid()
             {
                 var template = new ButtonsTemplate();

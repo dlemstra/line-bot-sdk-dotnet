@@ -1,30 +1,28 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheDeleteDefaultRichMenuMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ShouldCallTheCorrectApi()
             {
                 var httpClient = TestHttpClient.Create();
                 var bot = TestConfiguration.CreateBot(httpClient);
                 await bot.DeleteDefaultRichMenu();
 
-                Assert.AreEqual(HttpMethod.Delete, httpClient.RequestMethod);
-                Assert.AreEqual($"/user/all/richmenu", httpClient.RequestPath);
+                Assert.Equal(HttpMethod.Delete, httpClient.RequestMethod);
+                Assert.Equal($"/user/all/richmenu", httpClient.RequestPath);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
             {
                 var httpClient = TestHttpClient.ThatReturnsAnError();
@@ -36,14 +34,14 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnTheInstance()
             {
                 var httpClient = TestHttpClient.Create();
                 var bot = TestConfiguration.CreateBot(httpClient);
 
                 var result = await bot.DeleteDefaultRichMenu();
-                Assert.AreSame(bot, result);
+                Assert.Same(bot, result);
             }
         }
     }

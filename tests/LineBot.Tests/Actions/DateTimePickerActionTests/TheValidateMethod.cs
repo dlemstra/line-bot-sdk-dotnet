@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class DateTimePickerActionTest
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenLabelIsNull()
             {
                 IAction action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenDataIsNull()
             {
                 IAction action = new DateTimePickerAction(DateTimePickerMode.Date)
@@ -36,7 +35,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValid()
             {
                 IAction action = new DateTimePickerAction(DateTimePickerMode.Date)

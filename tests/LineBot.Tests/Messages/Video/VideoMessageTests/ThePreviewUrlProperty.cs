@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class VideoMessageTests
     {
-        [TestClass]
         public class ThePreviewUrlProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var message = new VideoMessage();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNotHttps()
             {
                 var message = new VideoMessage();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan1000Chars()
             {
                 var message = new VideoMessage();
@@ -44,7 +43,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenUrlIs1000Chars()
             {
                 var value = new Uri("https://foo.bar/" + new string('x', 984));
@@ -54,7 +53,7 @@ namespace Line.Tests
                     PreviewUrl = value
                 };
 
-                Assert.AreEqual(value, message.PreviewUrl);
+                Assert.Equal(value, message.PreviewUrl);
             }
         }
     }

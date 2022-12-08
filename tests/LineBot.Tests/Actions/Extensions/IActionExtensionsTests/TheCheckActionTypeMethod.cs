@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class IActionExtensionsTests
     {
-        [TestClass]
         public class TheCheckActionTypeMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionIsInvalid()
             {
                 var action = new TestAction();
@@ -19,7 +18,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<NotSupportedException>(() => IActionExtensions.CheckActionType(action));
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsPostbackAction()
             {
                 var action = new PostbackAction();
@@ -27,7 +26,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsMessageAction()
             {
                 var action = new MessageAction();
@@ -35,7 +34,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsUriAction()
             {
                 var action = new UriAction();
@@ -43,7 +42,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsCameraAction()
             {
                 var action = new CameraAction();
@@ -51,7 +50,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsCameraRollAction()
             {
                 var action = new CameraRollAction();
@@ -59,7 +58,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsLocationAction()
             {
                 var action = new LocationAction();
@@ -67,7 +66,7 @@ namespace Line.Tests
                 IActionExtensions.CheckActionType(action);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenActionIsDateTimePickerAction()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);

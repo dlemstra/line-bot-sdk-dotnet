@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapUriActionTests
     {
-        [TestClass]
         public class TheLabelProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan50Chars()
             {
                 var action = new ImagemapMessageAction();
@@ -22,17 +21,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs50Chars()
             {
-                string value = new string('x', 50);
+                var value = new string('x', 50);
 
                 var action = new ImagemapMessageAction()
                 {
                     Label = value
                 };
 
-                Assert.AreEqual(value, action.Label);
+                Assert.Equal(value, action.Label);
             }
         }
     }

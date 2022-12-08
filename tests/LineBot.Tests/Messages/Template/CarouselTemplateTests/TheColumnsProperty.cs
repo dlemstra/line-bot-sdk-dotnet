@@ -2,19 +2,18 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class CarouselTemplateTests
     {
-        [TestClass]
         public class TheColumnsProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                var template = new CarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The columns cannot be null.", () =>
                 {
@@ -22,10 +21,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                var template = new CarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The minimum number of columns is 1.", () =>
                 {
@@ -33,10 +32,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueContainsMoreThan10Items()
             {
-                CarouselTemplate template = new CarouselTemplate();
+                var template = new CarouselTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of columns is 10.", () =>
                 {
@@ -57,10 +56,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueContains10Items()
             {
-                CarouselTemplate template = new CarouselTemplate()
+                var template = new CarouselTemplate()
                 {
                     Columns = new CarouselColumn[]
                     {

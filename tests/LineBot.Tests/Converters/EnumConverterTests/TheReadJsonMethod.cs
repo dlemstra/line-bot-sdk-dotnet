@@ -2,20 +2,19 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class EnumConverterTests
     {
-        [TestClass]
         public class TheReadJsonMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTypeIsInteger()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
                 ExceptionAssert.Throws<InvalidOperationException>("Only string is supported.", () =>
                 {
@@ -23,31 +22,31 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTheDefaultWhenValueIsInvalid()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
-                TestEnum value = JsonConvert.DeserializeObject<TestEnum>(@"""invalid""", converter);
-                Assert.AreEqual(TestEnum.Unknown, value);
+                var value = JsonConvert.DeserializeObject<TestEnum>(@"""invalid""", converter);
+                Assert.Equal(TestEnum.Unknown, value);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldParseString()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
-                TestEnum value = JsonConvert.DeserializeObject<TestEnum>(@"""Test""", converter);
-                Assert.AreEqual(TestEnum.Test, value);
+                var value = JsonConvert.DeserializeObject<TestEnum>(@"""Test""", converter);
+                Assert.Equal(TestEnum.Test, value);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldIgnoreCasingWhenParsingString()
             {
-                EnumConverter<TestEnum> converter = new EnumConverter<TestEnum>();
+                var converter = new EnumConverter<TestEnum>();
 
-                TestEnum value = JsonConvert.DeserializeObject<TestEnum>(@"""test""", converter);
-                Assert.AreEqual(TestEnum.Test, value);
+                var value = JsonConvert.DeserializeObject<TestEnum>(@"""test""", converter);
+                Assert.Equal(TestEnum.Test, value);
             }
         }
     }

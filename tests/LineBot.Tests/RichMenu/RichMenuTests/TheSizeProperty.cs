@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuTests
     {
-        [TestClass]
         public class TheSizeProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var size = new RichMenuSize()
@@ -32,7 +31,7 @@ namespace Line.Tests
                 var richMenu = new RichMenu();
                 richMenu.Size = size;
 
-                Assert.AreEqual(size, richMenu.Size);
+                Assert.Equal(size, richMenu.Size);
             }
         }
     }

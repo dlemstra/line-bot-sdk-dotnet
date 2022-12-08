@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapUriActionTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenUrlIsNull()
             {
                 var action = new ImagemapUriAction()
@@ -25,7 +24,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenAreaIsNull()
             {
                 var action = new ImagemapUriAction()
@@ -39,7 +38,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValid()
             {
                 var action = new ImagemapUriAction()

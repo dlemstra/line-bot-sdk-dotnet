@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LocationMessageTests
     {
-        [TestClass]
         public class TheAddressProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var message = new LocationMessage();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var message = new LocationMessage();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan100Chars()
             {
                 var message = new LocationMessage();
@@ -44,17 +43,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs100Chars()
             {
                 var value = new string('x', 100);
 
-                LocationMessage message = new LocationMessage()
+                var message = new LocationMessage()
                 {
                     Address = value
                 };
 
-                Assert.AreEqual(value, message.Address);
+                Assert.Equal(value, message.Address);
             }
         }
     }

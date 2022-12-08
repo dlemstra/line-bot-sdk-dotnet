@@ -1,19 +1,18 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests.Signature
 {
     public partial class SignatureValidatorTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenContentIsNull()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.ThrowsArgumentNullException("content", () =>
                 {
@@ -21,10 +20,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenContentIsEmpty()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.ThrowsArgumentEmptyException("content", () =>
                 {
@@ -32,10 +31,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSignatureIsNull()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.ThrowsArgumentNullException("signature", () =>
                 {
@@ -43,10 +42,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSignatureIsEmpty()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.ThrowsArgumentEmptyException("signature", () =>
                 {
@@ -54,10 +53,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSignatureLengthIsInvalid()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
                 {
@@ -65,10 +64,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSignatureIsInvalid()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
 
                 ExceptionAssert.Throws<LineBotException>("Invalid signature.", () =>
                 {
@@ -76,10 +75,10 @@ namespace Line.Tests.Signature
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenSignatureIsValid()
             {
-                SignatureValidator validator = new SignatureValidator(TestConfiguration.Create());
+                var validator = new SignatureValidator(TestConfiguration.Create());
                 validator.Validate(new byte[] { 42 }, "aajPtaEL8oyiitLlTbSzkFCTDQ7Lr0m/89eDhe6tFx4=");
             }
         }

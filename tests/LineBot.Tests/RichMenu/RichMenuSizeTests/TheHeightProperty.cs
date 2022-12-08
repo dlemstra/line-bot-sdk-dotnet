@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TheRichMenuSizeTests
     {
-        [TestClass]
         public partial class TheHeightProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNot1686_843()
             {
                 var richMenuSize = new RichMenuSize();
@@ -19,7 +18,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<InvalidOperationException>("The possible height values are: 1686, 843.", () => { richMenuSize.Height = 100; });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1686()
             {
                 var richMenuSize = new RichMenuSize()
@@ -27,10 +26,10 @@ namespace Line.Tests
                     Height = 1686
                 };
 
-                Assert.AreEqual(1686, richMenuSize.Height);
+                Assert.Equal(1686, richMenuSize.Height);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs843()
             {
                 var richMenuSize = new RichMenuSize()
@@ -38,7 +37,7 @@ namespace Line.Tests
                     Height = 843
                 };
 
-                Assert.AreEqual(843, richMenuSize.Height);
+                Assert.Equal(843, richMenuSize.Height);
             }
         }
     }

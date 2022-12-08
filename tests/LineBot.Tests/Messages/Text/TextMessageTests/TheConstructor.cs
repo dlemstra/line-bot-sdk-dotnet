@@ -1,16 +1,15 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TextMessageTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var message = new TextMessage()
@@ -19,15 +18,15 @@ namespace Line.Tests
                 };
 
                 var serialized = JsonSerializer.SerializeObject(message);
-                Assert.AreEqual(@"{""type"":""text"",""text"":""Correct""}", serialized);
+                Assert.Equal(@"{""type"":""text"",""text"":""Correct""}", serialized);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetTheProperties()
             {
                 var message = new TextMessage("Correct");
 
-                Assert.AreEqual("Correct", message.Text);
+                Assert.Equal("Correct", message.Text);
             }
         }
     }

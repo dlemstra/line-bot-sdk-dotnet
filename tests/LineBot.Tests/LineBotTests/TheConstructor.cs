@@ -5,16 +5,15 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenConfigurationIsNull()
             {
                 ExceptionAssert.ThrowsArgumentNullException("configuration", () =>
@@ -23,7 +22,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsNotExceptionWhenLoggerIsNull()
             {
                 var configuration = new LineConfiguration()
@@ -35,7 +34,7 @@ namespace Line.Tests
                 new LineBot(configuration, null);
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelAccessTokenIsNull()
             {
                 var configuration = new LineConfiguration()
@@ -50,7 +49,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelAccessTokenIsEmpty()
             {
                 var configuration = new LineConfiguration()
@@ -65,7 +64,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelAccessTokenIsWhitespace()
             {
                 var configuration = new LineConfiguration()
@@ -80,7 +79,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelSecretTokenIsNull()
             {
                 var configuration = new LineConfiguration()
@@ -95,7 +94,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelSecretTokenIsEmpty()
             {
                 var configuration = new LineConfiguration()
@@ -110,7 +109,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ThrowsExceptionWhenChannelSecretTokenIsWhitespace()
             {
                 var configuration = new LineConfiguration()
@@ -125,7 +124,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetBaseAddressToApiWhenHttpFactoryIsUsed()
             {
                 var configuration = new LineConfiguration()
@@ -139,7 +138,7 @@ namespace Line.Tests
                 var field = bot.GetType().GetRuntimeFields().Where(f => f.Name == "_client").First();
                 var client = (HttpClient)field.GetValue(bot);
 
-                Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
+                Assert.Equal(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
             }
         }
     }

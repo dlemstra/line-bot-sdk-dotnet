@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapMessageTests
     {
-        [TestClass]
         public class TheBaseUrlProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var message = new ImagemapMessage();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNotHttps()
             {
                 var message = new ImagemapMessage();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan1000Chars()
             {
                 var message = new ImagemapMessage();
@@ -44,7 +43,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenUrlIs1000Chars()
             {
                 var value = new Uri("https://foo.bar/" + new string('x', 984));
@@ -54,7 +53,7 @@ namespace Line.Tests
                     BaseUrl = value
                 };
 
-                Assert.AreEqual(value, message.BaseUrl);
+                Assert.Equal(value, message.BaseUrl);
             }
         }
     }

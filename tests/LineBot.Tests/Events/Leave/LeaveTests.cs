@@ -4,32 +4,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
-    [TestClass]
     public class LeaveTests
     {
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.Leave)]
+        [Fact]
         public async Task GetEvents_ValidRequest_IsLeaveEvent()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.Leave);
+            var bot = TestConfiguration.CreateBot();
+            var request = new TestHttpRequest(JsonDocuments.Events.Leave);
 
             IEnumerable<ILineEvent> events = await bot.GetEvents(request);
-            Assert.IsNotNull(events);
-            Assert.AreEqual(1, events.Count());
+            Assert.NotNull(events);
+            Assert.Single(events);
 
-            ILineEvent lineEvent = events.First();
+            var lineEvent = events.First();
 
-            Assert.AreEqual(LineEventType.Leave, lineEvent.EventType);
+            Assert.Equal(LineEventType.Leave, lineEvent.EventType);
 
-            IEventSource source = lineEvent.Source;
-            Assert.IsNotNull(source);
-            Assert.AreEqual(EventSourceType.Group, source.SourceType);
-            Assert.AreEqual("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
+            var source = lineEvent.Source;
+            Assert.NotNull(source);
+            Assert.Equal(EventSourceType.Group, source.SourceType);
+            Assert.Equal("cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", source.Group.Id);
         }
     }
 }

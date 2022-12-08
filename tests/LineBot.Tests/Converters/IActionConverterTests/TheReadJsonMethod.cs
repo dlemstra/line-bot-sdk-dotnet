@@ -3,17 +3,16 @@
 
 using System;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class IActionConverterTests
     {
-        [TestClass]
         public class TheReadJsonMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTypeIsInvalid()
             {
                 var converter = new IActionConverter();
@@ -24,7 +23,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionIsInvalid()
             {
                 var converter = new IActionConverter();
@@ -35,7 +34,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionIsNotSupported()
             {
                 var converter = new IActionConverter();
@@ -46,8 +45,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.Camera)]
+            [Fact]
             public void ShouldCreateCameraActionWhenTypeIsCamera()
             {
                 var converter = new IActionConverter();
@@ -56,12 +54,11 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as CameraAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Camera", action.Label);
+                Assert.NotNull(action);
+                Assert.Equal("Camera", action.Label);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.CameraRoll)]
+            [Fact]
             public void ShouldCreateCameraActionWhenTypeIsCameraRoll()
             {
                 var converter = new IActionConverter();
@@ -70,12 +67,11 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as CameraRollAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Camera Roll", action.Label);
+                Assert.NotNull(action);
+                Assert.Equal("Camera Roll", action.Label);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.DateTimePicker)]
+            [Fact]
             public void ShouldCreateDateTimePickerActionWhenTypeIsDateTimePicker()
             {
                 var converter = new IActionConverter();
@@ -84,17 +80,16 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as DateTimePickerAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Select date", action.Label);
-                Assert.AreEqual("storeId=12345", action.Data);
-                Assert.AreEqual(DateTimePickerMode.DateTime, action.Mode);
-                Assert.AreEqual(new DateTime(2017, 12, 25, 0, 0, 0), action.Initial);
-                Assert.AreEqual(new DateTime(2018, 1, 24, 23, 59, 0), action.Max);
-                Assert.AreEqual(new DateTime(2017, 12, 23, 0, 0, 0), action.Min);
+                Assert.NotNull(action);
+                Assert.Equal("Select date", action.Label);
+                Assert.Equal("storeId=12345", action.Data);
+                Assert.Equal(DateTimePickerMode.DateTime, action.Mode);
+                Assert.Equal(new DateTime(2017, 12, 25, 0, 0, 0), action.Initial);
+                Assert.Equal(new DateTime(2018, 1, 24, 23, 59, 0), action.Max);
+                Assert.Equal(new DateTime(2017, 12, 23, 0, 0, 0), action.Min);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.Location)]
+            [Fact]
             public void ShouldCreateCameraActionWhenTypeIsLocation()
             {
                 var converter = new IActionConverter();
@@ -103,12 +98,11 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as LocationAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Location", action.Label);
+                Assert.NotNull(action);
+                Assert.Equal("Location", action.Label);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.Message)]
+            [Fact]
             public void ShouldCreateMessageActionWhenTypeIsMessage()
             {
                 var converter = new IActionConverter();
@@ -117,13 +111,12 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as MessageAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Yes", action.Label);
-                Assert.AreEqual("No", action.Text);
+                Assert.NotNull(action);
+                Assert.Equal("Yes", action.Label);
+                Assert.Equal("No", action.Text);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.Postback)]
+            [Fact]
             public void ShouldCreatePostbackActionWhenTypeIsPostback()
             {
                 var converter = new IActionConverter();
@@ -132,14 +125,13 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as PostbackAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("Buy", action.Label);
-                Assert.AreEqual("action=buy&itemid=111", action.Data);
-                Assert.AreEqual("Buy it", action.Text);
+                Assert.NotNull(action);
+                Assert.Equal("Buy", action.Label);
+                Assert.Equal("action=buy&itemid=111", action.Data);
+                Assert.Equal("Buy it", action.Text);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Actions.Uri)]
+            [Fact]
             public void ShouldCreateUriActionWhenTypeIsUri()
             {
                 var converter = new IActionConverter();
@@ -148,9 +140,9 @@ namespace Line.Tests
 
                 var action = JsonConvert.DeserializeObject<IAction>(data, converter) as UriAction;
 
-                Assert.IsNotNull(action);
-                Assert.AreEqual("View details", action.Label);
-                Assert.AreEqual(new Uri("http://example.com/page/222"), action.Url);
+                Assert.NotNull(action);
+                Assert.Equal("View details", action.Label);
+                Assert.Equal(new Uri("http://example.com/page/222"), action.Url);
             }
         }
     }

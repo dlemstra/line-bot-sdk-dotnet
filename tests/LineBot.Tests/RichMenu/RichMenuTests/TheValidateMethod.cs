@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenAreasIsNull()
             {
                 var richMenu = new RichMenu();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenAreasHasNullValue()
             {
                 var richMenu = new RichMenu()
@@ -39,7 +38,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenAreasIsInvalid()
             {
                 var richMenu = new RichMenu()
@@ -56,7 +55,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenChatBarTextIsNull()
             {
                 var richMenu = new RichMenu()
@@ -70,7 +69,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenNameIsNull()
             {
                 var richMenu = new RichMenu()
@@ -85,7 +84,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSizeIsNull()
             {
                 var richMenu = new RichMenu()
@@ -101,7 +100,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenSizeIsInvalid()
             {
                 var richMenu = new RichMenu()

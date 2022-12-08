@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuAreaTests
     {
-        [TestClass]
         public class TheBoundsProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenuArea = new RichMenuArea();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var richMenuBounds = new RichMenuBounds { Height = 200, Width = 200, X = 100, Y = 0 };
@@ -32,7 +31,7 @@ namespace Line.Tests
                     Bounds = richMenuBounds
                 };
 
-                Assert.AreEqual(richMenuBounds, richMenuArea.Bounds);
+                Assert.Equal(richMenuBounds, richMenuArea.Bounds);
             }
         }
     }

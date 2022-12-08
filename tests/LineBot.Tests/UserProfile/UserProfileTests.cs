@@ -4,49 +4,48 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
-    [TestClass]
     public class UserProfileTests
     {
-        [TestMethod]
+        [Fact]
         public async Task GetProfile_UserIsNulll_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("user", async () =>
             {
-                IUserProfile profile = await bot.GetProfile((IUser)null);
+                var profile = await bot.GetProfile((IUser)null);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetProfile_UserIdIsNull_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("userId", async () =>
             {
-                IUserProfile profile = await bot.GetProfile((string)null);
+                var profile = await bot.GetProfile((string)null);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetProfile_UserIdIsEmpty_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("userId", async () =>
             {
-                IUserProfile profile = await bot.GetProfile(string.Empty);
+                var profile = await bot.GetProfile(string.Empty);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetProfile_ErrorResponse_ThrowsException()
         {
-            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+            var httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -54,36 +53,34 @@ namespace Line.Tests
             });
         }
 
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.UserProfile)]
+        [Fact]
         public async Task GetProfile_CorrectResponse_ReturnsUserProfile()
         {
-            TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
+            var httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            IUserProfile profile = await bot.GetProfile("test");
+            var bot = TestConfiguration.CreateBot(httpClient);
+            var profile = await bot.GetProfile("test");
 
-            Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-            Assert.AreEqual("/profile/test", httpClient.RequestPath);
+            Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+            Assert.Equal("/profile/test", httpClient.RequestPath);
 
-            Assert.IsNotNull(profile);
-            Assert.AreEqual("LINE taro", profile.DisplayName);
-            Assert.AreEqual(new Uri("http://obs.line-apps.com/..."), profile.PictureUrl);
-            Assert.AreEqual("Hello, LINE!", profile.StatusMessage);
-            Assert.AreEqual("Uxxxxxxxxxxxxxx...", profile.UserId);
+            Assert.NotNull(profile);
+            Assert.Equal("LINE taro", profile.DisplayName);
+            Assert.Equal(new Uri("http://obs.line-apps.com/..."), profile.PictureUrl);
+            Assert.Equal("Hello, LINE!", profile.StatusMessage);
+            Assert.Equal("Uxxxxxxxxxxxxxx...", profile.UserId);
         }
 
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.UserProfile)]
+        [Fact]
         public async Task GetProfile_WithUser_ReturnsUserProfile()
         {
-            TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
+            var httpClient = TestHttpClient.Create(JsonDocuments.UserProfile);
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
-            IUserProfile profile = await bot.GetProfile(new TestUser());
+            var bot = TestConfiguration.CreateBot(httpClient);
+            var profile = await bot.GetProfile(new TestUser());
 
-            Assert.AreEqual("/profile/testUser", httpClient.RequestPath);
-            Assert.IsNotNull(profile);
+            Assert.Equal("/profile/testUser", httpClient.RequestPath);
+            Assert.NotNull(profile);
         }
     }
 }

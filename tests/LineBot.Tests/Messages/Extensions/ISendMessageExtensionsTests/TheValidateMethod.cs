@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ISendMessageExtensionsTests
     {
-        [TestClass]
         public class TheValidateMethod : ISendMessageExtensionsTests
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenCalledWithMoreThanFiveMessages()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The maximum number of messages is 5.", () =>
@@ -20,7 +19,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenArrarHasNullValue()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The message should not be null.", () =>
@@ -29,7 +28,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMessageTypeIsInvalid()
             {
                 ExceptionAssert.Throws<NotSupportedException>("Invalid message type.", () =>
@@ -38,7 +37,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMessageIsInvalid()
             {
                 ExceptionAssert.Throws<InvalidOperationException>("The text cannot be null.", () =>
@@ -47,7 +46,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsTextMessage()
             {
                 var message = new TextMessage() { Text = "Foo" };
@@ -55,7 +54,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsImageMessage()
             {
                 var message = new ImageMessage()
@@ -67,7 +66,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsVideoMessage()
             {
                 var message = new VideoMessage()
@@ -79,7 +78,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsAudioMessage()
             {
                 var message = new AudioMessage()
@@ -91,7 +90,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsLocationMessage()
             {
                 var message = new LocationMessage()
@@ -103,7 +102,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsStickerMessage()
             {
                 var message = new StickerMessage()
@@ -115,7 +114,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsImagemapMessage()
             {
                 var message = new ImagemapMessage()
@@ -129,7 +128,7 @@ namespace Line.Tests
                 ISendMessageExtensions.Validate(new ISendMessage[1] { message });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMessageIsTemplateMessage()
             {
                 var message = new TemplateMessage()

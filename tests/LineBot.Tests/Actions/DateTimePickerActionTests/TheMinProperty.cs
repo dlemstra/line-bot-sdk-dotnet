@@ -2,17 +2,16 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class DateTimePickerActionTest
     {
-        [TestClass]
         public class TheMinProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMinIsGreaterThanMax()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -26,7 +25,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMinIsEqualToMax()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -39,7 +38,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenMinIsLessThanMax()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -49,20 +48,20 @@ namespace Line.Tests
                 action.Max = max;
                 action.Min = min;
 
-                Assert.AreEqual(action.Max, max);
-                Assert.AreEqual(action.Min, min);
+                Assert.Equal(action.Max, max);
+                Assert.Equal(action.Min, min);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldBeAdjustedWhenDeserializing()
             {
                 var jsonData = @"{""type"":""datetimepicker"",""label"":""Foo"",""data"":""Bar"",""mode"":""time"",""initial"":""2018-10-08T10:30"",""max"":""2018-10-08T11:00"",""min"":""2018-10-08T10:00""}";
                 var action = JsonConvert.DeserializeObject<DateTimePickerAction>(jsonData);
 
-                Assert.AreEqual(action.Min, new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 10, 0, 0));
+                Assert.Equal(action.Min, new DateTime(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 10, 0, 0));
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldBeAdjustedWhenSet()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date)
@@ -76,7 +75,7 @@ namespace Line.Tests
 
                 action.Min = new DateTime(2018, 10, 9, 10, 30, 0);
 
-                Assert.AreEqual(action.Min, new DateTime(2018, 10, 9));
+                Assert.Equal(action.Min, new DateTime(2018, 10, 9));
             }
         }
     }

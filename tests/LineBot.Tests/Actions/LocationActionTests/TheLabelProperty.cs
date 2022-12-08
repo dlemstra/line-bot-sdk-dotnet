@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LocationActionTests
     {
-        [TestClass]
         public class TheLabelProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var action = new LocationAction();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var action = new LocationAction();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan20Chars()
             {
                 var action = new LocationAction();
@@ -44,7 +43,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs20Chars()
             {
                 var value = new string('x', 20);
@@ -54,7 +53,7 @@ namespace Line.Tests
                     Label = value
                 };
 
-                Assert.AreEqual(value, action.Label);
+                Assert.Equal(value, action.Label);
             }
         }
     }

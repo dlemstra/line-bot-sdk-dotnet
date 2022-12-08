@@ -1,21 +1,20 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuSizeTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldSetTheProperties()
             {
                 var size = new RichMenuSize(1686);
 
-                Assert.AreEqual(1686, size.Height);
+                Assert.Equal(1686, size.Height);
             }
         }
     }

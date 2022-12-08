@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapMessageTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenBaseUrlIsNull()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -30,7 +29,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenBaseSizeIsNull()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -49,7 +48,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenBaseSizeIsInvalid()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -69,7 +68,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenAlternativeTextIsNull()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -88,7 +87,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionsIsNull()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -104,7 +103,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionsAreInvalid()
             {
                 ISendMessage message = new ImagemapMessage()
@@ -124,7 +123,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValid()
             {
                 ISendMessage message = new ImagemapMessage()

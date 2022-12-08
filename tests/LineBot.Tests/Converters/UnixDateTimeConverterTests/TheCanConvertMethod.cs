@@ -2,29 +2,28 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class UnixDateTimeConverterTests
     {
-        [TestClass]
         public class TheCanConvertMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeIsDateTime()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
-                Assert.IsTrue(converter.CanConvert(typeof(DateTime)));
+                Assert.True(converter.CanConvert(typeof(DateTime)));
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnTrueWhenTypeIsNullableDateTime()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
-                Assert.IsFalse(converter.CanConvert(typeof(DateTime?)));
+                Assert.False(converter.CanConvert(typeof(DateTime?)));
             }
         }
     }

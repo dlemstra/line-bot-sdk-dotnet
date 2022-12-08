@@ -4,16 +4,15 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LoggingDelegatingHandlerTests
     {
-        [TestClass]
         public class TheSendAsyncMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ShouldLogApiCall()
             {
                 var logger = new TestLogger();
@@ -25,10 +24,10 @@ namespace Line.Tests
 
                 await httpClient.PostAsync("https://foo.bar", new StringContent("Test"));
 
-                Assert.AreEqual(new Uri("https://foo.bar/"), logger.LogApiCallUri);
+                Assert.Equal(new Uri("https://foo.bar/"), logger.LogApiCallUri);
 
                 var content = await logger.LogApiCallHttpContent.ReadAsStringAsync();
-                Assert.AreEqual("Test", content);
+                Assert.Equal("Test", content);
             }
         }
     }

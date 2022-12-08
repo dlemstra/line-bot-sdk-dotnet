@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class UriActionTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var action = new UriAction
@@ -20,8 +19,8 @@ namespace Line.Tests
                     Url = new Uri("http://foo.bar")
                 };
 
-                string serialized = JsonSerializer.SerializeObject(action);
-                Assert.AreEqual(@"{""type"":""uri"",""label"":""Foo"",""uri"":""http://foo.bar""}", serialized);
+                var serialized = JsonSerializer.SerializeObject(action);
+                Assert.Equal(@"{""type"":""uri"",""label"":""Foo"",""uri"":""http://foo.bar""}", serialized);
             }
         }
     }

@@ -2,20 +2,19 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class UnixDateTimeConverterTests
     {
-        [TestClass]
         public class TheReadJsonMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTypeIsNotInteger()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
                 ExceptionAssert.Throws<InvalidOperationException>("Only integer is supported.", () =>
                 {
@@ -23,28 +22,28 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnEpochUtcWhenValueIsZero()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
-                DateTime value = JsonConvert.DeserializeObject<DateTime>("0", converter);
+                var value = JsonConvert.DeserializeObject<DateTime>("0", converter);
 
-                DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0);
-                Assert.AreEqual(epoch, value);
-                Assert.AreEqual(DateTimeKind.Utc, value.Kind);
+                var epoch = new DateTime(1970, 1, 1, 0, 0, 0);
+                Assert.Equal(epoch, value);
+                Assert.Equal(DateTimeKind.Utc, value.Kind);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnEpochUtcPlusTwoSecondsWhenValueIs2000()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
-                DateTime value = JsonConvert.DeserializeObject<DateTime>("2000", converter);
+                var value = JsonConvert.DeserializeObject<DateTime>("2000", converter);
 
-                DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 2);
-                Assert.AreEqual(epoch, value);
-                Assert.AreEqual(DateTimeKind.Utc, value.Kind);
+                var epoch = new DateTime(1970, 1, 1, 0, 0, 2);
+                Assert.Equal(epoch, value);
+                Assert.Equal(DateTimeKind.Utc, value.Kind);
             }
         }
     }

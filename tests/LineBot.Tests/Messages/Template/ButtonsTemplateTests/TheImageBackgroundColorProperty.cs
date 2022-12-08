@@ -2,19 +2,18 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
-        [TestClass]
         public class TheImageBackgroundColorProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsNull()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should be 7 characters long.", () =>
                 {
@@ -22,10 +21,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsToLong()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should be 7 characters long.", () =>
                 {
@@ -33,10 +32,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueNotStartsWithNumberSign()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should start with #.", () =>
                 {
@@ -44,10 +43,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -55,10 +54,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid2()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -66,10 +65,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid3()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -77,10 +76,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid4()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -88,10 +87,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid5()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -99,10 +98,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid6()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -110,15 +109,15 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldUppercaseTheValue()
             {
-                ButtonsTemplate template = new ButtonsTemplate
+                var template = new ButtonsTemplate
                 {
                     ImageBackgroundColor = "#ff00FF"
                 };
 
-                Assert.AreEqual("#FF00FF", template.ImageBackgroundColor);
+                Assert.Equal("#FF00FF", template.ImageBackgroundColor);
             }
         }
     }

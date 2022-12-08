@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapMessageActionTests
     {
-        [TestClass]
         public class TheTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var action = new ImagemapMessageAction();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var action = new ImagemapMessageAction();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan400Chars()
             {
                 var action = new ImagemapMessageAction();
@@ -44,17 +43,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs400Chars()
             {
-                string value = new string('x', 400);
+                var value = new string('x', 400);
 
                 var action = new ImagemapMessageAction()
                 {
                     Text = value
                 };
 
-                Assert.AreEqual(value, action.Text);
+                Assert.Equal(value, action.Text);
             }
         }
     }

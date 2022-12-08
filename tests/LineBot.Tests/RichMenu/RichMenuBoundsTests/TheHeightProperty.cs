@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuBoundsTests
     {
-        [TestClass]
         public class TheHeightProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsBiggerThan1686()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -19,7 +18,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<InvalidOperationException>("The height cannot be bigger than 1686.", () => { richMenuBounds.Height = 1687; });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1686()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -27,10 +26,10 @@ namespace Line.Tests
                     Height = 1686
                 };
 
-                Assert.AreEqual(1686, richMenuBounds.Height);
+                Assert.Equal(1686, richMenuBounds.Height);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsLessThan1()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -38,7 +37,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<InvalidOperationException>("The height cannot be less than 1.", () => { richMenuBounds.Height = 0; });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -46,10 +45,10 @@ namespace Line.Tests
                     Height = 1
                 };
 
-                Assert.AreEqual(1, richMenuBounds.Height);
+                Assert.Equal(1, richMenuBounds.Height);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValuePlusYIsBiggerThan1686()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -61,7 +60,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValuePlusYIs1686()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -70,8 +69,8 @@ namespace Line.Tests
                     Height = 1486
                 };
 
-                Assert.AreEqual(200, richMenuBounds.Y);
-                Assert.AreEqual(1486, richMenuBounds.Height);
+                Assert.Equal(200, richMenuBounds.Y);
+                Assert.Equal(1486, richMenuBounds.Height);
             }
         }
     }

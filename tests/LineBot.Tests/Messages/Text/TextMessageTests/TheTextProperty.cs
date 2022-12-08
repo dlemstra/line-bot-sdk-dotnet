@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TextMessageTests
     {
-        [TestClass]
         public class TheTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var message = new TextMessage();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var message = new TextMessage();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan2000Chars()
             {
                 var message = new TextMessage();
@@ -44,7 +43,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs2000Chars()
             {
                 var value = new string('x', 2000);
@@ -54,7 +53,7 @@ namespace Line.Tests
                     Text = value
                 };
 
-                Assert.AreEqual(value, message.Text);
+                Assert.Equal(value, message.Text);
             }
         }
     }

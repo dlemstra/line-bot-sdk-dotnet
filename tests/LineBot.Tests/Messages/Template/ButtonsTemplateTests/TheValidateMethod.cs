@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
-        [TestClass]
         public class TheValidateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenTextIsNull()
             {
                 ITemplate template = new ButtonsTemplate()
@@ -30,7 +29,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionsIsNull()
             {
                 ITemplate template = new ButtonsTemplate()
@@ -46,7 +45,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenActionsIsInvalid()
             {
                 ITemplate template = new ButtonsTemplate()
@@ -66,7 +65,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValid()
             {
                 ITemplate template = new ButtonsTemplate()

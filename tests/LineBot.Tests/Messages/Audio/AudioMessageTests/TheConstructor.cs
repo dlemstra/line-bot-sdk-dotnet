@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class AudioMessageTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var message = new AudioMessage()
@@ -21,25 +20,25 @@ namespace Line.Tests
                 };
 
                 var serialized = JsonSerializer.SerializeObject(message);
-                Assert.AreEqual(@"{""type"":""audio"",""originalContentUrl"":""https://foo.url"",""duration"":10000}", serialized);
+                Assert.Equal(@"{""type"":""audio"",""originalContentUrl"":""https://foo.url"",""duration"":10000}", serialized);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetTheProperties()
             {
                 var message = new AudioMessage(new Uri("https://foo.url"), 1000);
 
-                Assert.AreEqual("https://foo.url/", message.Url.ToString());
-                Assert.AreEqual(1000, message.Duration);
+                Assert.Equal("https://foo.url/", message.Url.ToString());
+                Assert.Equal(1000, message.Duration);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldConvertStringUrl()
             {
                 var message = new AudioMessage("https://foo.url", 1000);
 
-                Assert.AreEqual("https://foo.url/", message.Url.ToString());
-                Assert.AreEqual(1000, message.Duration);
+                Assert.Equal("https://foo.url/", message.Url.ToString());
+                Assert.Equal(1000, message.Duration);
             }
         }
     }

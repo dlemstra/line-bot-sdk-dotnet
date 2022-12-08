@@ -3,16 +3,15 @@
 
 using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuTests
     {
-        [TestClass]
         public class TheAreasProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
@@ -23,7 +22,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var richMenuArea = new RichMenuArea
@@ -42,7 +41,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenLengthOfValueMoreThan20()
             {
                 var richMenuArea = new RichMenuArea
@@ -61,7 +60,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenLengthOfValueIs20()
             {
                 var richMenuArea = new RichMenuArea
@@ -75,7 +74,7 @@ namespace Line.Tests
                 var richMenu = new RichMenu();
                 richMenu.Areas = value;
 
-                Assert.AreEqual(value, richMenu.Areas);
+                Assert.Equal(value, richMenu.Areas);
             }
         }
     }

@@ -5,58 +5,57 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class HttpClientFactoryTests
     {
-        [TestClass]
         public class TheCreateMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldReturnNewInstance()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = nameof(ShouldReturnNewInstance)
                 };
 
-                HttpClient clientA = HttpClientFactory.Create(configuration, null);
-                HttpClient clientB = HttpClientFactory.Create(configuration, null);
+                var clientA = HttpClientFactory.Create(configuration, null);
+                var clientB = HttpClientFactory.Create(configuration, null);
 
-                Assert.AreNotEqual(clientA, clientB);
+                Assert.NotEqual(clientA, clientB);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldReturnInitializedHttpClient()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = nameof(ShouldReturnInitializedHttpClient)
                 };
 
-                HttpClient client = HttpClientFactory.Create(configuration, null);
+                var client = HttpClientFactory.Create(configuration, null);
 
-                Assert.AreEqual(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
-                string authorization = client.DefaultRequestHeaders.GetValues("Authorization").First();
-                Assert.AreEqual("Bearer " + nameof(ShouldReturnInitializedHttpClient), authorization);
+                Assert.Equal(new Uri("https://api.line.me/v2/bot/"), client.BaseAddress);
+                var authorization = client.DefaultRequestHeaders.GetValues("Authorization").First();
+                Assert.Equal("Bearer " + nameof(ShouldReturnInitializedHttpClient), authorization);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetInnerHandlerToLineBotLogger()
             {
-                LineConfiguration configuration = new LineConfiguration()
+                var configuration = new LineConfiguration()
                 {
                     ChannelAccessToken = nameof(ShouldReturnInitializedHttpClient)
                 };
 
-                HttpClient client = HttpClientFactory.Create(configuration, null);
+                var client = HttpClientFactory.Create(configuration, null);
 
-                FieldInfo field = client.GetType().BaseType.GetRuntimeFields().Where(f => f.Name == "_handler").First();
-                LoggingDelegatingHandler logger = field.GetValue(client) as LoggingDelegatingHandler;
-                Assert.IsNotNull(logger);
-                Assert.IsInstanceOfType(logger.InnerHandler, typeof(HttpClientHandler));
+                var field = client.GetType().BaseType.GetRuntimeFields().Where(f => f.Name == "_handler").First();
+                var logger = field.GetValue(client) as LoggingDelegatingHandler;
+                Assert.NotNull(logger);
+                Assert.IsType<HttpClientHandler>(logger.InnerHandler);
             }
         }
     }

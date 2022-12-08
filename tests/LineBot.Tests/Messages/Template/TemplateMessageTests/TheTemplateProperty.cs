@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TemplateMessageTests
     {
-        [TestClass]
         public class TheTemplateProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var message = new TemplateMessage();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsButtonsTemplate()
             {
                 var message = new TemplateMessage()
@@ -31,7 +30,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsConfirmTemplate()
             {
                 var message = new TemplateMessage()
@@ -40,7 +39,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsCarouselTemplate()
             {
                 var message = new TemplateMessage()
@@ -49,7 +48,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsImageCarouselTemplate()
             {
                 var message = new TemplateMessage()
@@ -58,7 +57,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsInvalid()
             {
                 var message = new TemplateMessage();

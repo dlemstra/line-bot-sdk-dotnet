@@ -4,16 +4,15 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheCreateRichMenuMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ShouldThrowExceptionWhenRichMenuIsNull()
             {
                 var bot = TestConfiguration.CreateBot();
@@ -24,7 +23,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldThrowExceptionWhenRichMenuIsInvalid()
             {
                 var richMenu = new RichMenu();
@@ -37,7 +36,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldThrowExceptionWhenResponseIsError()
             {
                 var richMenu = CreateRichMenu();
@@ -52,8 +51,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Whitespace)]
+            [Fact]
             public async Task ShouldReturnNullWhenResponseContainsWhitespace()
             {
                 var richMenu = CreateRichMenu();
@@ -62,10 +60,10 @@ namespace Line.Tests
                 var bot = TestConfiguration.CreateBot(httpClient);
                 var richMenuId = await bot.CreateRichMenu(richMenu);
 
-                Assert.IsNull(richMenuId);
+                Assert.Null(richMenuId);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldCreateRichMenu()
             {
                 var richMenu = CreateRichMenu();
@@ -76,13 +74,13 @@ namespace Line.Tests
                 var bot = TestConfiguration.CreateBot(httpClient);
                 var result = await bot.CreateRichMenu(richMenu);
 
-                Assert.AreEqual("/richmenu", httpClient.RequestPath);
+                Assert.Equal("/richmenu", httpClient.RequestPath);
 
-                string postedData =
+                var postedData =
                     @"{""areas"":[{""action"":{""type"":""uri"",""label"":""testLabel"",""uri"":""http://www.google.com""},""bounds"":{""x"":11,""y"":12,""width"":110,""height"":120}},{""action"":{""type"":""uri"",""label"":""testLabel2"",""uri"":""http://www.bing.com""},""bounds"":{""x"":21,""y"":22,""width"":210,""height"":220}}],""chatBarText"":""testChatBarTxt"",""name"":""testName"",""selected"":false,""size"":{""width"":2500,""height"":1686}}";
-                Assert.AreEqual(postedData, httpClient.PostedData);
+                Assert.Equal(postedData, httpClient.PostedData);
 
-                Assert.AreEqual(result, "richmenu-801b2cd26b2f13587329ed501d279d27");
+                Assert.Equal("richmenu-801b2cd26b2f13587329ed501d279d27", result);
             }
 
             private static RichMenu CreateRichMenu()

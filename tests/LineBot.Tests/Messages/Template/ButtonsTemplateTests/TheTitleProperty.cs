@@ -2,28 +2,27 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ButtonsTemplateTests
     {
-        [TestClass]
         public class TheTitleProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
-                ButtonsTemplate template = new ButtonsTemplate
+                var template = new ButtonsTemplate
                 {
                     Title = null
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan400Chars()
             {
-                ButtonsTemplate template = new ButtonsTemplate();
+                var template = new ButtonsTemplate();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The title cannot be longer than 400 characters.", () =>
                 {
@@ -31,17 +30,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs400Chars()
             {
-                string value = new string('x', 400);
+                var value = new string('x', 400);
 
-                ButtonsTemplate template = new ButtonsTemplate()
+                var template = new ButtonsTemplate()
                 {
                     Title = value
                 };
 
-                Assert.AreEqual(value, template.Title);
+                Assert.Equal(value, template.Title);
             }
         }
     }

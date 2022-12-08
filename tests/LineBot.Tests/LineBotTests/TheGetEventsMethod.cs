@@ -5,17 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
-        [DeploymentItem(JsonDocuments.Events.Webhook)]
         public class TheGetEventsMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ShouldLogRequest()
             {
                 var logger = new TestLogger();
@@ -29,10 +27,10 @@ namespace Line.Tests
                 var bytes = await File.ReadAllBytesAsync(JsonDocuments.Events.Webhook);
                 var expected = Encoding.UTF8.GetString(bytes).Substring(1); // Skip preamable.
 
-                Assert.AreEqual(expected, actual);
+                Assert.Equal(expected, actual);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldHaveDestination()
             {
                 var bot = TestConfiguration.CreateBot();
@@ -40,10 +38,10 @@ namespace Line.Tests
 
                 var events = await bot.GetEvents(request);
 
-                Assert.AreEqual("xxxxxxxxxx", events.Destination);
+                Assert.Equal("xxxxxxxxxx", events.Destination);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldHaveDestinationWhenEventsNull()
             {
                 var bot = TestConfiguration.CreateBot();
@@ -51,9 +49,9 @@ namespace Line.Tests
 
                 var events = await bot.GetEvents(request);
 
-                Assert.IsNotNull(events.Events);
-                Assert.AreEqual(0, events.Events.Count());
-                Assert.AreEqual("xxxxxxxxxx", events.Destination);
+                Assert.NotNull(events.Events);
+                Assert.Empty(events.Events);
+                Assert.Equal("xxxxxxxxxx", events.Destination);
             }
         }
     }

@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImagemapAreaTests
     {
-        [TestClass]
         public class TheXProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueBelowZero()
             {
                 var area = new ImagemapArea();

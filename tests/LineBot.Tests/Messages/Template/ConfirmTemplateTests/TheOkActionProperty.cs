@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ConfirmTemplateTests
     {
-        [TestClass]
         public class TheOkActionProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var template = new ConfirmTemplate();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNotNull()
             {
                 var action = new UriAction { Label = "testLabel2", Url = new Uri("http://www.bing.com") };
@@ -32,10 +31,10 @@ namespace Line.Tests
                     OkAction = action
                 };
 
-                Assert.AreEqual(action, confirmTemplate.OkAction);
+                Assert.Equal(action, confirmTemplate.OkAction);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsInvalidType()
             {
                 var template = new ConfirmTemplate();

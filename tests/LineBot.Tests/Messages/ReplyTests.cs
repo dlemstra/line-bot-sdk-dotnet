@@ -5,79 +5,78 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
-    [TestClass]
     public class ReplyTests
     {
-        [TestMethod]
+        [Fact]
         public async Task Reply_ReplyTokenIsNull_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("replyToken", async () =>
             {
                 await bot.Reply((string)null, new TextMessage() { Text = "Test" });
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_ReplyTokenIsEmpty_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("replyToken", async () =>
             {
                 await bot.Reply(string.Empty, new TextMessage() { Text = "Test" });
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_TokenIsNull_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("token", async () =>
             {
                 await bot.Reply((IReplyToken)null, new TextMessage() { Text = "Test" });
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_MessagesIsNull_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", null);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_EnumerableMessagesIsNull_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", (IEnumerable<ISendMessage>)null);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_NoMessages_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentEmptyExceptionAsync("messages", async () =>
             {
                 await bot.Reply("token", new TextMessage[] { });
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_ErrorResponse_ThrowsException()
         {
-            TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
+            var httpClient = TestHttpClient.ThatReturnsAnError();
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
 
             await ExceptionAssert.ThrowsUnknownError(async () =>
             {
@@ -85,10 +84,10 @@ namespace Line.Tests
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_TooManyMessages_ThrowsException()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
 
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>("The maximum number of messages is 5.", async () =>
             {
@@ -96,74 +95,74 @@ namespace Line.Tests
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_CorrectInput_CallsApi()
         {
-            TestHttpClient httpClient = TestHttpClient.Create();
+            var httpClient = TestHttpClient.Create();
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply("token", new TextMessage("Test1"), new TextMessage("Test2"));
 
-            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
+            var postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""Test1""},{""type"":""text"",""text"":""Test2""}]}";
 
-            Assert.AreEqual("/message/reply", httpClient.RequestPath);
-            Assert.AreEqual(postedData, httpClient.PostedData);
+            Assert.Equal("/message/reply", httpClient.RequestPath);
+            Assert.Equal(postedData, httpClient.PostedData);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Push_WithEnumerable_CallsApi()
         {
-            TestHttpClient httpClient = TestHttpClient.Create();
+            var httpClient = TestHttpClient.Create();
 
-            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
+            var messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply("token", messages);
 
-            string postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
+            var postedData = @"{""replyToken"":""token"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
-            Assert.AreEqual("/message/reply", httpClient.RequestPath);
-            Assert.AreEqual(postedData, httpClient.PostedData);
+            Assert.Equal("/message/reply", httpClient.RequestPath);
+            Assert.Equal(postedData, httpClient.PostedData);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_WithTokenAndEnumerableMessagesIsNull_CallsApi()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
+            var bot = TestConfiguration.CreateBot();
             await ExceptionAssert.ThrowsArgumentNullExceptionAsync("messages", async () =>
             {
                 await bot.Reply(new TestMessage(), (IEnumerable<ISendMessage>)null);
             });
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_WithToken_CallsApi()
         {
-            TestHttpClient httpClient = TestHttpClient.Create();
+            var httpClient = TestHttpClient.Create();
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply(new TestMessage(), new TextMessage("FooBar"));
 
-            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
+            var postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""}]}";
 
-            Assert.AreEqual("/message/reply", httpClient.RequestPath);
-            Assert.AreEqual(postedData, httpClient.PostedData);
+            Assert.Equal("/message/reply", httpClient.RequestPath);
+            Assert.Equal(postedData, httpClient.PostedData);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task Reply_WithTokenAndEnumerable_CallsApi()
         {
-            TestHttpClient httpClient = TestHttpClient.Create();
+            var httpClient = TestHttpClient.Create();
 
-            IEnumerable<TextMessage> messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
+            var messages = Enumerable.Repeat(new TextMessage("FooBar"), 2);
 
-            ILineBot bot = TestConfiguration.CreateBot(httpClient);
+            var bot = TestConfiguration.CreateBot(httpClient);
             await bot.Reply(new TestMessage(), messages);
 
-            string postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
+            var postedData = @"{""replyToken"":""testReplyToken"",""messages"":[{""type"":""text"",""text"":""FooBar""},{""type"":""text"",""text"":""FooBar""}]}";
 
-            Assert.AreEqual("/message/reply", httpClient.RequestPath);
-            Assert.AreEqual(postedData, httpClient.PostedData);
+            Assert.Equal("/message/reply", httpClient.RequestPath);
+            Assert.Equal(postedData, httpClient.PostedData);
         }
     }
 }

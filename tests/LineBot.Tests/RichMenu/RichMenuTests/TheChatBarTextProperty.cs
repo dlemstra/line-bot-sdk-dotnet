@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuTests
     {
-        [TestClass]
         public class TheChatBarTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var richMenu = new RichMenu();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsWhitespace()
             {
                 var richMenu = new RichMenu();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan14Chars()
             {
                 var richMenu = new RichMenu();
@@ -44,7 +43,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs14Chars()
             {
                 var value = new string('x', 14);
@@ -54,7 +53,7 @@ namespace Line.Tests
                     ChatBarText = value
                 };
 
-                Assert.AreEqual(value, richMenu.ChatBarText);
+                Assert.Equal(value, richMenu.ChatBarText);
             }
         }
     }

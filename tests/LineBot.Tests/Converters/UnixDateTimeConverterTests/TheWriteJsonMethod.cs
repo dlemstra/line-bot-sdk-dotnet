@@ -2,19 +2,18 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class EnumConverterTests
     {
-        [TestClass]
         public class UnixDateTimeConverterTests
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowException()
             {
-                UnixDateTimeConverter converter = new UnixDateTimeConverter();
+                var converter = new UnixDateTimeConverter();
 
                 ExceptionAssert.Throws<NotSupportedException>(() =>
                 {

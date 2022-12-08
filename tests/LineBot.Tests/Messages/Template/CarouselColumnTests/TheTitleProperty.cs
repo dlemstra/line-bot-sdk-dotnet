@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class TheThumbnailUrlProperty
     {
-        [TestClass]
         public class TheTitleProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var column = new CarouselColumn
@@ -20,7 +19,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan40Chars()
             {
                 var column = new CarouselColumn();
@@ -31,7 +30,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs40Chars()
             {
                 var value = new string('x', 40);
@@ -41,7 +40,7 @@ namespace Line.Tests
                     Title = value
                 };
 
-                Assert.AreEqual(value, column.Title);
+                Assert.Equal(value, column.Title);
             }
         }
     }

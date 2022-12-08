@@ -3,7 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
@@ -12,8 +12,8 @@ namespace Line.Tests
         public static TException Throws<TException>(string message, Action action)
             where TException : Exception
         {
-            TException exception = Throws<TException>(action);
-            Assert.IsNotNull(exception.Message);
+            var exception = Throws<TException>(action);
+            Assert.NotNull(exception.Message);
             if (!exception.Message.StartsWith(message))
                 Assert.Fail($"The message `{exception.Message}` does not start with `{message}`.");
 
@@ -23,8 +23,8 @@ namespace Line.Tests
         public static async Task<TException> ThrowsAsync<TException>(string message, Func<Task> action)
             where TException : Exception
         {
-            TException exception = await ThrowsAsync<TException>(action);
-            Assert.IsNotNull(exception.Message);
+            var exception = await ThrowsAsync<TException>(action);
+            Assert.NotNull(exception.Message);
             if (!exception.Message.StartsWith(message))
                 Assert.Fail($"The message `{exception.Message}` does not start with `{message}`.");
 
@@ -34,31 +34,31 @@ namespace Line.Tests
         public static void ThrowsArgumentNullException(string paramName, Action action)
         {
             ArgumentException exception = Throws<ArgumentNullException>(action);
-            Assert.AreEqual(paramName, exception.ParamName);
+            Assert.Equal(paramName, exception.ParamName);
         }
 
         public static async Task ThrowsArgumentNullExceptionAsync(string paramName, Func<Task> action)
         {
             ArgumentException exception = await ThrowsAsync<ArgumentNullException>(action);
-            Assert.AreEqual(paramName, exception.ParamName);
+            Assert.Equal(paramName, exception.ParamName);
         }
 
         public static void ThrowsArgumentEmptyException(string paramName, Action action)
         {
-            ArgumentException exception = Throws<ArgumentException>("Value cannot be empty.", action);
-            Assert.AreEqual(paramName, exception.ParamName);
+            var exception = Throws<ArgumentException>("Value cannot be empty.", action);
+            Assert.Equal(paramName, exception.ParamName);
         }
 
         public static async Task ThrowsArgumentEmptyExceptionAsync(string paramName, Func<Task> action)
         {
-            ArgumentException exception = await ThrowsAsync<ArgumentException>("Value cannot be empty.", action);
-            Assert.AreEqual(paramName, exception.ParamName);
+            var exception = await ThrowsAsync<ArgumentException>("Value cannot be empty.", action);
+            Assert.Equal(paramName, exception.ParamName);
         }
 
         public static void ThrowsArgumentException(string paramName, string message, Action action)
         {
-            ArgumentException exception = Throws<ArgumentException>(message, action);
-            Assert.AreEqual(paramName, exception.ParamName);
+            var exception = Throws<ArgumentException>(message, action);
+            Assert.Equal(paramName, exception.ParamName);
         }
 
         public static async Task<LineBotException> ThrowsUnknownError(Func<Task> action)
@@ -105,16 +105,16 @@ namespace Line.Tests
         private static TException AssertNotThrown<TException>()
             where TException : Exception
         {
-            Assert.Fail("Exception of type {0} was not thrown.", typeof(TException).Name);
+            Assert.Fail($"Exception of type {typeof(TException).Name} was not thrown.");
             return null;
         }
 
         private static TException CheckException<TException>(TException exception)
             where TException : Exception
         {
-            Type type = exception.GetType();
+            var type = exception.GetType();
             if (type != typeof(TException))
-                Assert.Fail("Exception of type {0} was not thrown an exception of type {1} was thrown.", typeof(TException).Name, type.Name);
+                Assert.Fail($"Exception of type {typeof(TException).Name} was not thrown an exception of type {type.Name} was thrown.");
 
             return exception;
         }

@@ -5,28 +5,27 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class StreamExtensionsTests
     {
-        [TestClass]
         public class ToArrayMethod
         {
             private static readonly byte[] Utf8Preamable = Encoding.UTF8.GetPreamble();
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnNullWhenStreamIsEmpty()
             {
                 using (var stream = new TestStream())
                 {
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNull(bytes);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.Null(bytes);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenStreamStartsWithPreamable()
             {
                 using (var stream = new TestStream())
@@ -34,15 +33,15 @@ namespace Line.Tests
                     stream.Write(Utf8Preamable, 0, 2);
                     stream.Position = 0;
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(2, bytes.Length);
-                    Assert.AreEqual(Utf8Preamable[0], bytes[0]);
-                    Assert.AreEqual(Utf8Preamable[1], bytes[1]);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(2, bytes.Length);
+                    Assert.Equal(Utf8Preamable[0], bytes[0]);
+                    Assert.Equal(Utf8Preamable[1], bytes[1]);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnEmptyArrayWhenStreamOnlyContainsPreamable()
             {
                 using (var stream = new TestStream())
@@ -50,55 +49,55 @@ namespace Line.Tests
                     stream.Write(Utf8Preamable, 0, Utf8Preamable.Length);
                     stream.Position = 0;
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(0, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Empty(bytes);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenStreamContainsData()
             {
                 using (var stream = new TestStream())
                 {
-                    byte[] data = new byte[4] { 68, 73, 82, 75 };
+                    var data = new byte[4] { 68, 73, 82, 75 };
                     stream.Write(data, 0, data.Length);
                     stream.Position = 0;
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(4, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(4, bytes.Length);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenStreamContains9000Bytes()
             {
                 using (var stream = new TestStream())
                 {
-                    byte[] data = Enumerable.Repeat((byte)68, 9000).ToArray();
+                    var data = Enumerable.Repeat((byte)68, 9000).ToArray();
                     stream.Write(data, 0, data.Length);
                     stream.Position = 0;
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(9000, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(9000, bytes.Length);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnNullWhenNonSeekableStreamIsEmpty()
             {
                 using (var stream = new TestStream())
                 {
                     stream.DisableSeeking();
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNull(bytes);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.Null(bytes);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenNonSeekableStreamStartsWithPreamable()
             {
                 using (var stream = new TestStream())
@@ -108,15 +107,15 @@ namespace Line.Tests
 
                     stream.DisableSeeking();
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(2, bytes.Length);
-                    Assert.AreEqual(Utf8Preamable[0], bytes[0]);
-                    Assert.AreEqual(Utf8Preamable[1], bytes[1]);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(2, bytes.Length);
+                    Assert.Equal(Utf8Preamable[0], bytes[0]);
+                    Assert.Equal(Utf8Preamable[1], bytes[1]);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnEmptyArrayWhenNonSeekableStreamOnlyContainsPreamable()
             {
                 using (var stream = new TestStream())
@@ -126,43 +125,43 @@ namespace Line.Tests
 
                     stream.DisableSeeking();
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(0, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Empty(bytes);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenNonSeekableStreamContainsData()
             {
                 using (var stream = new TestStream())
                 {
-                    byte[] data = new byte[4] { 68, 73, 82, 75 };
+                    var data = new byte[4] { 68, 73, 82, 75 };
                     stream.Write(data, 0, data.Length);
                     stream.Position = 0;
 
                     stream.DisableSeeking();
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(4, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(4, bytes.Length);
                 }
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ShouldReturnArrayWhenNonSeekableStreamContains9000Bytes()
             {
                 using (var stream = new TestStream())
                 {
-                    byte[] data = Enumerable.Repeat((byte)68, 9000).ToArray();
+                    var data = Enumerable.Repeat((byte)68, 9000).ToArray();
                     stream.Write(data, 0, data.Length);
                     stream.Position = 0;
 
                     stream.DisableSeeking();
 
-                    byte[] bytes = await stream.ToArrayAsync();
-                    Assert.IsNotNull(bytes);
-                    Assert.AreEqual(9000, bytes.Length);
+                    var bytes = await stream.ToArrayAsync();
+                    Assert.NotNull(bytes);
+                    Assert.Equal(9000, bytes.Length);
                 }
             }
 

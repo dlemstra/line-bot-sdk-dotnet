@@ -2,53 +2,49 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheGetDefaultRichMenuMethod
         {
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.RichMenu.DefaultRichMenuId)]
+            [Fact]
             public async Task ReturnsIdWhenResponseIsCorrect()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.DefaultRichMenuId);
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
+                var httpClient = TestHttpClient.Create(JsonDocuments.RichMenu.DefaultRichMenuId);
+                var bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
-                Assert.AreEqual("110FB567-E204-4131-9669-DB828CE65D2F", id);
+                Assert.Equal("110FB567-E204-4131-9669-DB828CE65D2F", id);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.EmptyObject)]
+            [Fact]
             public async Task ReturnsNullIdWhenResponseContainsEmptyObject()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.EmptyObject);
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
+                var httpClient = TestHttpClient.Create(JsonDocuments.EmptyObject);
+                var bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
-                Assert.IsNull(id);
+                Assert.Null(id);
             }
 
-            [TestMethod]
-            [DeploymentItem(JsonDocuments.Whitespace)]
+            [Fact]
             public async Task ReturnsNullIdWhenResponseContainsWhitespace()
             {
-                TestHttpClient httpClient = TestHttpClient.Create(JsonDocuments.Whitespace);
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
+                var httpClient = TestHttpClient.Create(JsonDocuments.Whitespace);
+                var bot = TestConfiguration.CreateBot(httpClient);
                 var id = await bot.GetDefaultRichMenu();
 
-                Assert.IsNull(id);
+                Assert.Null(id);
             }
 
-            [TestMethod]
+            [Fact]
             public async Task ThrowsExceptionWhenResponseIsError()
             {
-                TestHttpClient httpClient = TestHttpClient.ThatReturnsAnError();
-                ILineBot bot = TestConfiguration.CreateBot(httpClient);
+                var httpClient = TestHttpClient.ThatReturnsAnError();
+                var bot = TestConfiguration.CreateBot(httpClient);
 
                 await ExceptionAssert.ThrowsAsync<LineBotException>("Unknown error", async () =>
                 {

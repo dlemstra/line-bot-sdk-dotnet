@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImageCarouselTemplateTests
     {
-        [TestClass]
         public class TheConvertMethod
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenColumnsIsNull()
             {
                 ITemplate template = new ImageCarouselTemplate();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenColumnsIsInvalid()
             {
                 ITemplate template = new ImageCarouselTemplate()

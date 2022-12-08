@@ -4,19 +4,17 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheGetRichMenuImageMethod
         {
-            [TestClass]
             public class WithRichMenuId
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -27,7 +25,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -38,7 +36,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var richMenuId = Guid.NewGuid().ToString();
@@ -48,12 +46,12 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     var result = await bot.GetRichMenuImage(richMenuId);
 
-                    Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                    Assert.AreEqual($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
-                    CollectionAssert.AreEqual(data, result);
+                    Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+                    Assert.Equal($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
+                    Assert.Equal(data, result);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var richMenuId = Guid.NewGuid().ToString();
@@ -68,10 +66,9 @@ namespace Line.Tests
                 }
             }
 
-            [TestClass]
             public class WithRichMenuResponse
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuResponseIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -82,7 +79,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -93,7 +90,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var richMenuResponse = new RichMenuResponse()
@@ -109,7 +106,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var richMenuId = Guid.NewGuid().ToString();
@@ -123,12 +120,12 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     var result = await bot.GetRichMenuImage(richMenuResponse);
 
-                    Assert.AreEqual(HttpMethod.Get, httpClient.RequestMethod);
-                    Assert.AreEqual($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
-                    CollectionAssert.AreEqual(data, result);
+                    Assert.Equal(HttpMethod.Get, httpClient.RequestMethod);
+                    Assert.Equal($"/richmenu/{richMenuId}/content", httpClient.RequestPath);
+                    Assert.Equal(data, result);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var richMenuResponse = new RichMenuResponse()

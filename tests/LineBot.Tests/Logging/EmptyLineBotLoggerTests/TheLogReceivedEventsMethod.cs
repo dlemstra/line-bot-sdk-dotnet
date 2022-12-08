@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class EmptyLineBotLoggerTests
     {
-        [TestClass]
         public class TheLogReceivedEventsMethod
         {
-            [TestMethod]
+            [Fact]
             public async Task ShouldDoNothing()
             {
                 var logger = new EmptyLineBotLogger();

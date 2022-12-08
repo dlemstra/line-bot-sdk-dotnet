@@ -1,61 +1,55 @@
 ﻿// Copyright Dirk Lemstra (https://github.com/dlemstra/line-bot-sdk-dotnet).
 // Licensed under the Apache License, Version 2.0.
 
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
-    [TestClass]
     public class LineEventTests
     {
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.EmptyObject)]
+        [Fact]
         public async Task GetEvents_EmptyObject_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.EmptyObject);
+            var bot = TestConfiguration.CreateBot();
+            var request = new TestHttpRequest(JsonDocuments.EmptyObject);
 
             var events = await bot.GetEvents(request);
-            Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.NotNull(events);
+            Assert.Empty(events);
         }
 
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Events.NoEvents)]
+        [Fact]
         public async Task GetEvents_NoEvents_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
+            var bot = TestConfiguration.CreateBot();
+            var request = new TestHttpRequest(JsonDocuments.Events.NoEvents);
 
             var events = await bot.GetEvents(request);
-            Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.NotNull(events);
+            Assert.Empty(events);
         }
 
-        [TestMethod]
-        [DeploymentItem(JsonDocuments.Whitespace)]
+        [Fact]
         public async Task GetEvents_Whitespace_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest(JsonDocuments.Whitespace);
+            var bot = TestConfiguration.CreateBot();
+            var request = new TestHttpRequest(JsonDocuments.Whitespace);
 
             var events = await bot.GetEvents(request);
-            Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.NotNull(events);
+            Assert.Empty(events);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetEvents_NoData_ReturnsEmptyEnumerable()
         {
-            ILineBot bot = TestConfiguration.CreateBot();
-            TestHttpRequest request = new TestHttpRequest();
+            var bot = TestConfiguration.CreateBot();
+            var request = new TestHttpRequest();
 
             var events = await bot.GetEvents(request);
-            Assert.IsNotNull(events);
-            Assert.AreEqual(0, events.Count());
+            Assert.NotNull(events);
+            Assert.Empty(events);
         }
     }
 }

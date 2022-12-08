@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class DateTimePickerActionTest
     {
-        [TestClass]
         public class TheModeProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldSetDateAndTimeWhenDateTimePickerActionModeIsDateTime()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.DateTime);
@@ -19,10 +18,10 @@ namespace Line.Tests
                 var min = new DateTime(2018, 10, 08, 10, 30, 0);
                 action.Min = min;
 
-                Assert.AreEqual(min, action.Min);
+                Assert.Equal(min, action.Min);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetDateOnlyWhenDateTimePickerActionModeIsDate()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -31,10 +30,10 @@ namespace Line.Tests
                 var minDateTime = new DateTime(2018, 10, 08, 10, 30, 0);
                 action.Min = minDateTime;
 
-                Assert.AreEqual(minDate, action.Min);
+                Assert.Equal(minDate, action.Min);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldSetTimeOnlyWhenDateTimePickerActionModeIsTime()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Time);
@@ -51,12 +50,12 @@ namespace Line.Tests
                 action.Max = maxDateTime;
                 action.Initial = initialDateTime;
 
-                Assert.AreEqual(minTime, action.Min);
-                Assert.AreEqual(maxTime, action.Max);
-                Assert.AreEqual(initialTime, action.Initial);
+                Assert.Equal(minTime, action.Min);
+                Assert.Equal(maxTime, action.Max);
+                Assert.Equal(initialTime, action.Initial);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMinAndMaxHaveDifferentTimesButModeIsDate()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date);
@@ -71,7 +70,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenMinAndMaxHaveDifferentDatesButModeIsTime()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Time);
@@ -86,7 +85,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldFormatDateTimesAsDateTimesWhenModeIsDateTime()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.DateTime)
@@ -98,12 +97,12 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 0, 0, 0)
                 };
 
-                string serialized = JsonSerializer.SerializeObject(action);
+                var serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""mode"":""datetime"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25T00:00"",""max"":""2018-01-24T23:59"",""min"":""2017-12-25T00:00""}", serialized);
+                Assert.Equal(@"{""mode"":""datetime"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25T00:00"",""max"":""2018-01-24T23:59"",""min"":""2017-12-25T00:00""}", serialized);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldFormatDateTimesAsDatesWhenModeIsDate()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Date)
@@ -115,12 +114,12 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 0, 0, 0)
                 };
 
-                string serialized = JsonSerializer.SerializeObject(action);
+                var serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""mode"":""date"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25"",""max"":""2018-01-24"",""min"":""2017-12-25""}", serialized);
+                Assert.Equal(@"{""mode"":""date"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""2017-12-25"",""max"":""2018-01-24"",""min"":""2017-12-25""}", serialized);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldFormatDateTimesAsTimesWhenModeIsTime()
             {
                 var action = new DateTimePickerAction(DateTimePickerMode.Time)
@@ -132,9 +131,9 @@ namespace Line.Tests
                     Min = new DateTime(2017, 12, 25, 13, 0, 0)
                 };
 
-                string serialized = JsonSerializer.SerializeObject(action);
+                var serialized = JsonSerializer.SerializeObject(action);
 
-                Assert.AreEqual(@"{""mode"":""time"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""14:00"",""max"":""16:00"",""min"":""13:00""}", serialized);
+                Assert.Equal(@"{""mode"":""time"",""type"":""datetimepicker"",""data"":""storeId=12345"",""label"":""Select date"",""initial"":""14:00"",""max"":""16:00"",""min"":""13:00""}", serialized);
             }
         }
     }

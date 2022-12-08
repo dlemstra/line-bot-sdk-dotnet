@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ConfirmTemplateTests
     {
-        [TestClass]
         public class TheTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsNull()
             {
                 var template = new ConfirmTemplate();
@@ -22,7 +21,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsEmpty()
             {
                 var template = new ConfirmTemplate();
@@ -33,7 +32,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan240Chars()
             {
                 var template = new ConfirmTemplate();
@@ -44,17 +43,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs240Chars()
             {
-                string value = new string('x', 240);
+                var value = new string('x', 240);
 
                 var template = new ConfirmTemplate()
                 {
                     Text = value
                 };
 
-                Assert.AreEqual(value, template.Text);
+                Assert.Equal(value, template.Text);
             }
         }
     }

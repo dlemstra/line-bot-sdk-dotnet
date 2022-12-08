@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class PostbackActionTest
     {
-        [TestClass]
         public class TheTextProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIsNull()
             {
                 var action = new PostbackAction
@@ -20,7 +19,7 @@ namespace Line.Tests
                 };
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan300Chars()
             {
                 var action = new PostbackAction();
@@ -31,7 +30,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs300Chars()
             {
                 var value = new string('x', 300);
@@ -41,7 +40,7 @@ namespace Line.Tests
                     Text = value
                 };
 
-                Assert.AreEqual(value, action.Text);
+                Assert.Equal(value, action.Text);
             }
         }
     }

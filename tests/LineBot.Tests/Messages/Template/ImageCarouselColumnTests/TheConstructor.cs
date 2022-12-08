@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class ImageCarouselColumnTests
     {
-        [TestClass]
         public class TheConstructor
         {
-            [TestMethod]
+            [Fact]
             public void ShouldCreateSerializeableObject()
             {
                 var column = new ImageCarouselColumn
@@ -21,7 +20,7 @@ namespace Line.Tests
                 };
 
                 var serialized = JsonSerializer.SerializeObject(column);
-                Assert.AreEqual(@"{""imageUrl"":""https://foo.bar"",""action"":{""type"":""uri""}}", serialized);
+                Assert.Equal(@"{""imageUrl"":""https://foo.bar"",""action"":{""type"":""uri""}}", serialized);
             }
         }
     }

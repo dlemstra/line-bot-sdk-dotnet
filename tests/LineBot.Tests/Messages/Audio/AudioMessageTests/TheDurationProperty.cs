@@ -2,19 +2,18 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class AudioMessageTests
     {
-        [TestClass]
         public class TheDurationProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsZero()
             {
-                AudioMessage message = new AudioMessage();
+                var message = new AudioMessage();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The duration should be at least 1 millisecond.", () =>
                 {
@@ -22,10 +21,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMinusOne()
             {
-                AudioMessage message = new AudioMessage();
+                var message = new AudioMessage();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The duration should be at least 1 millisecond.", () =>
                 {
@@ -33,10 +32,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsMoreThan59999()
             {
-                AudioMessage message = new AudioMessage();
+                var message = new AudioMessage();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The duration cannot be longer than 1 minute.", () =>
                 {
@@ -44,17 +43,17 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenUrlIs59999Milliseconds()
             {
-                int value = 59999;
+                var value = 59999;
 
-                AudioMessage message = new AudioMessage()
+                var message = new AudioMessage()
                 {
                     Duration = value
                 };
 
-                Assert.AreEqual(value, message.Duration);
+                Assert.Equal(value, message.Duration);
             }
         }
     }

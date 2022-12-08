@@ -4,19 +4,17 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class LineBotTests
     {
-        [TestClass]
         public class TheSetUserRichMenuMethod
         {
-            [TestClass]
             public class WithUserIdAndRichMenuId
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -27,7 +25,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsEmpty()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -38,7 +36,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -49,7 +47,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -60,7 +58,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var userId = Guid.NewGuid().ToString();
@@ -70,11 +68,11 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetUserRichMenu(userId, richMenuId);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/{userId}/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.Equal(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.Equal($"/user/{userId}/richmenu/{richMenuId}", httpClient.RequestPath);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var userId = Guid.NewGuid().ToString();
@@ -89,21 +87,20 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldReturnTheInstance()
                 {
                     var httpClient = TestHttpClient.Create();
                     var bot = TestConfiguration.CreateBot(httpClient);
 
                     var result = await bot.SetUserRichMenu("test", "test");
-                    Assert.AreSame(bot, result);
+                    Assert.Same(bot, result);
                 }
             }
 
-            [TestClass]
             public class WithUserAndRichMenuId
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -114,7 +111,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsNull()
                 {
                     var user = new TestUser()
@@ -130,7 +127,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsEmpty()
                 {
                     var user = new TestUser()
@@ -146,7 +143,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var user = new TestUser();
@@ -159,7 +156,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var user = new TestUser();
@@ -172,7 +169,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var user = new TestUser();
@@ -183,11 +180,11 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetUserRichMenu(user, richMenuId);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/{user.Id}/richmenu/{richMenuId}", httpClient.RequestPath);
+                    Assert.Equal(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.Equal($"/user/{user.Id}/richmenu/{richMenuId}", httpClient.RequestPath);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var user = new TestUser();
@@ -202,7 +199,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldReturnTheInstance()
                 {
                     var user = new TestUser();
@@ -211,14 +208,13 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
 
                     var result = await bot.SetUserRichMenu(user, "test");
-                    Assert.AreSame(bot, result);
+                    Assert.Same(bot, result);
                 }
             }
 
-            [TestClass]
             public class WithhUserIdAndRichMenuResponse
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsNull()
                 {
                     var richMenuResponse = new RichMenuResponse()
@@ -234,7 +230,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsEmpty()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -245,7 +241,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIsNull()
                 {
                     var bot = TestConfiguration.CreateBot();
@@ -256,7 +252,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var richMenu = new RichMenuResponse()
@@ -272,7 +268,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var richMenu = new RichMenuResponse()
@@ -288,7 +284,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var userId = Guid.NewGuid().ToString();
@@ -301,11 +297,11 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetUserRichMenu(userId, richMenu);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/{userId}/richmenu/{richMenu.Id}", httpClient.RequestPath);
+                    Assert.Equal(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.Equal($"/user/{userId}/richmenu/{richMenu.Id}", httpClient.RequestPath);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var userId = Guid.NewGuid().ToString();
@@ -323,7 +319,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldReturnTheInstance()
                 {
                     var richMenu = new RichMenuResponse()
@@ -335,14 +331,13 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
 
                     var result = await bot.SetUserRichMenu("test", richMenu);
-                    Assert.AreSame(bot, result);
+                    Assert.Same(bot, result);
                 }
             }
 
-            [TestClass]
             public class WithUserAndRichMenuResponse
             {
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIsNull()
                 {
                     var richMenuResponse = new RichMenuResponse()
@@ -358,7 +353,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsNull()
                 {
                     var user = new TestUser()
@@ -378,7 +373,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenUserIdIsEmpty()
                 {
                     var user = new TestUser()
@@ -398,7 +393,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIsNull()
                 {
                     var user = new TestUser();
@@ -411,7 +406,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsNull()
                 {
                     var user = new TestUser();
@@ -428,7 +423,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenRichMenuIdIsEmpty()
                 {
                     var user = new TestUser();
@@ -445,7 +440,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldCallTheCorrectApi()
                 {
                     var user = new TestUser();
@@ -458,11 +453,11 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
                     await bot.SetUserRichMenu(user, richMenu);
 
-                    Assert.AreEqual(HttpMethod.Post, httpClient.RequestMethod);
-                    Assert.AreEqual($"/user/{user.Id}/richmenu/{richMenu.Id}", httpClient.RequestPath);
+                    Assert.Equal(HttpMethod.Post, httpClient.RequestMethod);
+                    Assert.Equal($"/user/{user.Id}/richmenu/{richMenu.Id}", httpClient.RequestPath);
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldThrowExceptionWhenApiCallIsUnsuccessful()
                 {
                     var user = new TestUser();
@@ -480,7 +475,7 @@ namespace Line.Tests
                     });
                 }
 
-                [TestMethod]
+                [Fact]
                 public async Task ShouldReturnTheInstance()
                 {
                     var user = new TestUser();
@@ -493,7 +488,7 @@ namespace Line.Tests
                     var bot = TestConfiguration.CreateBot(httpClient);
 
                     var result = await bot.SetUserRichMenu(user, richMenu);
-                    Assert.AreSame(bot, result);
+                    Assert.Same(bot, result);
                 }
             }
         }

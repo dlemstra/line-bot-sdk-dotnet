@@ -9,7 +9,7 @@ namespace Line.Tests
     {
         public static string SerializeObject(object value)
         {
-            string serialized = JsonConvert.SerializeObject(
+            var serialized = JsonConvert.SerializeObject(
                 value,
                 Formatting.None,
                 new JsonSerializerSettings

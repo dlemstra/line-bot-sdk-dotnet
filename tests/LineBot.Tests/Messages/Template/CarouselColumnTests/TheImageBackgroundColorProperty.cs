@@ -2,19 +2,18 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class CarouselColumnTests
     {
-        [TestClass]
         public class TheImageBackgroundColorProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsNull()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should be 7 characters long.", () =>
                 {
@@ -22,10 +21,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsToLong()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should be 7 characters long.", () =>
                 {
@@ -33,10 +32,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueNotStartsWithNumberSign()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color should start with #.", () =>
                 {
@@ -44,10 +43,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -55,10 +54,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid2()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -66,10 +65,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid3()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -77,10 +76,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid4()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -88,10 +87,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid5()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -99,10 +98,10 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThowExceptionWhenValueIsInvalid6()
             {
-                CarouselColumn template = new CarouselColumn();
+                var template = new CarouselColumn();
 
                 ExceptionAssert.Throws<InvalidOperationException>("The color contains invalid characters.", () =>
                 {
@@ -110,15 +109,15 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldUppercaseTheValue()
             {
-                CarouselColumn template = new CarouselColumn
+                var template = new CarouselColumn
                 {
                     ImageBackgroundColor = "#ff00FF"
                 };
 
-                Assert.AreEqual("#FF00FF", template.ImageBackgroundColor);
+                Assert.Equal("#FF00FF", template.ImageBackgroundColor);
             }
         }
     }

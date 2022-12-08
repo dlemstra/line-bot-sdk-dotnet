@@ -2,16 +2,15 @@
 // Licensed under the Apache License, Version 2.0.
 
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Line.Tests
 {
     public partial class RichMenuBoundsTests
     {
-        [TestClass]
         public class TheWidthProperty
         {
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -19,7 +18,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<InvalidOperationException>("The width cannot be bigger than 2500.", () => { richMenuBounds.Width = 2501; });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs2500()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -27,10 +26,10 @@ namespace Line.Tests
                     Width = 2500
                 };
 
-                Assert.AreEqual(2500, richMenuBounds.Width);
+                Assert.Equal(2500, richMenuBounds.Width);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValueIsLessThan1()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -38,7 +37,7 @@ namespace Line.Tests
                 ExceptionAssert.Throws<InvalidOperationException>("The width cannot be less than 1.", () => { richMenuBounds.Width = 0; });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValueIs1()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -46,10 +45,10 @@ namespace Line.Tests
                     Width = 1
                 };
 
-                Assert.AreEqual(1, richMenuBounds.Width);
+                Assert.Equal(1, richMenuBounds.Width);
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldThrowExceptionWhenValuePlusXIsBiggerThan2500()
             {
                 var richMenuBounds = new RichMenuBounds();
@@ -61,7 +60,7 @@ namespace Line.Tests
                 });
             }
 
-            [TestMethod]
+            [Fact]
             public void ShouldNotThrowExceptionWhenValuePlusXIs2500()
             {
                 var richMenuBounds = new RichMenuBounds()
@@ -70,8 +69,8 @@ namespace Line.Tests
                     Width = 2300
                 };
 
-                Assert.AreEqual(200, richMenuBounds.X);
-                Assert.AreEqual(2300, richMenuBounds.Width);
+                Assert.Equal(200, richMenuBounds.X);
+                Assert.Equal(2300, richMenuBounds.Width);
             }
         }
     }

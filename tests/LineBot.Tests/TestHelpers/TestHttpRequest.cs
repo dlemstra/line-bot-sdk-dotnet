@@ -72,15 +72,15 @@ namespace Line.Tests
 
         private IHeaderDictionary CreateHeaders()
         {
-            TestHeaderDictionary headers = new TestHeaderDictionary();
+            var headers = new TestHeaderDictionary();
 
-            byte[] content = Body.ToArrayAsync().Result;
+            var content = Body.ToArrayAsync().Result;
 
-            byte[] key = Encoding.UTF8.GetBytes(TestConfiguration.Create().ChannelSecret);
+            var key = Encoding.UTF8.GetBytes(TestConfiguration.Create().ChannelSecret);
 
-            using (HMACSHA256 hmac = new HMACSHA256(key))
+            using (var hmac = new HMACSHA256(key))
             {
-                byte[] hash = hmac.ComputeHash(content);
+                var hash = hmac.ComputeHash(content);
 
                 headers.Add("X-Line-Signature", new StringValues(Convert.ToBase64String(hash)));
             }
