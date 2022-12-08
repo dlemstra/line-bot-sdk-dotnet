@@ -34,10 +34,10 @@ namespace Line
                 return buffer;
             }
 
-            int offset = 0;
-            int remaining = buffer.Length;
+            var offset = 0;
+            var remaining = buffer.Length;
 
-            int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
+            var length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
             remaining -= length;
 
             /* Ignore the UTF8 Preamable */
@@ -62,7 +62,7 @@ namespace Line
             var buffer = new byte[BufferSize];
             using (var memStream = new MemoryStream())
             {
-                int length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
+                var length = await self.ReadAsync(buffer, 0, Utf8Preamable.Length).ConfigureAwait(false);
                 if (length == 0)
                     return null;
 
@@ -81,7 +81,7 @@ namespace Line
 
         private static bool IsUtf8Preamable(byte[] content)
         {
-            for (int i = 0; i < Utf8Preamable.Length; i++)
+            for (var i = 0; i < Utf8Preamable.Length; i++)
             {
                 if (content[i] != Utf8Preamable[i])
                     return false;

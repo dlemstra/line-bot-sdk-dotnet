@@ -33,7 +33,7 @@ namespace Line
                 if (value is null)
                     throw new InvalidOperationException("The columns cannot be null.");
 
-                int count = value.Count();
+                var count = value.Count();
 
                 if (count < 1)
                     throw new InvalidOperationException("The minimum number of columns is 1.");

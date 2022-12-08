@@ -49,9 +49,9 @@ namespace Line
             {
                 var hash = hmac.ComputeHash(content);
 
-                int result = 0;
+                var result = 0;
 
-                for (int i = 0; i < SignatureLength; i++)
+                for (var i = 0; i < SignatureLength; i++)
                 {
                     result |= hash[i] ^ expectedHash[i];
                 }

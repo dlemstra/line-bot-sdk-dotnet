@@ -22,9 +22,9 @@ namespace Line
 
         private static bool IsValidColor(string value)
         {
-            for (int i = 1; i < value.Length; i++)
+            for (var i = 1; i < value.Length; i++)
             {
-                char character = value[i];
+                var character = value[i];
 
                 // 0-9
                 if (character >= 48 && character <= 57)

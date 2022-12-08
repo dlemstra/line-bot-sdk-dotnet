@@ -433,9 +433,9 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            foreach (IEnumerable<string> toSet in to.Split(150))
+            foreach (var toSet in to.Split(150))
             {
-                foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
+                foreach (var messageSet in messages.Split(5))
                 {
                     var multicast = new MulticastMessage(toSet, messageSet);
 
@@ -537,7 +537,7 @@ namespace Line
             Guard.NotNullOrEmpty(nameof(to), to);
             Guard.NotNullOrEmpty(nameof(messages), messages);
 
-            foreach (IEnumerable<ISendMessage> messageSet in messages.Split(5))
+            foreach (var messageSet in messages.Split(5))
             {
                 var push = new PushMessage(to, messageSet);
 
