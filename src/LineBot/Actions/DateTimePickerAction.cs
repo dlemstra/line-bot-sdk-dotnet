@@ -209,7 +209,7 @@ namespace Line
             if (value is null)
                 return null;
 
-            DateTime adjustedDateTime = value.Value;
+            var adjustedDateTime = value.Value;
 
             if (Mode == DateTimePickerMode.Date)
                 adjustedDateTime = new DateTime(adjustedDateTime.Year, adjustedDateTime.Month, adjustedDateTime.Day, 0, 0, 0);
